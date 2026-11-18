@@ -1,0 +1,5 @@
+# The frozen heldout split and everything that guards it belong to the owner.
+/benchmark/heldout/          @omkar-k0
+/scripts/heldout_guard.py    @omkar-k0
+/.github/workflows/          @omkar-k0
+/.github/CODEOWNERS          @omkar-k0

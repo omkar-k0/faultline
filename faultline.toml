@@ -1,0 +1,9 @@
+# Runtime settings. Model name and URL live here, never in code.
+
+[llm]
+# OpenAI-compatible local endpoint, for example Ollama.
+base_url = ""
+model = ""
+
+[warehouse]
+adapter = "duckdb"
