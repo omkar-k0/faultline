@@ -15,7 +15,7 @@ PLAN = ROOT / "benchmark" / "plan.toml"
 
 @pytest.fixture(scope="module")
 def catalogs() -> dict[str, FaultCatalog]:
-    return {p: build_catalog(PROJECTS / p) for p in ("jaffle_shop", "stripe")}
+    return {p: build_catalog(PROJECTS / p) for p in ("jaffle_shop", "stripe", "court_cases")}
 
 
 def test_partition_is_disjoint_complete_and_proportional() -> None:

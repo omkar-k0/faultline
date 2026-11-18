@@ -25,7 +25,7 @@ ROW_FAULTS = {"late_or_missing_data", "duplicate_keys"}
 
 @pytest.fixture(scope="module")
 def catalogs() -> dict[str, FaultCatalog]:
-    return {p: build_catalog(PROJECTS / p) for p in ("jaffle_shop", "stripe")}
+    return {p: build_catalog(PROJECTS / p) for p in ("jaffle_shop", "stripe", "court_cases")}
 
 
 def _all_nodes(cat: FaultCatalog) -> set[str]:
@@ -145,7 +145,7 @@ def _check_recoverable(cat: FaultCatalog, fault_type: FaultType, seed: int, root
     max_examples=40, deadline=None, suppress_health_check=[HealthCheck.function_scoped_fixture]
 )
 @given(
-    project=st.sampled_from(["jaffle_shop", "stripe"]),
+    project=st.sampled_from(["jaffle_shop", "stripe", "court_cases"]),
     fault_type=st.sampled_from(FAULT_TYPES),
     seed=st.integers(min_value=0, max_value=10_000),
 )
