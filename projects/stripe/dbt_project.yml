@@ -1,0 +1,241 @@
+config-version: 2
+
+name: 'stripe_integration_tests'
+
+version: '1.10.2'
+
+profile: 'integration_tests'
+
+# For use with validations
+models:
+  +persist_docs:
+    relation: true
+    columns: "{{ false if target.type in ('databricks') else true }}"
+  +schema: "stripe_{{ var('directed_schema','dev') }}"
+
+vars:
+  # enable when generating docs
+  # stripe__using_credit_notes: true # @docs-include
+  stripe_schema: stripe_integrations_tests
+  stripe:
+    stripe_account_identifier: "account_data"
+    stripe_group_identifier: "group_data"
+    stripe_balance_transaction_identifier: "balance_transaction_data"
+    stripe_card_identifier: "card_data"
+    stripe_charge_identifier: "charge_data"
+    stripe_coupon_identifier: "coupon_data"
+    stripe_customer_identifier: "customer_data"
+    stripe_discount_identifier: "discount_data"
+    stripe_dispute_identifier: "dispute_data"
+    stripe_fee_identifier: "fee_data"
+    stripe_invoice_identifier: "invoice_data"
+    stripe_invoice_line_item_identifier: "invoice_line_item_data"
+    stripe_payment_intent_identifier: "payment_intent_data"
+    stripe_payment_method_card_identifier: "payment_method_card_data"
+    stripe_payment_method_identifier: "payment_method_data"
+    stripe_payout_identifier: "payout_data"
+    stripe_payout_balance_transaction_identifier: "payout_balance_transaction_data"
+    stripe_plan_identifier: "plan_data"
+    stripe_price_identifier: "price_data"
+    stripe_product_identifier: "product_data"
+    stripe_refund_identifier: "refund_data"
+    stripe_subscription_discount_identifier: "subscription_discount_data"
+    stripe_subscription_history_identifier: "subscription_history_data"
+    stripe_subscription_identifier: "subscription_data"
+    stripe_subscription_item_identifier: "subscription_item_data"
+    stripe_transfer_identifier: "transfer_data"
+    stripe_credit_note_identifier: "credit_note_data"
+    stripe_credit_note_line_item_identifier: "credit_note_line_item_data"
+
+
+seeds:
+  +docs:
+    show: False
+  +quote_columns: "{{ target.type in ('redshift','postgres', 'duckdb') or var('fivetran_using_source_casing', false) }}"
+  stripe_integration_tests:
+    account_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    balance_transaction_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        available_on: timestamp
+    card_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    coupon_data:
+      +column_types:
+        created: timestamp
+        redeem_by: timestamp
+        _fivetran_synced: timestamp
+    charge_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        balance_transaction_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+        captured: boolean
+        livemode: boolean
+        paid: boolean
+        refunded: boolean
+        amount: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        amount_refunded: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        application_fee_amount: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        outcome_risk_score: "{{ 'float' if target.type in ('redshift','postgres') else 'FLOAT64' if target.type == 'bigquery' else 'float'}}"
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    credit_note_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+        voided_at: timestamp
+    credit_note_line_item_data:
+      +column_types:
+        _fivetran_synced: timestamp
+    customer_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        description: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    dispute_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    fee_data:
+      +column_types:
+        _fivetran_synced: timestamp
+    invoice_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        due_date: timestamp
+        paid: boolean
+        auto_advance: boolean
+        amount_due: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        amount_paid: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        amount_remaining: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        subtotal: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        tax: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        total: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        attempt_count: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        number: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        post_payment_credit_notes_amount: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        pre_payment_credit_notes_amount: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    invoice_line_item_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+        unit_amount_excluding_tax: "{{ 'varchar(100)' if target.type in ('redshift','postgres') else 'string'}}"
+    payment_intent_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        canceled_at: timestamp
+    payment_method_card_data:
+      +column_types:
+        _fivetran_synced: timestamp
+    payment_method_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    payout_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        destination_bank_account_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+        destination_card_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    payout_balance_transaction_data:
+      +column_types:
+        _fivetran_synced: timestamp
+    plan_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        interval_count: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+    price_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        recurring_interval: "{{ 'varchar(100)' if target.type in ('redshift','postgres') else 'string'}}"
+        recurring_aggregate_usage: "{{ 'varchar(100)' if target.type in ('redshift','postgres') else 'string'}}"
+        recurring_usage_type: "{{ 'varchar(100)' if target.type in ('redshift','postgres') else 'string'}}"
+        recurring_interval_count: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+    product_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    refund_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    subscription_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        canceled_at: timestamp
+    subscription_history_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        canceled_at: timestamp
+    subscription_item_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+        quantity: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+    transfer_data:
+      +column_types:
+        _fivetran_synced: timestamp
+        created: timestamp
+    discount_data:
+      +enabled: "{{ target.type not in ('snowflake', 'postgres') or var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        _fivetran_synced: timestamp
+        end: timestamp
+        amount: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    discount_data_snowflake:
+      +alias: discount_data
+      +enabled: "{{ target.type == 'snowflake' and not var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        _fivetran_synced: timestamp
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    discount_data_postgres:
+      +alias: discount_data
+      +enabled: "{{ target.type == 'postgres' and not var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        _fivetran_synced: timestamp
+        end: timestamp
+        amount: "{{ 'bigint' if target.type in ('redshift','postgres') else 'INT64' if target.type == 'bigquery' else 'bigint'}}"
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    subscription_discount_data:
+      +enabled: "{{ target.type not in ('snowflake', 'postgres') or var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        _fivetran_synced: timestamp
+        end: timestamp
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    subscription_discount_data_snowflake:
+      +alias: subscription_discount_data
+      +enabled: "{{ target.type == 'snowflake' and not var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        _fivetran_synced: timestamp
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+    subscription_discount_data_postgres:
+      +alias: subscription_discount_data
+      +enabled: "{{ target.type == 'postgres' and not var('fivetran_using_source_casing', false) }}"
+      +column_types:
+        _fivetran_synced: timestamp
+        end: timestamp
+        invoice_id: "{{ 'varchar(500)' if target.type in ('redshift','postgres') else 'string'}}"
+
+
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['spark_utils', 'dbt_utils']
+
+flags:
+  send_anonymous_usage_stats: False
+
+  use_colors: True

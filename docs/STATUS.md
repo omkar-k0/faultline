@@ -1,32 +1,33 @@
 # Status
 
-Updated 2026-11-18.
+Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M0 Scaffold, issue #2, draft PR #3.
+M1 Collectors + lineage + impact, issue #5, draft PR #6. Built, waiting for review and the hand-check.
+
+M0 Scaffold is done: merged in PR #4, CI green.
 
 ## Done
 
-- Package skeleton with the layout from CLAUDE.md and `faultline --version`.
-- Dependencies pinned in `uv.lock`: dbt-core 1.12, dbt-duckdb, duckdb, sqlglot, networkx; dev: pytest, ruff, mypy, hypothesis.
-- `projects/jaffle_shop/` vendored from dbt-labs/jaffle_shop_duckdb (Apache 2.0) with LICENCE and SOURCE.md. Builds on DuckDB: 28 of 28 nodes pass.
-- `make setup` and `make check` (ruff, mypy --strict, dbt build, pytest: 32 tests) pass locally and on a fresh clone of the branch.
-- CI: `check` and `heldout-guard` jobs. The guard script has 15 tests, including end-to-end runs on a temporary git repo.
-- CODEOWNERS, issue templates (milestone, bug, benchmark-fix), DECISIONS.md, ARCHITECTURE.md.
+- M0: package, dependencies in `uv.lock`, Makefile, CI (`check`, `heldout-guard`), CODEOWNERS, issue templates.
+- Test projects: `jaffle_shop` (5 models, 27 columns) and `stripe` (fivetran dbt_stripe with its three packages, 65 models, 1,657 columns), both built offline on DuckDB. A test fails if any model is empty outside a pinned list.
+- `collectors/dbt_artifacts.py`: reads manifest v12 and catalog v1; fails loudly on missing files or other versions.
+- `lineage/table.py`, `lineage/column.py`: table graph and column lineage for every model column. jaffle_shop 27 of 27 resolved; stripe 1,588 resolved, 69 constant, 0 unresolved. Two undeclared dependencies in stripe are reported.
+- `lineage/impact.py`: downstream and upstream for any node or `node.column`, with the path for each hit and the tests on affected columns.
+- CLI: `faultline lineage`, `faultline lineage handcheck`, `faultline impact`.
+- Hand-check sheet for 30 columns (15 per project): `docs/handcheck/lineage-2026-11-18.md`.
+- Tests: 86 passing, including golden lineage for all 27 jaffle_shop columns (checked by hand against the SQL) and a hypothesis property test on random model chains.
 
 ## Not verified
 
-- CI green on GitHub. No workflow run appeared on PR #3 within a few minutes of the push; Actions may need enabling or approving in the repo settings.
+- The hand-check sheet is generated but not filled in. Its result is unknown.
+- Lineage accuracy on stripe beyond the property tests and spot checks: the hand-check covers 15 stripe columns.
 - CODEOWNERS enforcement: needs branch protection on `main` with "Require review from Code Owners", set by the owner.
 
 ## Open decisions
 
-Candidates for the second and third test projects (licence read, not yet build-tested here):
-- fivetran/dbt_stripe: Apache 2.0, 69 models, 31 seed files, DuckDB in its own CI.
-- tuva-health/demo: Apache 2.0, synthetic healthcare seeds, DuckDB profile in its own CI; pulls the large the_tuva_project package and terminology data over the network.
-- nydasco/dbt_with_duckdb: MIT, 8 models, CSV sources and snapshots, last commit 2024.
-- Ruled out: dbt-labs/jaffle-shop, dbt-synthea, mrr-playbook, make-open-data (no licence file); dbt-dummy (Postgres only).
+- Third test project, held out entirely for the final score. Candidate: tuva-health/demo (Apache 2.0), which needs network access at build time. Decide before M2.
 
 ## Broken
 
@@ -34,5 +35,5 @@ Candidates for the second and third test projects (licence read, not yet build-t
 
 ## Next step
 
-- Owner: review PR #3, turn on branch protection, mark ready when CI is green.
-- M1: collectors and lineage. Choose the second and third test projects before M2.
+- Owner: fill in the hand-check sheet, review PR #6, turn on branch protection on `main`.
+- Then M2: fault injector and benchmark. Plan first.
