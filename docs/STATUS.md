@@ -4,9 +4,9 @@ Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M1 Collectors + lineage + impact, issue #5, draft PR #6. Built, waiting for review and the hand-check.
+M2 Fault injector + benchmark, issue #7. Plan posted in the draft PR, waiting for approval.
 
-M0 Scaffold is done: merged in PR #4, CI green.
+M1 is merged (PR #6, CI green). Its hand-check sheet is not filled in yet.
 
 ## Done
 
@@ -35,5 +35,4 @@ M0 Scaffold is done: merged in PR #4, CI green.
 
 ## Next step
 
-- Owner: fill in the hand-check sheet, review PR #6, turn on branch protection on `main`.
-- Then M2: fault injector and benchmark. Plan first.
+- Owner: approve the M2 plan and answer its open questions; fill in the M1 hand-check sheet; turn on branch protection on `main`.
