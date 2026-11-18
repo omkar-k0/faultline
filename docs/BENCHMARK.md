@@ -26,7 +26,7 @@ Code faults that change nothing are thrown away: the generator also runs the cle
 | `broken_join` | code | left join to inner join, inner to left, or a join condition made always true | model, commit |
 | `timezone_error` | data | a timestamp column shifted by 1-9 hours; for a date column, a share of rows moved by a day | node, column |
 
-`node` is the node that models read: the source for stripe, the seed for jaffle_shop. `physical` is where the change was written.
+`node` is the node that models read: the source for stripe, the seed for jaffle_shop and court_cases. `physical` is where the change was written.
 
 ## Ground truth (`truth.json`, schema version 1)
 
@@ -53,7 +53,7 @@ Code faults that change nothing are thrown away: the generator also runs the cle
 
 Defined in `benchmark/plan.toml`.
 
-- **train** and **dev** use jaffle_shop and stripe. Each split has its own seeds, and within a project every seed and every model belongs to exactly one split, so no node is faulted in both.
+- **train** and **dev** use jaffle_shop, stripe and court_cases (synthetic, our own; see `projects/court_cases/SOURCE.md`). Each split has its own seeds, and within a project every seed and every model belongs to exactly one split, so no node is faulted in both.
 - **heldout** uses a third project that appears in no other split. It is generated once by the owner and frozen.
 
 ## What is committed and what is published

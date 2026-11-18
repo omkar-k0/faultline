@@ -75,3 +75,4 @@ Vendored under `projects/`, each with its licence and `SOURCE.md`.
 
 - `jaffle_shop`: dbt-labs/jaffle_shop_duckdb, Apache 2.0. 5 models, 27 columns.
 - `stripe`: fivetran/dbt_stripe with fivetran_utils, spark_utils and dbt_utils, Apache 2.0. 65 models, 1,657 columns.
+- `court_cases`: our own synthetic court case lifecycle, Apache 2.0. 20 models, 158 columns.

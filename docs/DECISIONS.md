@@ -86,3 +86,8 @@ Each entry: decision, alternative, reason.
 - Decision: `location` has `node` (what models read), `column`, `commit`, plus `physical` (where the change was written) and `file`.
 - Alternative: only node, column, commit, as in the approved schema.
 - Reason: for stripe the models read a source while the change is written to a seed; scoring uses `node`, the other two make every incident checkable by hand.
+
+## 2026-11-18: A third train/dev project of our own: court_cases
+- Decision: add `projects/court_cases`, a synthetic court case lifecycle project written for faultline (seeded generator, 20 models), to train and dev; train and dev were regenerated.
+- Alternative: use it as the held-out project, or stay with two projects.
+- Reason: more domain variety and fault sites (local court times make timezone faults realistic) and a demo domain for the viewer. It cannot be held-out: the same hand writes it and the triage rules. Real public court data may replace or join it later, after a licence check.
