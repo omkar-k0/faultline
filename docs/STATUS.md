@@ -1,10 +1,12 @@
 # Status
 
-Updated 2026-11-18.
+Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M0 Scaffold, issue #2, draft PR #3.
+M1 Collectors + lineage + impact, issue #5. Plan posted in the draft PR, waiting for approval.
+
+M0 Scaffold is done: merged in PR #4, CI `check` and `heldout-guard` green on the PR and `check` green on `main`.
 
 ## Done
 
@@ -17,7 +19,6 @@ M0 Scaffold, issue #2, draft PR #3.
 
 ## Not verified
 
-- CI green on GitHub. No workflow run appeared on PR #3 within a few minutes of the push; Actions may need enabling or approving in the repo settings.
 - CODEOWNERS enforcement: needs branch protection on `main` with "Require review from Code Owners", set by the owner.
 
 ## Open decisions
@@ -34,5 +35,5 @@ Candidates for the second and third test projects (licence read, not yet build-t
 
 ## Next step
 
-- Owner: review PR #3, turn on branch protection, mark ready when CI is green.
-- M1: collectors and lineage. Choose the second and third test projects before M2.
+- Owner: approve the M1 plan; turn on branch protection on `main`.
+- Choose the second and third test projects (jaffle_shop has 27 model columns, M1 needs 30 for the hand-check).
