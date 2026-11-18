@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: fct_cases
+    description: One row per case, with its hearings, filings, fees and final order.
+    columns:
+      - name: case_id
+        data_tests: [unique, not_null]
+      - name: hearing_count
+        data_tests: [not_null]
+  - name: fct_hearings
+    columns:
+      - name: hearing_id
+        data_tests: [unique, not_null]
+  - name: dim_courts
+    columns:
+      - name: court_id
+        data_tests: [unique, not_null]
+  - name: dim_lawyers
+    columns:
+      - name: lawyer_id
+        data_tests: [unique, not_null]
+  - name: int_case_final_orders
+    columns:
+      - name: case_id
+        data_tests: [unique]
+  - name: fee_reconciliation
+    columns:
+      - name: filing_id
+        data_tests: [unique]
+  - name: appeal_deadlines
+    columns:
+      - name: case_id
+        data_tests: [unique]

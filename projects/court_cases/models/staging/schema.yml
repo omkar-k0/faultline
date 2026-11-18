@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: stg_courts
+    columns:
+      - name: court_id
+        data_tests: [unique, not_null]
+      - name: court_level
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['district', 'high']}
+  - name: stg_judges
+    columns:
+      - name: judge_id
+        data_tests: [unique, not_null]
+      - name: court_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_courts'), field: court_id}
+  - name: stg_lawyers
+    columns:
+      - name: lawyer_id
+        data_tests: [unique, not_null]
+  - name: stg_parties
+    columns:
+      - name: party_id
+        data_tests: [unique, not_null]
+  - name: stg_cases
+    columns:
+      - name: case_id
+        data_tests: [unique, not_null]
+      - name: case_number
+        data_tests: [unique, not_null]
+      - name: case_type
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['civil', 'criminal', 'commercial', 'family', 'writ']}
+      - name: case_status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['pending', 'disposed', 'transferred', 'withdrawn']}
+      - name: court_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_courts'), field: court_id}
+      - name: lead_lawyer_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_lawyers'), field: lawyer_id}
+      - name: filed_at_utc
+        data_tests: [not_null]
+  - name: stg_hearings
+    columns:
+      - name: hearing_id
+        data_tests: [unique, not_null]
+      - name: case_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('stg_cases'), field: case_id}
+      - name: hearing_outcome
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['heard', 'adjourned', 'reserved', 'disposed']}
+  - name: stg_filings
+    columns:
+      - name: filing_id
+        data_tests: [unique, not_null]
+      - name: case_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_cases'), field: case_id}
+      - name: court_fee_inr
+        data_tests: [not_null]
+  - name: stg_orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: order_type
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['interim', 'final']}
+  - name: stg_fee_payments
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
+      - name: filing_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_filings'), field: filing_id}

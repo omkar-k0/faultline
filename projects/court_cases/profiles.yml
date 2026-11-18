@@ -1,0 +1,7 @@
+court_cases:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('FAULTLINE_DUCKDB_DIR', 'target') }}/court_cases.duckdb"
+      threads: 4

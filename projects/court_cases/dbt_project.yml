@@ -1,0 +1,40 @@
+name: 'court_cases'
+config-version: 2
+version: '0.1.0'
+profile: 'court_cases'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "logs"]
+
+require-dbt-version: [">=1.11.0", "<2.0.0"]
+
+seeds:
+  court_cases:
+    +schema: raw
+    raw_cases:
+      +column_types:
+        filed_at_local: timestamp
+        disposed_on: date
+        claim_amount_inr: double
+    raw_hearings:
+      +column_types:
+        scheduled_at_local: timestamp
+    raw_filings:
+      +column_types:
+        filed_at_local: timestamp
+    raw_fee_payments:
+      +column_types:
+        paid_at_local: timestamp
+
+models:
+  court_cases:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: table
+    marts:
+      +materialized: table
