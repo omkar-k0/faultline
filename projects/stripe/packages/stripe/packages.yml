@@ -1,0 +1,3 @@
+packages:
+  - local: packages/fivetran_utils
+  - local: packages/spark_utils

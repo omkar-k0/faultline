@@ -1,0 +1,7 @@
+integration_tests:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('FAULTLINE_DUCKDB_DIR', 'target') }}/stripe.duckdb"
+      threads: 4
