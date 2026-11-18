@@ -4,4 +4,5 @@ integration_tests:
     dev:
       type: duckdb
       path: "{{ env_var('FAULTLINE_DUCKDB_DIR', 'target') }}/stripe.duckdb"
+      schema: stripe_integrations_tests
       threads: 4

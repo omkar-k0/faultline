@@ -13,7 +13,7 @@ build-projects:
 		echo "== dbt build $$p"; \
 		mkdir -p projects/$$p/target; \
 		export FAULTLINE_DUCKDB_DIR=$(CURDIR)/projects/$$p/target; \
-		for cmd in deps build "docs generate"; do \
+		for cmd in deps seed build "docs generate"; do \
 			$(UV) run --frozen dbt $$cmd --project-dir projects/$$p --profiles-dir projects/$$p || exit 1; \
 		done; \
 	done

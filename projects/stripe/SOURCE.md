@@ -19,7 +19,8 @@ A runnable dbt project around the Fivetran Stripe package, built offline on Duck
 ## What was changed
 
 - `packages.yml` files point to the local folders above instead of the dbt package hub, so the build needs no network and every package is pinned.
-- `profiles.yml` is our own: DuckDB file under `target/`, 4 threads.
+- `profiles.yml` is our own: DuckDB file under `target/`, schema `stripe_integrations_tests` (where the package expects the source tables), 4 threads.
+- Build order: `dbt seed` runs before `dbt build`. The staging models read sources, not seeds, so dbt cannot order them; without the extra seed step every staging table is silently empty.
 - Not copied: docs, images, CI files, the packages' own integration tests.
 
-Seed data is the synthetic test data Fivetran ships with the package.
+Seed data is the synthetic test data Fivetran ships with the package. Two reporting models stay empty with this data: `stripe__ending_balance_reconciliation_itemized_4` and `stripe__payout_itemized_3`.
