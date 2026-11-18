@@ -4,4 +4,15 @@ An open-source reliability assistant for dbt Core projects. It detects data inci
 
 How it decides: deterministic lineage and checks first, then statistics, then a local language model that only ranks hypotheses that already passed a query test. If nothing passes, the answer is "not confirmed". No raw rows ever go to a model.
 
-**Status: design stage, no code yet.** The milestones and rules are in [CLAUDE.md](CLAUDE.md). Benchmark numbers will appear here, each linked to a file in `eval/results/`, once they exist.
+**Status: M0 scaffold. The package, the first test project (jaffle_shop on DuckDB), CI and the heldout guard are in place. Nothing detects or diagnoses incidents yet.** The milestones and rules are in [CLAUDE.md](CLAUDE.md). Benchmark numbers will appear here, each linked to a file in `eval/results/`, once they exist.
+
+## Develop
+
+Needs Python 3.12 and [uv](https://docs.astral.sh/uv/).
+
+```
+make setup   # create the env, install, build the test projects
+make check   # ruff, mypy --strict, dbt build, pytest
+```
+
+Test projects live in `projects/`, each with its licence and a `SOURCE.md`.
