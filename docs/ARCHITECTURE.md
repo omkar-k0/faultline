@@ -1,6 +1,6 @@
 # Architecture
 
-This file grows one milestone at a time. Built so far: M0 scaffold, M1 collectors and lineage.
+This file grows one milestone at a time. Built so far: M0 scaffold, M1 collectors and lineage, M2 fault injector and benchmark (train and dev).
 
 ## Order of work for every decision
 
@@ -49,6 +49,25 @@ target/manifest.json + catalog.json
 - Ephemeral models have no catalog entry. Their columns come from their own SQL, and downstream SQL reaches them through the `__dbt__cte__` CTE dbt inlines.
 - Relations read by the SQL but missing from `depends_on` are kept and reported as undeclared.
 - CLI: `faultline lineage`, `faultline lineage handcheck`, `faultline impact`.
+
+## Fault injector and benchmark (M2)
+
+```
+projects/<p> (built)  --catalog.build_catalog-->  FaultCatalog
+                                                   seeds, column roles, which columns models read,
+                                                   models and their SQL files
+benchmark/plan.toml --benchmark.load_plan--> splits --partition--> nodes per split (disjoint)
+                                                        |
+for each incident spec:                                 v
+  workspace.create (copy) -> resample (2% noise) -> git_init (clean commit)
+  -> faults.apply (data: rewrite a seed; code: edit a model, commit)
+  -> run.run_dbt (deps, seed, build, docs generate in one process)
+  -> code faults: compare with the clean run, retry if nothing changed
+  -> run.save_run (artefacts, log, profile)  +  truth.json
+-> benchmark/<split>/<id>/truth.json, benchmark/manifest.json, dist/benchmark-<split>.tar.gz
+```
+
+Details and the freeze procedure: [BENCHMARK.md](BENCHMARK.md).
 
 ## Test projects
 

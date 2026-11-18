@@ -56,3 +56,33 @@ Each entry: decision, alternative, reason.
 - Decision: call `sqlglot.lineage` once per model for all columns, falling back to one column at a time only if that fails.
 - Alternative: one call per column.
 - Reason: stripe lineage went from 31 s to 7 s with the same result.
+
+## 2026-11-18: Natural variation without dropping rows
+- Decision: clean and faulted runs start from seed data with 2% noise on numeric measures; rows are never dropped.
+- Alternative: keep 90-100% of rows, as first planned.
+- Reason: dropping payment rows left orders without payments and failed `not_null` tests on clean runs. Cost: clean runs do not vary in volume, so the volume false-alarm test in M4 is weaker. Listed as a known weakness.
+
+## 2026-11-18: Splits are disjoint by node, not only by column
+- Decision: within a project, every seed and every model belongs to exactly one split.
+- Alternative: disjoint (node, column) pairs.
+- Reason: root cause is scored at node level too; a node shared between train and dev would leak.
+
+## 2026-11-18: Code faults must change something
+- Decision: a code fault is kept only if the build fails or a table profile differs from the clean run with the same seed; otherwise the next site is tried (up to 6).
+- Alternative: keep every mutation.
+- Reason: an equivalent mutant is an incident with no symptom and no correct answer.
+
+## 2026-11-18: Heldout is frozen by one labelled PR from the owner
+- Decision: `heldout-guard` allows one additions-only PR labelled `heldout-freeze`, only while `benchmark/heldout/` is empty on the base. The owner generates heldout on his machine.
+- Alternative: generate heldout in the coding session.
+- Reason: whoever writes rules and prompts must never see heldout incidents.
+
+## 2026-11-18: dbt runs in one process per incident
+- Decision: `deps`, `seed`, `build` and `docs generate` run through `dbtRunner` in one subprocess.
+- Alternative: four `dbt` commands.
+- Reason: one Python start and one parse instead of four; a stripe run went from about 35 s to about 22 s.
+
+## 2026-11-18: Ground truth carries `physical` and `file` besides `node`
+- Decision: `location` has `node` (what models read), `column`, `commit`, plus `physical` (where the change was written) and `file`.
+- Alternative: only node, column, commit, as in the approved schema.
+- Reason: for stripe the models read a source while the change is written to a seed; scoring uses `node`, the other two make every incident checkable by hand.
