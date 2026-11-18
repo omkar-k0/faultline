@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "avg(",
+      "before": "sum(",
+      "line": 73,
+      "operator": "sum_to_avg"
+    },
+    "type": "model_logic_bug"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:98fa0d8cb303e86d7dbcb6cca254872277d207320ccb516376d9568ac4247384"
+  },
+  "incident_id": "inc_stripe_train_022",
+  "location": {
+    "column": "fees_this_month",
+    "commit": "93479a5cf7c47abbb43a82c129ef017155e0efc2",
+    "file": "packages/stripe/models/stripe__customer_overview.sql",
+    "node": "model.stripe.stripe__customer_overview",
+    "physical": "model.stripe.stripe__customer_overview"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.stripe__customer_overview"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100065,
+  "split": "train"
+}

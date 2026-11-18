@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 2
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:f9e77e88ce988348403ff3cb0f6c7e9a04f1c62e61e793a9f225f9afc32d208d"
+  },
+  "incident_id": "inc_stripe_train_012",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/card_data.csv",
+    "node": "source.stripe.stripe.card",
+    "physical": "seed.stripe_integration_tests.card_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100035,
+  "split": "train"
+}

@@ -1,0 +1,48 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on  customers.customer_id = customers.customer_id",
+      "before": "on  customers.customer_id = customer_payments.customer_id",
+      "line": 65,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 2
+  },
+  "hashes": {
+    "inputs": "sha256:a90987bcb69532b1e2b8452f4b81e218ad01110852a1b432ca23372804fb62ad"
+  },
+  "incident_id": "inc_jaffle_shop_dev_014",
+  "location": {
+    "column": null,
+    "commit": "962c5b8d83a70c8319acef5248a8edd47c364c0e",
+    "file": "models/customers.sql",
+    "node": "model.jaffle_shop.customers",
+    "physical": "model.jaffle_shop.customers"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.jaffle_shop.customers"
+    ],
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.jaffle_shop.unique_customers_customer_id.c5af1ff4b1"
+    ],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 200040,
+  "split": "dev"
+}

@@ -1,0 +1,53 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on charge.charge_id = charge.charge_id",
+      "before": "on charge.charge_id = latest_disputes.charge_id",
+      "line": 346,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:b4031c1c71e328bdf64ecdb55a0db79e89e0ead73b2cd172f47a7bfec4ba8b84"
+  },
+  "incident_id": "inc_stripe_train_026",
+  "location": {
+    "column": null,
+    "commit": "3bd32cbe949166f4d09fb25876d11ba1f897780f",
+    "file": "packages/stripe/models/stripe__balance_transactions.sql",
+    "node": "model.stripe.stripe__balance_transactions",
+    "physical": "model.stripe.stripe__balance_transactions"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.int_stripe__account_daily",
+      "model.stripe.int_stripe__account_partitions",
+      "model.stripe.int_stripe__account_rolling_totals",
+      "model.stripe.stripe__activity_itemized_2",
+      "model.stripe.stripe__balance_change_from_activity_itemized_3",
+      "model.stripe.stripe__balance_transactions",
+      "model.stripe.stripe__customer_overview",
+      "model.stripe.stripe__daily_overview"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100077,
+  "split": "train"
+}

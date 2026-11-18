@@ -1,0 +1,43 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "new_name": "scheduled_at_local_new",
+      "op": "rename"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:754e711a723828bf20480ea152a3935ed11f7bbcad17b635987f30e0d6bbc9a7"
+  },
+  "incident_id": "inc_court_cases_dev_002",
+  "location": {
+    "column": "scheduled_at_local",
+    "commit": null,
+    "file": "seeds/raw_hearings.csv",
+    "node": "seed.court_cases.raw_hearings",
+    "physical": "seed.court_cases.raw_hearings"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.court_cases.stg_hearings"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 22,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200006,
+  "split": "dev"
+}

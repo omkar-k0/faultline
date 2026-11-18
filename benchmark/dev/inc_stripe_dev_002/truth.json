@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "op": "drop"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:9023c45d9cec9b7ab9349127b2bdbac11902df7fec0a3dddd694ee68d4ad400d"
+  },
+  "incident_id": "inc_stripe_dev_002",
+  "location": {
+    "column": "trial_end",
+    "commit": null,
+    "file": "seeds/subscription_history_data.csv",
+    "node": "source.stripe.stripe.subscription_history",
+    "physical": "seed.stripe_integration_tests.subscription_history_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200005,
+  "split": "dev"
+}

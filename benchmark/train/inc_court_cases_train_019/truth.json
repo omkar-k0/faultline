@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "factor": 100.0,
+      "variant": "scale"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:c8594e5edaa3536b596c066fbb5abf49a03bcfbddf7474315fb9805d723f5953"
+  },
+  "incident_id": "inc_court_cases_train_019",
+  "location": {
+    "column": "claim_amount_inr",
+    "commit": null,
+    "file": "seeds/raw_cases.csv",
+    "node": "seed.court_cases.raw_cases",
+    "physical": "seed.court_cases.raw_cases"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100057,
+  "split": "train"
+}

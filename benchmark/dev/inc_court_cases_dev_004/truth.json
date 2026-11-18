@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "cutoff": "2025-12-15 13:30:00",
+      "rows_removed": 832,
+      "variant": "late"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:52aabd62b01684c2bc0a01f0a53d1f27de71bf40c368a0296db95ed84a59c789"
+  },
+  "incident_id": "inc_court_cases_dev_004",
+  "location": {
+    "column": "scheduled_at_local",
+    "commit": null,
+    "file": "seeds/raw_hearings.csv",
+    "node": "seed.court_cases.raw_hearings",
+    "physical": "seed.court_cases.raw_hearings"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200012,
+  "split": "dev"
+}

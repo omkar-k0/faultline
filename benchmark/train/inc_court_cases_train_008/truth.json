@@ -1,0 +1,44 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "cutoff": "2025-03-03 16:00:00",
+      "rows_removed": 857,
+      "variant": "late"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:6d2559b9c1d7bc85dd2551703fe6146047d5055e5402b4d3669a13f3452d310d"
+  },
+  "incident_id": "inc_court_cases_train_008",
+  "location": {
+    "column": "filed_at_local",
+    "commit": null,
+    "file": "seeds/raw_filings.csv",
+    "node": "seed.court_cases.raw_filings",
+    "physical": "seed.court_cases.raw_filings"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.court_cases.relationships_stg_fee_payments_filing_id__filing_id__ref_stg_filings_.32122da5cc"
+    ],
+    "skipped_nodes": 17,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100024,
+  "split": "train"
+}

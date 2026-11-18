@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "op": "drop"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:4d43d98372ffa3026caa3d35d6d35162384effff9b88b02239f192922f1f1531"
+  },
+  "incident_id": "inc_stripe_dev_001",
+  "location": {
+    "column": "amount_refunded",
+    "commit": null,
+    "file": "seeds/charge_data.csv",
+    "node": "source.stripe.stripe.charge",
+    "physical": "seed.stripe_integration_tests.charge_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200002,
+  "split": "dev"
+}

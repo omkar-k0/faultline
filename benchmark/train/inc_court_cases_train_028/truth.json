@@ -1,0 +1,51 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on filings.filing_id = filings.filing_id",
+      "before": "on filings.filing_id = payments.filing_id",
+      "line": 18,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 6
+  },
+  "hashes": {
+    "inputs": "sha256:409f178ba0f344cb83a5b09ab707911370a4044eb52f4477cb586ba76af5af57"
+  },
+  "incident_id": "inc_court_cases_train_028",
+  "location": {
+    "column": null,
+    "commit": "8b4c7f84972a0e5d507769a562259dc0405ac39a",
+    "file": "models/intermediate/int_filing_fees.sql",
+    "node": "model.court_cases.int_filing_fees",
+    "physical": "model.court_cases.int_filing_fees"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.court_cases.fct_cases",
+      "model.court_cases.fee_reconciliation",
+      "model.court_cases.int_case_filings",
+      "model.court_cases.int_filing_fees"
+    ],
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.court_cases.unique_fee_reconciliation_filing_id.63d72c182c"
+    ],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100084,
+  "split": "train"
+}

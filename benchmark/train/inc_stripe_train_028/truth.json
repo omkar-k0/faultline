@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on invoice.customer_id = invoice.customer_id",
+      "before": "on invoice.customer_id = customer.customer_id",
+      "line": 218,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:ba78a1ffb7bace26c21186542afb1bd4075d962dd573393cb37552fe2d1fe705"
+  },
+  "incident_id": "inc_stripe_train_028",
+  "location": {
+    "column": null,
+    "commit": "a690dea2d8a28981da13dcaebc16b92383749ef3",
+    "file": "packages/stripe/models/standardized_models/stripe__line_item_enhanced.sql",
+    "node": "model.stripe.stripe__line_item_enhanced",
+    "physical": "model.stripe.stripe__line_item_enhanced"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.stripe__line_item_enhanced"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100083,
+  "split": "train"
+}

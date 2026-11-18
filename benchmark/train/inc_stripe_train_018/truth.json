@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "factor": 0.01,
+      "variant": "scale"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:80a46bb73cf32411aafd2f1b3c20ad294504aafdb37223efacebbf3faaf3928a"
+  },
+  "incident_id": "inc_stripe_train_018",
+  "location": {
+    "column": "amount_received",
+    "commit": null,
+    "file": "seeds/payment_intent_data.csv",
+    "node": "source.stripe.stripe.payment_intent",
+    "physical": "seed.stripe_integration_tests.payment_intent_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100053,
+  "split": "train"
+}

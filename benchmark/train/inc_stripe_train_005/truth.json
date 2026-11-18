@@ -1,0 +1,43 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_removed": 13,
+      "variant": "missing"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:f16f7b7a01dbf0b0586dcc0f875c8655e7fc2d07eb6ad546458e418bad2b40db"
+  },
+  "incident_id": "inc_stripe_train_005",
+  "location": {
+    "column": null,
+    "commit": null,
+    "file": "seeds/payment_method_data.csv",
+    "node": "source.stripe.stripe.payment_method",
+    "physical": "seed.stripe_integration_tests.payment_method_data"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.stripe.stripe__balance_transactions"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 10,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100014,
+  "split": "train"
+}

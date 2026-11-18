@@ -1,0 +1,43 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_removed": 843,
+      "variant": "missing"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:5804c18f63b7ba58e05ae5e61e52f16d52a939020122184ad4a6494454f3f0b8"
+  },
+  "incident_id": "inc_court_cases_train_007",
+  "location": {
+    "column": null,
+    "commit": null,
+    "file": "seeds/raw_orders.csv",
+    "node": "seed.court_cases.raw_orders",
+    "physical": "seed.court_cases.raw_orders"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.court_cases.dim_lawyers"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 2,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100021,
+  "split": "train"
+}
