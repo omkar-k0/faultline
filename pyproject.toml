@@ -1,0 +1,56 @@
+[project]
+name = "faultline"
+version = "0.0.1"
+description = "Reliability assistant for dbt Core projects, with a fault-injection benchmark."
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{ name = "Omkar Khadilkar" }]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "dbt-core>=1.11,<2",
+    "dbt-duckdb>=1.11,<2",
+    "duckdb>=1.4",
+    "sqlglot>=27",
+    "networkx>=3.4",
+]
+
+[project.scripts]
+faultline = "faultline.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "hypothesis>=6.100",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/faultline"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+mypy_path = "src"
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["networkx.*", "sqlglot.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["dbt: runs dbt against a vendored project (slower)"]
