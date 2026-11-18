@@ -17,8 +17,16 @@ M0 Scaffold, issue #2, draft PR #3.
 
 ## Not verified
 
-- CI green on GitHub (first run pending at time of writing).
+- CI green on GitHub. No workflow run appeared on PR #3 within a few minutes of the push; Actions may need enabling or approving in the repo settings.
 - CODEOWNERS enforcement: needs branch protection on `main` with "Require review from Code Owners", set by the owner.
+
+## Open decisions
+
+Candidates for the second and third test projects (licence read, not yet build-tested here):
+- fivetran/dbt_stripe: Apache 2.0, 69 models, 31 seed files, DuckDB in its own CI.
+- tuva-health/demo: Apache 2.0, synthetic healthcare seeds, DuckDB profile in its own CI; pulls the large the_tuva_project package and terminology data over the network.
+- nydasco/dbt_with_duckdb: MIT, 8 models, CSV sources and snapshots, last commit 2024.
+- Ruled out: dbt-labs/jaffle-shop, dbt-synthea, mrr-playbook, make-open-data (no licence file); dbt-dummy (Postgres only).
 
 ## Broken
 
