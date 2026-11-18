@@ -44,6 +44,8 @@ class Node:
     # For tests: the node and column the test is attached to.
     attached_node: str | None = None
     test_column: str | None = None
+    test_name: str | None = None  # generic test name, e.g. "relationships"
+    test_kwargs: tuple[tuple[str, str], ...] = ()
 
     @property
     def is_ephemeral(self) -> bool:
@@ -122,6 +124,10 @@ def _node(raw: Mapping[str, Any], catalog_entry: Mapping[str, Any] | None) -> No
         columns=_catalog_columns(catalog_entry),
         attached_node=raw.get("attached_node"),
         test_column=str(test_column) if test_column else None,
+        test_name=test_meta.get("name"),
+        test_kwargs=tuple(
+            sorted((str(k), str(v)) for k, v in kwargs.items() if isinstance(v, str | int | float))
+        ),
     )
 
 
