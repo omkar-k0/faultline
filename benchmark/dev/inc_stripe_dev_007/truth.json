@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 1
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:d017589f0b95b8c7950dc704687f6e3e0677d6476044050633ffbb3db41993ba"
+  },
+  "incident_id": "inc_stripe_dev_007",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/coupon_data.csv",
+    "node": "source.stripe.stripe.coupon",
+    "physical": "seed.stripe_integration_tests.coupon_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200014,
+  "split": "dev"
+}

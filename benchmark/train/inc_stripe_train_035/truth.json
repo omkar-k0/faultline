@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "coalesce(transactions_grouped.total_gross_transaction_amount, 1)",
+      "before": "coalesce(transactions_grouped.total_gross_transaction_amount, 0)",
+      "line": 190,
+      "operator": "coalesce_zero_to_one"
+    },
+    "type": "model_logic_bug"
+  },
+  "generation": {
+    "attempts": 2
+  },
+  "hashes": {
+    "inputs": "sha256:04e2e2f81e3f8b3fcfc480c42d1aa4bbd83492cf91dc48c53bce637493f360dc"
+  },
+  "incident_id": "inc_stripe_train_035",
+  "location": {
+    "column": "total_gross_transaction_amount",
+    "commit": "698b7ce7e41163a1b85eec1b4d497d7addf6311b",
+    "file": "packages/stripe/models/stripe__customer_overview.sql",
+    "node": "model.stripe.stripe__customer_overview",
+    "physical": "model.stripe.stripe__customer_overview"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.stripe__customer_overview"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100070,
+  "split": "train"
+}

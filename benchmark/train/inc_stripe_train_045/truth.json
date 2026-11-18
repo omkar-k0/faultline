@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "hours": -2,
+      "rows_changed": 10,
+      "variant": "data"
+    },
+    "type": "timezone_error"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:9e44a8c64509f3d2717e16c20c6234d7ab942802b498f2ca32af18b48ede4859"
+  },
+  "incident_id": "inc_stripe_train_045",
+  "location": {
+    "column": "created",
+    "commit": null,
+    "file": "seeds/product_data.csv",
+    "node": "source.stripe.stripe.product",
+    "physical": "seed.stripe_integration_tests.product_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100087,
+  "split": "train"
+}

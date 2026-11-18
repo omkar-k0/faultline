@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "factor": 100.0,
+      "variant": "scale"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:1cc29896891f131f4400db1ea00c7a94c1803402d96b4d6e817488c420da634a"
+  },
+  "incident_id": "inc_stripe_dev_015",
+  "location": {
+    "column": "fee",
+    "commit": null,
+    "file": "seeds/balance_transaction_data.csv",
+    "node": "source.stripe.stripe.balance_transaction",
+    "physical": "seed.stripe_integration_tests.balance_transaction_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200030,
+  "split": "dev"
+}

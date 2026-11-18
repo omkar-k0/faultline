@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "inner join",
+      "before": "left join",
+      "line": 195,
+      "operator": "left_to_inner_join"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:e21a9ddc0847a604e5ef6173fd4ef990d72b6952cdcb787db036ebe45ec1467f"
+  },
+  "incident_id": "inc_stripe_train_040",
+  "location": {
+    "column": null,
+    "commit": "37699a5f6b2234d66a57dcf6bb6105770df06813",
+    "file": "packages/stripe/models/standardized_models/stripe__line_item_enhanced.sql",
+    "node": "model.stripe.stripe__line_item_enhanced",
+    "physical": "model.stripe.stripe__line_item_enhanced"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.stripe__line_item_enhanced"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100080,
+  "split": "train"
+}

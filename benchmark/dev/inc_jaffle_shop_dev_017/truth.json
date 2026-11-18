@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "avg(",
+      "before": "sum(",
+      "line": 37,
+      "operator": "sum_to_avg"
+    },
+    "type": "model_logic_bug"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:bbe2f36a4d09210b5b3802a5eaffed84abe096b3e10788212e2bf39a6a3eb794"
+  },
+  "incident_id": "inc_jaffle_shop_dev_017",
+  "location": {
+    "column": null,
+    "commit": "9c2826689d566e89d0f36c8a83cc5304a7460a76",
+    "file": "models/customers.sql",
+    "node": "model.jaffle_shop.customers",
+    "physical": "model.jaffle_shop.customers"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.jaffle_shop.customers"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 200033,
+  "split": "dev"
+}

@@ -1,0 +1,28 @@
+{
+  "fault": null,
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:81f9d14ed28a849529cc1a2d3c9bcc9735239938b0dc5954b035f4aa8b5a4a83"
+  },
+  "incident_id": "inc_jaffle_shop_dev_027",
+  "location": null,
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 200051,
+  "split": "dev"
+}

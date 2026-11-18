@@ -1,0 +1,48 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "/ 10",
+      "before": "/ 100",
+      "line": 19,
+      "operator": "divide_by_100_to_10"
+    },
+    "type": "model_logic_bug"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:33c4b16d7cd72da50c3e1b8505a8043b4b2df7aff0567cdf0ca19b49c952e667"
+  },
+  "incident_id": "inc_jaffle_shop_train_031",
+  "location": {
+    "column": "amount",
+    "commit": "29518e336b62f42a3f7b59d2c8d97a8750357bc0",
+    "file": "models/staging/stg_payments.sql",
+    "node": "model.jaffle_shop.stg_payments",
+    "physical": "model.jaffle_shop.stg_payments"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.jaffle_shop.customers",
+      "model.jaffle_shop.orders",
+      "model.jaffle_shop.stg_payments"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100061,
+  "split": "train"
+}

@@ -1,0 +1,48 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on account_rolling_totals.date_day = account_rolling_totals.date_day",
+      "before": "on account_rolling_totals.date_day = date_spine.date_day",
+      "line": 49,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:093f8298264ee9faad8e48a2008545dd4f9e615590ba82f90e6e3718b31bfc2f"
+  },
+  "incident_id": "inc_stripe_dev_021",
+  "location": {
+    "column": null,
+    "commit": "0efde9fcaf23ad4de225afcbe65ccdfa92bc9f26",
+    "file": "packages/stripe/models/intermediate/int_stripe__account_rolling_totals.sql",
+    "node": "model.stripe.int_stripe__account_rolling_totals",
+    "physical": "model.stripe.int_stripe__account_rolling_totals"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.int_stripe__account_partitions",
+      "model.stripe.int_stripe__account_rolling_totals",
+      "model.stripe.stripe__daily_overview"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200042,
+  "split": "dev"
+}

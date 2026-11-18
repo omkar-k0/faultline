@@ -1,0 +1,28 @@
+{
+  "fault": null,
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:c65924c2e4e036a75434d1a816e8b999c8a2ab8a6681e792bbaa04633ff4c38c"
+  },
+  "incident_id": "inc_stripe_train_056",
+  "location": null,
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100108,
+  "split": "train"
+}

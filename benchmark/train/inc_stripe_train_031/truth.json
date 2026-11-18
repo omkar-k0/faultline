@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "avg(",
+      "before": "sum(",
+      "line": 57,
+      "operator": "sum_to_avg"
+    },
+    "type": "model_logic_bug"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:d6f2c2933e0e5a34244677a0d5de45e0c7a572d28f5dc4b8bd58058a84b77c10"
+  },
+  "incident_id": "inc_stripe_train_031",
+  "location": {
+    "column": "total_amount_paid",
+    "commit": "dc75f3ff4b468e9985defd373d4c2620b4de94ff",
+    "file": "packages/stripe/models/stripe__subscription_details.sql",
+    "node": "model.stripe.stripe__subscription_details",
+    "physical": "model.stripe.stripe__subscription_details"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.stripe__subscription_details"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100062,
+  "split": "train"
+}

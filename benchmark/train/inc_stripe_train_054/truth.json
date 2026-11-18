@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "hours": -8,
+      "rows_changed": 4,
+      "variant": "data"
+    },
+    "type": "timezone_error"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:27da905965ec80728e5526171f59c291f23110a23ea207c20d9086d2bff01428"
+  },
+  "incident_id": "inc_stripe_train_054",
+  "location": {
+    "column": "created",
+    "commit": null,
+    "file": "seeds/refund_data.csv",
+    "node": "source.stripe.stripe.refund",
+    "physical": "seed.stripe_integration_tests.refund_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100096,
+  "split": "train"
+}

@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "factor": 0.01,
+      "variant": "scale"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:87b483dfae6c16791d6da5dbc950ad47d42cbc346d7ff5c3c303298346aeeb10"
+  },
+  "incident_id": "inc_jaffle_shop_train_028",
+  "location": {
+    "column": "amount",
+    "commit": null,
+    "file": "seeds/raw_payments.csv",
+    "node": "seed.jaffle_shop.raw_payments",
+    "physical": "seed.jaffle_shop.raw_payments"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100055,
+  "split": "train"
+}

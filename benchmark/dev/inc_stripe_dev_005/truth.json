@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_removed": 13,
+      "variant": "missing"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:3b9b7e8da1b39773515960367825c176ac4822fa22ac0e51468ede63bb4276fd"
+  },
+  "incident_id": "inc_stripe_dev_005",
+  "location": {
+    "column": null,
+    "commit": null,
+    "file": "seeds/fee_data.csv",
+    "node": "source.stripe.stripe.fee",
+    "physical": "seed.stripe_integration_tests.fee_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200010,
+  "split": "dev"
+}

@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 1
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:d15bcfecf169fb0d059b3921a364c1c2c44b998158653ba16dd2260f2bdc0b1e"
+  },
+  "incident_id": "inc_stripe_train_013",
+  "location": {
+    "column": "payment_method_id",
+    "commit": null,
+    "file": "seeds/payment_method_card_data.csv",
+    "node": "source.stripe.stripe.payment_method_card",
+    "physical": "seed.stripe_integration_tests.payment_method_card_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100026,
+  "split": "train"
+}

@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "hours": -4,
+      "rows_changed": 3,
+      "variant": "data"
+    },
+    "type": "timezone_error"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:2509f7cdb933ef2a1032ced2d8a913dd053aab9a28f28f3d15bb1183ca28a0d9"
+  },
+  "incident_id": "inc_stripe_train_052",
+  "location": {
+    "column": "period_end",
+    "commit": null,
+    "file": "seeds/invoice_line_item_data.csv",
+    "node": "source.stripe.stripe.invoice_line_item",
+    "physical": "seed.stripe_integration_tests.invoice_line_item_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100094,
+  "split": "train"
+}

@@ -1,0 +1,43 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "new_name": "payment_method_new",
+      "op": "rename"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:970983c5bd14415ebbd9da60a62f44bf9b74b58da6b6b5efdbcb163294f5fb6e"
+  },
+  "incident_id": "inc_jaffle_shop_train_003",
+  "location": {
+    "column": "payment_method",
+    "commit": null,
+    "file": "seeds/raw_payments.csv",
+    "node": "seed.jaffle_shop.raw_payments",
+    "physical": "seed.jaffle_shop.raw_payments"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.jaffle_shop.stg_payments"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 17,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100005,
+  "split": "train"
+}
