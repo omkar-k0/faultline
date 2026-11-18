@@ -1,6 +1,6 @@
 .PHONY: setup build-projects check lint typecheck test clean
 
-PROJECTS := jaffle_shop
+PROJECTS := jaffle_shop stripe
 UV := uv
 export DBT_SEND_ANONYMOUS_USAGE_STATS := false
 
@@ -12,8 +12,10 @@ build-projects:
 	@for p in $(PROJECTS); do \
 		echo "== dbt build $$p"; \
 		mkdir -p projects/$$p/target; \
-		FAULTLINE_DUCKDB_DIR=$(CURDIR)/projects/$$p/target \
-			$(UV) run --frozen dbt build --project-dir projects/$$p --profiles-dir projects/$$p || exit 1; \
+		export FAULTLINE_DUCKDB_DIR=$(CURDIR)/projects/$$p/target; \
+		for cmd in deps build "docs generate"; do \
+			$(UV) run --frozen dbt $$cmd --project-dir projects/$$p --profiles-dir projects/$$p || exit 1; \
+		done; \
 	done
 
 lint:

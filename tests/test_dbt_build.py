@@ -11,7 +11,7 @@ PROJECTS = Path(__file__).resolve().parents[1] / "projects"
 
 
 @pytest.mark.dbt
-@pytest.mark.parametrize("name", ["jaffle_shop"])
+@pytest.mark.parametrize("name", ["jaffle_shop", "stripe"])
 def test_last_build_succeeded(name: str) -> None:
     results_file = PROJECTS / name / "target" / "run_results.json"
     if not results_file.exists():
