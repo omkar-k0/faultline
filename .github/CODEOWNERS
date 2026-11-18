@@ -3,3 +3,5 @@
 /scripts/heldout_guard.py    @omkar-k0
 /.github/workflows/          @omkar-k0
 /.github/CODEOWNERS          @omkar-k0
+/benchmark/plan.toml         @omkar-k0
+/benchmark/manifest.json     @omkar-k0

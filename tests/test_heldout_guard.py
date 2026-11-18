@@ -123,3 +123,66 @@ def test_main_end_to_end_heldout_file(repo: Path) -> None:
 def test_main_end_to_end_src_reference(repo: Path) -> None:
     _commit(repo, "src/faultline/triage/rules.py", 'p = "benchmark/heldout"\n')
     assert main(["guard", "main"]) == 1
+
+
+# The one-time freeze
+
+
+def test_freeze_allows_adding_heldout_and_manifest() -> None:
+    from heldout_guard import find_freeze_violations
+
+    changes = [
+        FileChange("A", "benchmark/heldout/inc_1/truth.json"),
+        FileChange("A", "benchmark/heldout/inc_2/truth.json"),
+        FileChange("M", "benchmark/manifest.json"),
+    ]
+    assert find_freeze_violations(changes, base_has_heldout=False) == []
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        FileChange("M", "src/faultline/triage/rules.py"),
+        FileChange("A", "src/faultline/eval/splits.py"),
+        FileChange("M", "scripts/heldout_guard.py"),
+        FileChange("D", "benchmark/heldout/inc_1/truth.json"),
+        FileChange("R", "benchmark/heldout/x.json", "benchmark/dev/x.json"),
+    ],
+)
+def test_freeze_rejects_anything_else(change: FileChange) -> None:
+    from heldout_guard import find_freeze_violations
+
+    changes = [FileChange("A", "benchmark/heldout/inc_1/truth.json"), change]
+    assert find_freeze_violations(changes, base_has_heldout=False)
+
+
+def test_freeze_only_once() -> None:
+    from heldout_guard import find_freeze_violations
+
+    changes = [FileChange("A", "benchmark/heldout/inc_9/truth.json")]
+    assert find_freeze_violations(changes, base_has_heldout=True)
+
+
+def test_freeze_must_add_something() -> None:
+    from heldout_guard import find_freeze_violations
+
+    assert find_freeze_violations(
+        [FileChange("M", "benchmark/manifest.json")], base_has_heldout=False
+    )
+
+
+def test_main_freeze_end_to_end(repo: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("HELDOUT_FREEZE", "true")
+    _commit(repo, "benchmark/heldout/inc_1/truth.json", "{}\n")
+    assert main(["guard", "main"]) == 0
+    _git(repo, "checkout", "-q", "main")
+    _git(repo, "merge", "-q", "--ff-only", "feature")
+    _git(repo, "checkout", "-q", "-b", "second")
+    _commit(repo, "benchmark/heldout/inc_2/truth.json", "{}\n")
+    assert main(["guard", "main"]) == 1  # already frozen on the base
+
+
+def test_main_without_label_still_blocks(repo: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("HELDOUT_FREEZE", "false")
+    _commit(repo, "benchmark/heldout/inc_1/truth.json", "{}\n")
+    assert main(["guard", "main"]) == 1

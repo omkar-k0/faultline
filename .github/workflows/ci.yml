@@ -2,6 +2,7 @@ name: ci
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
   push:
     branches: [main]
 
@@ -38,4 +39,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check benchmark/heldout is untouched
+        env:
+          HELDOUT_FREEZE: ${{ contains(github.event.pull_request.labels.*.name, 'heldout-freeze') }}
         run: python3 scripts/heldout_guard.py "origin/${{ github.base_ref }}"
