@@ -1,0 +1,48 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on latest_versions.version_id = latest_versions.version_id",
+      "before": "on latest_versions.version_id = version.version_id",
+      "line": 50,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:ee051e57f5f0727c01946a94029a96486b3292597df470250a65e7a7bae194d4"
+  },
+  "incident_id": "inc_jira_heldout_037",
+  "location": {
+    "column": null,
+    "commit": "c2f50b1f420906773b413d63ef2c80a627db4d47",
+    "file": "packages/jira/models/intermediate/int_jira__issue_versions.sql",
+    "node": "model.jira.int_jira__issue_versions",
+    "physical": "model.jira.int_jira__issue_versions"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.jira.jira__issue_enhanced",
+      "model.jira.jira__issue_status_transitions",
+      "model.jira.jira__timestamp_issue_field_history"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300037,
+  "split": "heldout"
+}

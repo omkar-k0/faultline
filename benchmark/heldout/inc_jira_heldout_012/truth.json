@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "cutoff": "2020-11-23 12:21:02.159000",
+      "rows_removed": 2,
+      "variant": "late"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:d954adbbe77eb8bb4657aaab65c4324d4d80e010f7336f319cdf414079fe7933"
+  },
+  "incident_id": "inc_jira_heldout_012",
+  "location": {
+    "column": "_fivetran_synced",
+    "commit": null,
+    "file": "seeds/component.csv",
+    "node": "source.jira.jira.component",
+    "physical": "seed.jira_integration_tests.component"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300012,
+  "split": "heldout"
+}

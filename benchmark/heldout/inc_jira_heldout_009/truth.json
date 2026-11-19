@@ -1,0 +1,44 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_removed": 5,
+      "variant": "missing"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:c4c0d0b682fe7ee770fd9cadd2d086c163808c1d67b7040cd4ee6ec20f0565d6"
+  },
+  "incident_id": "inc_jira_heldout_009",
+  "location": {
+    "column": null,
+    "commit": null,
+    "file": "seeds/team.csv",
+    "node": "source.jira.jira.team",
+    "physical": "seed.jira_integration_tests.team"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.jira.jira__daily_issue_field_history",
+      "model.jira.jira__timestamp_issue_field_history"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 19,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300009,
+  "split": "heldout"
+}

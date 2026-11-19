@@ -1,0 +1,28 @@
+{
+  "fault": null,
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:b7a85926535d48cf617f8b347435ce3e0afbb19593c15dac6ab5ea3b82de7d1e"
+  },
+  "incident_id": "inc_jira_heldout_056",
+  "location": null,
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300056,
+  "split": "heldout"
+}

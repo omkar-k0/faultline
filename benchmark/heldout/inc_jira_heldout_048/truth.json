@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "hours": -1,
+      "rows_changed": 3,
+      "variant": "data"
+    },
+    "type": "timezone_error"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:838aee6443a46eb02294f7cf7a06a4a212007671f201b7bdfc61d644c3bc382f"
+  },
+  "incident_id": "inc_jira_heldout_048",
+  "location": {
+    "column": "_fivetran_synced",
+    "commit": null,
+    "file": "seeds/version.csv",
+    "node": "source.jira.jira.version",
+    "physical": "seed.jira_integration_tests.version"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300048,
+  "split": "heldout"
+}

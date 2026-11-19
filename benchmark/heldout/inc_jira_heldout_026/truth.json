@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_changed": 1,
+      "target": "Version 3.0",
+      "variant": "category_mix"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:f997f974965e9acda7f3be6d8fc857aa410f3709876210854bdcd2c2584f7689"
+  },
+  "incident_id": "inc_jira_heldout_026",
+  "location": {
+    "column": "name",
+    "commit": null,
+    "file": "seeds/version.csv",
+    "node": "source.jira.jira.version",
+    "physical": "seed.jira_integration_tests.version"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300026,
+  "split": "heldout"
+}

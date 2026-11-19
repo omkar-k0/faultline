@@ -21,3 +21,10 @@ location_share = 1
 # The held-out split uses a third project that appears nowhere else. It is
 # added by the owner, generated once by the owner, and frozen. See
 # docs/BENCHMARK.md.
+
+[splits.heldout]
+projects = ["jira"]
+seed_base = 300000
+incidents_per_fault = 6
+clean_runs_per_project = 10
+location_share = 1

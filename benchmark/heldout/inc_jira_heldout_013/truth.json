@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 1
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:563092a80b2a92ab7d8a9338dfbaa676e6a848747f65534a0039bdf9804ce137"
+  },
+  "incident_id": "inc_jira_heldout_013",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/component.csv",
+    "node": "source.jira.jira.component",
+    "physical": "seed.jira_integration_tests.component"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300013,
+  "split": "heldout"
+}
