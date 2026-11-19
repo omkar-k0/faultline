@@ -1,0 +1,10 @@
+packages:
+  - local: packages/jira
+    name: jira
+  - local: packages/fivetran_utils
+    name: fivetran_utils
+  - local: packages/spark_utils
+    name: spark_utils
+  - local: packages/dbt_utils
+    name: dbt_utils
+sha1_hash: bb7049fa37bd1987038fb15935bd07cc234b99c1
