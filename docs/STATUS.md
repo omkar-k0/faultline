@@ -35,7 +35,7 @@ M2 Fault injector + benchmark, issue #7, draft PR #9 (PR #8 merged the plan only
 
 ## Open decisions
 
-- Held-out project. Options with licences checked: fivetran/dbt_jira (recommended), dbt_zendesk, dbt_github, tuva-health/demo.
+- None for M2: the held-out project is fivetran/dbt_jira (owner's choice), vendored in `projects/jira`, builds offline (110 of 110 pass, 61 models, 0 unresolved lineage columns).
 
 ## Broken
 
@@ -43,6 +43,6 @@ M2 Fault injector + benchmark, issue #7, draft PR #9 (PR #8 merged the plan only
 
 ## Next step
 
-- Owner: pick the held-out project; review PR #9 (merge only when its checklist is ticked); upload the two new archives to a GitHub Release; turn on branch protection later.
+- Owner: run the held-out freeze (`docs/BENCHMARK.md`); review PR #9 (merge only when its checklist is ticked); upload the two new archives to a GitHub Release; turn on branch protection later.
 - Later: research real public court data and its licences; build the web viewer from the Stitch designs (real content only).
-- Then: vendor the held-out project, owner runs the freeze (`docs/BENCHMARK.md`), then M3.
+- Then M3.

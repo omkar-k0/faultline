@@ -91,3 +91,8 @@ Each entry: decision, alternative, reason.
 - Decision: add `projects/court_cases`, a synthetic court case lifecycle project written for faultline (seeded generator, 20 models), to train and dev; train and dev were regenerated.
 - Alternative: use it as the held-out project, or stay with two projects.
 - Reason: more domain variety and fault sites (local court times make timezone faults realistic) and a demo domain for the viewer. It cannot be held-out: the same hand writes it and the triage rules. Real public court data may replace or join it later, after a licence check.
+
+## 2026-11-19: The held-out project is fivetran/dbt_jira
+- Decision: vendor dbt_jira (Apache 2.0, 61 models) as the project used only by the held-out split; owner's choice.
+- Alternative: dbt_zendesk, dbt_github, or tuva-health/demo.
+- Reason: a new domain (project management) at stripe's size, building offline with the same pinned packages. Weakness: same vendor coding style as stripe.

@@ -66,7 +66,7 @@ Defined in `benchmark/plan.toml`.
 
 The `heldout-guard` CI job fails any PR that touches `benchmark/heldout/`. The one exception is a PR with the `heldout-freeze` label, while `benchmark/heldout/` is still empty on `main`: it may add files there and change `benchmark/plan.toml` and `benchmark/manifest.json`, nothing else. After it merges, heldout is frozen for good.
 
-1. Vendor the held-out project in a normal PR (`projects/<name>`, with LICENCE and SOURCE.md) and add it to `PROJECTS` in the Makefile.
+1. The held-out project is vendored: `projects/jira` (fivetran/dbt_jira), already in `PROJECTS` in the Makefile.
 2. On your own machine, from a clean `main`:
    ```
    git switch -c heldout-freeze
@@ -75,7 +75,7 @@ The `heldout-guard` CI job fails any PR that touches `benchmark/heldout/`. The o
 3. Add the split to `benchmark/plan.toml`:
    ```toml
    [splits.heldout]
-   projects = ["<name>"]
+   projects = ["jira"]
    seed_base = 300000
    incidents_per_fault = 6
    clean_runs_per_project = 10
