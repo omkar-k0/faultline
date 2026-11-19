@@ -56,6 +56,36 @@ Wrong and not-confirmed are kept apart on purpose: faultline's design says a wro
 
 `make eval-dev` runs the two no-LLM baselines. Their result files are reproducible byte for byte, and a test fails if the committed files go stale.
 
+## Monitors (M4)
+
+`monitors` is faultline's own detection step, scored like a baseline: `faultline eval --split dev --baseline monitors`. It compares each run's table profile with **known-good history**, the other clean runs of the same project in the same split.
+
+- Every incident is compared with exactly 9 of the 10 clean runs. A clean run never sees itself; a faulted run leaves one out by a hash of its id. The reference size therefore says nothing about the incident.
+- The harness picks the references from ground truth; the monitors themselves never read it.
+- A value is unusual when it leaves the range of the reference runs widened by a margin (settings in `faultline.toml` under `[monitors]`).
+
+| Monitor | Flags when |
+|---|---|
+| schema | a relation or column disappears or appears, or a column type changes |
+| volume | row count leaves the reference range by more than 1% (at least 1 row) |
+| freshness | the newest value of a time column falls more than 1 hour behind the reference, or the column goes empty |
+| null rate | a column's null share rises more than 2 points above the reference maximum |
+| distribution | a numeric mean, median, min or max leaves the reference range widened by the largest of 10% of the median, 6 MADs and the reference spread |
+| duplicates | a key column (`id` or `*_id`) that is unique in every reference run stops being unique |
+| time shift | a time column's min and max both move by the same amount |
+
+Anomalies also give candidate locations (most upstream first, then most severe). Strict root cause is M5's job; the numbers are reported because the harness scores every method the same way.
+
+### How the settings were chosen
+
+Tuned on dev only. The first version raised 6 false alarms on 30 clean dev runs. Three changes, each a rule rather than a fitted number, brought that to 0 without losing a detection:
+
+1. Duplicates only on key columns: 2% noise sometimes made two amounts equal.
+2. Freshness needs a lag over 1 hour: the noise also nudged a court's UTC offset column (330 to 331 minutes), so clean hearing times moved by a minute.
+3. The distribution band also widens by the reference spread: a fee column whose median sits between -1 and 1.
+
+The same settings were then run once on train, which played no part in tuning; the result is in `eval/results/train/monitors.md`. Held-out remains the honest number.
+
 ## Running `raw_log_llm` on your own machine
 
 CI never calls a model. This baseline runs on a machine with enough memory (16 GB is enough for a 7B model) and comes back as a pull request.
@@ -81,3 +111,5 @@ CI never calls a model. This baseline runs on a machine with enough memory (16 G
 - **Naming the commit is easy.** In every code-fault run the fault is the only commit after the clean snapshot. A method that always names the newest commit gets the commit part right for free.
 - **`dbt_tests_guess` has a structural ceiling.** dbt tests sit on staging and mart models, while data faults sit in sources, so its guesses land one step downstream.
 - **Clean runs do not vary in volume** (see BENCHMARK.md), so false alarms on row counts are an easy test.
+- **Category-mix shifts are nearly invisible to monitors.** The profile stores distinct counts, not category frequencies.
+- **The injector's noise touched a non-measure number** (a court's UTC offset in minutes). It is frozen into the benchmark now; the freshness tolerance absorbs it.

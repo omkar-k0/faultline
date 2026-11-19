@@ -1,6 +1,6 @@
 # Architecture
 
-This file grows one milestone at a time. Built so far: M0 scaffold, M1 collectors and lineage, M2 fault injector and benchmark, M3 eval harness and baselines.
+This file grows one milestone at a time. Built so far: M0 scaffold, M1 collectors and lineage, M2 fault injector and benchmark, M3 eval harness and baselines, M4 monitors.
 
 ## Order of work for every decision
 
@@ -82,6 +82,17 @@ benchmark/<split>/<id>/truth.json --score.load_truth--> Truth
 ```
 
 LLM calls go through `faultline.llm.LLMClient`; the only implementation talks to a local OpenAI-compatible server. Details: [EVAL.md](EVAL.md).
+
+## Monitors (M4)
+
+```
+incident profile.json + 9 known-good profiles (picked by the eval harness)
+  -> monitors.core.detect: schema, volume, freshness, null rate, distribution, duplicates, time shift
+  -> Anomaly(monitor, node, column, observed, expected, severity)
+  -> monitors.method.rank: most upstream first -> Prediction(detected, candidates)
+```
+
+Settings in `faultline.toml` `[monitors]`. Details: [EVAL.md](EVAL.md).
 
 ## Test projects
 

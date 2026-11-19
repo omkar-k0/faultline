@@ -126,3 +126,13 @@ Each entry: decision, alternative, reason.
 - Decision: a test reruns `dbt_tests` and `dbt_tests_guess` on dev and compares with `eval/results/dev`.
 - Alternative: trust the committed files.
 - Reason: "a stranger can reproduce the numbers" is checked on every PR.
+
+## 2026-11-19: Monitors compare with known-good runs from the same split
+- Decision: each incident's reference is 9 of the 10 clean runs of its project in the same split (a clean run leaves itself out, a faulted run leaves one out by hash); the harness picks them.
+- Alternative: train's clean runs, or every other run of the split.
+- Reason: owner's choice; works unchanged on held-out (no train runs of jira), keeps faulted runs out of "normal", and the fixed size reveals nothing.
+
+## 2026-11-19: Monitor fixes are rules, not fitted numbers
+- Decision: duplicates only on key columns, freshness lag above 1 hour, distribution band widened by the reference spread. False alarms on dev went from 6/30 to 0/30 with no detection lost.
+- Alternative: raise thresholds until the false alarms disappear.
+- Reason: each rule names its cause, so it should carry to unseen data; checked once on train (same settings, not used for tuning).

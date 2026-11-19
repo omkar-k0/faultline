@@ -154,12 +154,11 @@ def _cmd_benchmark_summary(args: argparse.Namespace) -> int:
 
 
 def _cmd_eval(args: argparse.Namespace) -> int:
-    from faultline.eval.baselines import NO_LLM_BASELINES
     from faultline.eval.run import run_eval
     from faultline.llm.client import OpenAICompatibleClient, load_config
 
     client = None
-    if args.baseline not in NO_LLM_BASELINES:
+    if args.baseline == "raw_log_llm":
         client = OpenAICompatibleClient(load_config(Path(args.config)))
     command = f"faultline eval --split {args.split} --baseline {args.baseline}"
     doc = run_eval(
@@ -169,6 +168,7 @@ def _cmd_eval(args: argparse.Namespace) -> int:
         client=client,
         download=not args.no_download,
         command=command,
+        config_path=Path(args.config),
     )
     m = doc["metrics"]
     f, c = m["faulted"], m["clean"]

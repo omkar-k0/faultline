@@ -4,9 +4,16 @@ Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M3 Eval harness + baselines, issue #13, draft PR #14. Built; the no-LLM baselines are scored on dev. `raw_log_llm` waits for the owner's run on his MacBook Air.
+M4 Monitors, issue #16, draft PR #17. Built and scored on dev; checked once on train.
 
-M2 is done: merged to `main` (PRs #9, #10, #11, #12).
+M3 is done: merged to `main` (PRs #14, #15).
+
+## Done in M4
+
+- `monitors/core.py`: seven checks on table profiles (schema, volume, freshness, null rate, distribution, duplicates, time shift), settings in `faultline.toml` `[monitors]`.
+- `monitors/method.py`: known-good reference picker (9 of 10 clean runs, same project and split) and upstream-first ranking of anomalies.
+- `faultline eval --baseline monitors`; results in `eval/results/dev/monitors.*` and `eval/results/train/monitors.*`, both reproducible byte for byte (test). The result table includes which monitor fired per fault type.
+- Unit and property tests in `tests/test_monitors.py`.
 
 ## Done in M3
 
@@ -34,7 +41,6 @@ M2 is done: merged to `main` (PRs #9, #10, #11, #12).
 
 ## Not verified
 
-- `raw_log_llm` on a real model: only tested with a fake client. Prompt sizes on dev reach about 37,000 characters, so Ollama needs a 16k context (documented).
 
 - M1 hand-check sheet: still not filled in.
 - CODEOWNERS enforcement: needs branch protection on `main`.
@@ -58,5 +64,5 @@ M2 is done: merged to `main` (PRs #9, #10, #11, #12).
 ## Next step
 
 - Later: research real public court data and its licences; build the web viewer from the Stitch designs (real content only).
-- Owner: run `make eval-dev-llm` on the MacBook Air (docs/EVAL.md) and open a PR with the three result files; review PR #14.
-- Then M4: monitors. Plan first.
+- Owner: review PR #17.
+- Then M5: incident manager and triage agent. Plan first.

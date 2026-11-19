@@ -10,3 +10,16 @@ timeout_s = 600
 
 [warehouse]
 adapter = "duckdb"
+
+[monitors]
+# A value is unusual when it leaves the range of the reference runs, widened by
+# a margin. Tuned on dev only. See docs/EVAL.md.
+volume_rel_margin = 0.01
+volume_abs_margin = 1
+null_abs_margin = 0.02
+dist_rel_margin = 0.10
+dist_mad_k = 6.0
+dist_abs_margin = 1e-9
+dist_spread_k = 1.0
+freshness_min_lag_hours = 1.0
+min_reference_runs = 3
