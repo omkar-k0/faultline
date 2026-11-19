@@ -101,3 +101,28 @@ Each entry: decision, alternative, reason.
 - Decision: accept the freeze on `main` as merged by #11, without the `heldout-freeze` label (the guard failed there).
 - Alternative: revert #11 and redo it with the label.
 - Reason: #11 changed exactly the files that #10 froze (58 added held-out files, manifest, plan), and #10 passed the guard in freeze mode. Reverting would itself rewrite heldout. Lesson: a freeze PR targets `main` directly.
+
+## 2026-11-19: Clean the git history at load time
+- Decision: methods see only commits that touch model SQL, with messages replaced by "commit N".
+- Alternative: regenerate every split with neutral commits.
+- Reason: the saved logs carry the injector's messages and seed-data commits; the rule uses no ground truth, and heldout is frozen so it could not be regenerated anyway.
+
+## 2026-11-19: Two dbt-tests baselines
+- Decision: score `dbt_tests` (alert only) and `dbt_tests_guess` (alert plus naive root cause), on the owner's request.
+- Alternative: one of them.
+- Reason: the first is the honest "what dbt gives you"; the second gives the baseline a fair chance at root cause.
+
+## 2026-11-19: Node-only match is reported as a diagnostic
+- Decision: report "right node" at top-1 and top-3 next to the strict location-level numbers, labelled diagnostic.
+- Alternative: report only strict numbers.
+- Reason: it shows near misses (right model, no commit) without lowering the bar CLAUDE.md sets.
+
+## 2026-11-19: LLM client on the standard library
+- Decision: `OpenAICompatibleClient` uses `urllib`, no new dependency; model and URL in faultline.toml.
+- Alternative: the `openai` or `httpx` package.
+- Reason: one POST endpoint does not justify a dependency; CI only uses a fake client.
+
+## 2026-11-19: Committed no-LLM results must reproduce byte for byte
+- Decision: a test reruns `dbt_tests` and `dbt_tests_guess` on dev and compares with `eval/results/dev`.
+- Alternative: trust the committed files.
+- Reason: "a stranger can reproduce the numbers" is checked on every PR.

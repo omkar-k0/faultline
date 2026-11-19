@@ -4,7 +4,19 @@ Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M2 is done: merged to `main` (PRs #9, #10, #11). Next: M3, plan first.
+M3 Eval harness + baselines, issue #13, draft PR #14. Built; the no-LLM baselines are scored on dev. `raw_log_llm` waits for the owner's run on his MacBook Air.
+
+M2 is done: merged to `main` (PRs #9, #10, #11, #12).
+
+## Done in M3
+
+- `eval/loader.py`: downloads the split archive from release `benchmark-v1`, checks its sha256 against the manifest, extracts safely; methods see run files and a cleaned git history only (injector messages and seed-data commits removed; leak test on every dev run).
+- `eval/score.py`: location-level matching (node or physical node, column when the truth has one, commit for code faults); detection, top-1, top-3, wrong top-1, not confirmed, false alarms on clean runs; node-only diagnostic. Property tests.
+- `eval/baselines.py`: `dbt_tests` (alert only), `dbt_tests_guess` (alert plus naive cause), `raw_log_llm` (local model, strict JSON).
+- `llm/client.py`: `LLMClient` and an OpenAI-compatible client on the standard library; `faultline.toml` points at Ollama with `qwen2.5:7b-instruct`.
+- `faultline eval`, `make eval-dev`, `make eval-dev-llm`, `make fetch-benchmark`.
+- Results committed: `eval/results/dev/dbt_tests.*` and `eval/results/dev/dbt_tests_guess.*`. A test checks they reproduce byte for byte.
+- `docs/EVAL.md`: metrics, baselines, how to run the LLM baseline, known weaknesses.
 
 ## Done
 
@@ -21,6 +33,8 @@ M2 is done: merged to `main` (PRs #9, #10, #11). Next: M3, plan first.
 - Tests: 125 passing, including the recoverability property test for every fault type on all three projects.
 
 ## Not verified
+
+- `raw_log_llm` on a real model: only tested with a fake client. Prompt sizes on dev reach about 37,000 characters, so Ollama needs a 16k context (documented).
 
 - M1 hand-check sheet: still not filled in.
 - CODEOWNERS enforcement: needs branch protection on `main`.
@@ -43,6 +57,6 @@ M2 is done: merged to `main` (PRs #9, #10, #11). Next: M3, plan first.
 
 ## Next step
 
-- Owner: turn on branch protection on `main` (CODEOWNERS is not enforced without it).
 - Later: research real public court data and its licences; build the web viewer from the Stitch designs (real content only).
-- M3: eval harness and baselines ("dbt tests only", "raw-log LLM") scored on dev. Plan first.
+- Owner: run `make eval-dev-llm` on the MacBook Air (docs/EVAL.md) and open a PR with the three result files; review PR #14.
+- Then M4: monitors. Plan first.

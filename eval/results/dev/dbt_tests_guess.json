@@ -1,0 +1,1954 @@
+{
+ "archive_sha256": "sha256:4b03de862025322908c3b3036bc9b8d7617139e3a01eb3dd6403ecea504ed5a4",
+ "baseline": "dbt_tests_guess",
+ "command": "faultline eval --split dev --baseline dbt_tests_guess",
+ "config": {
+  "baseline": "dbt_tests_guess",
+  "faultline_version": "0.0.1"
+ },
+ "config_hash": "b68cd9753bf3",
+ "incidents": [
+  {
+   "incident_id": "inc_court_cases_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_001",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_judges"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_002",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_003",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_004",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_005",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "court_id",
+      "commit": null,
+      "node": "model.court_cases.stg_courts"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_006",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "hearing_id",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_007",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_008",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_009",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_010",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_011",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_012",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_013",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "hearing_id",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_014",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "hearing_id",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_015",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_016",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_017",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_018",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_019",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_020",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_021",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_022",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_023",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_024",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_025",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_court_cases_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_026",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_001",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_002",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_003",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_004",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_005",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "order_id",
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_006",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "order_id",
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_007",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_008",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_009",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_010",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_011",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_012",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_013",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_014",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "customer_id",
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_015",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_016",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_017",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_018",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_019",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_020",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_021",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_022",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_023",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_024",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_025",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_026",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_001",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_002",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_003",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_004",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_005",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_006",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_007",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_008",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_009",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_010",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_011",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_012",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_013",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_014",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_015",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_016",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_017",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_018",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_019",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_020",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_021",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_022",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_023",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_024",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_025",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_stripe_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_026",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  }
+ ],
+ "metrics": {
+  "by_fault_type": {
+   "broken_join": {
+    "detected": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "diagnostic_node_top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "diagnostic_node_top3": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    }
+   },
+   "distribution_shift": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "duplicate_keys": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    }
+   },
+   "late_or_missing_data": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "model_logic_bug": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "null_spike": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "schema_change": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    }
+   },
+   "timezone_error": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   }
+  },
+  "by_project": {
+   "court_cases": {
+    "detected": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    },
+    "diagnostic_node_top1": {
+     "count": 2,
+     "n": 16,
+     "rate": 0.125
+    },
+    "diagnostic_node_top3": {
+     "count": 2,
+     "n": 16,
+     "rate": 0.125
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    }
+   },
+   "jaffle_shop": {
+    "detected": {
+     "count": 5,
+     "n": 16,
+     "rate": 0.3125
+    },
+    "diagnostic_node_top1": {
+     "count": 1,
+     "n": 16,
+     "rate": 0.0625
+    },
+    "diagnostic_node_top3": {
+     "count": 1,
+     "n": 16,
+     "rate": 0.0625
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 5,
+     "n": 16,
+     "rate": 0.3125
+    }
+   },
+   "stripe": {
+    "detected": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    }
+   }
+  },
+  "clean": {
+   "false_alarms": {
+    "count": 0,
+    "n": 30,
+    "rate": 0.0
+   },
+   "n": 30
+  },
+  "faulted": {
+   "detected": {
+    "count": 11,
+    "n": 48,
+    "rate": 0.2292
+   },
+   "diagnostic_node_top1": {
+    "count": 3,
+    "n": 48,
+    "rate": 0.0625
+   },
+   "diagnostic_node_top3": {
+    "count": 3,
+    "n": 48,
+    "rate": 0.0625
+   },
+   "n": 48,
+   "not_confirmed": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "top1": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "top3": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "wrong_top1": {
+    "count": 11,
+    "n": 48,
+    "rate": 0.2292
+   }
+  }
+ },
+ "plan_sha256": "sha256:cb61ddf816eaab7e85a986f74ec4397a32e7e9962d8c7b9ebe2aab72aaecd95f",
+ "split": "dev"
+}

@@ -1,4 +1,4 @@
-.PHONY: setup build-projects check lint typecheck test clean benchmark
+.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm
 
 PROJECTS := jaffle_shop stripe court_cases jira
 UV := uv
@@ -33,6 +33,17 @@ check: lint typecheck build-projects test
 benchmark:
 	@test -n "$(SPLIT)" || (echo "usage: make benchmark SPLIT=<name from benchmark/plan.toml>"; exit 2)
 	$(UV) run --frozen faultline benchmark generate --split $(SPLIT)
+
+fetch-benchmark:
+	$(UV) run --frozen python -c "from pathlib import Path; from faultline.eval.loader import load_incidents; [print(s, len(load_incidents(s)[0]), 'incidents ready') for s in ('train', 'dev')]"
+
+eval-dev:
+	$(UV) run --frozen faultline eval --split dev --baseline dbt_tests
+	$(UV) run --frozen faultline eval --split dev --baseline dbt_tests_guess
+
+# Needs a local model server (see docs/EVAL.md). Never runs in CI.
+eval-dev-llm:
+	$(UV) run --frozen faultline eval --split dev --baseline raw_log_llm
 
 clean:
 	rm -rf .venv .pytest_cache .mypy_cache .ruff_cache build dist
