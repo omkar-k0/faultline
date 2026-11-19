@@ -85,7 +85,7 @@ The `heldout-guard` CI job fails any PR that touches `benchmark/heldout/`. The o
    ```
    uv run faultline benchmark generate --split heldout
    ```
-5. Commit `benchmark/heldout/`, `benchmark/manifest.json` and `benchmark/plan.toml`, push, open the PR, and add the `heldout-freeze` label. Check that `heldout-guard` passes, then merge.
+5. Commit `benchmark/heldout/`, `benchmark/manifest.json` and `benchmark/plan.toml`, push, open the PR **against `main`**, and add the `heldout-freeze` label. Check that `heldout-guard` passes, then merge.
 6. Upload `dist/benchmark-heldout.tar.gz` to a GitHub Release.
 
 Do not open the files in `benchmark/heldout/` or paste them into a chat. Only `faultline eval --split heldout` reads them, once, at the end.

@@ -96,3 +96,8 @@ Each entry: decision, alternative, reason.
 - Decision: vendor dbt_jira (Apache 2.0, 61 models) as the project used only by the held-out split; owner's choice.
 - Alternative: dbt_zendesk, dbt_github, or tuva-health/demo.
 - Reason: a new domain (project management) at stripe's size, building offline with the same pinned packages. Weakness: same vendor coding style as stripe.
+
+## 2026-11-19: Record of how heldout reached main
+- Decision: accept the freeze on `main` as merged by #11, without the `heldout-freeze` label (the guard failed there).
+- Alternative: revert #11 and redo it with the label.
+- Reason: #11 changed exactly the files that #10 froze (58 added held-out files, manifest, plan), and #10 passed the guard in freeze mode. Reverting would itself rewrite heldout. Lesson: a freeze PR targets `main` directly.
