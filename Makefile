@@ -1,6 +1,6 @@
 .PHONY: setup build-projects check lint typecheck test clean benchmark
 
-PROJECTS := jaffle_shop stripe court_cases
+PROJECTS := jaffle_shop stripe court_cases jira
 UV := uv
 export DBT_SEND_ANONYMOUS_USAGE_STATS := false
 
