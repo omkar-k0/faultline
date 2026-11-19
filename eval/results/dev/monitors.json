@@ -1,0 +1,6394 @@
+{
+ "archive_sha256": "sha256:4b03de862025322908c3b3036bc9b8d7617139e3a01eb3dd6403ecea504ed5a4",
+ "baseline": "monitors",
+ "by_monitor": {
+  "distribution": {
+   "broken_join": 3,
+   "distribution_shift": 4,
+   "duplicate_keys": 2,
+   "late_or_missing_data": 3,
+   "model_logic_bug": 1,
+   "schema_change": 1,
+   "timezone_error": 1
+  },
+  "duplicates": {
+   "duplicate_keys": 3
+  },
+  "freshness": {
+   "broken_join": 1,
+   "distribution_shift": 1,
+   "late_or_missing_data": 4,
+   "model_logic_bug": 3,
+   "null_spike": 2,
+   "timezone_error": 2
+  },
+  "null_rate": {
+   "broken_join": 1,
+   "duplicate_keys": 1,
+   "late_or_missing_data": 5,
+   "null_spike": 6,
+   "schema_change": 1
+  },
+  "schema": {
+   "broken_join": 1,
+   "duplicate_keys": 4,
+   "late_or_missing_data": 5,
+   "model_logic_bug": 2,
+   "schema_change": 6
+  },
+  "time_shift": {
+   "timezone_error": 2
+  },
+  "volume": {
+   "broken_join": 6,
+   "duplicate_keys": 4,
+   "late_or_missing_data": 6
+  }
+ },
+ "command": "faultline eval --split dev --baseline monitors",
+ "config": {
+  "baseline": "monitors",
+  "faultline_version": "0.0.1",
+  "monitors": {
+   "dist_abs_margin": 1e-09,
+   "dist_mad_k": 6.0,
+   "dist_rel_margin": 0.1,
+   "dist_spread_k": 1.0,
+   "freshness_min_lag_hours": 1.0,
+   "min_reference_runs": 3,
+   "null_abs_margin": 0.02,
+   "volume_abs_margin": 1,
+   "volume_rel_margin": 0.01
+  },
+  "reference": "other clean runs of the same project in the split, all but one"
+ },
+ "config_hash": "f33c88c9e810",
+ "incidents": [
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_judges",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "judge_name",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_judges",
+     "observed": "missing",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_001",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "judge_name",
+      "commit": null,
+      "node": "seed.court_cases.raw_judges"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_judges"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.appeal_deadlines",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.court_backlog_monthly",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_courts",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_lawyers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_cases",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "scheduled_at_local_new",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": "new",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_002",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": "scheduled_at_local_new",
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "court_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "judge_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "judge_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "appointed_on",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "court_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "judge_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "judge_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.court_cases.raw_judges",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "35..37",
+     "monitor": "volume",
+     "node": "model.court_cases.stg_judges",
+     "observed": 0,
+     "severity": 17.5
+    },
+    {
+     "column": null,
+     "expected": "35..37",
+     "monitor": "volume",
+     "node": "seed.court_cases.raw_judges",
+     "observed": 0,
+     "severity": 17.5
+    },
+    {
+     "column": "appointed_on",
+     "expected": ">= 2022-06-02T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_judges",
+     "observed": null,
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_003",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "appointed_on",
+      "commit": null,
+      "node": "seed.court_cases.raw_judges"
+     },
+     {
+      "column": "court_id",
+      "commit": null,
+      "node": "seed.court_cases.raw_judges"
+     },
+     {
+      "column": "judge_id",
+      "commit": null,
+      "node": "seed.court_cases.raw_judges"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "model.court_cases.fct_hearings",
+     "observed": 3536,
+     "severity": 9.02380952380946
+    },
+    {
+     "column": null,
+     "expected": "832..848",
+     "monitor": "volume",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": 731,
+     "severity": 5.988095238095256
+    },
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 3536,
+     "severity": 9.02380952380946
+    },
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": 3536,
+     "severity": 9.02380952380946
+    },
+    {
+     "column": "first_hearing_date",
+     "expected": ">= 2026-05-26T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_cases",
+     "observed": "2025-12-15T00:00:00",
+     "severity": 3888.0
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_cases",
+     "observed": "2025-12-15T00:00:00",
+     "severity": 4728.0
+    },
+    {
+     "column": "hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "2025-12-15T00:00:00",
+     "severity": 4728.0
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": ">= 2026-06-30T08:35:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "2025-12-15T07:50:00",
+     "severity": 4728.75
+    },
+    {
+     "column": "first_hearing_date",
+     "expected": ">= 2026-05-26T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "2025-12-15T00:00:00",
+     "severity": 3888.0
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "2025-12-15T00:00:00",
+     "severity": 4728.0
+    },
+    {
+     "column": "hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "2025-12-15T00:00:00",
+     "severity": 4728.0
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": ">= 2026-06-30T14:15:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "2025-12-15T13:15:00",
+     "severity": 4729.0
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": ">= 2026-06-30T08:35:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "2025-12-15T07:50:00",
+     "severity": 4728.75
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": ">= 2026-06-30T14:15:00",
+     "monitor": "freshness",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": "2025-12-15T13:15:00",
+     "severity": 4729.0
+    },
+    {
+     "column": "adjournment_rate",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_cases",
+     "observed": 0.1298,
+     "severity": 5.488095238095237
+    },
+    {
+     "column": "first_hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_cases",
+     "observed": 0.1298,
+     "severity": 5.488095238095237
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_cases",
+     "observed": 0.1298,
+     "severity": 5.488095238095237
+    },
+    {
+     "column": "avg_adjournment_rate",
+     "expected": "0.242533..0.296429",
+     "monitor": "distribution",
+     "node": "model.court_cases.dim_lawyers",
+     "observed": "min=0.214286",
+     "severity": 0.5240981738972327
+    },
+    {
+     "column": "adjournment_count",
+     "expected": "2.65393..3.24369",
+     "monitor": "distribution",
+     "node": "model.court_cases.fct_cases",
+     "observed": "mean=2.37976",
+     "severity": 0.46487735730684526
+    },
+    {
+     "column": "hearing_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.court_cases.fct_cases",
+     "observed": "min=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "hearing_count",
+     "expected": "21.6..26.4",
+     "monitor": "distribution",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "max=21",
+     "severity": 0.12500000000000036
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_004",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.appeal_deadlines",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.court_backlog_monthly",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_courts",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_lawyers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_cases",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fee_reconciliation",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_cases",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "court_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.court_cases.stg_courts",
+     "observed": "12 distinct / 13 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "court_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.court_cases.raw_courts",
+     "observed": "12 distinct / 13 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_005",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "court_id",
+      "commit": null,
+      "node": "seed.court_cases.raw_courts"
+     },
+     {
+      "column": "court_id",
+      "commit": null,
+      "node": "model.court_cases.stg_courts"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_cases"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.appeal_deadlines",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.court_backlog_monthly",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_courts",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_lawyers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_cases",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 5179,
+     "severity": 8.783424908424847
+    },
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": 5179,
+     "severity": 8.783424908424847
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_006",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.fct_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "court_level",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.dim_courts",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    },
+    {
+     "column": "court_level",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.stg_courts",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    },
+    {
+     "column": "court_level",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.court_cases.raw_courts",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_007",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "court_level",
+      "commit": null,
+      "node": "seed.court_cases.raw_courts"
+     },
+     {
+      "column": "court_level",
+      "commit": null,
+      "node": "model.court_cases.stg_courts"
+     },
+     {
+      "column": "court_level",
+      "commit": null,
+      "node": "model.court_cases.dim_courts"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "scheduled_at_utc",
+     "expected": ">= 2026-06-30T08:35:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "2026-06-30T06:40:00",
+     "severity": 1.9166666666666667
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": ">= 2026-06-30T14:15:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "2026-06-30T12:00:00",
+     "severity": 2.25
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": ">= 2026-06-30T08:35:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "2026-06-30T06:40:00",
+     "severity": 1.9166666666666667
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": ">= 2026-06-30T14:15:00",
+     "monitor": "freshness",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": "2026-06-30T12:00:00",
+     "severity": 2.25
+    },
+    {
+     "column": "first_hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_cases",
+     "observed": 0.0762,
+     "severity": 2.8095238095238066
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_cases",
+     "observed": 0.0762,
+     "severity": 2.8095238095238066
+    },
+    {
+     "column": "hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "local_hour",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "weekday",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.fct_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "first_hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": 0.0762,
+     "severity": 2.8095238095238066
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": 0.0762,
+     "severity": 2.8095238095238066
+    },
+    {
+     "column": "hearing_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": 0.4054,
+     "severity": 19.272435897435898
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_008",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": "hearing_date",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     },
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "filed_at_utc",
+     "expected": ">= 2026-03-02T10:03:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_cases",
+     "observed": "2026-02-07T09:25:00",
+     "severity": 552.6333333333333
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": ">= 2026-06-30T08:35:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "2026-06-07T17:35:00",
+     "severity": 543.0
+    },
+    {
+     "column": "filed_at_utc",
+     "expected": ">= 2026-03-02T10:03:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_cases",
+     "observed": "2026-02-07T09:25:00",
+     "severity": 552.6333333333333
+    },
+    {
+     "column": "scheduled_at_utc",
+     "expected": ">= 2026-06-30T08:35:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "2026-06-07T17:35:00",
+     "severity": 543.0
+    },
+    {
+     "column": "utc_offset_minutes",
+     "expected": "293.45..364.55",
+     "monitor": "distribution",
+     "node": "model.court_cases.stg_courts",
+     "observed": "median=33400",
+     "severity": 464.63361462728534
+    },
+    {
+     "column": "utc_offset_minutes",
+     "expected": "293.45..364.55",
+     "monitor": "distribution",
+     "node": "seed.court_cases.raw_courts",
+     "observed": "median=33400",
+     "severity": 464.63361462728534
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_009",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "utc_offset_minutes",
+      "commit": null,
+      "node": "seed.court_cases.raw_courts"
+     },
+     {
+      "column": "utc_offset_minutes",
+      "commit": null,
+      "node": "model.court_cases.stg_courts"
+     },
+     {
+      "column": "filed_at_utc",
+      "commit": null,
+      "node": "model.court_cases.stg_cases"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "avg_adjournment_rate",
+     "expected": "0.423962..0.518176",
+     "monitor": "distribution",
+     "node": "model.court_cases.dim_courts",
+     "observed": "min=0.098895",
+     "severity": 3.4503130114696567
+    },
+    {
+     "column": "avg_adjournment_rate",
+     "expected": "0.242533..0.296429",
+     "monitor": "distribution",
+     "node": "model.court_cases.dim_lawyers",
+     "observed": "min=0.020833",
+     "severity": 4.113460689250822
+    },
+    {
+     "column": "adjournment_count",
+     "expected": "1.8..2.2",
+     "monitor": "distribution",
+     "node": "model.court_cases.fct_cases",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "adjournment_rate",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.court_cases.fct_cases",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "adjournment_count",
+     "expected": "1.8..2.2",
+     "monitor": "distribution",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_010",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "adjournment_count",
+      "commit": null,
+      "node": "model.court_cases.int_case_hearings"
+     },
+     {
+      "column": "adjournment_count",
+      "commit": null,
+      "node": "model.court_cases.fct_cases"
+     },
+     {
+      "column": "adjournment_rate",
+      "commit": null,
+      "node": "model.court_cases.fct_cases"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "last_hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_cases",
+     "observed": "2026-05-26T00:00:00",
+     "severity": 840.0
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "2026-05-26T00:00:00",
+     "severity": 840.0
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_011",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "last_hearing_date",
+      "commit": null,
+      "node": "model.court_cases.int_case_hearings"
+     },
+     {
+      "column": "last_hearing_date",
+      "commit": null,
+      "node": "model.court_cases.fct_cases"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "last_hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.fct_cases",
+     "observed": "2026-05-26T00:00:00",
+     "severity": 840.0
+    },
+    {
+     "column": "last_hearing_date",
+     "expected": ">= 2026-06-30T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "2026-05-26T00:00:00",
+     "severity": 840.0
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_012",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "last_hearing_date",
+      "commit": null,
+      "node": "model.court_cases.int_case_hearings"
+     },
+     {
+      "column": "last_hearing_date",
+      "commit": null,
+      "node": "model.court_cases.fct_cases"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 3669120,
+     "severity": 41949.499999999716
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_013",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.appeal_deadlines",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.court_backlog_monthly",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_courts",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.dim_lawyers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_cases",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.court_cases.int_case_hearings",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "4324..4412",
+     "monitor": "volume",
+     "node": "model.court_cases.stg_hearings",
+     "observed": 52416,
+     "severity": 549.4999999999964
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_014",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.fct_hearings"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.court_cases.int_case_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "scheduled_at_local",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.court_cases.stg_hearings",
+     "observed": "+9 h",
+     "severity": 9.0
+    },
+    {
+     "column": "scheduled_at_local",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "seed.court_cases.raw_hearings",
+     "observed": "+9 h",
+     "severity": 9.0
+    },
+    {
+     "column": "local_hour",
+     "expected": "9..11",
+     "monitor": "distribution",
+     "node": "model.court_cases.fct_hearings",
+     "observed": "min=0",
+     "severity": 4.5
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_015",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     },
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "model.court_cases.stg_hearings"
+     },
+     {
+      "column": "local_hour",
+      "commit": null,
+      "node": "model.court_cases.fct_hearings"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "appointed_on",
+     "expected": ">= 2022-06-02T00:00:00",
+     "monitor": "freshness",
+     "node": "model.court_cases.stg_judges",
+     "observed": "2022-06-01T00:00:00",
+     "severity": 24.0
+    },
+    {
+     "column": "appointed_on",
+     "expected": ">= 2022-06-02T00:00:00",
+     "monitor": "freshness",
+     "node": "seed.court_cases.raw_judges",
+     "observed": "2022-06-01T00:00:00",
+     "severity": 24.0
+    }
+   ],
+   "incident_id": "inc_court_cases_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_016",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "appointed_on",
+      "commit": null,
+      "node": "seed.court_cases.raw_judges"
+     },
+     {
+      "column": "appointed_on",
+      "commit": null,
+      "node": "model.court_cases.stg_judges"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_017",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_018",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_019",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_020",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_021",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_022",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_023",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_024",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_025",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_court_cases_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_026",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "missing",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jaffle_shop_dev_001",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "status",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "missing",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jaffle_shop_dev_002",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "first_order",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "most_recent_order",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "order_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "order_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "order_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.orders",
+     "observed": 0,
+     "severity": 49.0
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": 0,
+     "severity": 49.0
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": 0,
+     "severity": 49.0
+    },
+    {
+     "column": "customer_lifetime_value",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    },
+    {
+     "column": "first_order",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    },
+    {
+     "column": "most_recent_order",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    },
+    {
+     "column": "number_of_orders",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_jaffle_shop_dev_003",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "order_date",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": "status",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "first_order",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "most_recent_order",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "order_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "order_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "order_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.orders",
+     "observed": 0,
+     "severity": 49.0
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": 0,
+     "severity": 49.0
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": 0,
+     "severity": 49.0
+    },
+    {
+     "column": "customer_lifetime_value",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    },
+    {
+     "column": "first_order",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    },
+    {
+     "column": "most_recent_order",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    },
+    {
+     "column": "number_of_orders",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 1.0,
+     "severity": 30.0
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_jaffle_shop_dev_004",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "order_date",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": "status",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": 105,
+     "severity": 2.5
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": 105,
+     "severity": 2.5
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_005",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.customers",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jaffle_shop.orders",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": 115,
+     "severity": 7.5
+    },
+    {
+     "column": null,
+     "expected": "98..100",
+     "monitor": "volume",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": 115,
+     "severity": 7.5
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_006",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "most_recent_order",
+     "expected": ">= 2018-04-09T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jaffle_shop.customers",
+     "observed": "2018-04-07T00:00:00",
+     "severity": 48.0
+    },
+    {
+     "column": "order_date",
+     "expected": ">= 2018-04-09T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jaffle_shop.orders",
+     "observed": "2018-04-07T00:00:00",
+     "severity": 48.0
+    },
+    {
+     "column": "order_date",
+     "expected": ">= 2018-04-09T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": "2018-04-07T00:00:00",
+     "severity": 48.0
+    },
+    {
+     "column": "order_date",
+     "expected": ">= 2018-04-09T00:00:00",
+     "monitor": "freshness",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": "2018-04-07T00:00:00",
+     "severity": 48.0
+    },
+    {
+     "column": "first_order",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 0.59,
+     "severity": 9.500000000000004
+    },
+    {
+     "column": "most_recent_order",
+     "expected": "<= 0.4000",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.customers",
+     "observed": 0.59,
+     "severity": 9.500000000000004
+    },
+    {
+     "column": "order_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.orders",
+     "observed": 0.5152,
+     "severity": 24.757575757575754
+    },
+    {
+     "column": "order_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": 0.5152,
+     "severity": 24.757575757575754
+    },
+    {
+     "column": "order_date",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": 0.5152,
+     "severity": 24.757575757575754
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jaffle_shop_dev_007",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "order_date",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": "order_date",
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     },
+     {
+      "column": "most_recent_order",
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "status",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.orders",
+     "observed": 0.5253,
+     "severity": 25.262626262626263
+    },
+    {
+     "column": "status",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jaffle_shop.stg_orders",
+     "observed": 0.5253,
+     "severity": 25.262626262626263
+    },
+    {
+     "column": "status",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jaffle_shop.raw_orders",
+     "observed": 0.5253,
+     "severity": 25.262626262626263
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jaffle_shop_dev_008",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "status",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_orders"
+     },
+     {
+      "column": "status",
+      "commit": null,
+      "node": "model.jaffle_shop.stg_orders"
+     },
+     {
+      "column": "status",
+      "commit": null,
+      "node": "model.jaffle_shop.orders"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_009",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_010",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_011",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "most_recent_order",
+     "expected": ">= 2018-04-09T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jaffle_shop.customers",
+     "observed": "2018-04-07T00:00:00",
+     "severity": 48.0
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_012",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "most_recent_order",
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "99..101",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.customers",
+     "observed": 62,
+     "severity": 18.5
+    },
+    {
+     "column": "customer_id",
+     "expected": "45.45..55.55",
+     "monitor": "distribution",
+     "node": "model.jaffle_shop.customers",
+     "observed": "median=41.5",
+     "severity": 0.3910891089108916
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_013",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     },
+     {
+      "column": "customer_id",
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "99..101",
+     "monitor": "volume",
+     "node": "model.jaffle_shop.customers",
+     "observed": 6200,
+     "severity": 3049.5
+    }
+   ],
+   "incident_id": "inc_jaffle_shop_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_014",
+    "node_hit_rank": 1,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jaffle_shop.customers"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_015",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_016",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_017",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_018",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_019",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_020",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_021",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_022",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_023",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_024",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_025",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jaffle_shop_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_026",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "amount_refunded",
+     "expected": "BIGINT",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__charge",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__charge_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.charge_data",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.charge",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__charge",
+     "observed": 1.0,
+     "severity": 49.0
+    }
+   ],
+   "incident_id": "inc_stripe_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_001",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "amount_refunded",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.charge_data"
+     },
+     {
+      "column": "amount_refunded",
+      "commit": null,
+      "node": "source.stripe.stripe.charge"
+     },
+     {
+      "column": "amount_refunded",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__charge_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "trial_end",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__subscription_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "trial_end",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.subscription_history_data",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "trial_end",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.subscription_history",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "billing_threshold_amount_gte",
+     "expected": "8.1..9.9",
+     "monitor": "distribution",
+     "node": "seed.stripe_integration_tests.subscription_data",
+     "observed": "max=8",
+     "severity": 0.05555555555555534
+    },
+    {
+     "column": "billing_threshold_amount_gte",
+     "expected": "8.1..9.9",
+     "monitor": "distribution",
+     "node": "source.stripe.stripe.subscription",
+     "observed": "max=8",
+     "severity": 0.05555555555555534
+    }
+   ],
+   "incident_id": "inc_stripe_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_002",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "trial_end",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.subscription_history_data"
+     },
+     {
+      "column": "trial_end",
+      "commit": null,
+      "node": "source.stripe.stripe.subscription_history"
+     },
+     {
+      "column": "billing_threshold_amount_gte",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.subscription_data"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "invoice_prefix",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "livemode",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "tax_exempt",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__activity_itemized_2",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__balance_change_from_activity_itemized_3",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__balance_transactions",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__ending_balance_reconciliation_itemized_4",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__invoice_details",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_is_delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__invoice_details",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__invoice_line_item_details",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "invoice_prefix",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "livemode",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "tax_exempt",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "invoice_prefix",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "livemode",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "tax_exempt",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "17..19",
+     "monitor": "volume",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 6,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "source.stripe.stripe.customer",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": "created_at",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-03-11T20:21:13",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "created",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "customer_created_at",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-03-11T20:21:13",
+     "monitor": "freshness",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "created",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-03-11T20:21:13",
+     "monitor": "freshness",
+     "node": "source.stripe.stripe.customer",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "created",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "source.stripe.stripe.customer",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "account_balance",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "<= 0.9644",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 1.7777777777777781
+    },
+    {
+     "column": "customer_balance",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "customer_created_at",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "customer_name",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "is_deleted",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "is_delinquent",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "total_fees",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=101754",
+     "severity": 50876749999999.49
+    },
+    {
+     "column": "total_gross_transaction_amount",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=2.93887e+06",
+     "severity": 1469435499999999.5
+    },
+    {
+     "column": "total_net_transaction_amount",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=2.69712e+06",
+     "severity": 1348560999999999.5
+    },
+    {
+     "column": "total_sales",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=2.93887e+06",
+     "severity": 1469435499999999.5
+    },
+    {
+     "column": "total_sales_count",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=1",
+     "severity": 499999999.5
+    }
+   ],
+   "incident_id": "inc_stripe_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_003",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     },
+     {
+      "column": "bank_account_id",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     },
+     {
+      "column": "created",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "invoice_prefix",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "livemode",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "tax_exempt",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__activity_itemized_2",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__balance_change_from_activity_itemized_3",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__balance_transactions",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__ending_balance_reconciliation_itemized_4",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__invoice_details",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_is_delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__invoice_details",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "customer_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__invoice_line_item_details",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "invoice_prefix",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "livemode",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "tax_exempt",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "delinquent",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "invoice_prefix",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_deleted",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "livemode",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "metadata",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "tax_exempt",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.stripe.stripe.customer",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "17..19",
+     "monitor": "volume",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 6,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": null,
+     "expected": "11..13",
+     "monitor": "volume",
+     "node": "source.stripe.stripe.customer",
+     "observed": 0,
+     "severity": 5.5
+    },
+    {
+     "column": "created_at",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__customer",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-03-11T20:21:13",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "created",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "customer_created_at",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-03-11T20:21:13",
+     "monitor": "freshness",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "created",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-03-11T20:21:13",
+     "monitor": "freshness",
+     "node": "source.stripe.stripe.customer",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "created",
+     "expected": ">= 2021-03-11T19:53:45",
+     "monitor": "freshness",
+     "node": "source.stripe.stripe.customer",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "account_balance",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "bank_account_id",
+     "expected": "<= 0.9644",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 1.7777777777777781
+    },
+    {
+     "column": "customer_balance",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "customer_created_at",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "customer_name",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "is_deleted",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "is_delinquent",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": 1.0,
+     "severity": 32.33333333333333
+    },
+    {
+     "column": "total_fees",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=99653.5",
+     "severity": 49826749999999.49
+    },
+    {
+     "column": "total_gross_transaction_amount",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=2.8439e+06",
+     "severity": 1421950499999999.5
+    },
+    {
+     "column": "total_net_transaction_amount",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=2.7534e+06",
+     "severity": 1376697499999999.5
+    },
+    {
+     "column": "total_sales",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=2.8439e+06",
+     "severity": 1421950499999999.5
+    },
+    {
+     "column": "total_sales_count",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__customer_overview",
+     "observed": "median=1",
+     "severity": 499999999.5
+    }
+   ],
+   "incident_id": "inc_stripe_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_004",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     },
+     {
+      "column": "bank_account_id",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     },
+     {
+      "column": "created",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "amount_off",
+     "expected": "<= 0.5914",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": 0.625,
+     "severity": 1.6785714285714293
+    },
+    {
+     "column": "amount_off",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__coupon_tmp",
+     "observed": 0.5455,
+     "severity": 1.2727272727272698
+    },
+    {
+     "column": "amount_off",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "seed.stripe_integration_tests.coupon_data",
+     "observed": 0.5455,
+     "severity": 1.2727272727272698
+    },
+    {
+     "column": "amount_off",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "source.stripe.stripe.coupon",
+     "observed": 0.5455,
+     "severity": 1.2727272727272698
+    },
+    {
+     "column": "duration_in_months",
+     "expected": "1.8..2.2",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": "median=3",
+     "severity": 1.999999999999999
+    },
+    {
+     "column": "max_redemptions",
+     "expected": "3.15..3.85",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": "median=5",
+     "severity": 1.6428571428571423
+    },
+    {
+     "column": "percent_off",
+     "expected": "15.385..19.665",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": "median=15.3",
+     "severity": 0.019859813084111513
+    },
+    {
+     "column": "duration_in_months",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__coupon_tmp",
+     "observed": "median=2",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "duration_in_months",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "seed.stripe_integration_tests.coupon_data",
+     "observed": "median=2",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "duration_in_months",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "source.stripe.stripe.coupon",
+     "observed": "median=2",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "coupon_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": "7 distinct / 8 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.stripe.stg_stripe__coupon_tmp",
+     "observed": "10 distinct / 11 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.stripe_integration_tests.coupon_data",
+     "observed": "10 distinct / 11 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.stripe.stripe.coupon",
+     "observed": "10 distinct / 11 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_stripe_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_005",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "duration_in_months",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.coupon_data"
+     },
+     {
+      "column": "duration_in_months",
+      "commit": null,
+      "node": "source.stripe.stripe.coupon"
+     },
+     {
+      "column": "amount_off",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.coupon_data"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "12..14",
+     "monitor": "volume",
+     "node": "model.stripe.stg_stripe__fee",
+     "observed": 15,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "12..14",
+     "monitor": "volume",
+     "node": "model.stripe.stg_stripe__fee_tmp",
+     "observed": 15,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "12..14",
+     "monitor": "volume",
+     "node": "seed.stripe_integration_tests.fee_data",
+     "observed": 15,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "12..14",
+     "monitor": "volume",
+     "node": "source.stripe.stripe.fee",
+     "observed": 15,
+     "severity": 0.5
+    },
+    {
+     "column": "amount",
+     "expected": "23190.8..29283.3",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__fee",
+     "observed": "mean=30492.2",
+     "severity": 0.19842706786059786
+    },
+    {
+     "column": "amount",
+     "expected": "23190.8..29283.3",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__fee_tmp",
+     "observed": "mean=30492.2",
+     "severity": 0.19842706786059786
+    },
+    {
+     "column": "amount",
+     "expected": "23190.8..29283.3",
+     "monitor": "distribution",
+     "node": "seed.stripe_integration_tests.fee_data",
+     "observed": "mean=30492.2",
+     "severity": 0.19842706786059786
+    },
+    {
+     "column": "amount",
+     "expected": "23190.8..29283.3",
+     "monitor": "distribution",
+     "node": "source.stripe.stripe.fee",
+     "observed": "mean=30492.2",
+     "severity": 0.19842706786059786
+    },
+    {
+     "column": "balance_transaction_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.stripe.stg_stripe__fee",
+     "observed": "13 distinct / 15 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "balance_transaction_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.stripe.stg_stripe__fee_tmp",
+     "observed": "13 distinct / 15 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "balance_transaction_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.stripe_integration_tests.fee_data",
+     "observed": "13 distinct / 15 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "balance_transaction_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.stripe.stripe.fee",
+     "observed": "13 distinct / 15 rows",
+     "severity": 2.0
+    }
+   ],
+   "incident_id": "inc_stripe_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_006",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "balance_transaction_id",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.fee_data"
+     },
+     {
+      "column": "balance_transaction_id",
+      "commit": null,
+      "node": "source.stripe.stripe.fee"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.stripe_integration_tests.fee_data"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "duration",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": 0.7143,
+     "severity": 34.714285714285715
+    },
+    {
+     "column": "duration",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__coupon_tmp",
+     "observed": 0.7,
+     "severity": 33.99999999999999
+    },
+    {
+     "column": "duration",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.stripe_integration_tests.coupon_data",
+     "observed": 0.7,
+     "severity": 33.99999999999999
+    },
+    {
+     "column": "duration",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.stripe.stripe.coupon",
+     "observed": 0.7,
+     "severity": 33.99999999999999
+    }
+   ],
+   "incident_id": "inc_stripe_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_007",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "duration",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.coupon_data"
+     },
+     {
+      "column": "duration",
+      "commit": null,
+      "node": "source.stripe.stripe.coupon"
+     },
+     {
+      "column": "duration",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__coupon_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "amount_refunded",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__charge",
+     "observed": 0.375,
+     "severity": 17.75
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.stripe.stg_stripe__charge_tmp",
+     "observed": 0.375,
+     "severity": 17.75
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.stripe_integration_tests.charge_data",
+     "observed": 0.375,
+     "severity": 17.75
+    },
+    {
+     "column": "amount_refunded",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.stripe.stripe.charge",
+     "observed": 0.375,
+     "severity": 17.75
+    }
+   ],
+   "incident_id": "inc_stripe_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_008",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "amount_refunded",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.charge_data"
+     },
+     {
+      "column": "amount_refunded",
+      "commit": null,
+      "node": "source.stripe.stripe.charge"
+     },
+     {
+      "column": "amount_refunded",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__charge_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "amount",
+     "expected": "1.27208e+06..1.5898e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__payout",
+     "observed": "mean=14277.5",
+     "severity": 3.958880062516662
+    },
+    {
+     "column": "amount",
+     "expected": "1.27208e+06..1.5898e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__payout_tmp",
+     "observed": "mean=14277.5",
+     "severity": 3.958880062516662
+    },
+    {
+     "column": "amount",
+     "expected": "1.27208e+06..1.5898e+06",
+     "monitor": "distribution",
+     "node": "seed.stripe_integration_tests.payout_data",
+     "observed": "mean=14277.5",
+     "severity": 3.958880062516662
+    },
+    {
+     "column": "amount",
+     "expected": "1.27208e+06..1.5898e+06",
+     "monitor": "distribution",
+     "node": "source.stripe.stripe.payout",
+     "observed": "mean=14277.5",
+     "severity": 3.958880062516662
+    }
+   ],
+   "incident_id": "inc_stripe_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_009",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "amount",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.payout_data"
+     },
+     {
+      "column": "amount",
+      "commit": null,
+      "node": "source.stripe.stripe.payout"
+     },
+     {
+      "column": "amount",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__payout_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "amount",
+     "expected": "23220.4..29283.3",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__fee",
+     "observed": "mean=69426.7",
+     "severity": 6.621181363856666
+    },
+    {
+     "column": "amount",
+     "expected": "23220.4..29283.3",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__fee_tmp",
+     "observed": "mean=69426.7",
+     "severity": 6.621181363856666
+    },
+    {
+     "column": "amount",
+     "expected": "23220.4..29283.3",
+     "monitor": "distribution",
+     "node": "seed.stripe_integration_tests.fee_data",
+     "observed": "mean=69426.7",
+     "severity": 6.621181363856666
+    },
+    {
+     "column": "amount",
+     "expected": "23220.4..29283.3",
+     "monitor": "distribution",
+     "node": "source.stripe.stripe.fee",
+     "observed": "mean=69426.7",
+     "severity": 6.621181363856666
+    }
+   ],
+   "incident_id": "inc_stripe_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_010",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "amount",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.fee_data"
+     },
+     {
+      "column": "amount",
+      "commit": null,
+      "node": "source.stripe.stripe.fee"
+     },
+     {
+      "column": "amount",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__fee_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "rolling_daily_end_balance_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_daily_net_activity_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_adjustments_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_adjustments_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_gross_payout_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_gross_transaction_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_net_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_payout_fee_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_payouts_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_refunds_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_sales_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_sales_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_daily_end_balance_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_daily_net_activity_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_adjustments_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_adjustments_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_gross_payout_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_gross_transaction_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_net_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_payout_fee_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_payouts_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_refunds_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_sales_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_sales_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_daily_end_balance_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_daily_net_activity_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_adjustments_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_adjustments_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_gross_payout_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_gross_transaction_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_net_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_payout_fee_amount",
+     "expected": "DECIMAL(38,1)",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_payouts_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_refunds_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_sales_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_sales_count",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_daily_end_balance_amount",
+     "expected": "1.79626e+07..2.29873e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=19403.4",
+     "severity": 3.5710657148463825
+    },
+    {
+     "column": "rolling_daily_net_activity_amount",
+     "expected": "1.79791e+07..2.30079e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=19421.5",
+     "severity": 3.5713743692821778
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_amount",
+     "expected": "5.92289e+06..7.55021e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=6320.14",
+     "severity": 3.6357927823350518
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_count",
+     "expected": "14.4..17.6",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=0.01",
+     "severity": 4.496874999999998
+    },
+    {
+     "column": "rolling_total_daily_gross_payout_amount",
+     "expected": "-22293.1..-15248.9",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=-17.255",
+     "severity": 2.1623310048433115
+    },
+    {
+     "column": "rolling_total_daily_gross_transaction_amount",
+     "expected": "1.81099e+06..2.31355e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "min=9902.53",
+     "severity": 3.5838269138548906
+    },
+    {
+     "column": "rolling_total_daily_net_transactions_amount",
+     "expected": "1.79791e+07..2.30079e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=19421.5",
+     "severity": 3.5713743692821778
+    },
+    {
+     "column": "rolling_total_daily_payouts_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "rolling_total_daily_sales_amount",
+     "expected": "1.81099e+06..2.31355e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "min=9902.53",
+     "severity": 3.5838269138548906
+    },
+    {
+     "column": "rolling_total_daily_sales_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "min=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "rolling_daily_end_balance_amount",
+     "expected": "1.79626e+07..2.29873e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=19403.4",
+     "severity": 3.5710657148463825
+    },
+    {
+     "column": "rolling_daily_net_activity_amount",
+     "expected": "1.79791e+07..2.30079e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=19421.5",
+     "severity": 3.5713743692821778
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_amount",
+     "expected": "5.92289e+06..7.55021e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=6320.14",
+     "severity": 3.6357927823350518
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_count",
+     "expected": "14.4..17.6",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=0.01",
+     "severity": 4.496874999999998
+    },
+    {
+     "column": "rolling_total_daily_gross_payout_amount",
+     "expected": "-22293.1..-15248.9",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=-17.255",
+     "severity": 2.1623310048433115
+    },
+    {
+     "column": "rolling_total_daily_gross_transaction_amount",
+     "expected": "1.81099e+06..2.31355e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "min=9902.53",
+     "severity": 3.5838269138548906
+    },
+    {
+     "column": "rolling_total_daily_net_transactions_amount",
+     "expected": "1.79791e+07..2.30079e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=19421.5",
+     "severity": 3.5713743692821778
+    },
+    {
+     "column": "rolling_total_daily_payouts_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "rolling_total_daily_sales_amount",
+     "expected": "1.81099e+06..2.31355e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "min=9902.53",
+     "severity": 3.5838269138548906
+    },
+    {
+     "column": "rolling_total_daily_sales_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "min=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "rolling_daily_end_balance_amount",
+     "expected": "1.79626e+07..2.29873e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=19403.4",
+     "severity": 3.5710657148463825
+    },
+    {
+     "column": "rolling_daily_net_activity_amount",
+     "expected": "1.79791e+07..2.30079e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=19421.5",
+     "severity": 3.5713743692821778
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_amount",
+     "expected": "5.92289e+06..7.55021e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=6320.14",
+     "severity": 3.6357927823350518
+    },
+    {
+     "column": "rolling_total_daily_failed_charge_count",
+     "expected": "14.4..17.6",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=0.01",
+     "severity": 4.496874999999998
+    },
+    {
+     "column": "rolling_total_daily_gross_payout_amount",
+     "expected": "-22293.1..-15248.9",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=-17.255",
+     "severity": 2.1623310048433115
+    },
+    {
+     "column": "rolling_total_daily_gross_transaction_amount",
+     "expected": "1.81099e+06..2.31355e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "min=9902.53",
+     "severity": 3.5838269138548906
+    },
+    {
+     "column": "rolling_total_daily_net_transactions_amount",
+     "expected": "1.79791e+07..2.30079e+07",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=19421.5",
+     "severity": 3.5713743692821778
+    },
+    {
+     "column": "rolling_total_daily_payouts_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "rolling_total_daily_sales_amount",
+     "expected": "1.81099e+06..2.31355e+06",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "min=9902.53",
+     "severity": 3.5838269138548906
+    },
+    {
+     "column": "rolling_total_daily_sales_count",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "min=0",
+     "severity": 4.499999999999998
+    }
+   ],
+   "incident_id": "inc_stripe_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_011",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "rolling_daily_end_balance_amount",
+      "commit": null,
+      "node": "model.stripe.int_stripe__account_rolling_totals"
+     },
+     {
+      "column": "rolling_daily_net_activity_amount",
+      "commit": null,
+      "node": "model.stripe.int_stripe__account_rolling_totals"
+     },
+     {
+      "column": "rolling_total_daily_adjustments_amount",
+      "commit": null,
+      "node": "model.stripe.int_stripe__account_rolling_totals"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_daily",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_partitions",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.int_stripe__account_rolling_totals",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "rolling_total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    },
+    {
+     "column": "total_daily_other_transactions_amount",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.stripe.stripe__daily_overview",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_stripe_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_012",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "total_daily_other_transactions_amount",
+      "commit": null,
+      "node": "model.stripe.int_stripe__account_daily"
+     },
+     {
+      "column": "rolling_total_daily_other_transactions_amount",
+      "commit": null,
+      "node": "model.stripe.int_stripe__account_rolling_totals"
+     },
+     {
+      "column": "total_daily_other_transactions_amount",
+      "commit": null,
+      "node": "model.stripe.int_stripe__account_rolling_totals"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "80..82",
+     "monitor": "volume",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": 4,
+     "severity": 38.0
+    },
+    {
+     "column": "subscription_month",
+     "expected": ">= 2026-11-01T00:00:00",
+     "monitor": "freshness",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": "2024-10-01T00:00:00",
+     "severity": 18264.0
+    },
+    {
+     "column": "subscription_year",
+     "expected": ">= 2026-01-01T00:00:00",
+     "monitor": "freshness",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": "2024-01-01T00:00:00",
+     "severity": 17544.0
+    },
+    {
+     "column": "prior_month_contract_mrr",
+     "expected": "<= 0.1928",
+     "monitor": "null_rate",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": 0.25,
+     "severity": 2.8580246913580254
+    },
+    {
+     "column": "item_month_number",
+     "expected": "26.1..31.9",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": "max=4",
+     "severity": 3.810344827586209
+    }
+   ],
+   "incident_id": "inc_stripe_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_013",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "subscription_month",
+      "commit": null,
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     },
+     {
+      "column": "subscription_year",
+      "commit": null,
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "80..82",
+     "monitor": "volume",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": 648,
+     "severity": 283.0
+    },
+    {
+     "column": "item_month_number",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": "median=6",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "month_contract_mrr",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": "max=9156",
+     "severity": 4577999999999.499
+    },
+    {
+     "column": "prior_month_contract_mrr",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.stripe.stripe__subscription_item_mrr_report",
+     "observed": "max=9156",
+     "severity": 4577999999999.499
+    }
+   ],
+   "incident_id": "inc_stripe_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_014",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "month_contract_mrr",
+      "commit": null,
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     },
+     {
+      "column": "prior_month_contract_mrr",
+      "commit": null,
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.stripe.stg_stripe__customer_tmp",
+     "observed": "+1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "seed.stripe_integration_tests.customer_data",
+     "observed": "+1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "source.stripe.stripe.customer",
+     "observed": "+1 h",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_stripe_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_015",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.customer_data"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.stripe.stripe.customer"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__customer_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "created_at",
+     "expected": ">= 2024-07-04T12:30:00",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__coupon",
+     "observed": "2024-07-04T10:30:00",
+     "severity": 2.0
+    },
+    {
+     "column": "created",
+     "expected": ">= 2024-08-01T09:00:00",
+     "monitor": "freshness",
+     "node": "model.stripe.stg_stripe__coupon_tmp",
+     "observed": "2024-08-01T07:00:00",
+     "severity": 2.0
+    },
+    {
+     "column": "created",
+     "expected": ">= 2024-08-01T09:00:00",
+     "monitor": "freshness",
+     "node": "seed.stripe_integration_tests.coupon_data",
+     "observed": "2024-08-01T07:00:00",
+     "severity": 2.0
+    },
+    {
+     "column": "created",
+     "expected": ">= 2024-08-01T09:00:00",
+     "monitor": "freshness",
+     "node": "source.stripe.stripe.coupon",
+     "observed": "2024-08-01T07:00:00",
+     "severity": 2.0
+    }
+   ],
+   "incident_id": "inc_stripe_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_stripe_dev_016",
+    "node_hit_rank": 1,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "created",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.coupon_data"
+     },
+     {
+      "column": "created",
+      "commit": null,
+      "node": "source.stripe.stripe.coupon"
+     },
+     {
+      "column": "created",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__coupon_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_017",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_018",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_019",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_020",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_021",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_022",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_023",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_024",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_025",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_stripe_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_026",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  }
+ ],
+ "metrics": {
+  "by_fault_type": {
+   "broken_join": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    }
+   },
+   "distribution_shift": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "diagnostic_node_top3": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "top3": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "wrong_top1": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    }
+   },
+   "duplicate_keys": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "top3": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "wrong_top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    }
+   },
+   "late_or_missing_data": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "model_logic_bug": {
+    "detected": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    },
+    "diagnostic_node_top1": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    },
+    "diagnostic_node_top3": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    }
+   },
+   "null_spike": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "schema_change": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "timezone_error": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top3": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "top3": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   }
+  },
+  "by_project": {
+   "court_cases": {
+    "detected": {
+     "count": 16,
+     "n": 16,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 15,
+     "n": 16,
+     "rate": 0.9375
+    },
+    "diagnostic_node_top3": {
+     "count": 15,
+     "n": 16,
+     "rate": 0.9375
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 10,
+     "n": 16,
+     "rate": 0.625
+    },
+    "top3": {
+     "count": 10,
+     "n": 16,
+     "rate": 0.625
+    },
+    "wrong_top1": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    }
+   },
+   "jaffle_shop": {
+    "detected": {
+     "count": 11,
+     "n": 16,
+     "rate": 0.6875
+    },
+    "diagnostic_node_top1": {
+     "count": 11,
+     "n": 16,
+     "rate": 0.6875
+    },
+    "diagnostic_node_top3": {
+     "count": 11,
+     "n": 16,
+     "rate": 0.6875
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    },
+    "top3": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    },
+    "wrong_top1": {
+     "count": 5,
+     "n": 16,
+     "rate": 0.3125
+    }
+   },
+   "stripe": {
+    "detected": {
+     "count": 16,
+     "n": 16,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 16,
+     "n": 16,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 16,
+     "n": 16,
+     "rate": 1.0
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 11,
+     "n": 16,
+     "rate": 0.6875
+    },
+    "top3": {
+     "count": 11,
+     "n": 16,
+     "rate": 0.6875
+    },
+    "wrong_top1": {
+     "count": 5,
+     "n": 16,
+     "rate": 0.3125
+    }
+   }
+  },
+  "clean": {
+   "false_alarms": {
+    "count": 0,
+    "n": 30,
+    "rate": 0.0
+   },
+   "n": 30
+  },
+  "faulted": {
+   "detected": {
+    "count": 43,
+    "n": 48,
+    "rate": 0.8958
+   },
+   "diagnostic_node_top1": {
+    "count": 42,
+    "n": 48,
+    "rate": 0.875
+   },
+   "diagnostic_node_top3": {
+    "count": 42,
+    "n": 48,
+    "rate": 0.875
+   },
+   "n": 48,
+   "not_confirmed": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "top1": {
+    "count": 27,
+    "n": 48,
+    "rate": 0.5625
+   },
+   "top3": {
+    "count": 27,
+    "n": 48,
+    "rate": 0.5625
+   },
+   "wrong_top1": {
+    "count": 16,
+    "n": 48,
+    "rate": 0.3333
+   }
+  }
+ },
+ "plan_sha256": "sha256:cb61ddf816eaab7e85a986f74ec4397a32e7e9962d8c7b9ebe2aab72aaecd95f",
+ "split": "dev"
+}
