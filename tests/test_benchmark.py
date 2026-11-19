@@ -13,9 +13,14 @@ from tests.conftest import PROJECTS, ROOT
 PLAN = ROOT / "benchmark" / "plan.toml"
 
 
+def _plan_projects(plan_path: Path) -> list[str]:
+    return sorted({p for s in load_plan(plan_path).splits.values() for p in s.projects})
+
+
 @pytest.fixture(scope="module")
 def catalogs() -> dict[str, FaultCatalog]:
-    return {p: build_catalog(PROJECTS / p) for p in ("jaffle_shop", "stripe", "court_cases")}
+    """A catalog for every project any split in the plan uses, held-out included."""
+    return {p: build_catalog(PROJECTS / p) for p in _plan_projects(PLAN)}
 
 
 def test_partition_is_disjoint_complete_and_proportional() -> None:
@@ -53,6 +58,22 @@ def test_specs_cover_every_fault_type(catalogs: dict[str, FaultCatalog]) -> None
         assert len({s.incident_id for s, _ in specs}) == len(specs)
         assert len({s.seed for s, _ in specs}) == len(specs)
         assert all(s.seed > split.seed_base for s, _ in specs)
+
+
+def test_a_split_with_its_own_project_works(tmp_path: Path) -> None:
+    """A split whose project appears in no other split (the held-out shape)."""
+    plan_path = tmp_path / "plan.toml"
+    plan_path.write_text(
+        PLAN.read_text() + "\n[splits.extra]\nprojects = ['jira']\nseed_base = 900000\n"
+        "incidents_per_fault = 1\nclean_runs_per_project = 1\nlocation_share = 1\n"
+    )
+    plan = load_plan(plan_path)
+    cats = {p: build_catalog(PROJECTS / p) for p in _plan_projects(plan_path)}
+    alloc = split_nodes(plan, cats["jira"])
+    assert set(alloc) == {"extra"}
+    specs = build_specs(plan.splits["extra"], cats, {"jira": alloc["extra"]})
+    assert len(specs) == len(FAULT_TYPES) + 1
+    assert {s.project for s, _ in specs} == {"jira"}
 
 
 def test_seed_bases_must_differ(tmp_path: Path) -> None:
