@@ -162,3 +162,18 @@ Each entry: decision, alternative, reason.
 - Alternative: require distinct < rows, as the M4 duplicates monitor does.
 - Reason: the profile's distinct counts are approximate (101 distinct in a 99-row table), so exact uniqueness misses real duplicates.
 
+## 2026-11-19: "Correct not confirmed" is measured against the untested ranking
+- Decision: an abstention counts as correct when the same run's best untested cause (no-tests ranking) would have been wrong at top-1.
+- Alternative: count every abstention on a faulted run as wrong, or every one as right.
+- Reason: owner's approval; it asks whether the gate held back a wrong answer or a right one, from the same evidence.
+
+## 2026-11-19: No-lineage ablation strips the graphs, not the code paths
+- Decision: the ablation runs the same triage on a context whose table and column graphs have no edges.
+- Alternative: separate code paths that skip each lineage use.
+- Reason: one switch removes every use of lineage at once (grouping, proposing upstream, input checks, elimination), and nothing else changes.
+
+## 2026-11-19: The LLM re-ranker may only permute survivors
+- Decision: the model returns an order of the numbered survivors; unknown numbers are dropped, missing ones keep their deterministic place, and at most 6 survivors are shown.
+- Alternative: let the model return causes in its own words and match them back.
+- Reason: CLAUDE.md principle 1: the LLM ranks hypotheses that survived their tests and never invents a cause; a numbered list makes that checkable.
+
