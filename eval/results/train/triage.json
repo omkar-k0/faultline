@@ -1,5 +1,5 @@
 {
- "archive_sha256": "sha256:cf3b50902a87cbb5f0b64583ee5484080291f37a0a3e10af62f6363be6a97287",
+ "archive_sha256": "sha256:e620ba7d6d1c4c948f82d5f424ad365eae3b81cd60e4c87013e601e0e39322d1",
  "baseline": "triage",
  "command": "faultline eval --split train --baseline triage",
  "config": {
@@ -19,20 +19,20 @@
   "reference": "other clean runs of the same project in the split, all but one",
   "triage": "deterministic ranking, no language model"
  },
- "config_hash": "3936aebbc02f",
+ "config_hash": "d7723c98f207",
  "gating": {
-  "answered": 88,
+  "answered": 89,
   "correct_not_confirmed": {
    "count": 0,
    "n": 0,
    "rate": null
   },
-  "detected": 88,
+  "detected": 89,
   "not_confirmed": 0,
   "right_when_answering": {
-   "count": 85,
-   "n": 88,
-   "rate": 0.9659
+   "count": 86,
+   "n": 89,
+   "rate": 0.9663
   },
   "ungated_top1": {
    "count": 35,
@@ -856,7 +856,7 @@
          {
           "column": null,
           "expected": "success",
-          "node": "model.court_cases.stg_hearings",
+          "node": "model.court_cases.stg_cases",
           "observed": "error",
           "severity": "inf",
           "source": "dbt_error"
@@ -864,7 +864,7 @@
          {
           "column": null,
           "expected": "success",
-          "node": "model.court_cases.stg_cases",
+          "node": "model.court_cases.stg_hearings",
           "observed": "error",
           "severity": "inf",
           "source": "dbt_error"
@@ -985,7 +985,7 @@
        {
         "column": null,
         "expected": "success",
-        "node": "model.court_cases.stg_hearings",
+        "node": "model.court_cases.stg_cases",
         "observed": "error",
         "severity": "inf",
         "source": "dbt_error"
@@ -993,7 +993,7 @@
        {
         "column": null,
         "expected": "success",
-        "node": "model.court_cases.stg_cases",
+        "node": "model.court_cases.stg_hearings",
         "observed": "error",
         "severity": "inf",
         "source": "dbt_error"
@@ -9007,7 +9007,7 @@
           "source": "dbt_test"
          },
          {
-          "column": "credit_card_amount",
+          "column": "gift_card_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -9015,7 +9015,7 @@
           "source": "dbt_test"
          },
          {
-          "column": "gift_card_amount",
+          "column": "credit_card_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -9155,7 +9155,7 @@
           "source": "dbt_test"
          },
          {
-          "column": "credit_card_amount",
+          "column": "gift_card_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -9163,7 +9163,7 @@
           "source": "dbt_test"
          },
          {
-          "column": "gift_card_amount",
+          "column": "credit_card_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -9299,7 +9299,7 @@
         "source": "dbt_test"
        },
        {
-        "column": "credit_card_amount",
+        "column": "gift_card_amount",
         "expected": "pass",
         "node": "model.jaffle_shop.orders",
         "observed": "not_null fail",
@@ -9307,7 +9307,7 @@
         "source": "dbt_test"
        },
        {
-        "column": "gift_card_amount",
+        "column": "credit_card_amount",
         "expected": "pass",
         "node": "model.jaffle_shop.orders",
         "observed": "not_null fail",
@@ -11721,23 +11721,7 @@
           "source": "distribution"
          },
          {
-          "column": "amount",
-          "expected": "pass",
-          "node": "model.jaffle_shop.orders",
-          "observed": "not_null fail",
-          "severity": "inf",
-          "source": "dbt_test"
-         },
-         {
           "column": "bank_transfer_amount",
-          "expected": "pass",
-          "node": "model.jaffle_shop.orders",
-          "observed": "not_null fail",
-          "severity": "inf",
-          "source": "dbt_test"
-         },
-         {
-          "column": "credit_card_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -11753,7 +11737,23 @@
           "source": "dbt_test"
          },
          {
+          "column": "amount",
+          "expected": "pass",
+          "node": "model.jaffle_shop.orders",
+          "observed": "not_null fail",
+          "severity": "inf",
+          "source": "dbt_test"
+         },
+         {
           "column": "gift_card_amount",
+          "expected": "pass",
+          "node": "model.jaffle_shop.orders",
+          "observed": "not_null fail",
+          "severity": "inf",
+          "source": "dbt_test"
+         },
+         {
+          "column": "credit_card_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -11903,23 +11903,7 @@
         "source": "distribution"
        },
        {
-        "column": "amount",
-        "expected": "pass",
-        "node": "model.jaffle_shop.orders",
-        "observed": "not_null fail",
-        "severity": "inf",
-        "source": "dbt_test"
-       },
-       {
         "column": "bank_transfer_amount",
-        "expected": "pass",
-        "node": "model.jaffle_shop.orders",
-        "observed": "not_null fail",
-        "severity": "inf",
-        "source": "dbt_test"
-       },
-       {
-        "column": "credit_card_amount",
         "expected": "pass",
         "node": "model.jaffle_shop.orders",
         "observed": "not_null fail",
@@ -11935,7 +11919,23 @@
         "source": "dbt_test"
        },
        {
+        "column": "amount",
+        "expected": "pass",
+        "node": "model.jaffle_shop.orders",
+        "observed": "not_null fail",
+        "severity": "inf",
+        "source": "dbt_test"
+       },
+       {
         "column": "gift_card_amount",
+        "expected": "pass",
+        "node": "model.jaffle_shop.orders",
+        "observed": "not_null fail",
+        "severity": "inf",
+        "source": "dbt_test"
+       },
+       {
+        "column": "credit_card_amount",
         "expected": "pass",
         "node": "model.jaffle_shop.orders",
         "observed": "not_null fail",
@@ -12238,14 +12238,6 @@
           "source": "dbt_test"
          },
          {
-          "column": "bank_transfer_amount",
-          "expected": "pass",
-          "node": "model.jaffle_shop.orders",
-          "observed": "not_null fail",
-          "severity": "inf",
-          "source": "dbt_test"
-         },
-         {
           "column": "coupon_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
@@ -12255,6 +12247,14 @@
          },
          {
           "column": "credit_card_amount",
+          "expected": "pass",
+          "node": "model.jaffle_shop.orders",
+          "observed": "not_null fail",
+          "severity": "inf",
+          "source": "dbt_test"
+         },
+         {
+          "column": "bank_transfer_amount",
           "expected": "pass",
           "node": "model.jaffle_shop.orders",
           "observed": "not_null fail",
@@ -12412,14 +12412,6 @@
         "source": "dbt_test"
        },
        {
-        "column": "bank_transfer_amount",
-        "expected": "pass",
-        "node": "model.jaffle_shop.orders",
-        "observed": "not_null fail",
-        "severity": "inf",
-        "source": "dbt_test"
-       },
-       {
         "column": "coupon_amount",
         "expected": "pass",
         "node": "model.jaffle_shop.orders",
@@ -12429,6 +12421,14 @@
        },
        {
         "column": "credit_card_amount",
+        "expected": "pass",
+        "node": "model.jaffle_shop.orders",
+        "observed": "not_null fail",
+        "severity": "inf",
+        "source": "dbt_test"
+       },
+       {
+        "column": "bank_transfer_amount",
         "expected": "pass",
         "node": "model.jaffle_shop.orders",
         "observed": "not_null fail",
@@ -21903,22 +21903,145 @@
    "incident_id": "inc_stripe_train_019",
    "outcome": {
     "abstained": false,
-    "detected": false,
+    "detected": true,
     "false_alarm": false,
     "fault_type": "distribution_shift",
-    "hit_rank": null,
+    "hit_rank": 1,
     "incident_id": "inc_stripe_train_019",
-    "node_hit_rank": null,
+    "node_hit_rank": 1,
     "project": "stripe",
     "wrong_top1": false
    },
    "prediction": {
-    "candidates": [],
-    "detected": false
+    "candidates": [
+     {
+      "column": "exp_year",
+      "commit": null,
+      "node": "source.stripe.stripe.card"
+     },
+     {
+      "column": "exp_year",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.card_data"
+     }
+    ],
+    "detected": true
    },
    "report": {
-    "detected": false,
-    "incidents": [],
+    "detected": true,
+    "incidents": [
+     {
+      "causes": [
+       {
+        "checks": [
+         {
+          "detail": "1 symptoms",
+          "name": "the column itself is off",
+          "passed": true
+         }
+        ],
+        "column": "exp_year",
+        "commit": null,
+        "description": "values of source.stripe.stripe.card.exp_year changed",
+        "explains": [
+         {
+          "column": "exp_year",
+          "expected": "1808.4..2234.6",
+          "node": "model.stripe.stg_stripe__card_tmp",
+          "observed": "median=4172",
+          "severity": 4.545753,
+          "source": "distribution"
+         },
+         {
+          "column": "exp_year",
+          "expected": "1808.4..2234.6",
+          "node": "source.stripe.stripe.card",
+          "observed": "median=4172",
+          "severity": 4.545753,
+          "source": "distribution"
+         }
+        ],
+        "kind": "source_column",
+        "lineage": [
+         "source.stripe.stripe.card.exp_year",
+         "source.stripe.stripe.card.exp_year -> model.stripe.stg_stripe__card_tmp.exp_year"
+        ],
+        "mode": "observed",
+        "node": "source.stripe.stripe.card",
+        "strength": 1
+       }
+      ],
+      "incident": 1,
+      "proposed": 6,
+      "rejected": 5,
+      "status": "confirmed",
+      "symptoms": [
+       {
+        "column": "exp_year",
+        "expected": "1808.4..2234.6",
+        "node": "model.stripe.stg_stripe__card_tmp",
+        "observed": "median=4172",
+        "severity": 4.545753,
+        "source": "distribution"
+       },
+       {
+        "column": "exp_year",
+        "expected": "1808.4..2234.6",
+        "node": "source.stripe.stripe.card",
+        "observed": "median=4172",
+        "severity": 4.545753,
+        "source": "distribution"
+       }
+      ]
+     },
+     {
+      "causes": [
+       {
+        "checks": [
+         {
+          "detail": "1 symptoms",
+          "name": "the column itself is off",
+          "passed": true
+         }
+        ],
+        "column": "exp_year",
+        "commit": null,
+        "description": "values of seed.stripe_integration_tests.card_data.exp_year changed",
+        "explains": [
+         {
+          "column": "exp_year",
+          "expected": "1808.4..2234.6",
+          "node": "seed.stripe_integration_tests.card_data",
+          "observed": "median=4172",
+          "severity": 4.545753,
+          "source": "distribution"
+         }
+        ],
+        "kind": "source_column",
+        "lineage": [
+         "seed.stripe_integration_tests.card_data.exp_year"
+        ],
+        "mode": "observed",
+        "node": "seed.stripe_integration_tests.card_data",
+        "strength": 1
+       }
+      ],
+      "incident": 2,
+      "proposed": 6,
+      "rejected": 5,
+      "status": "confirmed",
+      "symptoms": [
+       {
+        "column": "exp_year",
+        "expected": "1808.4..2234.6",
+        "node": "seed.stripe_integration_tests.card_data",
+        "observed": "median=4172",
+        "severity": 4.545753,
+        "source": "distribution"
+       }
+      ]
+     }
+    ],
     "run": "inc_stripe_train_019",
     "states": [
      "gather",
@@ -22898,17 +23021,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -22922,17 +23045,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -22946,50 +23069,50 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23002,18 +23125,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23026,10 +23149,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -23050,17 +23173,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23074,50 +23197,50 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23130,18 +23253,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23154,10 +23277,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -23178,17 +23301,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23202,18 +23325,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
@@ -23258,34 +23381,34 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23298,18 +23421,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23322,10 +23445,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -23346,17 +23469,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23370,18 +23493,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
@@ -23617,17 +23740,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23641,17 +23764,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23665,50 +23788,50 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23721,18 +23844,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23745,10 +23868,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -23769,17 +23892,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23793,50 +23916,50 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23849,18 +23972,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -23873,10 +23996,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -23897,17 +24020,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -23921,18 +24044,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
@@ -23977,34 +24100,34 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24017,18 +24140,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24041,10 +24164,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -24065,17 +24188,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -24089,18 +24212,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
@@ -24336,17 +24459,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -24360,17 +24483,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -24384,50 +24507,50 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24440,18 +24563,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24464,10 +24587,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -24488,17 +24611,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -24512,50 +24635,50 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24568,18 +24691,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24592,10 +24715,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -24616,17 +24739,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -24640,18 +24763,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
@@ -24696,34 +24819,34 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8535.81..10668.3",
+          "expected": "8531.79..10663.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104716",
+          "observed": "mean=104666",
           "severity": 44.101943,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_end_balance_amount",
-          "expected": "1.78551e+07..2.23147e+07",
+          "expected": "1.78552e+07..2.23148e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19022e+08",
-          "severity": 44.109271,
+          "observed": "mean=2.19024e+08",
+          "severity": 44.109267,
           "source": "distribution"
          },
          {
           "column": "rolling_daily_net_activity_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24736,18 +24859,18 @@
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_net_transactions_amount",
-          "expected": "1.78719e+07..2.23353e+07",
+          "expected": "1.7872e+07..2.23355e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.19216e+08",
-          "severity": 44.109216,
+          "observed": "mean=2.19217e+08",
+          "severity": 44.109213,
           "source": "distribution"
          },
          {
@@ -24760,10 +24883,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83457e+07..2.30716e+07",
+          "expected": "1.83459e+07..2.30718e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.28753e+08",
-          "severity": 43.522279,
+          "observed": "mean=2.28755e+08",
+          "severity": 43.522274,
           "source": "distribution"
          },
          {
@@ -24784,17 +24907,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8543.88..10678.3",
+          "expected": "8539.86..10673.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=104809",
+          "observed": "mean=104760",
           "severity": 44.101895,
           "source": "distribution"
          },
@@ -24808,18 +24931,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8770.99..11031",
+          "expected": "8766.86..11025.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=109367",
+          "observed": "mean=109315",
           "severity": 43.512019,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=0.041431",
-          "severity": 49.506638,
+          "observed": "max=22",
+          "severity": 49.5,
           "source": "distribution"
          },
          {
@@ -25034,17 +25157,17 @@
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8535.81..10668.3",
+        "expected": "8531.79..10663.3",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=104716",
+        "observed": "mean=104666",
         "severity": 44.101943,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
@@ -25058,17 +25181,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
@@ -25082,50 +25205,50 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=0.041431",
-        "severity": 49.506638,
+        "observed": "max=22",
+        "severity": 49.5,
         "source": "distribution"
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8535.81..10668.3",
+        "expected": "8531.79..10663.3",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=104716",
+        "observed": "mean=104666",
         "severity": 44.101943,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
        {
         "column": "rolling_daily_end_balance_amount",
-        "expected": "1.78551e+07..2.23147e+07",
+        "expected": "1.78552e+07..2.23148e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.19022e+08",
-        "severity": 44.109271,
+        "observed": "mean=2.19024e+08",
+        "severity": 44.109267,
         "source": "distribution"
        },
        {
         "column": "rolling_daily_net_activity_amount",
-        "expected": "1.78719e+07..2.23353e+07",
+        "expected": "1.7872e+07..2.23355e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.19216e+08",
-        "severity": 44.109216,
+        "observed": "mean=2.19217e+08",
+        "severity": 44.109213,
         "source": "distribution"
        },
        {
@@ -25138,18 +25261,18 @@
        },
        {
         "column": "rolling_total_daily_gross_transaction_amount",
-        "expected": "1.83457e+07..2.30716e+07",
+        "expected": "1.83459e+07..2.30718e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.28753e+08",
-        "severity": 43.522279,
+        "observed": "mean=2.28755e+08",
+        "severity": 43.522274,
         "source": "distribution"
        },
        {
         "column": "rolling_total_daily_net_transactions_amount",
-        "expected": "1.78719e+07..2.23353e+07",
+        "expected": "1.7872e+07..2.23355e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.19216e+08",
-        "severity": 44.109216,
+        "observed": "mean=2.19217e+08",
+        "severity": 44.109213,
         "source": "distribution"
        },
        {
@@ -25162,10 +25285,10 @@
        },
        {
         "column": "rolling_total_daily_sales_amount",
-        "expected": "1.83457e+07..2.30716e+07",
+        "expected": "1.83459e+07..2.30718e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.28753e+08",
-        "severity": 43.522279,
+        "observed": "mean=2.28755e+08",
+        "severity": 43.522274,
         "source": "distribution"
        },
        {
@@ -25186,17 +25309,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
@@ -25210,50 +25333,50 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=0.041431",
-        "severity": 49.506638,
+        "observed": "max=22",
+        "severity": 49.5,
         "source": "distribution"
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8535.81..10668.3",
+        "expected": "8531.79..10663.3",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=104716",
+        "observed": "mean=104666",
         "severity": 44.101943,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
        {
         "column": "rolling_daily_end_balance_amount",
-        "expected": "1.78551e+07..2.23147e+07",
+        "expected": "1.78552e+07..2.23148e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.19022e+08",
-        "severity": 44.109271,
+        "observed": "mean=2.19024e+08",
+        "severity": 44.109267,
         "source": "distribution"
        },
        {
         "column": "rolling_daily_net_activity_amount",
-        "expected": "1.78719e+07..2.23353e+07",
+        "expected": "1.7872e+07..2.23355e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.19216e+08",
-        "severity": 44.109216,
+        "observed": "mean=2.19217e+08",
+        "severity": 44.109213,
         "source": "distribution"
        },
        {
@@ -25266,18 +25389,18 @@
        },
        {
         "column": "rolling_total_daily_gross_transaction_amount",
-        "expected": "1.83457e+07..2.30716e+07",
+        "expected": "1.83459e+07..2.30718e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.28753e+08",
-        "severity": 43.522279,
+        "observed": "mean=2.28755e+08",
+        "severity": 43.522274,
         "source": "distribution"
        },
        {
         "column": "rolling_total_daily_net_transactions_amount",
-        "expected": "1.78719e+07..2.23353e+07",
+        "expected": "1.7872e+07..2.23355e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.19216e+08",
-        "severity": 44.109216,
+        "observed": "mean=2.19217e+08",
+        "severity": 44.109213,
         "source": "distribution"
        },
        {
@@ -25290,10 +25413,10 @@
        },
        {
         "column": "rolling_total_daily_sales_amount",
-        "expected": "1.83457e+07..2.30716e+07",
+        "expected": "1.83459e+07..2.30718e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.28753e+08",
-        "severity": 43.522279,
+        "observed": "mean=2.28755e+08",
+        "severity": 43.522274,
         "source": "distribution"
        },
        {
@@ -25314,17 +25437,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
@@ -25338,18 +25461,18 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=0.041431",
-        "severity": 49.506638,
+        "observed": "max=22",
+        "severity": 49.5,
         "source": "distribution"
        },
        {
@@ -25394,34 +25517,34 @@
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8535.81..10668.3",
+        "expected": "8531.79..10663.3",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=104716",
+        "observed": "mean=104666",
         "severity": 44.101943,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
        {
         "column": "rolling_daily_end_balance_amount",
-        "expected": "1.78551e+07..2.23147e+07",
+        "expected": "1.78552e+07..2.23148e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.19022e+08",
-        "severity": 44.109271,
+        "observed": "mean=2.19024e+08",
+        "severity": 44.109267,
         "source": "distribution"
        },
        {
         "column": "rolling_daily_net_activity_amount",
-        "expected": "1.78719e+07..2.23353e+07",
+        "expected": "1.7872e+07..2.23355e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.19216e+08",
-        "severity": 44.109216,
+        "observed": "mean=2.19217e+08",
+        "severity": 44.109213,
         "source": "distribution"
        },
        {
@@ -25434,18 +25557,18 @@
        },
        {
         "column": "rolling_total_daily_gross_transaction_amount",
-        "expected": "1.83457e+07..2.30716e+07",
+        "expected": "1.83459e+07..2.30718e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.28753e+08",
-        "severity": 43.522279,
+        "observed": "mean=2.28755e+08",
+        "severity": 43.522274,
         "source": "distribution"
        },
        {
         "column": "rolling_total_daily_net_transactions_amount",
-        "expected": "1.78719e+07..2.23353e+07",
+        "expected": "1.7872e+07..2.23355e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.19216e+08",
-        "severity": 44.109216,
+        "observed": "mean=2.19217e+08",
+        "severity": 44.109213,
         "source": "distribution"
        },
        {
@@ -25458,10 +25581,10 @@
        },
        {
         "column": "rolling_total_daily_sales_amount",
-        "expected": "1.83457e+07..2.30716e+07",
+        "expected": "1.83459e+07..2.30718e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.28753e+08",
-        "severity": 43.522279,
+        "observed": "mean=2.28755e+08",
+        "severity": 43.522274,
         "source": "distribution"
        },
        {
@@ -25482,17 +25605,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8543.88..10678.3",
+        "expected": "8539.86..10673.2",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=104809",
+        "observed": "mean=104760",
         "severity": 44.101895,
         "source": "distribution"
        },
@@ -25506,18 +25629,18 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8770.99..11031",
+        "expected": "8766.86..11025.8",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=109367",
+        "observed": "mean=109315",
         "severity": 43.512019,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=0.041431",
-        "severity": 49.506638,
+        "observed": "max=22",
+        "severity": 49.5,
         "source": "distribution"
        },
        {
@@ -25722,17 +25845,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -25746,17 +25869,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -25770,33 +25893,33 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -25818,18 +25941,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -25850,10 +25973,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -25874,17 +25997,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -25898,33 +26021,33 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -25946,18 +26069,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -25978,10 +26101,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26002,17 +26125,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26026,18 +26149,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
@@ -26082,17 +26205,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26114,18 +26237,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26146,10 +26269,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26170,17 +26293,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26194,18 +26317,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
@@ -26441,17 +26564,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26465,17 +26588,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26489,33 +26612,33 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26537,18 +26660,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26569,10 +26692,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26593,17 +26716,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26617,33 +26740,33 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26665,18 +26788,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26697,10 +26820,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26721,17 +26844,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26745,18 +26868,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
@@ -26801,17 +26924,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26833,18 +26956,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26865,10 +26988,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -26889,17 +27012,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -26913,18 +27036,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
@@ -27160,17 +27283,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27184,17 +27307,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27208,33 +27331,33 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_daily",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27256,18 +27379,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -27288,10 +27411,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -27312,17 +27435,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27336,33 +27459,33 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_partitions",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27384,18 +27507,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -27416,10 +27539,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -27440,17 +27563,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27464,18 +27587,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.int_stripe__account_rolling_totals",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
@@ -27520,17 +27643,17 @@
          },
          {
           "column": "daily_end_balance_amount",
-          "expected": "8518.34..10665.3",
+          "expected": "8514.33..10660.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96192.3",
+          "observed": "mean=96147",
           "severity": 39.83534,
           "source": "distribution"
          },
          {
           "column": "daily_net_activity_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27552,18 +27675,18 @@
          },
          {
           "column": "rolling_total_daily_gross_payout_amount",
-          "expected": "-21145.4..-16056.7",
+          "expected": "-21655.2..-16443.8",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=-187080",
+          "observed": "median=-191590",
           "severity": 32.608114,
           "source": "distribution"
          },
          {
           "column": "rolling_total_daily_gross_transaction_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -27584,10 +27707,10 @@
          },
          {
           "column": "rolling_total_daily_sales_amount",
-          "expected": "1.83363e+07..2.3081e+07",
+          "expected": "1.83365e+07..2.30812e+07",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=2.06116e+08",
-          "severity": 38.576744,
+          "observed": "mean=2.06118e+08",
+          "severity": 38.57674,
           "source": "distribution"
          },
          {
@@ -27608,17 +27731,17 @@
          },
          {
           "column": "total_daily_gross_transaction_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_net_transactions_amount",
-          "expected": "8526.34..10675.3",
+          "expected": "8522.33..10670.3",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=96282.5",
+          "observed": "mean=96237.2",
           "severity": 39.83672,
           "source": "distribution"
          },
@@ -27632,18 +27755,18 @@
          },
          {
           "column": "total_daily_sales_amount",
-          "expected": "8766.54..11035.4",
+          "expected": "8762.42..11030.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=98542.7",
+          "observed": "mean=98496.3",
           "severity": 38.568866,
           "source": "distribution"
          },
          {
           "column": "total_daily_sales_count",
-          "expected": "0.0033894..0.0041426",
+          "expected": "1.8..2.2",
           "node": "model.stripe.stripe__daily_overview",
-          "observed": "mean=0.037665",
-          "severity": 44.506638,
+          "observed": "max=20",
+          "severity": 44.5,
           "source": "distribution"
          },
          {
@@ -27858,17 +27981,17 @@
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8518.34..10665.3",
+        "expected": "8514.33..10660.3",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=96192.3",
+        "observed": "mean=96147",
         "severity": 39.83534,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -27882,17 +28005,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -27906,33 +28029,33 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.int_stripe__account_daily",
-        "observed": "mean=0.037665",
-        "severity": 44.506638,
+        "observed": "max=20",
+        "severity": 44.5,
         "source": "distribution"
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8518.34..10665.3",
+        "expected": "8514.33..10660.3",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=96192.3",
+        "observed": "mean=96147",
         "severity": 39.83534,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -27954,18 +28077,18 @@
        },
        {
         "column": "rolling_total_daily_gross_payout_amount",
-        "expected": "-21145.4..-16056.7",
+        "expected": "-21655.2..-16443.8",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=-187080",
+        "observed": "median=-191590",
         "severity": 32.608114,
         "source": "distribution"
        },
        {
         "column": "rolling_total_daily_gross_transaction_amount",
-        "expected": "1.83363e+07..2.3081e+07",
+        "expected": "1.83365e+07..2.30812e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.06116e+08",
-        "severity": 38.576744,
+        "observed": "mean=2.06118e+08",
+        "severity": 38.57674,
         "source": "distribution"
        },
        {
@@ -27986,10 +28109,10 @@
        },
        {
         "column": "rolling_total_daily_sales_amount",
-        "expected": "1.83363e+07..2.3081e+07",
+        "expected": "1.83365e+07..2.30812e+07",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=2.06116e+08",
-        "severity": 38.576744,
+        "observed": "mean=2.06118e+08",
+        "severity": 38.57674,
         "source": "distribution"
        },
        {
@@ -28010,17 +28133,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -28034,33 +28157,33 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.int_stripe__account_partitions",
-        "observed": "mean=0.037665",
-        "severity": 44.506638,
+        "observed": "max=20",
+        "severity": 44.5,
         "source": "distribution"
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8518.34..10665.3",
+        "expected": "8514.33..10660.3",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=96192.3",
+        "observed": "mean=96147",
         "severity": 39.83534,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -28082,18 +28205,18 @@
        },
        {
         "column": "rolling_total_daily_gross_payout_amount",
-        "expected": "-21145.4..-16056.7",
+        "expected": "-21655.2..-16443.8",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=-187080",
+        "observed": "median=-191590",
         "severity": 32.608114,
         "source": "distribution"
        },
        {
         "column": "rolling_total_daily_gross_transaction_amount",
-        "expected": "1.83363e+07..2.3081e+07",
+        "expected": "1.83365e+07..2.30812e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.06116e+08",
-        "severity": 38.576744,
+        "observed": "mean=2.06118e+08",
+        "severity": 38.57674,
         "source": "distribution"
        },
        {
@@ -28114,10 +28237,10 @@
        },
        {
         "column": "rolling_total_daily_sales_amount",
-        "expected": "1.83363e+07..2.3081e+07",
+        "expected": "1.83365e+07..2.30812e+07",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=2.06116e+08",
-        "severity": 38.576744,
+        "observed": "mean=2.06118e+08",
+        "severity": 38.57674,
         "source": "distribution"
        },
        {
@@ -28138,17 +28261,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -28162,18 +28285,18 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.int_stripe__account_rolling_totals",
-        "observed": "mean=0.037665",
-        "severity": 44.506638,
+        "observed": "max=20",
+        "severity": 44.5,
         "source": "distribution"
        },
        {
@@ -28218,17 +28341,17 @@
        },
        {
         "column": "daily_end_balance_amount",
-        "expected": "8518.34..10665.3",
+        "expected": "8514.33..10660.3",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=96192.3",
+        "observed": "mean=96147",
         "severity": 39.83534,
         "source": "distribution"
        },
        {
         "column": "daily_net_activity_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -28250,18 +28373,18 @@
        },
        {
         "column": "rolling_total_daily_gross_payout_amount",
-        "expected": "-21145.4..-16056.7",
+        "expected": "-21655.2..-16443.8",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=-187080",
+        "observed": "median=-191590",
         "severity": 32.608114,
         "source": "distribution"
        },
        {
         "column": "rolling_total_daily_gross_transaction_amount",
-        "expected": "1.83363e+07..2.3081e+07",
+        "expected": "1.83365e+07..2.30812e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.06116e+08",
-        "severity": 38.576744,
+        "observed": "mean=2.06118e+08",
+        "severity": 38.57674,
         "source": "distribution"
        },
        {
@@ -28282,10 +28405,10 @@
        },
        {
         "column": "rolling_total_daily_sales_amount",
-        "expected": "1.83363e+07..2.3081e+07",
+        "expected": "1.83365e+07..2.30812e+07",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=2.06116e+08",
-        "severity": 38.576744,
+        "observed": "mean=2.06118e+08",
+        "severity": 38.57674,
         "source": "distribution"
        },
        {
@@ -28306,17 +28429,17 @@
        },
        {
         "column": "total_daily_gross_transaction_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_net_transactions_amount",
-        "expected": "8526.34..10675.3",
+        "expected": "8522.33..10670.3",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=96282.5",
+        "observed": "mean=96237.2",
         "severity": 39.83672,
         "source": "distribution"
        },
@@ -28330,18 +28453,18 @@
        },
        {
         "column": "total_daily_sales_amount",
-        "expected": "8766.54..11035.4",
+        "expected": "8762.42..11030.2",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=98542.7",
+        "observed": "mean=98496.3",
         "severity": 38.568866,
         "source": "distribution"
        },
        {
         "column": "total_daily_sales_count",
-        "expected": "0.0033894..0.0041426",
+        "expected": "1.8..2.2",
         "node": "model.stripe.stripe__daily_overview",
-        "observed": "mean=0.037665",
-        "severity": 44.506638,
+        "observed": "max=20",
+        "severity": 44.5,
         "source": "distribution"
        },
        {
@@ -30321,19 +30444,19 @@
    },
    "distribution_shift": {
     "detected": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "diagnostic_node_top1": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "diagnostic_node_top3": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "n": 12,
     "not_confirmed": {
@@ -30342,14 +30465,14 @@
      "rate": 0.0
     },
     "top1": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "top3": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "wrong_top1": {
      "count": 0,
@@ -30665,19 +30788,19 @@
    },
    "stripe": {
     "detected": {
-     "count": 31,
+     "count": 32,
      "n": 34,
-     "rate": 0.9118
+     "rate": 0.9412
     },
     "diagnostic_node_top1": {
-     "count": 31,
+     "count": 32,
      "n": 34,
-     "rate": 0.9118
+     "rate": 0.9412
     },
     "diagnostic_node_top3": {
-     "count": 31,
+     "count": 32,
      "n": 34,
-     "rate": 0.9118
+     "rate": 0.9412
     },
     "n": 34,
     "not_confirmed": {
@@ -30686,14 +30809,14 @@
      "rate": 0.0
     },
     "top1": {
-     "count": 28,
+     "count": 29,
      "n": 34,
-     "rate": 0.8235
+     "rate": 0.8529
     },
     "top3": {
-     "count": 30,
+     "count": 31,
      "n": 34,
-     "rate": 0.8824
+     "rate": 0.9118
     },
     "wrong_top1": {
      "count": 3,
@@ -30712,19 +30835,19 @@
   },
   "faulted": {
    "detected": {
-    "count": 88,
+    "count": 89,
     "n": 96,
-    "rate": 0.9167
+    "rate": 0.9271
    },
    "diagnostic_node_top1": {
-    "count": 88,
+    "count": 89,
     "n": 96,
-    "rate": 0.9167
+    "rate": 0.9271
    },
    "diagnostic_node_top3": {
-    "count": 88,
+    "count": 89,
     "n": 96,
-    "rate": 0.9167
+    "rate": 0.9271
    },
    "n": 96,
    "not_confirmed": {
@@ -30733,14 +30856,14 @@
     "rate": 0.0
    },
    "top1": {
-    "count": 85,
+    "count": 86,
     "n": 96,
-    "rate": 0.8854
+    "rate": 0.8958
    },
    "top3": {
-    "count": 87,
+    "count": 88,
     "n": 96,
-    "rate": 0.9062
+    "rate": 0.9167
    },
    "wrong_top1": {
     "count": 3,
@@ -30749,6 +30872,6 @@
    }
   }
  },
- "plan_sha256": "sha256:cb61ddf816eaab7e85a986f74ec4397a32e7e9962d8c7b9ebe2aab72aaecd95f",
+ "plan_sha256": "sha256:673730eabec62170c3b394acd891fe80d8d2bc52aafde032b7dfd47e6474e60d",
  "split": "train"
 }
