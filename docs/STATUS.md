@@ -4,9 +4,9 @@ Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M3 Eval harness + baselines, issue #13, draft PR #14. Built; the no-LLM baselines are scored on dev. `raw_log_llm` waits for the owner's run on his MacBook Air.
+M4 Monitors, issue #16, plan approved, being built on `m4-monitors`.
 
-M2 is done: merged to `main` (PRs #9, #10, #11, #12).
+M3 is done: merged to `main` (PRs #14, #15). Dev results for `dbt_tests`, `dbt_tests_guess` and `raw_log_llm` (qwen2.5:7b-instruct, run on the owner's MacBook Air) are in `eval/results/dev/`.
 
 ## Done in M3
 
@@ -34,7 +34,6 @@ M2 is done: merged to `main` (PRs #9, #10, #11, #12).
 
 ## Not verified
 
-- `raw_log_llm` on a real model: only tested with a fake client. Prompt sizes on dev reach about 37,000 characters, so Ollama needs a 16k context (documented).
 
 - M1 hand-check sheet: still not filled in.
 - CODEOWNERS enforcement: needs branch protection on `main`.
@@ -58,5 +57,4 @@ M2 is done: merged to `main` (PRs #9, #10, #11, #12).
 ## Next step
 
 - Later: research real public court data and its licences; build the web viewer from the Stitch designs (real content only).
-- Owner: run `make eval-dev-llm` on the MacBook Air (docs/EVAL.md) and open a PR with the three result files; review PR #14.
-- Then M4: monitors. Plan first.
+- M4 monitors on `m4-monitors`.
