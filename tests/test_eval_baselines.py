@@ -204,14 +204,25 @@ def test_run_eval_writes_tables_and_is_deterministic(tmp_path: Path) -> None:
     assert (tmp_path / "a" / "dev" / "dbt_tests_guess.run.json").is_file()
 
 
-def test_committed_results_match_a_fresh_run(tmp_path: Path) -> None:
-    """eval/results/dev for the no-LLM baselines is reproducible byte for byte."""
-    for baseline in ("dbt_tests", "dbt_tests_guess"):
-        _run(tmp_path, baseline)
-        for ext in ("json", "md"):
-            fresh = (tmp_path / "dev" / f"{baseline}.{ext}").read_text()
-            committed = (ROOT / "eval" / "results" / "dev" / f"{baseline}.{ext}").read_text()
-            assert fresh == committed, f"{baseline}.{ext} is stale: run `make eval-dev`"
+@pytest.mark.parametrize(
+    ("split", "method"),
+    [("dev", "dbt_tests"), ("dev", "dbt_tests_guess"), ("dev", "monitors"), ("train", "monitors")],
+)
+def test_committed_results_match_a_fresh_run(tmp_path: Path, split: str, method: str) -> None:
+    """Committed results of every no-LLM method reproduce byte for byte."""
+    run_eval(
+        split,
+        method,
+        benchmark_dir=ROOT / "benchmark",
+        dist_dir=ROOT / "dist",
+        runs_dir=ROOT / "build/eval",
+        results_dir=tmp_path,
+        config_path=ROOT / "faultline.toml",
+    )
+    for ext in ("json", "md"):
+        fresh = (tmp_path / split / f"{method}.{ext}").read_text()
+        committed = (ROOT / "eval" / "results" / split / f"{method}.{ext}").read_text()
+        assert fresh == committed, f"{split}/{method}.{ext} is stale: run `make eval-dev`"
 
 
 def test_raw_log_llm_end_to_end_with_fake_client(tmp_path: Path) -> None:
