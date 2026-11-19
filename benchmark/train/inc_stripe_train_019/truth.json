@@ -2,24 +2,24 @@
   "fault": {
     "class": "data",
     "params": {
-      "factor": 2.768,
+      "factor": 2.049,
       "variant": "scale"
     },
     "type": "distribution_shift"
   },
   "generation": {
-    "attempts": 1
+    "attempts": 2
   },
   "hashes": {
-    "inputs": "sha256:95d69a4c87990fd652102eb09b1582b3307a75dad0d93f806c7e86d16e77a91a"
+    "inputs": "sha256:b3879b88d3c7b695fa7bf90390b1ae6724fdffd9e03ca9e58403b07bde142657"
   },
   "incident_id": "inc_stripe_train_019",
   "location": {
-    "column": "amount_capturable",
+    "column": "exp_year",
     "commit": null,
-    "file": "seeds/payment_intent_data.csv",
-    "node": "source.stripe.stripe.payment_intent",
-    "physical": "seed.stripe_integration_tests.payment_intent_data"
+    "file": "seeds/card_data.csv",
+    "node": "source.stripe.stripe.card",
+    "physical": "seed.stripe_integration_tests.card_data"
   },
   "observed": {
     "dbt_status": "success",
