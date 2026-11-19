@@ -480,6 +480,362 @@
       "plan_sha256": "sha256:cb61ddf816eaab7e85a986f74ec4397a32e7e9962d8c7b9ebe2aab72aaecd95f",
       "skipped": []
     },
+    "heldout": {
+      "archive": "benchmark-heldout.tar.gz",
+      "archive_sha256": "sha256:8fe3c87c2658e821574fbb53078391028878b96c4ec3bc8625a6a0ffa408f7e7",
+      "incidents": [
+        {
+          "id": "inc_jira_heldout_001",
+          "inputs": "sha256:758543623ee6eefd25ba3ff58638dcb2132a7b33b9a8ee388806870c4c4249c1",
+          "project": "jira",
+          "truth_sha256": "sha256:11898381d373509fe0d544bb8b571a249fad55df5915a2410500087787440f9e"
+        },
+        {
+          "id": "inc_jira_heldout_002",
+          "inputs": "sha256:97988c94fb2aa13351eb69dcee0126103a1026c84982a03b06f05eeb7c161c4e",
+          "project": "jira",
+          "truth_sha256": "sha256:5b76cac9f7c56ba0b2014fa58174aa44a9cd48a58740adaae0eba589238e9a37"
+        },
+        {
+          "id": "inc_jira_heldout_003",
+          "inputs": "sha256:e9b3f92f4fdfc741d9de9ecf7cd60b4649719a65316aa9dcd510650bf0f8278b",
+          "project": "jira",
+          "truth_sha256": "sha256:2b33d970beca9ad1ae5be326f012b84d8732f862c2d7887eeb55a70282187c46"
+        },
+        {
+          "id": "inc_jira_heldout_004",
+          "inputs": "sha256:8cc03349cc40e8b3d0511ca6cf280a8b50a02f03c5d092a950ed92564ba8e337",
+          "project": "jira",
+          "truth_sha256": "sha256:c5cc78c0d55e57837f12719e3d277340bd23d539c5c3d3a2372ed3d07e83ae3d"
+        },
+        {
+          "id": "inc_jira_heldout_005",
+          "inputs": "sha256:1ec7f1d511c4ed39b0dd85d270628cc5688291c22e76289780e0169322860684",
+          "project": "jira",
+          "truth_sha256": "sha256:57b17284953c2d2b939ca7a82be049ec7cbaf3cc4591fdb48c565e6341b2ccf8"
+        },
+        {
+          "id": "inc_jira_heldout_006",
+          "inputs": "sha256:ca9053028cdf17c0715f6da39a980e2c0123b2664fd4a92ea06f7ce96eae4ea4",
+          "project": "jira",
+          "truth_sha256": "sha256:e9f59ff8b5a32b95ee5721914a59538281e5efc6342e36ec1e714d0da3be102a"
+        },
+        {
+          "id": "inc_jira_heldout_007",
+          "inputs": "sha256:0a3a2b614c8120e91945c182416a6b91a0c34b1e4b9797e6a727497d37aac51f",
+          "project": "jira",
+          "truth_sha256": "sha256:55576d225abf18fcc9ed5020e686d781f5999b243c4db79cc3eca2c23bf0b532"
+        },
+        {
+          "id": "inc_jira_heldout_008",
+          "inputs": "sha256:98ea83b9d5d8ce0ff90e51f26d013d94803a87552e71a6da5e09ee2363695833",
+          "project": "jira",
+          "truth_sha256": "sha256:d64ba72df17bf626e174d0477a644fa15d0d22a7d50d70c65f274a65c34e9daa"
+        },
+        {
+          "id": "inc_jira_heldout_009",
+          "inputs": "sha256:c4c0d0b682fe7ee770fd9cadd2d086c163808c1d67b7040cd4ee6ec20f0565d6",
+          "project": "jira",
+          "truth_sha256": "sha256:3f6b9c6b1f7f83106ba93c04d218a09d43d06bcad3e179d1afe79c971dcf4a32"
+        },
+        {
+          "id": "inc_jira_heldout_010",
+          "inputs": "sha256:345b0e34a8e170829f12999c2e8338e39e5a087e97dfca27bed2054be30293b3",
+          "project": "jira",
+          "truth_sha256": "sha256:20a271c2bb1b45b2c19d510d3e64bb3cbf00ae67dc1faac6122a767f89c6848f"
+        },
+        {
+          "id": "inc_jira_heldout_011",
+          "inputs": "sha256:9fb577ad0ad18c3f3b6d5c5ca07863d598534b8ddd34411ff9915e5d8eb8025d",
+          "project": "jira",
+          "truth_sha256": "sha256:09e8b32d8bc1dc3fbf5e17f96b9a80d8e1260d02f8903a565183a10d9bfbee47"
+        },
+        {
+          "id": "inc_jira_heldout_012",
+          "inputs": "sha256:d954adbbe77eb8bb4657aaab65c4324d4d80e010f7336f319cdf414079fe7933",
+          "project": "jira",
+          "truth_sha256": "sha256:c4073fc648f4c526aa3333f950027a3348a9c29af522104149699d694a92cc24"
+        },
+        {
+          "id": "inc_jira_heldout_013",
+          "inputs": "sha256:563092a80b2a92ab7d8a9338dfbaa676e6a848747f65534a0039bdf9804ce137",
+          "project": "jira",
+          "truth_sha256": "sha256:7990e8c4263aea5fad420e055be665894344711bf72a2ecd6cdfff478a37d397"
+        },
+        {
+          "id": "inc_jira_heldout_014",
+          "inputs": "sha256:4920641f3966b53effb7c9904d3b52b93b1167fd3e5eff6d10de2478b30067be",
+          "project": "jira",
+          "truth_sha256": "sha256:83b3e699a5d72f652feb43f457934475a0c4471591cab0f8028bf6cbe9cbb89e"
+        },
+        {
+          "id": "inc_jira_heldout_015",
+          "inputs": "sha256:5a6db0907a8d4389cc0702231f79374b3ce028faa97ceb3c283d4ec0ad3f67f2",
+          "project": "jira",
+          "truth_sha256": "sha256:22f13ed39b8d06f2fa6c756a0ab1c595c330fbd7a02136319bdaec743698877b"
+        },
+        {
+          "id": "inc_jira_heldout_016",
+          "inputs": "sha256:d3f041f0780299a5cdc93786e9ce045b45e7383f0ccb2d57ec18c3832a790e8a",
+          "project": "jira",
+          "truth_sha256": "sha256:59797adf1c0fbc53ae4c6db81a54fa864b59d11094edface4d9a5e0b0584b614"
+        },
+        {
+          "id": "inc_jira_heldout_017",
+          "inputs": "sha256:e6cb1ea0b94fdd952317d57d57684d28c9d08affc52b24a1ff6340326016a118",
+          "project": "jira",
+          "truth_sha256": "sha256:5d8a5b8bf3ba75b3142ed44e36a9ccd6411ebf1841b8eef9b0b0fc5e0d871a11"
+        },
+        {
+          "id": "inc_jira_heldout_018",
+          "inputs": "sha256:e1b7e8c4e2f87816bd9f52f91e36bd99d7410de1517cafd1aba476fa393f0127",
+          "project": "jira",
+          "truth_sha256": "sha256:d7c8a737f3091a3508a803276669b2917554a0d3121304f2aae1b810fc553279"
+        },
+        {
+          "id": "inc_jira_heldout_019",
+          "inputs": "sha256:7489a4de6541d2a1d94ec30a223f9559f9b32a76cdf891849d7b2fa071e7d03b",
+          "project": "jira",
+          "truth_sha256": "sha256:ccd0cac784a8c3bbf6345acbbbecdf25c9d62ac13c9af43d14002c1c19c4b79f"
+        },
+        {
+          "id": "inc_jira_heldout_020",
+          "inputs": "sha256:41e374fef110e0be89a701221dfae7444bb979bbff3acc289d6af84ef8df3609",
+          "project": "jira",
+          "truth_sha256": "sha256:3c3d96e98898e469b118e97bdec909147c1f4939ca8b0ab48437b625d995f2d7"
+        },
+        {
+          "id": "inc_jira_heldout_021",
+          "inputs": "sha256:1f110941758f68ea552fd1278d0f7588e704c8d1c99ae3aeeeb0b4fe291c4a69",
+          "project": "jira",
+          "truth_sha256": "sha256:0bde92b551587e69022c4227b7d734df14ec04fbc84acfcea3e25f432d88f08f"
+        },
+        {
+          "id": "inc_jira_heldout_022",
+          "inputs": "sha256:7812d9741deb036f833db419d86f995b7c94f6d927acbf1c3278930c766fa05e",
+          "project": "jira",
+          "truth_sha256": "sha256:0357f55c1def56caaa88b24e2c666476d63b6dedfc0c76c222415339a5afd21b"
+        },
+        {
+          "id": "inc_jira_heldout_023",
+          "inputs": "sha256:4a047990ee703526fa36a4371983bd60206b4b0d21aae6ba33e8f41a4d6e7c14",
+          "project": "jira",
+          "truth_sha256": "sha256:ea4ac98e27218873c41900f12804d99dde6cf4526e7786b635ce5a051b0cb5f3"
+        },
+        {
+          "id": "inc_jira_heldout_024",
+          "inputs": "sha256:fb812bbab096d8ca6edbea9a956910b4578395d659e82a6203269c99b5adb94e",
+          "project": "jira",
+          "truth_sha256": "sha256:aa1919d470bae37d217974b65a20c7e0e78d62eb94d99caa152575e75a03c7c6"
+        },
+        {
+          "id": "inc_jira_heldout_025",
+          "inputs": "sha256:076727a0ba9ef79ed168838c3dcbddf32236a9978afb57b3a5d2cfc8907eccab",
+          "project": "jira",
+          "truth_sha256": "sha256:96d535e8fb5eac838ec913a77997793cb4a3726c8b7c9996d187cd4b991c269d"
+        },
+        {
+          "id": "inc_jira_heldout_026",
+          "inputs": "sha256:f997f974965e9acda7f3be6d8fc857aa410f3709876210854bdcd2c2584f7689",
+          "project": "jira",
+          "truth_sha256": "sha256:74131e7128a0b22ed4ba711313546488d83d79dc076e593336ad6b267bf55e53"
+        },
+        {
+          "id": "inc_jira_heldout_027",
+          "inputs": "sha256:5a1939f864b68e5ff99de8f87c842e3e2554d8e5ee67b2a320eaf8b27bb28e0a",
+          "project": "jira",
+          "truth_sha256": "sha256:f0bde27f93b58f2d61e3b3ff91666b3177307027de35e8152def9e5062fea6b8"
+        },
+        {
+          "id": "inc_jira_heldout_028",
+          "inputs": "sha256:209a49d622a2e68b81fe9e0fe78706111563541425baceb5aee7ec6bb007035a",
+          "project": "jira",
+          "truth_sha256": "sha256:682fb8da4eb955ec43eeb5749d81874a77062b0ad0415411bb7138e79910abc3"
+        },
+        {
+          "id": "inc_jira_heldout_029",
+          "inputs": "sha256:905c601c91376c93a4c4682e1b89f492dfb2cc8633df56673f060b7def8cc115",
+          "project": "jira",
+          "truth_sha256": "sha256:168fae1756dae5e712cfb23de4f9a687c61e4afa6f311949eba8163546983012"
+        },
+        {
+          "id": "inc_jira_heldout_030",
+          "inputs": "sha256:972fea92ef3f05a3a9df8fd38d43f87c0136a0e03317d3200cc3c321bd494555",
+          "project": "jira",
+          "truth_sha256": "sha256:5ca955dcd79f76e98159368d02434233b1ef4c8de6d5d747d02bb24b885fb821"
+        },
+        {
+          "id": "inc_jira_heldout_031",
+          "inputs": "sha256:c8f03a9e96c6b3eec2d2de7dc5a343d5f23e08049570f47770ebf74612a6ec77",
+          "project": "jira",
+          "truth_sha256": "sha256:d96c953e2843586971c672f64a2f6d62bca9d4b1c5d0f53b0d67bcc859331678"
+        },
+        {
+          "id": "inc_jira_heldout_032",
+          "inputs": "sha256:3f46bb98d65c8fbb3480d756f72f695bffc537e94e7620526b5c69fd2b47409f",
+          "project": "jira",
+          "truth_sha256": "sha256:adf6dfc721cc6aef702828d7e2b64a7db9a14481332169d8ed2d2350e1dcc7bc"
+        },
+        {
+          "id": "inc_jira_heldout_033",
+          "inputs": "sha256:0b53b10db3b450beefe94e5562bb09f4ca960553629b1b09f89c9074cd70d22b",
+          "project": "jira",
+          "truth_sha256": "sha256:023c60c7f344b257846862f7f7b3742efec4d04714d3d7d2c0d972ecfeddc935"
+        },
+        {
+          "id": "inc_jira_heldout_034",
+          "inputs": "sha256:ba5a0c076624952c4caa93d2e025623752c75b5ea39ccad13582684d52efad3f",
+          "project": "jira",
+          "truth_sha256": "sha256:ed8a58368c5a9b8c248af97f91d96a04f8ac37aee8cd44b6fcb9b2f07053e308"
+        },
+        {
+          "id": "inc_jira_heldout_035",
+          "inputs": "sha256:d2732cbed955eb999f457ff8990aed8837bb9b5eb945f6154584ee7f844939b1",
+          "project": "jira",
+          "truth_sha256": "sha256:4ab0bda6283824c9611fc102e9d1d2f6b72805ecffe664283b21cad95239d06a"
+        },
+        {
+          "id": "inc_jira_heldout_036",
+          "inputs": "sha256:35b95ca7bafbcdf22c993b803684e8c91677536c604a7bebe9beb4d0362e4cd6",
+          "project": "jira",
+          "truth_sha256": "sha256:fad2392842e1b10255b05627c0b5522b5b2fbac252f0c47122ab526deb48f4d4"
+        },
+        {
+          "id": "inc_jira_heldout_037",
+          "inputs": "sha256:ee051e57f5f0727c01946a94029a96486b3292597df470250a65e7a7bae194d4",
+          "project": "jira",
+          "truth_sha256": "sha256:5bab568e01f120b42a6ab001b04b5d5baf434ebba6154dbd619047b345fc027c"
+        },
+        {
+          "id": "inc_jira_heldout_038",
+          "inputs": "sha256:ff7dea989c55ef6fdce8274a756a461446f9e424056099c1508e077aa8f97aeb",
+          "project": "jira",
+          "truth_sha256": "sha256:6675c92f76514df863be3f3a1b00b9f38e2018fc4f598f298b60fcdd0ad711e3"
+        },
+        {
+          "id": "inc_jira_heldout_039",
+          "inputs": "sha256:559771c6595fc53df3063722448085c50d61991de5d90a7dcc8a801cc3436d3b",
+          "project": "jira",
+          "truth_sha256": "sha256:16979973adf696f097a03cd4914a1447ccfe4711820548a6ee7db5c4b046ba04"
+        },
+        {
+          "id": "inc_jira_heldout_040",
+          "inputs": "sha256:782ae064e4d21ec0a133900880aa72253438327359412f706a22a1fc7fef8f6f",
+          "project": "jira",
+          "truth_sha256": "sha256:aca2d207c665676f13a5c986120a279225e3623dad82d7fcad26cfbe18cf3751"
+        },
+        {
+          "id": "inc_jira_heldout_041",
+          "inputs": "sha256:8098bafe86e847f5c3f94cfbf8982983fd2b952aa000e108b0b247cf12c06ace",
+          "project": "jira",
+          "truth_sha256": "sha256:622082ced6a3abe87435e1b0c8c012de87a69c617197120e1d6fc0d0f99a0cca"
+        },
+        {
+          "id": "inc_jira_heldout_042",
+          "inputs": "sha256:7fd0c062ef9536d8305322343013c6058620bb41996f6bb44fd83a623e70da75",
+          "project": "jira",
+          "truth_sha256": "sha256:34742b588d7f4aeaa9441f52e274cbe2268f1448f40cce5640da03a5bb7efa9f"
+        },
+        {
+          "id": "inc_jira_heldout_043",
+          "inputs": "sha256:165aface59daf6daf5ae9872a77c9f037c6c351193ff340cb7dccd9974ae6c2a",
+          "project": "jira",
+          "truth_sha256": "sha256:a7fba1c1048c1846ab5624851512d0f303f4e1f05db5fb931b72925c59583ba2"
+        },
+        {
+          "id": "inc_jira_heldout_044",
+          "inputs": "sha256:23cd77ba7995016b31756bdddd188b24deca8721e95bbb7faf7ccbf11319be91",
+          "project": "jira",
+          "truth_sha256": "sha256:2fc6e6412b4ad48466d0b1b4426edec4d1017c53a94fd5e1113c5835dbc0b4c9"
+        },
+        {
+          "id": "inc_jira_heldout_045",
+          "inputs": "sha256:fe362b75cc990c44785b109e0f05ed6ba3499575442c8da51c5546297f9b92bd",
+          "project": "jira",
+          "truth_sha256": "sha256:8ae5b736a0257f15d8bffa142aec925f132149f0122f3f2364290e528f7eaaa2"
+        },
+        {
+          "id": "inc_jira_heldout_046",
+          "inputs": "sha256:303cc299272efb2b2cfebeb8f0d056a5d7d02fa854f00bf601d6408a84f253f7",
+          "project": "jira",
+          "truth_sha256": "sha256:78844d44797a9f0a3e87a24ce5121ffc1554ded2c2857b3cbf5c2bf5988b6505"
+        },
+        {
+          "id": "inc_jira_heldout_047",
+          "inputs": "sha256:a20e7e5e9aea773b079ee9b2b5a219e55456e2e65b56f1100c8e4880e0d90a04",
+          "project": "jira",
+          "truth_sha256": "sha256:bc46c1166e778424aaea27185bd0d94493c175208c937e29927a8fe5542a44b6"
+        },
+        {
+          "id": "inc_jira_heldout_048",
+          "inputs": "sha256:838aee6443a46eb02294f7cf7a06a4a212007671f201b7bdfc61d644c3bc382f",
+          "project": "jira",
+          "truth_sha256": "sha256:eed2a1254721e0699bad1a1c949af371443e20d217c970e41a263c4708e2a95b"
+        },
+        {
+          "id": "inc_jira_heldout_049",
+          "inputs": "sha256:1cdf4174ea690b9df363b14c2ea6957cf5023c42330395af8cb11761efe6c34a",
+          "project": "jira",
+          "truth_sha256": "sha256:d8c0382a5d17bab96bb03a0e1a90fb6c90b992c13615a890cf416209cfa78e7b"
+        },
+        {
+          "id": "inc_jira_heldout_050",
+          "inputs": "sha256:7a28e33138aac42ab150a63017ced02a7526847706295f550196d0259ea74f57",
+          "project": "jira",
+          "truth_sha256": "sha256:e376cf85dd31959e8f085a06c9403d6d0116d398075daf0e317b68aeb262633d"
+        },
+        {
+          "id": "inc_jira_heldout_051",
+          "inputs": "sha256:021b0a2afdf7242496bf9bf482790305f0009206f2ae7110fbcaa721d93ccabf",
+          "project": "jira",
+          "truth_sha256": "sha256:0ec604c64fb7d70debac5d15e2337640b7ad7e30a40c499562efe275bfc438df"
+        },
+        {
+          "id": "inc_jira_heldout_052",
+          "inputs": "sha256:84c1f3071ad774674c2982e23f422000ffa8e3584125bd2f7920d5ddab2166e9",
+          "project": "jira",
+          "truth_sha256": "sha256:d12196e026e98e3ce9c5c4701eed91151cb68eeeb2a582f00cd2297307c78a06"
+        },
+        {
+          "id": "inc_jira_heldout_053",
+          "inputs": "sha256:51ff060821cff667bf94d7aae425546e2cfb364f45fc461fa45b42752921d92d",
+          "project": "jira",
+          "truth_sha256": "sha256:950ebe1e13840c094a00bbf3951803f2b2f773e55609f7b8f5551a1c27c21279"
+        },
+        {
+          "id": "inc_jira_heldout_054",
+          "inputs": "sha256:6703fbfdfed91c7dc61a8b942cd7e2335fb63954caba1a279b4d779e4b12a1c4",
+          "project": "jira",
+          "truth_sha256": "sha256:32d98f02d2b03b34418f04480860cde93d935466ee12463584eaa1cbfd89f5f7"
+        },
+        {
+          "id": "inc_jira_heldout_055",
+          "inputs": "sha256:762641368a977f73028a7f909d1daab8bf8c7bd91fc5c6752cf9426a8b993398",
+          "project": "jira",
+          "truth_sha256": "sha256:4a65474f6739201383dc5bea4653df20d66bf90af61be2943a3e03c44657d79e"
+        },
+        {
+          "id": "inc_jira_heldout_056",
+          "inputs": "sha256:b7a85926535d48cf617f8b347435ce3e0afbb19593c15dac6ab5ea3b82de7d1e",
+          "project": "jira",
+          "truth_sha256": "sha256:e1df3e61e649cfa2dc9eca2929fada2262b502653fdd3eab2e3aadc512b34aaf"
+        },
+        {
+          "id": "inc_jira_heldout_057",
+          "inputs": "sha256:9d773350ae00bbef86a061e01c5c5788977969614c2de107ffe7b62ade6e6c1a",
+          "project": "jira",
+          "truth_sha256": "sha256:b7d3cc3af06d1e64418dc58cd614d34993a4c46bdbc0c74f8d470b7e9bef1113"
+        },
+        {
+          "id": "inc_jira_heldout_058",
+          "inputs": "sha256:5ba310733cb40085047aad6edc76797ffa3a5a947fc197f56de48b1843251cac",
+          "project": "jira",
+          "truth_sha256": "sha256:bb47593eeab200cc67de22fbe5e90e1db22a507f5e5b417e1b965806f446b6dc"
+        }
+      ],
+      "plan_sha256": "sha256:673730eabec62170c3b394acd891fe80d8d2bc52aafde032b7dfd47e6474e60d",
+      "skipped": []
+    },
     "train": {
       "archive": "benchmark-train.tar.gz",
       "archive_sha256": "sha256:cf3b50902a87cbb5f0b64583ee5484080291f37a0a3e10af62f6363be6a97287",

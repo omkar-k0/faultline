@@ -1,0 +1,51 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on issue_history_scd.issue_id = issue_history_scd.issue_id",
+      "before": "on issue_history_scd.issue_id = issue.issue_id",
+      "line": 52,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:559771c6595fc53df3063722448085c50d61991de5d90a7dcc8a801cc3436d3b"
+  },
+  "incident_id": "inc_jira_heldout_039",
+  "location": {
+    "column": null,
+    "commit": "efb9a0c9b9c48ef233a9bd75b5ebf1a70c1cf553",
+    "file": "packages/jira/models/intermediate/field_history/int_jira__issue_calendar_spine.sql",
+    "node": "model.jira.int_jira__issue_calendar_spine",
+    "physical": "model.jira.int_jira__issue_calendar_spine"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.jira.jira__daily_issue_field_history",
+      "model.jira.jira__daily_sprint_issue_history",
+      "model.jira.jira__issue_enhanced",
+      "model.jira.jira__issue_status_transitions",
+      "model.jira.jira__sprint_enhanced",
+      "model.jira.jira__timestamp_issue_field_history"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300039,
+  "split": "heldout"
+}

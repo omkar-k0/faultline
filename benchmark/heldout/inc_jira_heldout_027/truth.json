@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_changed": 1,
+      "target": "Yes, this is an issue to test permissions",
+      "variant": "category_mix"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:5a1939f864b68e5ff99de8f87c842e3e2554d8e5ee67b2a320eaf8b27bb28e0a"
+  },
+  "incident_id": "inc_jira_heldout_027",
+  "location": {
+    "column": "description",
+    "commit": null,
+    "file": "seeds/issue.csv",
+    "node": "source.jira.jira.issue",
+    "physical": "seed.jira_integration_tests.issue"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300027,
+  "split": "heldout"
+}

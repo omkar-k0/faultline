@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "new_name": "issue_id_v2",
+      "op": "rename"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:1ec7f1d511c4ed39b0dd85d270628cc5688291c22e76289780e0169322860684"
+  },
+  "incident_id": "inc_jira_heldout_005",
+  "location": {
+    "column": "issue_id",
+    "commit": null,
+    "file": "seeds/issue_link.csv",
+    "node": "source.jira.jira.issue_link",
+    "physical": "seed.jira_integration_tests.issue_link"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300005,
+  "split": "heldout"
+}

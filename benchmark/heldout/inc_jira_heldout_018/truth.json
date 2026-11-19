@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 1
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:e1b7e8c4e2f87816bd9f52f91e36bd99d7410de1517cafd1aba476fa393f0127"
+  },
+  "incident_id": "inc_jira_heldout_018",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/priority.csv",
+    "node": "source.jira.jira.priority",
+    "physical": "seed.jira_integration_tests.priority"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.jira.unique_jira__daily_sprint_issue_history_sprint_issue_day_id.6f60eb8c6b"
+    ],
+    "skipped_nodes": 2,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300018,
+  "split": "heldout"
+}
