@@ -20,7 +20,7 @@ from faultline.inject.catalog import FaultCatalog
 from faultline.inject.faults import Applied, Candidate, FaultType
 from faultline.inject.resample import resample
 from faultline.inject.run import RunCapture, observed, profile_diff, run_dbt, save_run
-from faultline.inject.workspace import create, file_sha256, git_init, tree_hash
+from faultline.inject.workspace import create, file_sha256, git_changed_files, git_init, tree_hash
 
 SCHEMA_VERSION = 1
 MAX_ATTEMPTS = 6
@@ -73,12 +73,15 @@ def ordered_candidates(
 def inject_only(
     catalog: FaultCatalog, dest: Path, spec: IncidentSpec, nodes: set[str]
 ) -> tuple[Path, str, Applied | None]:
-    """Prepare and inject the first candidate, without running dbt (used by tests)."""
+    """Prepare and inject the first candidate that changes a file, without running dbt (tests)."""
     ws, clean = prepare(catalog, dest, spec)
     cands = ordered_candidates(catalog, spec, nodes)
-    if not cands:
-        return ws, clean, None
-    return ws, clean, faults.apply(ws, catalog, cands[0], _rng(spec, "fault"))
+    for cand in cands:
+        _reset(ws, clean)
+        applied = faults.apply(ws, catalog, cand, _rng(spec, "fault"))
+        if applied.fault_class == "code" or git_changed_files(ws, clean):
+            return ws, clean, applied
+    return ws, clean, None
 
 
 def truth_document(
@@ -114,7 +117,8 @@ def generate(
     truth_path: Path,
     workdir: Path | None = None,
 ) -> dict[str, Any]:
-    """Generate one incident. Code faults that change nothing are skipped (equivalent mutants)."""
+    """Generate one incident. Faults that change nothing are skipped (equivalent mutants):
+    data faults when no file changed, code faults when no profile changed."""
     with tempfile.TemporaryDirectory(dir=workdir) as tmp:
         ws, clean_commit = prepare(catalog, Path(tmp) / "ws", spec)
         cands = ordered_candidates(catalog, spec, nodes)
@@ -127,6 +131,10 @@ def generate(
             if cand is not None:
                 _reset(ws, clean_commit)
                 applied = faults.apply(ws, catalog, cand, _rng(spec, f"fault:{attempts}"))
+                if applied.fault_class == "data" and not git_changed_files(ws, clean_commit):
+                    # Equivalent data mutant (e.g. scaling a column of zeros): try the next site.
+                    applied, capture = None, None
+                    continue
             capture = run_dbt(ws)
             if cand is None or applied is None or applied.fault_class == "data":
                 break

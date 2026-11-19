@@ -21,14 +21,24 @@ from typing import Any
 from faultline import __version__
 from faultline.eval.baselines import NO_LLM_BASELINES, Baseline, RawLogLLM, prompt_sha256
 from faultline.eval.loader import Incident, load_incidents
-from faultline.eval.score import Prediction, Truth, aggregate, load_truth, score_incident
+from faultline.eval.score import (
+    Outcome,
+    Prediction,
+    Truth,
+    _rate,
+    aggregate,
+    load_truth,
+    score_incident,
+)
 from faultline.llm.client import LLMClient
 from faultline.monitors.core import MONITORS, MonitorConfig, Profile, load_monitor_config
 from faultline.monitors.method import MonitorMethod, pick_references
-from faultline.triage.method import TriageMethod
+from faultline.triage import llm_rank
+from faultline.triage.method import ABLATIONS, TriageMethod
 
 # Methods that compare a run with known-good runs picked by the harness.
-REFERENCE_METHODS = frozenset({"monitors", "triage"})
+REFERENCE_METHODS = frozenset({"monitors", "triage", "triage_llm"})
+TRIAGE_METHODS = frozenset({"triage", "triage_llm"})
 
 FAULT_ORDER = (
     "schema_change",
@@ -68,23 +78,36 @@ def harness_references(
     return {iid: [by_id[r].profile for r in refs] for iid, refs in ref_ids.items()}
 
 
+def result_name(baseline: str, ablate: str | None = None) -> str:
+    return f"{baseline}.no_{ablate}" if ablate else baseline
+
+
 def config_for(
-    baseline: str, client: LLMClient | None, monitor_config: MonitorConfig | None = None
+    baseline: str,
+    client: LLMClient | None,
+    monitor_config: MonitorConfig | None = None,
+    ablate: str | None = None,
 ) -> dict[str, Any]:
     config: dict[str, Any] = {"baseline": baseline, "faultline_version": __version__}
+    if ablate:
+        config["ablate"] = ablate
     if baseline in REFERENCE_METHODS:
         assert monitor_config is not None
         config["monitors"] = asdict(monitor_config)
         config["reference"] = "other clean runs of the same project in the split, all but one"
     if baseline == "triage":
         config["triage"] = "deterministic ranking, no language model"
-    if baseline == "raw_log_llm":
+    if baseline == "triage_llm":
+        config["triage"] = "deterministic tests, survivors re-ranked by a local language model"
+    if baseline in {"raw_log_llm", "triage_llm"}:
         assert client is not None
         cfg = getattr(client, "config", None)
         config.update(
             {
                 "model": client.model,
-                "prompt_sha256": prompt_sha256(),
+                "prompt_sha256": (
+                    prompt_sha256() if baseline == "raw_log_llm" else llm_rank.prompt_sha256()
+                ),
                 "temperature": getattr(cfg, "temperature", None),
                 "seed": getattr(cfg, "seed", None),
             }
@@ -129,6 +152,20 @@ def to_markdown(doc: dict[str, Any]) -> str:
             row = bm.get(mon, {})
             cells = [str(row.get(ft, 0)) for ft in types] + [str(row.get("clean", 0))]
             lines.append(f"| {mon} | " + " | ".join(cells) + " |")
+    if "gating" in doc:
+        g = doc["gating"]
+        lines += [
+            "",
+            "## The gate",
+            "",
+            f"- Answered (a cause given): {g['answered']} of {g['detected']} detected faulted "
+            f"runs; right at top-1 when answering: {_pct(g['right_when_answering'])}.",
+            f"- Not confirmed: {g['not_confirmed']}; correct not confirmed: "
+            f"{_pct(g['correct_not_confirmed'])} (abstained, and the best untested cause "
+            "would have been wrong).",
+            f"- Without the tests (every proposed cause ranked) top-1 would be "
+            f"{_pct(g['ungated_top1'])}.",
+        ]
     lines += [
         "",
         f"False alarms on clean runs: {_pct(m['clean']['false_alarms'])}.",
@@ -156,7 +193,11 @@ def run_eval(
     download: bool = True,
     command: str | None = None,
     config_path: Path = Path("faultline.toml"),
+    ablate: str | None = None,
 ) -> dict[str, Any]:
+    if ablate is not None and (baseline != "triage" or ablate not in ABLATIONS):
+        raise ValueError(f"--ablate {ablate} applies to --baseline triage only ({ABLATIONS})")
+    name = result_name(baseline, ablate)
     incidents, section = load_incidents(split, benchmark_dir, dist_dir, runs_dir, download)
     raw: RawLogLLM | None = None
     monitor_method: MonitorMethod | None = None
@@ -172,7 +213,12 @@ def run_eval(
             monitor_method = MonitorMethod(references, monitor_config)
             method = monitor_method
         else:
-            triage_method = TriageMethod(references, monitor_config)
+            reranker = None
+            if baseline == "triage_llm":
+                if client is None:
+                    raise ValueError("triage_llm needs an LLM client")
+                reranker = llm_rank.LLMReranker(client)
+            triage_method = TriageMethod(references, monitor_config, ablate, reranker)
             method = triage_method
     elif baseline in NO_LLM_BASELINES:
         method = NO_LLM_BASELINES[baseline]
@@ -184,13 +230,14 @@ def run_eval(
     else:
         raise ValueError(f"unknown method {baseline!r}")
 
-    config = config_for(baseline, client, monitor_config)
+    config = config_for(baseline, client, monitor_config, ablate)
     config_hash = hashlib.sha256(
         json.dumps({**config, "archive_sha256": section["archive_sha256"]}, sort_keys=True).encode()
     ).hexdigest()[:12]
 
     rows = []
     outcomes = []
+    ungated_outcomes = []
     for incident in incidents:
         prediction: Prediction = method(incident)
         truth = truths[incident.incident_id]
@@ -210,12 +257,17 @@ def run_eval(
             row["anomalies"] = monitor_method.anomalies.get(incident.incident_id, [])
         if triage_method is not None:
             row["report"] = triage_method.reports.get(incident.incident_id)
+            ungated = score_incident(triage_method.ungated[incident.incident_id], truth)
+            ungated_outcomes.append(ungated)
+            row["ungated_hit_rank"] = ungated.hit_rank
         rows.append(row)
 
     doc = {
         "split": split,
-        "baseline": baseline,
-        "command": command or f"faultline eval --split {split} --baseline {baseline}",
+        "baseline": name,
+        "command": command
+        or f"faultline eval --split {split} --baseline {baseline}"
+        + (f" --ablate {ablate}" if ablate else ""),
         "config": config,
         "config_hash": config_hash,
         "archive_sha256": section["archive_sha256"],
@@ -230,14 +282,69 @@ def run_eval(
                 cell = by_monitor.setdefault(mon, {})
                 cell[outcome.fault_type] = cell.get(outcome.fault_type, 0) + 1
         doc["by_monitor"] = by_monitor
+    if triage_method is not None:
+        doc["gating"] = gating(outcomes, ungated_outcomes)
     out_dir = results_dir / split
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / f"{baseline}.json").write_text(json.dumps(doc, indent=1, sort_keys=True) + "\n")
-    (out_dir / f"{baseline}.md").write_text(to_markdown(doc))
+    (out_dir / f"{name}.json").write_text(json.dumps(doc, indent=1, sort_keys=True) + "\n")
+    (out_dir / f"{name}.md").write_text(to_markdown(doc))
     run_info = {
         "git_commit": _git_commit(),
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "config_hash": config_hash,
     }
-    (out_dir / f"{baseline}.run.json").write_text(json.dumps(run_info, indent=1) + "\n")
+    (out_dir / f"{name}.run.json").write_text(json.dumps(run_info, indent=1) + "\n")
+    if triage_method is not None:
+        write_ablation_table(out_dir)
     return doc
+
+
+def gating(outcomes: Sequence[Outcome], ungated: Sequence[Outcome]) -> dict[str, Any]:
+    """What the tests did: answers given, abstentions, and whether abstaining was right."""
+    pairs = [(o, u) for o, u in zip(outcomes, ungated, strict=True) if o.fault_type != "clean"]
+    detected = [(o, u) for o, u in pairs if o.detected]
+    answered = [o for o, _ in detected if not o.abstained]
+    abstained = [u for o, u in detected if o.abstained]
+    return {
+        "detected": len(detected),
+        "answered": len(answered),
+        "right_when_answering": _rate(sum(o.hit_rank == 1 for o in answered), len(answered)),
+        "not_confirmed": len(abstained),
+        "correct_not_confirmed": _rate(sum(u.hit_rank != 1 for u in abstained), len(abstained)),
+        "ungated_top1": _rate(sum(u.hit_rank == 1 for _, u in pairs), len(pairs)),
+    }
+
+
+ABLATION_ROWS = (
+    ("triage_llm", "full: tests, lineage, LLM re-ranker"),
+    ("triage", "no LLM ranker (deterministic ranking)"),
+    ("triage.no_tests", "no tests (every proposed cause ranked)"),
+    ("triage.no_lineage", "no lineage (causes only at alarmed tables)"),
+)
+
+
+def write_ablation_table(out_dir: Path) -> None:
+    """One table from whichever triage result files exist in the split's folder."""
+    split = out_dir.name
+    lines = [
+        f"# Triage ablations on {split}",
+        "",
+        "Built from the result files in this folder; a row is missing until its run exists.",
+        "",
+        "| Variant | Top-1 | Top-3 | Wrong top-1 | Not confirmed | Correct not confirmed | "
+        "False alarms | File |",
+        "|---|---|---|---|---|---|---|---|",
+    ]
+    for name, label in ABLATION_ROWS:
+        path = out_dir / f"{name}.json"
+        if not path.exists():
+            continue
+        doc = json.loads(path.read_text())
+        f, g = doc["metrics"]["faulted"], doc.get("gating", {})
+        ncc = g.get("correct_not_confirmed", {"rate": None})
+        lines.append(
+            f"| {label} | {_pct(f['top1'])} | {_pct(f['top3'])} | {_pct(f['wrong_top1'])} | "
+            f"{_pct(f['not_confirmed'])} | {_pct(ncc)} | "
+            f"{_pct(doc['metrics']['clean']['false_alarms'])} | [{name}.md]({name}.md) |"
+        )
+    (out_dir / "ablations.md").write_text("\n".join(lines) + "\n")

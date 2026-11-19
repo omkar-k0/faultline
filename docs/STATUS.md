@@ -5,10 +5,18 @@ Updated 2026-11-19, afternoon.
 ## Current milestone
 
 M5 Incident manager + triage agent, issue #18. Built in two PRs:
-- **M5a** (branch `m5a-triage`, draft PR): incident manager, hypotheses, tests, deterministic ranking. Built and scored on dev; checked once on train.
-- **M5b** (next): text reports polished, the three ablations (no tests, no lineage, no LLM ranker), the "correct not confirmed" metric, and the LLM re-ranker run on the owner's Mac.
+- **M5a**: incident manager, hypotheses, tests, deterministic ranking. Merged (PR #19).
+- **M5b** (branch `m5b-ablations`, draft PR): the three ablations, the gate metrics including "correct not confirmed", and the LLM re-ranker. Waiting on one run: `make eval-dev-triage-llm` on the owner's Mac (docs/EVAL.md).
 
-M4 is done: merged to `main` (PR #17).
+## Done in M5b
+
+- Generator fix: data faults that change no file are skipped. Train benchmark-fix for `inc_stripe_train_019` (a no-op), train regenerated as `benchmark-train-2.tar.gz`; train monitors and triage re-run. **The new asset still has to be uploaded to release benchmark-v1 by the owner** (file in Downloads); until then a clean clone cannot fetch train.
+
+- `triage/llm_rank.py`: re-ranker prompt, answer parsing; the agent's RERANK state lets it only permute survivors.
+- `faultline eval --baseline triage --ablate tests|lineage`, `--baseline triage_llm`; `eval/results/<split>/ablations.md` built from the result files.
+- Gate metrics in every triage result: answered, right when answering, not confirmed, correct not confirmed, untested top-1.
+- Dev results: no LLM ranker top-1 89.6% (43/48); no tests 39.6% (19/48) with wrong top-1 50.0% (24/48); no lineage 87.5% (42/48). From `eval/results/dev/ablations.md`.
+- Tests: 21 in `tests/test_triage.py`, plus a fake-model end-to-end run of `triage_llm`; the ablation results reproduce byte for byte.
 
 ## Done in M5a
 
@@ -18,7 +26,7 @@ M4 is done: merged to `main` (PR #17).
 - `triage/checks.py`: one test per cause, run on recorded aggregates, lineage, compiled SQL and history; causes inferred by elimination for changes through unmeasured (text) inputs.
 - `triage/agent.py`: the state machine gather -> group -> propose -> test -> rank -> report; survivors only, "not confirmed" when none.
 - `faultline eval --baseline triage`, `faultline triage <run id>` (prints the report, stores it in `build/faultline.duckdb`).
-- Results: `eval/results/dev/triage.*` (top-1 89.6%, 43/48; wrong top-1 0/48; false alarms 0/30) and, as a one-time check, `eval/results/train/triage.*` (top-1 88.5%, 85/96; wrong top-1 3/96; false alarms 0/30). Both reproduce byte for byte (test).
+- Results: `eval/results/dev/triage.*` (top-1 89.6%, 43/48; wrong top-1 0/48; false alarms 0/30) and, as a one-time check, `eval/results/train/triage.*` (M5a: top-1 88.5%, 85/96; after the train benchmark-fix: 89.6%, 86/96, wrong top-1 3/96, false alarms 0/30). Both reproduce byte for byte (test).
 - Tests: 193 passing, including `tests/test_triage.py` (13, one property test).
 
 ## Done in M4
@@ -54,7 +62,8 @@ M4 is done: merged to `main` (PR #17).
 
 ## Not verified
 
-- "Not confirmed" never fired on dev or train, so abstention is untested by the benchmark so far.
+- "Not confirmed" never fired on dev or train, so "correct not confirmed" has no cases (n/a).
+- The full variant with the LLM re-ranker has not been run with a real model yet.
 
 - M1 hand-check sheet: still not filled in.
 - CODEOWNERS enforcement: needs branch protection on `main`.

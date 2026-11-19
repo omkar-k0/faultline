@@ -237,3 +237,109 @@ def test_store_round_trip(tmp_path: Path) -> None:
     assert got is not None and got["status"] == "confirmed" and got["run"] == "run"
     assert store.list("run")[0][1] == "confirmed"
     store.close()
+
+
+# --- M5b: ablations, the gate, the re-ranker -------------------------------
+
+
+def test_without_tests_every_proposal_is_ranked() -> None:
+    p = _profile(amount_nulls=40)
+    gated = _triage(p)
+    ungated = Triage(gated.ctx, detect(p, REFS, CFG), [], CFG, use_tests=False).run()
+    assert len(ungated.reports[0].ranked) == ungated.reports[0].proposed
+    assert len(gated.reports[0].ranked) < gated.reports[0].proposed
+    assert gated.ungated_prediction() == ungated.prediction()
+
+
+def test_not_confirmed_still_has_an_ungated_guess() -> None:
+    p = _profile()
+    p[MART]["columns"]["amount2"]["mean"] = 300.0
+    t = _triage(p)
+    assert t.prediction().abstained
+    assert t.ungated_prediction().candidates  # what the gate held back
+
+
+def test_without_lineage_causes_stay_at_alarmed_tables() -> None:
+    from faultline.triage.method import without_lineage
+
+    p = _profile(is_x_mean=0.9)  # only mart is off; its cause is upstream
+    t = _triage(p)
+    bare = without_lineage(t.ctx)
+    assert bare.table_ancestors(MART) == set() and bare.column_ancestors(MART, "is_x") == set()
+    blind = Triage(bare, detect(p, REFS, CFG), [], CFG).run()
+    assert blind.prediction().abstained  # nothing upstream to propose, no commit at mart
+
+
+def _reranker(order: list[int]) -> Any:
+    calls: list[int] = []
+
+    def rerank(incident: dict[str, Any], causes: list[dict[str, Any]]) -> Any:
+        calls.append(len(causes))
+        return order, "summary text", {"raw_answer": "x"}
+
+    rerank.calls = calls  # type: ignore[attr-defined]
+    return rerank
+
+
+def test_reranker_can_only_reorder_survivors() -> None:
+    p = _profile(rows=120, distinct_ids=100)
+    base = _triage(p)
+    survivors = [r.hypothesis for r in base.reports[0].ranked]
+    assert len(survivors) >= 2
+    # Ask for the last survivor first, plus an index that does not exist and a repeat.
+    order = [len(survivors) - 1, 99, len(survivors) - 1]
+    ranker = _reranker(order)
+    t = Triage(base.ctx, detect(p, REFS, CFG), [], CFG, reranker=ranker).run()
+    got = [r.hypothesis for r in t.reports[0].ranked]
+    assert sorted(got) == sorted(survivors)  # same set: nothing added, nothing dropped
+    assert got[0] == survivors[-1] and got[1:] == survivors[:-1]
+    assert t.reports[0].rerank == {
+        "raw_answer": "x",
+        "order": [len(survivors) - 1],
+        "completed_by_rule": len(survivors) - 1,
+    }
+    assert t.report()["incidents"][0]["summary"] == "summary text"
+    assert "rerank" in t.trace
+
+
+def test_reranker_is_not_called_without_survivors() -> None:
+    p = _profile()
+    p[MART]["columns"]["amount2"]["mean"] = 300.0
+    ranker = _reranker([0])
+    t = Triage(_triage(p).ctx, detect(p, REFS, CFG), [], CFG, reranker=ranker).run()
+    assert ranker.calls == [] and t.prediction().abstained
+
+
+def test_parse_order() -> None:
+    from faultline.triage.llm_rank import parse_order
+
+    assert parse_order('ok {"order": [2, 1, 7], "summary": "s"}', 3) == ([1, 0], "s", None)
+    assert parse_order("no json", 3)[2] == "no JSON object in the answer"
+    assert parse_order('{"order": "1"}', 3)[2] == "no order list"
+
+
+def test_prompt_carries_no_rows() -> None:
+    from faultline.triage.llm_rank import build_prompt
+
+    t = _triage(_profile(amount_nulls=40))
+    inc = t.report()["incidents"][0]
+    prompt = build_prompt(inc, inc["causes"])
+    assert "values of seed.p.raw.amount changed" in prompt
+    assert "Candidates:" in prompt and "null_rate at seed.p.raw.amount" in prompt
+
+
+def test_gating_counts_correct_abstentions() -> None:
+    from faultline.eval.run import gating
+    from faultline.eval.score import Outcome
+
+    def o(abst: bool, hit: int | None, ft: str = "null_spike") -> Outcome:
+        return Outcome("i", "p", ft, True, hit, hit, abst, hit != 1 and not abst, False)
+
+    g = gating(
+        [o(False, 1), o(True, None), o(True, None), o(False, None)],
+        [o(False, 1), o(False, 2), o(False, 1), o(False, None)],
+    )
+    assert (g["answered"], g["not_confirmed"]) == (2, 2)
+    assert g["right_when_answering"]["count"] == 1
+    assert g["correct_not_confirmed"]["count"] == 1  # the second abstention would have been right
+    assert g["ungated_top1"]["count"] == 2

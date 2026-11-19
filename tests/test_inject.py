@@ -200,3 +200,23 @@ def test_operators_skip_jinja(catalogs: dict[str, FaultCatalog]) -> None:
 
     text = "select {{ sum(1) }} {# sum( #} -- sum(\n sum(x) from t"
     assert len(_matches(text, r"\bsum\s*\(")) == 1
+
+
+def test_scaling_a_column_of_zeros_is_an_equivalent_mutant(
+    catalogs: dict[str, FaultCatalog], tmp_path: Path
+) -> None:
+    """A data fault that changes no file is never kept (found by the property test)."""
+    import random
+
+    cat = catalogs["stripe"]
+    zero = [
+        c
+        for c in faults.candidates("distribution_shift", cat, _all_nodes(cat))
+        if c.physical.endswith("customer_data") and c.column == "account_balance"
+    ]
+    assert zero, "fixture column moved: pick another all-zero column"
+    spec = IncidentSpec("z", "stripe", "t", 1, None)
+    ws, clean = prepare(cat, tmp_path / "ws", spec)
+    applied = faults.apply(ws, cat, zero[0], random.Random(0))
+    assert applied.params["variant"] == "scale"
+    assert git_changed_files(ws, clean) == []  # nothing changed: the generator must skip it

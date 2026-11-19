@@ -59,7 +59,8 @@ Defined in `benchmark/plan.toml`.
 ## What is committed and what is published
 
 - Committed: `benchmark/<split>/<incident>/truth.json` and `benchmark/manifest.json` (every incident with the hashes of its ground truth and of its injected inputs, plus the sha256 of each split's archive).
-- Published as GitHub Release assets: `benchmark-<split>.tar.gz`, the run directories. Their sha256 is in the manifest.
+- Published as GitHub Release assets: `benchmark-<split>.tar.gz`, the run directories. Their sha256 is in the manifest. The manifest names each split's asset, so a split that is regenerated gets a new file name (train is `benchmark-train-2.tar.gz` since 2026-11-19) and older commits still verify against the old asset.
+- Regenerating a split reproduces every truth file and input hash, not the archive bytes: dbt artefacts carry timestamps, and stripe models build a date spine up to the day they run. The published archive is the reference.
 - Reproducible: the injected inputs and `truth.json` (same plan and code give the same hashes). Not byte-reproducible: dbt's own artefacts carry timestamps, so a regenerated archive has a different hash.
 
 ## Freezing heldout (owner, once)
@@ -89,3 +90,8 @@ The `heldout-guard` CI job fails any PR that touches `benchmark/heldout/`. The o
 6. Upload `dist/benchmark-heldout.tar.gz` to a GitHub Release.
 
 Do not open the files in `benchmark/heldout/` or paste them into a chat. Only `faultline eval --split heldout` reads them, once, at the end.
+
+## Benchmark fixes
+
+- **2026-11-19, train `inc_stripe_train_019`.** The fault scaled `payment_intent_data.amount_capturable`, which is 0 in every row, so the run equalled a clean one. The generator now skips data faults that change no file, as it already skipped code faults that change no profile. Train was regenerated in full (`benchmark-train-2.tar.gz`); every other train truth file is byte identical. Regenerating dev with the fixed generator reproduces all 78 truth and input hashes, so dev was left as published. Held-out was not touched and not opened; it may hold a no-op incident of the same kind, which can only be checked after its final score.
+

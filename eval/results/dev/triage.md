@@ -14,6 +14,12 @@ Config hash `2d6665853400` · archive `sha256:4b03de862025…` · command `fault
 | timezone_error | 6 | 66.7% (4/6) | 66.7% (4/6) | 66.7% (4/6) | 0.0% (0/6) | 0.0% (0/6) |
 | **all faulted** | 48 | 89.6% (43/48) | 89.6% (43/48) | 89.6% (43/48) | 0.0% (0/48) | 0.0% (0/48) |
 
+## The gate
+
+- Answered (a cause given): 43 of 43 detected faulted runs; right at top-1 when answering: 100.0% (43/43).
+- Not confirmed: 0; correct not confirmed: n/a (abstained, and the best untested cause would have been wrong).
+- Without the tests (every proposed cause ranked) top-1 would be 39.6% (19/48).
+
 False alarms on clean runs: 0.0% (0/30).
 
 Diagnostic, not a score: right node at top-1 89.6% (43/48), in top-3 89.6% (43/48) (column and commit ignored).

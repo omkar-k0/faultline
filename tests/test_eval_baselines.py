@@ -213,13 +213,17 @@ def test_run_eval_writes_tables_and_is_deterministic(tmp_path: Path) -> None:
         ("train", "monitors"),
         ("dev", "triage"),
         ("train", "triage"),
+        ("dev", "triage.no_tests"),
+        ("dev", "triage.no_lineage"),
     ],
 )
 def test_committed_results_match_a_fresh_run(tmp_path: Path, split: str, method: str) -> None:
     """Committed results of every no-LLM method reproduce byte for byte."""
+    baseline, _, ablate = method.partition(".no_")
     run_eval(
         split,
-        method,
+        baseline,
+        ablate=ablate or None,
         benchmark_dir=ROOT / "benchmark",
         dist_dir=ROOT / "dist",
         runs_dir=ROOT / "build/eval",
@@ -240,3 +244,30 @@ def test_raw_log_llm_end_to_end_with_fake_client(tmp_path: Path) -> None:
     assert doc["metrics"]["clean"]["false_alarms"]["count"] == 30
     assert all("inject:" not in p for p in client.prompts)
     assert len(client.prompts) == 78
+
+
+class RerankFake:
+    """Answers every re-rank prompt with "keep the first first"."""
+
+    model = "fake-ranker"
+
+    def __init__(self) -> None:
+        self.prompts: list[str] = []
+
+    def complete(self, system: str, user: str) -> str:
+        from faultline.triage.llm_rank import SYSTEM_PROMPT as RERANK_PROMPT
+
+        assert system == RERANK_PROMPT
+        self.prompts.append(user)
+        return '{"order": [1], "summary": "fake"}'
+
+
+def test_triage_llm_end_to_end_with_fake_client(tmp_path: Path) -> None:
+    client = RerankFake()
+    doc = _run(tmp_path, "triage_llm", client)
+    committed = json.loads((ROOT / "eval/results/dev/triage.json").read_text())
+    # Keeping the first cause first changes no score.
+    assert doc["metrics"] == committed["metrics"]
+    assert doc["config"]["model"] == "fake-ranker"
+    assert len(client.prompts) >= committed["gating"]["answered"]  # one per incident with causes
+    assert all("inject:" not in p for p in client.prompts)

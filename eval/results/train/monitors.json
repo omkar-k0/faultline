@@ -1,10 +1,10 @@
 {
- "archive_sha256": "sha256:cf3b50902a87cbb5f0b64583ee5484080291f37a0a3e10af62f6363be6a97287",
+ "archive_sha256": "sha256:e620ba7d6d1c4c948f82d5f424ad365eae3b81cd60e4c87013e601e0e39322d1",
  "baseline": "monitors",
  "by_monitor": {
   "distribution": {
    "broken_join": 7,
-   "distribution_shift": 6,
+   "distribution_shift": 7,
    "duplicate_keys": 2,
    "late_or_missing_data": 2,
    "model_logic_bug": 8,
@@ -62,7 +62,7 @@
   },
   "reference": "other clean runs of the same project in the split, all but one"
  },
- "config_hash": "ae2c949aae4f",
+ "config_hash": "80cd348a3faf",
  "incidents": [
   {
    "anomalies": [
@@ -7693,22 +7693,63 @@
    }
   },
   {
-   "anomalies": [],
+   "anomalies": [
+    {
+     "column": "exp_year",
+     "expected": "1808.4..2234.6",
+     "monitor": "distribution",
+     "node": "model.stripe.stg_stripe__card_tmp",
+     "observed": "median=4172",
+     "severity": 4.545753167526985
+    },
+    {
+     "column": "exp_year",
+     "expected": "1808.4..2234.6",
+     "monitor": "distribution",
+     "node": "seed.stripe_integration_tests.card_data",
+     "observed": "median=4172",
+     "severity": 4.545753167526985
+    },
+    {
+     "column": "exp_year",
+     "expected": "1808.4..2234.6",
+     "monitor": "distribution",
+     "node": "source.stripe.stripe.card",
+     "observed": "median=4172",
+     "severity": 4.545753167526985
+    }
+   ],
    "incident_id": "inc_stripe_train_019",
    "outcome": {
     "abstained": false,
-    "detected": false,
+    "detected": true,
     "false_alarm": false,
     "fault_type": "distribution_shift",
-    "hit_rank": null,
+    "hit_rank": 1,
     "incident_id": "inc_stripe_train_019",
-    "node_hit_rank": null,
+    "node_hit_rank": 1,
     "project": "stripe",
     "wrong_top1": false
    },
    "prediction": {
-    "candidates": [],
-    "detected": false
+    "candidates": [
+     {
+      "column": "exp_year",
+      "commit": null,
+      "node": "seed.stripe_integration_tests.card_data"
+     },
+     {
+      "column": "exp_year",
+      "commit": null,
+      "node": "source.stripe.stripe.card"
+     },
+     {
+      "column": "exp_year",
+      "commit": null,
+      "node": "model.stripe.stg_stripe__card_tmp"
+     }
+    ],
+    "detected": true
    }
   },
   {
@@ -7952,19 +7993,19 @@
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8535.81..10668.3",
+     "expected": "8531.79..10663.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=104716",
-     "severity": 44.101943453664944
+     "observed": "mean=104666",
+     "severity": 44.1019434596558
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "total_daily_gross_payout_amount",
@@ -7976,19 +8017,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "total_daily_payouts_count",
@@ -8000,51 +8041,51 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=0.041431",
-     "severity": 49.506638343069575
+     "observed": "max=22",
+     "severity": 49.499999999999986
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8535.81..10668.3",
+     "expected": "8531.79..10663.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=104716",
-     "severity": 44.101943453664944
+     "observed": "mean=104666",
+     "severity": 44.1019434596558
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "rolling_daily_end_balance_amount",
-     "expected": "1.78551e+07..2.23147e+07",
+     "expected": "1.78552e+07..2.23148e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.19022e+08",
-     "severity": 44.10927063803887
+     "observed": "mean=2.19024e+08",
+     "severity": 44.109267135958135
     },
     {
      "column": "rolling_daily_net_activity_amount",
-     "expected": "1.78719e+07..2.23353e+07",
+     "expected": "1.7872e+07..2.23355e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.19216e+08",
-     "severity": 44.10921632529706
+     "observed": "mean=2.19217e+08",
+     "severity": 44.10921282608108
     },
     {
      "column": "rolling_total_daily_gross_payout_amount",
@@ -8056,19 +8097,19 @@
     },
     {
      "column": "rolling_total_daily_gross_transaction_amount",
-     "expected": "1.83457e+07..2.30716e+07",
+     "expected": "1.83459e+07..2.30718e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.28753e+08",
-     "severity": 43.522278663130415
+     "observed": "mean=2.28755e+08",
+     "severity": 43.52227375937069
     },
     {
      "column": "rolling_total_daily_net_transactions_amount",
-     "expected": "1.78719e+07..2.23353e+07",
+     "expected": "1.7872e+07..2.23355e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.19216e+08",
-     "severity": 44.10921632529706
+     "observed": "mean=2.19217e+08",
+     "severity": 44.10921282608108
     },
     {
      "column": "rolling_total_daily_payouts_count",
@@ -8080,11 +8121,11 @@
     },
     {
      "column": "rolling_total_daily_sales_amount",
-     "expected": "1.83457e+07..2.30716e+07",
+     "expected": "1.83459e+07..2.30718e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.28753e+08",
-     "severity": 43.522278663130415
+     "observed": "mean=2.28755e+08",
+     "severity": 43.52227375937069
     },
     {
      "column": "rolling_total_daily_sales_count",
@@ -8104,19 +8145,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "total_daily_payouts_count",
@@ -8128,51 +8169,51 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=0.041431",
-     "severity": 49.506638343069575
+     "observed": "max=22",
+     "severity": 49.499999999999986
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8535.81..10668.3",
+     "expected": "8531.79..10663.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=104716",
-     "severity": 44.101943453664944
+     "observed": "mean=104666",
+     "severity": 44.1019434596558
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "rolling_daily_end_balance_amount",
-     "expected": "1.78551e+07..2.23147e+07",
+     "expected": "1.78552e+07..2.23148e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.19022e+08",
-     "severity": 44.10927063803887
+     "observed": "mean=2.19024e+08",
+     "severity": 44.109267135958135
     },
     {
      "column": "rolling_daily_net_activity_amount",
-     "expected": "1.78719e+07..2.23353e+07",
+     "expected": "1.7872e+07..2.23355e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.19216e+08",
-     "severity": 44.10921632529706
+     "observed": "mean=2.19217e+08",
+     "severity": 44.10921282608108
     },
     {
      "column": "rolling_total_daily_gross_payout_amount",
@@ -8184,19 +8225,19 @@
     },
     {
      "column": "rolling_total_daily_gross_transaction_amount",
-     "expected": "1.83457e+07..2.30716e+07",
+     "expected": "1.83459e+07..2.30718e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.28753e+08",
-     "severity": 43.522278663130415
+     "observed": "mean=2.28755e+08",
+     "severity": 43.52227375937069
     },
     {
      "column": "rolling_total_daily_net_transactions_amount",
-     "expected": "1.78719e+07..2.23353e+07",
+     "expected": "1.7872e+07..2.23355e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.19216e+08",
-     "severity": 44.10921632529706
+     "observed": "mean=2.19217e+08",
+     "severity": 44.10921282608108
     },
     {
      "column": "rolling_total_daily_payouts_count",
@@ -8208,11 +8249,11 @@
     },
     {
      "column": "rolling_total_daily_sales_amount",
-     "expected": "1.83457e+07..2.30716e+07",
+     "expected": "1.83459e+07..2.30718e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.28753e+08",
-     "severity": 43.522278663130415
+     "observed": "mean=2.28755e+08",
+     "severity": 43.52227375937069
     },
     {
      "column": "rolling_total_daily_sales_count",
@@ -8232,19 +8273,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "total_daily_payouts_count",
@@ -8256,19 +8297,19 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=0.041431",
-     "severity": 49.506638343069575
+     "observed": "max=22",
+     "severity": 49.499999999999986
     },
     {
      "column": "total_fees",
@@ -8312,35 +8353,35 @@
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8535.81..10668.3",
+     "expected": "8531.79..10663.3",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=104716",
-     "severity": 44.101943453664944
+     "observed": "mean=104666",
+     "severity": 44.1019434596558
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "rolling_daily_end_balance_amount",
-     "expected": "1.78551e+07..2.23147e+07",
+     "expected": "1.78552e+07..2.23148e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.19022e+08",
-     "severity": 44.10927063803887
+     "observed": "mean=2.19024e+08",
+     "severity": 44.109267135958135
     },
     {
      "column": "rolling_daily_net_activity_amount",
-     "expected": "1.78719e+07..2.23353e+07",
+     "expected": "1.7872e+07..2.23355e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.19216e+08",
-     "severity": 44.10921632529706
+     "observed": "mean=2.19217e+08",
+     "severity": 44.10921282608108
     },
     {
      "column": "rolling_total_daily_gross_payout_amount",
@@ -8352,19 +8393,19 @@
     },
     {
      "column": "rolling_total_daily_gross_transaction_amount",
-     "expected": "1.83457e+07..2.30716e+07",
+     "expected": "1.83459e+07..2.30718e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.28753e+08",
-     "severity": 43.522278663130415
+     "observed": "mean=2.28755e+08",
+     "severity": 43.52227375937069
     },
     {
      "column": "rolling_total_daily_net_transactions_amount",
-     "expected": "1.78719e+07..2.23353e+07",
+     "expected": "1.7872e+07..2.23355e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.19216e+08",
-     "severity": 44.10921632529706
+     "observed": "mean=2.19217e+08",
+     "severity": 44.10921282608108
     },
     {
      "column": "rolling_total_daily_payouts_count",
@@ -8376,11 +8417,11 @@
     },
     {
      "column": "rolling_total_daily_sales_amount",
-     "expected": "1.83457e+07..2.30716e+07",
+     "expected": "1.83459e+07..2.30718e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.28753e+08",
-     "severity": 43.522278663130415
+     "observed": "mean=2.28755e+08",
+     "severity": 43.52227375937069
     },
     {
      "column": "rolling_total_daily_sales_count",
@@ -8400,19 +8441,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8543.88..10678.3",
+     "expected": "8539.86..10673.2",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=104809",
-     "severity": 44.10189517848833
+     "observed": "mean=104760",
+     "severity": 44.10189517005599
     },
     {
      "column": "total_daily_payouts_count",
@@ -8424,19 +8465,19 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8770.99..11031",
+     "expected": "8766.86..11025.8",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=109367",
-     "severity": 43.512019383935254
+     "observed": "mean=109315",
+     "severity": 43.51201936591022
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=0.041431",
-     "severity": 49.506638343069575
+     "observed": "max=22",
+     "severity": 49.499999999999986
     },
     {
      "column": "automatic_payout_id",
@@ -8596,19 +8637,19 @@
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8518.34..10665.3",
+     "expected": "8514.33..10660.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=96192.3",
-     "severity": 39.83534038281767
+     "observed": "mean=96147",
+     "severity": 39.83534037741485
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "total_daily_gross_payout_amount",
@@ -8620,19 +8661,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "total_daily_payouts_count",
@@ -8644,35 +8685,35 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_daily",
-     "observed": "mean=0.037665",
-     "severity": 44.50663834306957
+     "observed": "max=20",
+     "severity": 44.499999999999986
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8518.34..10665.3",
+     "expected": "8514.33..10660.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=96192.3",
-     "severity": 39.83534038281767
+     "observed": "mean=96147",
+     "severity": 39.83534037741485
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "rolling_daily_end_balance_amount",
@@ -8692,19 +8733,19 @@
     },
     {
      "column": "rolling_total_daily_gross_payout_amount",
-     "expected": "-21145.4..-16056.7",
+     "expected": "-21655.2..-16443.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=-187080",
-     "severity": 32.608114130331764
+     "observed": "median=-191590",
+     "severity": 32.608114123994945
     },
     {
      "column": "rolling_total_daily_gross_transaction_amount",
-     "expected": "1.83363e+07..2.3081e+07",
+     "expected": "1.83365e+07..2.30812e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.06116e+08",
-     "severity": 38.576743552628045
+     "observed": "mean=2.06118e+08",
+     "severity": 38.57673978731719
     },
     {
      "column": "rolling_total_daily_net_transactions_amount",
@@ -8724,11 +8765,11 @@
     },
     {
      "column": "rolling_total_daily_sales_amount",
-     "expected": "1.83363e+07..2.3081e+07",
+     "expected": "1.83365e+07..2.30812e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=2.06116e+08",
-     "severity": 38.576743552628045
+     "observed": "mean=2.06118e+08",
+     "severity": 38.57673978731719
     },
     {
      "column": "rolling_total_daily_sales_count",
@@ -8748,19 +8789,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "total_daily_payouts_count",
@@ -8772,35 +8813,35 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_partitions",
-     "observed": "mean=0.037665",
-     "severity": 44.50663834306957
+     "observed": "max=20",
+     "severity": 44.499999999999986
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8518.34..10665.3",
+     "expected": "8514.33..10660.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=96192.3",
-     "severity": 39.83534038281767
+     "observed": "mean=96147",
+     "severity": 39.83534037741485
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "rolling_daily_end_balance_amount",
@@ -8820,19 +8861,19 @@
     },
     {
      "column": "rolling_total_daily_gross_payout_amount",
-     "expected": "-21145.4..-16056.7",
+     "expected": "-21655.2..-16443.8",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=-187080",
-     "severity": 32.608114130331764
+     "observed": "median=-191590",
+     "severity": 32.608114123994945
     },
     {
      "column": "rolling_total_daily_gross_transaction_amount",
-     "expected": "1.83363e+07..2.3081e+07",
+     "expected": "1.83365e+07..2.30812e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.06116e+08",
-     "severity": 38.576743552628045
+     "observed": "mean=2.06118e+08",
+     "severity": 38.57673978731719
     },
     {
      "column": "rolling_total_daily_net_transactions_amount",
@@ -8852,11 +8893,11 @@
     },
     {
      "column": "rolling_total_daily_sales_amount",
-     "expected": "1.83363e+07..2.3081e+07",
+     "expected": "1.83365e+07..2.30812e+07",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=2.06116e+08",
-     "severity": 38.576743552628045
+     "observed": "mean=2.06118e+08",
+     "severity": 38.57673978731719
     },
     {
      "column": "rolling_total_daily_sales_count",
@@ -8876,19 +8917,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "total_daily_payouts_count",
@@ -8900,19 +8941,19 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.int_stripe__account_rolling_totals",
-     "observed": "mean=0.037665",
-     "severity": 44.50663834306957
+     "observed": "max=20",
+     "severity": 44.499999999999986
     },
     {
      "column": "total_fees",
@@ -8956,19 +8997,19 @@
     },
     {
      "column": "daily_end_balance_amount",
-     "expected": "8518.34..10665.3",
+     "expected": "8514.33..10660.3",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=96192.3",
-     "severity": 39.83534038281767
+     "observed": "mean=96147",
+     "severity": 39.83534037741485
     },
     {
      "column": "daily_net_activity_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "rolling_daily_end_balance_amount",
@@ -8988,19 +9029,19 @@
     },
     {
      "column": "rolling_total_daily_gross_payout_amount",
-     "expected": "-21145.4..-16056.7",
+     "expected": "-21655.2..-16443.8",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=-187080",
-     "severity": 32.608114130331764
+     "observed": "median=-191590",
+     "severity": 32.608114123994945
     },
     {
      "column": "rolling_total_daily_gross_transaction_amount",
-     "expected": "1.83363e+07..2.3081e+07",
+     "expected": "1.83365e+07..2.30812e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.06116e+08",
-     "severity": 38.576743552628045
+     "observed": "mean=2.06118e+08",
+     "severity": 38.57673978731719
     },
     {
      "column": "rolling_total_daily_net_transactions_amount",
@@ -9020,11 +9061,11 @@
     },
     {
      "column": "rolling_total_daily_sales_amount",
-     "expected": "1.83363e+07..2.3081e+07",
+     "expected": "1.83365e+07..2.30812e+07",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=2.06116e+08",
-     "severity": 38.576743552628045
+     "observed": "mean=2.06118e+08",
+     "severity": 38.57673978731719
     },
     {
      "column": "rolling_total_daily_sales_count",
@@ -9044,19 +9085,19 @@
     },
     {
      "column": "total_daily_gross_transaction_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_net_transactions_amount",
-     "expected": "8526.34..10675.3",
+     "expected": "8522.33..10670.3",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=96282.5",
-     "severity": 39.83671998159607
+     "observed": "mean=96237.2",
+     "severity": 39.836719978238065
     },
     {
      "column": "total_daily_payouts_count",
@@ -9068,19 +9109,19 @@
     },
     {
      "column": "total_daily_sales_amount",
-     "expected": "8766.54..11035.4",
+     "expected": "8762.42..11030.2",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=98542.7",
-     "severity": 38.56886567808529
+     "observed": "mean=98496.3",
+     "severity": 38.56886566201256
     },
     {
      "column": "total_daily_sales_count",
-     "expected": "0.0033894..0.0041426",
+     "expected": "1.8..2.2",
      "monitor": "distribution",
      "node": "model.stripe.stripe__daily_overview",
-     "observed": "mean=0.037665",
-     "severity": 44.50663834306957
+     "observed": "max=20",
+     "severity": 44.499999999999986
     },
     {
      "column": "automatic_payout_id",
@@ -9963,19 +10004,19 @@
    },
    "distribution_shift": {
     "detected": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "diagnostic_node_top1": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "diagnostic_node_top3": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "n": 12,
     "not_confirmed": {
@@ -9984,14 +10025,14 @@
      "rate": 0.0
     },
     "top1": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "top3": {
-     "count": 6,
+     "count": 7,
      "n": 12,
-     "rate": 0.5
+     "rate": 0.5833
     },
     "wrong_top1": {
      "count": 0,
@@ -10307,19 +10348,19 @@
    },
    "stripe": {
     "detected": {
-     "count": 31,
+     "count": 32,
      "n": 34,
-     "rate": 0.9118
+     "rate": 0.9412
     },
     "diagnostic_node_top1": {
-     "count": 31,
+     "count": 32,
      "n": 34,
-     "rate": 0.9118
+     "rate": 0.9412
     },
     "diagnostic_node_top3": {
-     "count": 31,
+     "count": 32,
      "n": 34,
-     "rate": 0.9118
+     "rate": 0.9412
     },
     "n": 34,
     "not_confirmed": {
@@ -10328,14 +10369,14 @@
      "rate": 0.0
     },
     "top1": {
-     "count": 20,
+     "count": 21,
      "n": 34,
-     "rate": 0.5882
+     "rate": 0.6176
     },
     "top3": {
-     "count": 22,
+     "count": 23,
      "n": 34,
-     "rate": 0.6471
+     "rate": 0.6765
     },
     "wrong_top1": {
      "count": 11,
@@ -10354,19 +10395,19 @@
   },
   "faulted": {
    "detected": {
-    "count": 88,
+    "count": 89,
     "n": 96,
-    "rate": 0.9167
+    "rate": 0.9271
    },
    "diagnostic_node_top1": {
-    "count": 88,
+    "count": 89,
     "n": 96,
-    "rate": 0.9167
+    "rate": 0.9271
    },
    "diagnostic_node_top3": {
-    "count": 88,
+    "count": 89,
     "n": 96,
-    "rate": 0.9167
+    "rate": 0.9271
    },
    "n": 96,
    "not_confirmed": {
@@ -10375,14 +10416,14 @@
     "rate": 0.0
    },
    "top1": {
-    "count": 54,
+    "count": 55,
     "n": 96,
-    "rate": 0.5625
+    "rate": 0.5729
    },
    "top3": {
-    "count": 56,
+    "count": 57,
     "n": 96,
-    "rate": 0.5833
+    "rate": 0.5938
    },
    "wrong_top1": {
     "count": 34,
@@ -10391,6 +10432,6 @@
    }
   }
  },
- "plan_sha256": "sha256:cb61ddf816eaab7e85a986f74ec4397a32e7e9962d8c7b9ebe2aab72aaecd95f",
+ "plan_sha256": "sha256:673730eabec62170c3b394acd891fe80d8d2bc52aafde032b7dfd47e6474e60d",
  "split": "train"
 }

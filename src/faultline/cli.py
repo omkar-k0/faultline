@@ -158,9 +158,11 @@ def _cmd_eval(args: argparse.Namespace) -> int:
     from faultline.llm.client import OpenAICompatibleClient, load_config
 
     client = None
-    if args.baseline == "raw_log_llm":
+    if args.baseline in {"raw_log_llm", "triage_llm"}:
         client = OpenAICompatibleClient(load_config(Path(args.config)))
     command = f"faultline eval --split {args.split} --baseline {args.baseline}"
+    if args.ablate:
+        command += f" --ablate {args.ablate}"
     doc = run_eval(
         args.split,
         args.baseline,
@@ -169,12 +171,13 @@ def _cmd_eval(args: argparse.Namespace) -> int:
         download=not args.no_download,
         command=command,
         config_path=Path(args.config),
+        ablate=args.ablate,
     )
     m = doc["metrics"]
     f, c = m["faulted"], m["clean"]
     print(
-        f"{args.baseline} on {args.split}: {f['n']} faulted, {c['n']} clean, "
-        f"config {doc['config_hash']} -> {args.results_dir}/{args.split}/{args.baseline}.md"
+        f"{doc['baseline']} on {args.split}: {f['n']} faulted, {c['n']} clean, "
+        f"config {doc['config_hash']} -> {args.results_dir}/{args.split}/{doc['baseline']}.md"
     )
     return 0
 
@@ -244,6 +247,11 @@ def build_parser() -> argparse.ArgumentParser:
     ev = sub.add_parser("eval", help="score a baseline on a benchmark split")
     ev.add_argument("--split", required=True, choices=sorted(EVALUABLE_SPLITS))
     ev.add_argument("--baseline", required=True, choices=list(BASELINES))
+    ev.add_argument(
+        "--ablate",
+        choices=["tests", "lineage"],
+        help="with --baseline triage: switch off one step (the LLM ranker is off by default)",
+    )
     ev.add_argument("--results-dir", default="eval/results")
     ev.add_argument("--config", default="faultline.toml")
     ev.add_argument("--no-download", action="store_true", help="use dist/ only, never download")

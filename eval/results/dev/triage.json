@@ -20,6 +20,26 @@
   "triage": "deterministic ranking, no language model"
  },
  "config_hash": "2d6665853400",
+ "gating": {
+  "answered": 43,
+  "correct_not_confirmed": {
+   "count": 0,
+   "n": 0,
+   "rate": null
+  },
+  "detected": 43,
+  "not_confirmed": 0,
+  "right_when_answering": {
+   "count": 43,
+   "n": 43,
+   "rate": 1.0
+  },
+  "ungated_top1": {
+   "count": 19,
+   "n": 48,
+   "rate": 0.3958
+  }
+ },
  "incidents": [
   {
    "incident_id": "inc_court_cases_dev_001",
@@ -137,7 +157,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_court_cases_dev_002",
@@ -496,7 +517,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_court_cases_dev_003",
@@ -802,7 +824,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_dev_004",
@@ -1392,7 +1415,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_005",
@@ -1680,7 +1704,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_dev_006",
@@ -2048,7 +2073,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_dev_007",
@@ -2167,7 +2193,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_court_cases_dev_008",
@@ -2503,7 +2530,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_court_cases_dev_009",
@@ -2673,7 +2701,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_010",
@@ -2836,7 +2865,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_011",
@@ -3006,7 +3036,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_dev_012",
@@ -3176,7 +3207,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_dev_013",
@@ -3346,7 +3378,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_dev_014",
@@ -3698,7 +3731,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_015",
@@ -3817,7 +3851,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_court_cases_dev_016",
@@ -3919,7 +3954,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_court_cases_dev_017",
@@ -3950,7 +3986,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_018",
@@ -3981,7 +4018,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_019",
@@ -4012,7 +4050,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_020",
@@ -4043,7 +4082,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_021",
@@ -4074,7 +4114,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_022",
@@ -4105,7 +4146,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_023",
@@ -4136,7 +4178,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_024",
@@ -4167,7 +4210,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_025",
@@ -4198,7 +4242,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_dev_026",
@@ -4229,7 +4274,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_001",
@@ -4381,7 +4427,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_dev_002",
@@ -4533,7 +4580,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_jaffle_shop_dev_003",
@@ -5046,7 +5094,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_004",
@@ -5559,7 +5608,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_005",
@@ -5797,7 +5847,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_006",
@@ -6035,7 +6086,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_007",
@@ -6252,7 +6304,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_dev_008",
@@ -6371,7 +6424,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_dev_009",
@@ -6402,7 +6456,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_010",
@@ -6433,7 +6488,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_011",
@@ -6464,7 +6520,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_012",
@@ -6608,7 +6665,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_013",
@@ -6778,7 +6836,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_014",
@@ -6948,7 +7007,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_dev_015",
@@ -6979,7 +7039,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_016",
@@ -7010,7 +7071,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_017",
@@ -7041,7 +7103,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_018",
@@ -7072,7 +7135,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_019",
@@ -7103,7 +7167,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_020",
@@ -7134,7 +7199,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_021",
@@ -7165,7 +7231,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_022",
@@ -7196,7 +7263,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_023",
@@ -7227,7 +7295,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_024",
@@ -7258,7 +7327,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_025",
@@ -7289,7 +7359,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_dev_026",
@@ -7320,7 +7391,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_001",
@@ -7481,7 +7553,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_002",
@@ -7725,7 +7798,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_003",
@@ -8804,7 +8878,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_dev_004",
@@ -9883,7 +9958,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_dev_005",
@@ -10291,7 +10367,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_dev_006",
@@ -10893,7 +10970,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_dev_007",
@@ -11064,7 +11142,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_stripe_dev_008",
@@ -11235,7 +11314,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_009",
@@ -11406,7 +11486,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_010",
@@ -11577,7 +11658,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_stripe_dev_011",
@@ -14275,7 +14357,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_012",
@@ -14575,7 +14658,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_013",
@@ -14913,7 +14997,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_dev_014",
@@ -15216,7 +15301,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_dev_015",
@@ -15370,7 +15456,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_016",
@@ -15541,7 +15628,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_stripe_dev_017",
@@ -15572,7 +15660,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_018",
@@ -15603,7 +15692,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_019",
@@ -15634,7 +15724,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_020",
@@ -15665,7 +15756,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_021",
@@ -15696,7 +15788,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_022",
@@ -15727,7 +15820,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_023",
@@ -15758,7 +15852,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_024",
@@ -15789,7 +15884,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_025",
@@ -15820,7 +15916,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_dev_026",
@@ -15851,7 +15948,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   }
  ],
  "metrics": {

@@ -110,6 +110,37 @@ The same settings were then run once on train, which played no part in tuning; t
 
 **How it was built.** Designed and tuned on dev only, by reading where monitors went wrong there. Then run once on train with the same code, as a check; train played no part in tuning. Results: `eval/results/dev/triage.md`, `eval/results/train/triage.md`.
 
+## Triage ablations and the gate (M5b)
+
+Three ablations, each run through the same harness. The table is built from the result files: `eval/results/dev/ablations.md`.
+
+| Variant | Command | What is switched off |
+|---|---|---|
+| full | `faultline eval --split dev --baseline triage_llm` | nothing: tests, lineage, and the local LLM re-ranker (runs on your machine, see below) |
+| no LLM ranker | `faultline eval --split dev --baseline triage` | the re-ranker; survivors keep the deterministic order |
+| no tests | `... --baseline triage --ablate tests` | the tests and elimination; every proposed cause is ranked by the same ranking |
+| no lineage | `... --baseline triage --ablate lineage` | every lineage edge: incidents are single tables, causes are proposed only at alarmed tables, and checks on inputs have nothing to check |
+
+**The gate** is reported for every triage variant (section "The gate" in its `.md`):
+- *Answered* and *right when answering*: of the detected faulted runs where triage named a cause, how often its top-1 was right.
+- *Correct not confirmed*: triage abstained, and its best untested cause (the no-tests ranking of the same run) would have been wrong at top-1. An abstention that hid a right answer counts against it.
+- *Without the tests*: top-1 of the untested ranking, computed on the same run.
+
+### Running the LLM re-ranker on your own machine
+
+The re-ranker sees each incident's symptoms and the causes that passed their tests, with checks and lineage. It answers with an order and a two-line summary. It cannot add a cause: indices that do not exist are dropped, and any cause it leaves out keeps its deterministic place after the ones it ordered. An unusable answer leaves the deterministic order. Prompt: `src/faultline/triage/llm_rank.py`; its hash is in the result file.
+
+1. Start the model server as for `raw_log_llm` (below): `OLLAMA_CONTEXT_LENGTH=16384 ollama serve`, with `qwen2.5:7b-instruct` pulled.
+2. In a second terminal:
+   ```
+   cd faultline
+   git fetch && git switch m5b-ablations && git pull
+   make setup
+   make eval-dev-triage-llm
+   ```
+   One prompt per incident that has causes (about 45 on dev), each much shorter than the `raw_log_llm` prompts.
+3. Commit the files it writes, `eval/results/dev/triage_llm.{json,md,run.json}` and the updated `eval/results/dev/ablations.md`, and push to the branch.
+
 ## Running `raw_log_llm` on your own machine
 
 CI never calls a model. This baseline runs on a machine with enough memory (16 GB is enough for a 7B model) and comes back as a pull request.
@@ -137,7 +168,10 @@ CI never calls a model. This baseline runs on a machine with enough memory (16 G
 - **Clean runs do not vary in volume** (see BENCHMARK.md), so false alarms on row counts are an easy test.
 - **Category-mix shifts are nearly invisible to monitors.** The profile stores distinct counts, not category frequencies.
 - **The injector's noise touched a non-measure number** (a court's UTC offset in minutes). It is frozen into the benchmark now; the freshness tolerance absorbs it.
-- **"Not confirmed" never fired on dev or train.** Every detected faulted run got at least one surviving cause, so abstention is untested by this benchmark so far. What the tests filter out is measured by the no-tests ablation (M5b).
+- **"Not confirmed" never fired on dev or train.** Every detected faulted run got at least one surviving cause, so "correct not confirmed" has no cases yet (n/a). What the tests filter out shows in the no-tests ablation instead.
+- **Lineage adds little on this benchmark.** Every seed and source is profiled, so most data faults show a symptom at the source itself and are found without walking upstream. Lineage matters where the source cannot show the change (a text column), the one dev case the no-lineage ablation loses. A real project with unprofiled sources would lean on it more.
 - **Triage was shaped by dev's misses.** Train is the check; held-out remains the honest number.
 - **Elimination leans on what the profile cannot see.** It names text inputs because they have no distribution statistics; a change hidden inside a measured column's summary would point it the wrong way.
 - **A code cause can appear more than once in a report**, with the same commit and different columns.
+- **Held-out may contain a fault that changes nothing.** Train had one (fixed, see BENCHMARK.md). Held-out was frozen before the generator fix and is not opened, so it is checked only after its final score.
+

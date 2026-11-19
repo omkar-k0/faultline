@@ -1,4 +1,4 @@
-.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm
+.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm eval-dev-triage-llm
 
 PROJECTS := jaffle_shop stripe court_cases jira
 UV := uv
@@ -44,10 +44,16 @@ eval-dev:
 	$(UV) run --frozen faultline eval --split train --baseline monitors
 	$(UV) run --frozen faultline eval --split dev --baseline triage
 	$(UV) run --frozen faultline eval --split train --baseline triage
+	$(UV) run --frozen faultline eval --split dev --baseline triage --ablate tests
+	$(UV) run --frozen faultline eval --split dev --baseline triage --ablate lineage
 
 # Needs a local model server (see docs/EVAL.md). Never runs in CI.
 eval-dev-llm:
 	$(UV) run --frozen faultline eval --split dev --baseline raw_log_llm
+
+# The full triage with the local LLM re-ranker. Needs a local model server. Never runs in CI.
+eval-dev-triage-llm:
+	$(UV) run --frozen faultline eval --split dev --baseline triage_llm
 
 clean:
 	rm -rf .venv .pytest_cache .mypy_cache .ruff_cache build dist
