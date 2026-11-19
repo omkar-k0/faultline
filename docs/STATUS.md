@@ -4,7 +4,9 @@ Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M2 is done: merged to `main` (PRs #9, #10, #11). Next: M3, plan first.
+M3 Eval harness + baselines, issue #13, plan approved, being built on `m3-eval`.
+
+M2 is done: merged to `main` (PRs #9, #10, #11, #12).
 
 ## Done
 
