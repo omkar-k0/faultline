@@ -42,6 +42,8 @@ eval-dev:
 	$(UV) run --frozen faultline eval --split dev --baseline dbt_tests_guess
 	$(UV) run --frozen faultline eval --split dev --baseline monitors
 	$(UV) run --frozen faultline eval --split train --baseline monitors
+	$(UV) run --frozen faultline eval --split dev --baseline triage
+	$(UV) run --frozen faultline eval --split train --baseline triage
 
 # Needs a local model server (see docs/EVAL.md). Never runs in CI.
 eval-dev-llm:

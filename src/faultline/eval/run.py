@@ -12,6 +12,7 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
+from collections.abc import Mapping, Sequence
 from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
@@ -19,11 +20,15 @@ from typing import Any
 
 from faultline import __version__
 from faultline.eval.baselines import NO_LLM_BASELINES, Baseline, RawLogLLM, prompt_sha256
-from faultline.eval.loader import load_incidents
-from faultline.eval.score import Prediction, aggregate, load_truth, score_incident
+from faultline.eval.loader import Incident, load_incidents
+from faultline.eval.score import Prediction, Truth, aggregate, load_truth, score_incident
 from faultline.llm.client import LLMClient
-from faultline.monitors.core import MONITORS, MonitorConfig, load_monitor_config
+from faultline.monitors.core import MONITORS, MonitorConfig, Profile, load_monitor_config
 from faultline.monitors.method import MonitorMethod, pick_references
+from faultline.triage.method import TriageMethod
+
+# Methods that compare a run with known-good runs picked by the harness.
+REFERENCE_METHODS = frozenset({"monitors", "triage"})
 
 FAULT_ORDER = (
     "schema_change",
@@ -47,14 +52,32 @@ def _git_commit() -> str | None:
     return out.stdout.strip()
 
 
+def harness_references(
+    incidents: Sequence[Incident], truths: Mapping[str, Truth]
+) -> dict[str, list[Profile]]:
+    """Known-good profiles for every incident, picked by the harness from ground truth.
+
+    Only which runs are clean is read from the truth files; the method never sees them.
+    """
+    by_id = {i.incident_id: i for i in incidents}
+    ref_ids = pick_references(
+        [i.incident_id for i in incidents],
+        {i.incident_id: i.project for i in incidents},
+        [iid for iid, t in truths.items() if t.clean],
+    )
+    return {iid: [by_id[r].profile for r in refs] for iid, refs in ref_ids.items()}
+
+
 def config_for(
     baseline: str, client: LLMClient | None, monitor_config: MonitorConfig | None = None
 ) -> dict[str, Any]:
     config: dict[str, Any] = {"baseline": baseline, "faultline_version": __version__}
-    if baseline == "monitors":
+    if baseline in REFERENCE_METHODS:
         assert monitor_config is not None
         config["monitors"] = asdict(monitor_config)
         config["reference"] = "other clean runs of the same project in the split, all but one"
+    if baseline == "triage":
+        config["triage"] = "deterministic ranking, no language model"
     if baseline == "raw_log_llm":
         assert client is not None
         cfg = getattr(client, "config", None)
@@ -137,20 +160,20 @@ def run_eval(
     incidents, section = load_incidents(split, benchmark_dir, dist_dir, runs_dir, download)
     raw: RawLogLLM | None = None
     monitor_method: MonitorMethod | None = None
+    triage_method: TriageMethod | None = None
     monitor_config: MonitorConfig | None = None
     truths = {i.incident_id: load_truth(benchmark_dir, split, i.incident_id) for i in incidents}
-    if baseline == "monitors":
+    if baseline in REFERENCE_METHODS:
         # The harness, not the method, picks known-good history from ground truth.
         monitor_config = load_monitor_config(config_path)
-        by_id = {i.incident_id: i for i in incidents}
-        ref_ids = pick_references(
-            [i.incident_id for i in incidents],
-            {i.incident_id: i.project for i in incidents},
-            [iid for iid, t in truths.items() if t.clean],
-        )
-        references = {iid: [by_id[r].profile for r in refs] for iid, refs in ref_ids.items()}
-        monitor_method = MonitorMethod(references, monitor_config)
-        method: Baseline = monitor_method
+        references = harness_references(incidents, truths)
+        method: Baseline
+        if baseline == "monitors":
+            monitor_method = MonitorMethod(references, monitor_config)
+            method = monitor_method
+        else:
+            triage_method = TriageMethod(references, monitor_config)
+            method = triage_method
     elif baseline in NO_LLM_BASELINES:
         method = NO_LLM_BASELINES[baseline]
     elif baseline == "raw_log_llm":
@@ -185,6 +208,8 @@ def run_eval(
             row["raw_answer"] = raw.raw_answers.get(incident.incident_id)
         if monitor_method is not None:
             row["anomalies"] = monitor_method.anomalies.get(incident.incident_id, [])
+        if triage_method is not None:
+            row["report"] = triage_method.reports.get(incident.incident_id)
         rows.append(row)
 
     doc = {
