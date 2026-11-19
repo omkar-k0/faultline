@@ -209,4 +209,4 @@ NO_LLM_BASELINES: dict[str, Baseline] = {
     "dbt_tests": baseline_dbt_tests,
     "dbt_tests_guess": baseline_dbt_tests_guess,
 }
-BASELINES = (*NO_LLM_BASELINES, "raw_log_llm", "monitors", "triage")
+BASELINES = (*NO_LLM_BASELINES, "raw_log_llm", "monitors", "triage", "triage_llm")
