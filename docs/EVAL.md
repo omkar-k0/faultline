@@ -86,6 +86,30 @@ Tuned on dev only. The first version raised 6 false alarms on 30 clean dev runs.
 
 The same settings were then run once on train, which played no part in tuning; the result is in `eval/results/train/monitors.md`. Held-out remains the honest number.
 
+## Triage (M5a)
+
+`triage` is faultline's diagnosis: `faultline eval --split dev --baseline triage`, or `faultline triage <run id>` for one run (prints the report and stores its incidents in `build/faultline.duckdb`). It is a plain state machine, `gather -> group -> propose -> test -> rank -> report`, with no language model.
+
+1. **Gather.** Symptoms of the run: the monitor anomalies (same references as M4) plus failed dbt tests and errored models. Nodes dbt skipped are consequences, not symptoms.
+2. **Group.** Symptoms joined by table lineage into incidents: ten alarms below one broken source are one incident.
+3. **Propose.** A table changes for two reasons only: its inputs changed or its code changed. Data causes are proposed at seeds and sources upstream of a symptom (a column, the table, or duplicate rows on a key column). Code causes are proposed at models on the path, one per commit that changed the model's file; the commit that created a file does not count.
+4. **Test.** Each candidate is tested on the run's evidence:
+
+| Candidate | Passes when |
+|---|---|
+| source column | that column itself shows a symptom |
+| source table | the table itself shows a table-level symptom (rows, missing relation) |
+| duplicate rows on key `k` | `k` is a key by name, unique in every reference run, rows rose above the reference range, and the distinct count of `k` did not rise with them |
+| code change in model `M`, commit `c` | `c` changed `M`'s file; `M` (or the named column) is off; every input table of `M` is normal (and, for a column, every input column) |
+
+   Then **elimination**: a model column that no tested cause explains, with no commit on its path and every measured input normal, must have changed through an input the profile cannot measure (text columns carry no distribution statistics). Those inputs are reported as causes **inferred by elimination**, marked as such and ranked below every observed cause.
+5. **Rank.** Survivors only: strongest evidence first (structural before statistical), a named column before a whole table, then the number of symptoms explained. The list is never padded. With symptoms but no survivor, the answer is "not confirmed".
+6. **Report.** Up to three causes per incident, each with its checks, the symptoms it explains and the lineage path to each.
+
+**What the tests run against.** The benchmark archives hold each table's aggregate profile (every number was produced by an aggregate SQL query when the run was captured), not the databases. So in benchmark mode the tests check those recorded aggregates plus lineage, compiled SQL and git history. Against a live warehouse the same tests would run as SQL. Saving the databases instead is not possible for the frozen held-out split.
+
+**How it was built.** Designed and tuned on dev only, by reading where monitors went wrong there. Then run once on train with the same code, as a check; train played no part in tuning. Results: `eval/results/dev/triage.md`, `eval/results/train/triage.md`.
+
 ## Running `raw_log_llm` on your own machine
 
 CI never calls a model. This baseline runs on a machine with enough memory (16 GB is enough for a 7B model) and comes back as a pull request.
@@ -113,3 +137,7 @@ CI never calls a model. This baseline runs on a machine with enough memory (16 G
 - **Clean runs do not vary in volume** (see BENCHMARK.md), so false alarms on row counts are an easy test.
 - **Category-mix shifts are nearly invisible to monitors.** The profile stores distinct counts, not category frequencies.
 - **The injector's noise touched a non-measure number** (a court's UTC offset in minutes). It is frozen into the benchmark now; the freshness tolerance absorbs it.
+- **"Not confirmed" never fired on dev or train.** Every detected faulted run got at least one surviving cause, so abstention is untested by this benchmark so far. What the tests filter out is measured by the no-tests ablation (M5b).
+- **Triage was shaped by dev's misses.** Train is the check; held-out remains the honest number.
+- **Elimination leans on what the profile cannot see.** It names text inputs because they have no distribution statistics; a change hidden inside a measured column's summary would point it the wrong way.
+- **A code cause can appear more than once in a report**, with the same commit and different columns.

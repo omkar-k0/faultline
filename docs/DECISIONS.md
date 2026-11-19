@@ -136,3 +136,29 @@ Each entry: decision, alternative, reason.
 - Decision: duplicates only on key columns, freshness lag above 1 hour, distribution band widened by the reference spread. False alarms on dev went from 6/30 to 0/30 with no detection lost.
 - Alternative: raise thresholds until the false alarms disappear.
 - Reason: each rule names its cause, so it should carry to unseen data; checked once on train (same settings, not used for tuning).
+
+## 2026-11-19: Triage tests run on recorded aggregates in benchmark mode
+- Decision: hypothesis tests check the archived profiles, lineage, compiled SQL and git history; live SQL is for real warehouses later.
+- Alternative: save each run's DuckDB file and re-query it.
+- Reason: owner's approval; the frozen held-out split has no databases, and every profile value was itself an aggregate query.
+
+## 2026-11-19: Data causes only at sources, code causes only at models
+- Decision: a model is proposed as a cause only together with a commit that changed its file; data causes are proposed at seeds and sources.
+- Alternative: let any anomalous model be a cause on its own.
+- Reason: in dbt a model's output changes only if its inputs or its code changed; this keeps "the model is broken" from being a guess without a commit behind it.
+
+## 2026-11-19: The commit that created a file is not a change
+- Decision: for each model, the first commit in the cleaned history that touched its file is treated as its creation and never proposed.
+- Alternative: propose every commit that touched the file.
+- Reason: the initial snapshot touches every file; real history also starts with a creation commit that cannot explain a new incident.
+
+## 2026-11-19: Causes inferred by elimination are reported, marked and ranked last
+- Decision: when a model column is off, no commit is on its path and every measured input is normal, its unmeasured (text) inputs are reported as inferred causes.
+- Alternative: answer "not confirmed" in that case.
+- Reason: output changed with code unchanged means an input changed; the report says it was inferred, and its strength is the lowest, so any observed cause outranks it.
+
+## 2026-11-19: Duplicate rows tested by rows against distinct keys
+- Decision: duplicates pass when rows rise above the reference range while the key's distinct count does not.
+- Alternative: require distinct < rows, as the M4 duplicates monitor does.
+- Reason: the profile's distinct counts are approximate (101 distinct in a 99-row table), so exact uniqueness misses real duplicates.
+
