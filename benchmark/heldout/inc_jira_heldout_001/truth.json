@@ -1,0 +1,40 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "op": "drop"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:758543623ee6eefd25ba3ff58638dcb2132a7b33b9a8ee388806870c4c4249c1"
+  },
+  "incident_id": "inc_jira_heldout_001",
+  "location": {
+    "column": "_fivetran_synced",
+    "commit": null,
+    "file": "seeds/field_option.csv",
+    "node": "source.jira.jira.field_option",
+    "physical": "seed.jira_integration_tests.field_option"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jira",
+  "schema_version": 1,
+  "seed": 300001,
+  "split": "heldout"
+}
