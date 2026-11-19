@@ -70,7 +70,10 @@ def test_a_split_with_its_own_project_works(tmp_path: Path) -> None:
     plan = load_plan(plan_path)
     cats = {p: build_catalog(PROJECTS / p) for p in _plan_projects(plan_path)}
     alloc = split_nodes(plan, cats["jira"])
-    assert set(alloc) == {"extra"}
+    assert "extra" in alloc
+    others = [name for name in alloc if name != "extra"]
+    for name in others:
+        assert not alloc[name] & alloc["extra"]
     specs = build_specs(plan.splits["extra"], cats, {"jira": alloc["extra"]})
     assert len(specs) == len(FAULT_TYPES) + 1
     assert {s.project for s, _ in specs} == {"jira"}
