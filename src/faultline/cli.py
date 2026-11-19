@@ -11,9 +11,11 @@ from pathlib import Path
 
 from faultline import __version__
 from faultline.collectors.dbt_artifacts import ArtifactError, Project, load_project
+from faultline.eval.loader import BenchmarkError
 from faultline.lineage.column import ProjectLineage, build_column_lineage
 from faultline.lineage.handcheck import build_sheet, to_csv, to_markdown
 from faultline.lineage.impact import Direction, TargetError, impact
+from faultline.llm.client import LLMError
 
 PROJECTS_DIR = Path("projects")
 
@@ -151,6 +153,32 @@ def _cmd_benchmark_summary(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_eval(args: argparse.Namespace) -> int:
+    from faultline.eval.baselines import NO_LLM_BASELINES
+    from faultline.eval.run import run_eval
+    from faultline.llm.client import OpenAICompatibleClient, load_config
+
+    client = None
+    if args.baseline not in NO_LLM_BASELINES:
+        client = OpenAICompatibleClient(load_config(Path(args.config)))
+    command = f"faultline eval --split {args.split} --baseline {args.baseline}"
+    doc = run_eval(
+        args.split,
+        args.baseline,
+        results_dir=Path(args.results_dir),
+        client=client,
+        download=not args.no_download,
+        command=command,
+    )
+    m = doc["metrics"]
+    f, c = m["faulted"], m["clean"]
+    print(
+        f"{args.baseline} on {args.split}: {f['n']} faulted, {c['n']} clean, "
+        f"config {doc['config_hash']} -> {args.results_dir}/{args.split}/{args.baseline}.md"
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="faultline",
@@ -178,7 +206,17 @@ def build_parser() -> argparse.ArgumentParser:
     imp.add_argument("--json", action="store_true")
     imp.set_defaults(func=_cmd_impact)
 
+    from faultline.eval.baselines import BASELINES
+    from faultline.eval.loader import EVALUABLE_SPLITS
     from faultline.inject.faults import FAULT_TYPES
+
+    ev = sub.add_parser("eval", help="score a baseline on a benchmark split")
+    ev.add_argument("--split", required=True, choices=sorted(EVALUABLE_SPLITS))
+    ev.add_argument("--baseline", required=True, choices=list(BASELINES))
+    ev.add_argument("--results-dir", default="eval/results")
+    ev.add_argument("--config", default="faultline.toml")
+    ev.add_argument("--no-download", action="store_true", help="use dist/ only, never download")
+    ev.set_defaults(func=_cmd_eval)
 
     inj = sub.add_parser("inject", help="inject one fault into a copy of a project and run it")
     inj.add_argument("--project", required=True)
@@ -213,7 +251,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     try:
         code: int = func(args)
-    except (ArtifactError, TargetError, FileExistsError) as exc:
+    except (ArtifactError, TargetError, FileExistsError, BenchmarkError, LLMError) as exc:
         print(f"faultline: {exc}", file=sys.stderr)
         return 2
     return code
