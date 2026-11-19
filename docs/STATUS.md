@@ -4,9 +4,16 @@ Updated 2026-11-18, evening.
 
 ## Current milestone
 
-M4 Monitors, issue #16, plan approved, being built on `m4-monitors`.
+M4 Monitors, issue #16, draft PR #17. Built and scored on dev; checked once on train.
 
-M3 is done: merged to `main` (PRs #14, #15). Dev results for `dbt_tests`, `dbt_tests_guess` and `raw_log_llm` (qwen2.5:7b-instruct, run on the owner's MacBook Air) are in `eval/results/dev/`.
+M3 is done: merged to `main` (PRs #14, #15).
+
+## Done in M4
+
+- `monitors/core.py`: seven checks on table profiles (schema, volume, freshness, null rate, distribution, duplicates, time shift), settings in `faultline.toml` `[monitors]`.
+- `monitors/method.py`: known-good reference picker (9 of 10 clean runs, same project and split) and upstream-first ranking of anomalies.
+- `faultline eval --baseline monitors`; results in `eval/results/dev/monitors.*` and `eval/results/train/monitors.*`, both reproducible byte for byte (test). The result table includes which monitor fired per fault type.
+- Unit and property tests in `tests/test_monitors.py`.
 
 ## Done in M3
 
@@ -57,4 +64,5 @@ M3 is done: merged to `main` (PRs #14, #15). Dev results for `dbt_tests`, `dbt_t
 ## Next step
 
 - Later: research real public court data and its licences; build the web viewer from the Stitch designs (real content only).
-- M4 monitors on `m4-monitors`.
+- Owner: review PR #17.
+- Then M5: incident manager and triage agent. Plan first.
