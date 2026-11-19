@@ -1,0 +1,48 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on orders.order_id = orders.order_id",
+      "before": "on orders.order_id = order_payments.order_id",
+      "line": 52,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:dfd1d14aeb5c41d83e8315ebb327c788c85732890a413e5489bed8515a4f3bff"
+  },
+  "incident_id": "inc_jaffle_shop_train_026",
+  "location": {
+    "column": null,
+    "commit": "8a7370ad5cff774e2dd9f0b891b87836b2493336",
+    "file": "models/orders.sql",
+    "node": "model.jaffle_shop.orders",
+    "physical": "model.jaffle_shop.orders"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.jaffle_shop.orders"
+    ],
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.jaffle_shop.unique_orders_order_id.fed79b3a6e"
+    ],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100076,
+  "split": "train"
+}

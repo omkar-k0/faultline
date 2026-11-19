@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "factor": 100.0,
+      "variant": "scale"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:6440e01fd5cd7096bfa34fd31ce5d1c6c7defd294631078f522d347f748f75e6"
+  },
+  "incident_id": "inc_court_cases_dev_009",
+  "location": {
+    "column": "utc_offset_minutes",
+    "commit": null,
+    "file": "seeds/raw_courts.csv",
+    "node": "seed.court_cases.raw_courts",
+    "physical": "seed.court_cases.raw_courts"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200027,
+  "split": "dev"
+}

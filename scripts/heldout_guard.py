@@ -5,11 +5,17 @@ Fails a pull request when it:
 2. adds a line under src/ that mentions "heldout", outside the allowlisted
    files that implement `faultline eval --split heldout`.
 
+One exception, the freeze: when HELDOUT_FREEZE=true (the PR carries the
+owner's `heldout-freeze` label) and benchmark/heldout/ is empty on the base,
+the PR may add files under benchmark/heldout/ and modify the files in
+FREEZE_ALSO_ALLOWED, and nothing else. After that, heldout is frozen.
+
 Usage: python scripts/heldout_guard.py <base-ref>
 """
 
 from __future__ import annotations
 
+import os
 import re
 import subprocess
 import sys
@@ -23,6 +29,9 @@ HELDOUT_PATTERN = re.compile(r"held[\s_\-/]*out", re.IGNORECASE)
 # `faultline eval --split heldout` belongs here. Changes to this list are
 # owner-reviewed through CODEOWNERS.
 ALLOWED_SRC_FILES: frozenset[str] = frozenset({"src/faultline/eval/splits.py"})
+
+# Besides adding heldout files, a freeze PR may change only these.
+FREEZE_ALSO_ALLOWED: frozenset[str] = frozenset({"benchmark/manifest.json", "benchmark/plan.toml"})
 
 
 @dataclass(frozen=True)
@@ -77,6 +86,31 @@ def parse_added_lines(diff: str) -> list[AddedLine]:
     return added
 
 
+def find_freeze_violations(changes: list[FileChange], base_has_heldout: bool) -> list[str]:
+    if base_has_heldout:
+        return [
+            "benchmark/heldout/ is already frozen on the base branch; it cannot be frozen again"
+        ]
+    violations: list[str] = []
+    added = 0
+    for change in changes:
+        paths = [change.path] + ([change.old_path] if change.old_path else [])
+        if change.status == "A" and change.path.startswith(HELDOUT_DIR):
+            added += 1
+            continue
+        if change.status == "M" and change.path in FREEZE_ALSO_ALLOWED:
+            continue
+        if change.status == "A" and change.path in FREEZE_ALSO_ALLOWED:
+            continue
+        for path in paths:
+            violations.append(
+                f"{change.status} {path}: a freeze PR may only add benchmark/heldout/ files"
+            )
+    if added == 0:
+        violations.append("freeze PR adds no files under benchmark/heldout/")
+    return violations
+
+
 def find_violations(changes: list[FileChange], added: list[AddedLine]) -> list[str]:
     violations: list[str] = []
     for change in changes:
@@ -104,6 +138,17 @@ def main(argv: list[str]) -> int:
         return 2
     base = argv[1]
     changes = parse_name_status(_git("diff", "--name-status", "-M", f"{base}...HEAD"))
+    if os.environ.get("HELDOUT_FREEZE", "").lower() == "true":
+        base_has_heldout = bool(
+            _git("ls-tree", "-r", "--name-only", base, "--", HELDOUT_DIR).strip()
+        )
+        violations = find_freeze_violations(changes, base_has_heldout)
+        for violation in violations:
+            print(f"heldout-guard (freeze): {violation}")
+        if violations:
+            return 1
+        print(f"heldout-guard (freeze): ok, {len(changes)} files")
+        return 0
     added = parse_added_lines(_git("diff", "-U0", "--no-color", f"{base}...HEAD", "--", SRC_DIR))
     violations = find_violations(changes, added)
     for violation in violations:

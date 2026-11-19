@@ -1,0 +1,13 @@
+court_id,court_name,state,court_level,utc_offset_minutes
+CRT01,District Court 01 (Maharashtra),Maharashtra,district,330
+CRT02,District Court 02 (Karnataka),Karnataka,district,330
+CRT03,District Court 03 (Tamil Nadu),Tamil Nadu,district,330
+CRT04,District Court 04 (Delhi),Delhi,district,330
+CRT05,District Court 05 (Gujarat),Gujarat,district,330
+CRT06,District Court 06 (West Bengal),West Bengal,district,330
+CRT07,High Court 07 (Maharashtra),Maharashtra,high,330
+CRT08,District Court 08 (Karnataka),Karnataka,district,330
+CRT09,High Court 09 (Tamil Nadu),Tamil Nadu,high,330
+CRT10,High Court 10 (Delhi),Delhi,high,330
+CRT11,District Court 11 (Gujarat),Gujarat,district,330
+CRT12,District Court 12 (West Bengal),West Bengal,district,330

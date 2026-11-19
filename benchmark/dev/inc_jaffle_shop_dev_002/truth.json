@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "op": "drop"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:2676f8e7a64427089a5ed176a37adab79447e0488a74889024c9c71d11c5f3ff"
+  },
+  "incident_id": "inc_jaffle_shop_dev_002",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/raw_orders.csv",
+    "node": "seed.jaffle_shop.raw_orders",
+    "physical": "seed.jaffle_shop.raw_orders"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.jaffle_shop.stg_orders"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 17,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 200004,
+  "split": "dev"
+}

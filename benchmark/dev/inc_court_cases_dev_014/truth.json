@@ -1,0 +1,55 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on cases.court_id = cases.court_id",
+      "before": "on cases.court_id = courts.court_id",
+      "line": 25,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:dfce248e3ae0fc1c1580d0a1f5d8c2fd8e18de810450ee20de41a2cdf972c1d0"
+  },
+  "incident_id": "inc_court_cases_dev_014",
+  "location": {
+    "column": null,
+    "commit": "d35b21249c16012ccc937ba2ff46205d9f485c33",
+    "file": "models/staging/stg_hearings.sql",
+    "node": "model.court_cases.stg_hearings",
+    "physical": "model.court_cases.stg_hearings"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.court_cases.appeal_deadlines",
+      "model.court_cases.court_backlog_monthly",
+      "model.court_cases.dim_courts",
+      "model.court_cases.dim_lawyers",
+      "model.court_cases.fct_cases",
+      "model.court_cases.fct_hearings",
+      "model.court_cases.int_case_hearings",
+      "model.court_cases.stg_hearings"
+    ],
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.court_cases.unique_stg_hearings_hearing_id.71ca5d8460"
+    ],
+    "skipped_nodes": 17,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200042,
+  "split": "dev"
+}

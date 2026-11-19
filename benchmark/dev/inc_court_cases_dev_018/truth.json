@@ -1,0 +1,28 @@
+{
+  "fault": null,
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:92d295dda0eb411c6a9ccac9c43463807361a9b876e25dcddc0035cd4f6012e4"
+  },
+  "incident_id": "inc_court_cases_dev_018",
+  "location": null,
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200070,
+  "split": "dev"
+}

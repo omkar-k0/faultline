@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_removed": 12,
+      "variant": "missing"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:e804b7340c2e619e40f976ec6757a0214aeab52ea360712b5452150aeb414b87"
+  },
+  "incident_id": "inc_stripe_dev_004",
+  "location": {
+    "column": null,
+    "commit": null,
+    "file": "seeds/customer_data.csv",
+    "node": "source.stripe.stripe.customer",
+    "physical": "seed.stripe_integration_tests.customer_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200011,
+  "split": "dev"
+}

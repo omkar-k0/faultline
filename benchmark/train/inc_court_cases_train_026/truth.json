@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on months.court_id = months.court_id",
+      "before": "on months.court_id = disposed.court_id",
+      "line": 31,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:9923b737290fcd5e498ed0c4ac66f45eabe3dec187cba29fbad1d9e10a54081c"
+  },
+  "incident_id": "inc_court_cases_train_026",
+  "location": {
+    "column": null,
+    "commit": "2c9b5164fd8e99420de354794715250e6731e686",
+    "file": "models/marts/court_backlog_monthly.sql",
+    "node": "model.court_cases.court_backlog_monthly",
+    "physical": "model.court_cases.court_backlog_monthly"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.court_cases.court_backlog_monthly"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100078,
+  "split": "train"
+}

@@ -1,0 +1,47 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "min(",
+      "before": "max(",
+      "line": 6,
+      "operator": "max_to_min"
+    },
+    "type": "model_logic_bug"
+  },
+  "generation": {
+    "attempts": 3
+  },
+  "hashes": {
+    "inputs": "sha256:77f8fbd75946a8bd1da959dbf4e98f2a2d3afc5c0e01bc0fc25983b8b0523c39"
+  },
+  "incident_id": "inc_court_cases_dev_011",
+  "location": {
+    "column": "last_hearing_date",
+    "commit": "46ea6aa80885bbd68c9c37f56303ead787a8582c",
+    "file": "models/intermediate/int_case_hearings.sql",
+    "node": "model.court_cases.int_case_hearings",
+    "physical": "model.court_cases.int_case_hearings"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.court_cases.fct_cases",
+      "model.court_cases.int_case_hearings"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200033,
+  "split": "dev"
+}

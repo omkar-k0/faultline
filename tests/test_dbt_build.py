@@ -20,6 +20,9 @@ PROJECTS = Path(__file__).resolve().parents[1] / "projects"
 EXPECTED_EMPTY = {
     "jaffle_shop": set(),
     "stripe": {"stripe__ending_balance_reconciliation_itemized_4", "stripe__payout_itemized_3"},
+    # an exceptions report: empty while every court fee is paid exactly
+    "court_cases": {"fee_reconciliation"},
+    "jira": set(),
 }
 
 

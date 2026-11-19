@@ -1,0 +1,361 @@
+party_id,party_type,party_name,state
+PTY0001,company,Company Party 0001,Gujarat
+PTY0002,company,Company Party 0002,Maharashtra
+PTY0003,individual,Individual Party 0003,Tamil Nadu
+PTY0004,individual,Individual Party 0004,West Bengal
+PTY0005,individual,Individual Party 0005,Tamil Nadu
+PTY0006,individual,Individual Party 0006,West Bengal
+PTY0007,company,Company Party 0007,Delhi
+PTY0008,individual,Individual Party 0008,Maharashtra
+PTY0009,company,Company Party 0009,Gujarat
+PTY0010,individual,Individual Party 0010,Gujarat
+PTY0011,individual,Individual Party 0011,Maharashtra
+PTY0012,company,Company Party 0012,Delhi
+PTY0013,individual,Individual Party 0013,Maharashtra
+PTY0014,individual,Individual Party 0014,West Bengal
+PTY0015,company,Company Party 0015,Gujarat
+PTY0016,individual,Individual Party 0016,Maharashtra
+PTY0017,company,Company Party 0017,Tamil Nadu
+PTY0018,government,Government Party 0018,Tamil Nadu
+PTY0019,individual,Individual Party 0019,Maharashtra
+PTY0020,company,Company Party 0020,Karnataka
+PTY0021,company,Company Party 0021,Delhi
+PTY0022,individual,Individual Party 0022,West Bengal
+PTY0023,company,Company Party 0023,Karnataka
+PTY0024,individual,Individual Party 0024,Tamil Nadu
+PTY0025,individual,Individual Party 0025,Delhi
+PTY0026,company,Company Party 0026,Tamil Nadu
+PTY0027,company,Company Party 0027,Tamil Nadu
+PTY0028,individual,Individual Party 0028,Gujarat
+PTY0029,individual,Individual Party 0029,Karnataka
+PTY0030,individual,Individual Party 0030,Gujarat
+PTY0031,company,Company Party 0031,Karnataka
+PTY0032,individual,Individual Party 0032,Gujarat
+PTY0033,individual,Individual Party 0033,Maharashtra
+PTY0034,individual,Individual Party 0034,Karnataka
+PTY0035,individual,Individual Party 0035,Tamil Nadu
+PTY0036,individual,Individual Party 0036,West Bengal
+PTY0037,individual,Individual Party 0037,Karnataka
+PTY0038,company,Company Party 0038,Karnataka
+PTY0039,government,Government Party 0039,West Bengal
+PTY0040,individual,Individual Party 0040,West Bengal
+PTY0041,individual,Individual Party 0041,Gujarat
+PTY0042,individual,Individual Party 0042,Delhi
+PTY0043,individual,Individual Party 0043,Gujarat
+PTY0044,company,Company Party 0044,Delhi
+PTY0045,company,Company Party 0045,Karnataka
+PTY0046,individual,Individual Party 0046,West Bengal
+PTY0047,individual,Individual Party 0047,Maharashtra
+PTY0048,individual,Individual Party 0048,Gujarat
+PTY0049,individual,Individual Party 0049,Gujarat
+PTY0050,individual,Individual Party 0050,Karnataka
+PTY0051,government,Government Party 0051,Gujarat
+PTY0052,company,Company Party 0052,Delhi
+PTY0053,company,Company Party 0053,Tamil Nadu
+PTY0054,company,Company Party 0054,Gujarat
+PTY0055,individual,Individual Party 0055,West Bengal
+PTY0056,individual,Individual Party 0056,West Bengal
+PTY0057,company,Company Party 0057,Maharashtra
+PTY0058,individual,Individual Party 0058,Maharashtra
+PTY0059,individual,Individual Party 0059,Tamil Nadu
+PTY0060,individual,Individual Party 0060,Karnataka
+PTY0061,individual,Individual Party 0061,Delhi
+PTY0062,company,Company Party 0062,Karnataka
+PTY0063,company,Company Party 0063,Tamil Nadu
+PTY0064,individual,Individual Party 0064,Delhi
+PTY0065,government,Government Party 0065,Gujarat
+PTY0066,individual,Individual Party 0066,Karnataka
+PTY0067,individual,Individual Party 0067,Karnataka
+PTY0068,individual,Individual Party 0068,Karnataka
+PTY0069,individual,Individual Party 0069,West Bengal
+PTY0070,government,Government Party 0070,Tamil Nadu
+PTY0071,company,Company Party 0071,Gujarat
+PTY0072,government,Government Party 0072,Karnataka
+PTY0073,company,Company Party 0073,Karnataka
+PTY0074,individual,Individual Party 0074,Tamil Nadu
+PTY0075,individual,Individual Party 0075,Delhi
+PTY0076,individual,Individual Party 0076,Tamil Nadu
+PTY0077,individual,Individual Party 0077,Tamil Nadu
+PTY0078,individual,Individual Party 0078,Karnataka
+PTY0079,individual,Individual Party 0079,Tamil Nadu
+PTY0080,individual,Individual Party 0080,Gujarat
+PTY0081,company,Company Party 0081,Tamil Nadu
+PTY0082,government,Government Party 0082,Gujarat
+PTY0083,individual,Individual Party 0083,Delhi
+PTY0084,company,Company Party 0084,West Bengal
+PTY0085,company,Company Party 0085,West Bengal
+PTY0086,individual,Individual Party 0086,Delhi
+PTY0087,individual,Individual Party 0087,Tamil Nadu
+PTY0088,company,Company Party 0088,Karnataka
+PTY0089,individual,Individual Party 0089,Tamil Nadu
+PTY0090,individual,Individual Party 0090,Delhi
+PTY0091,individual,Individual Party 0091,Gujarat
+PTY0092,individual,Individual Party 0092,West Bengal
+PTY0093,government,Government Party 0093,Maharashtra
+PTY0094,company,Company Party 0094,Karnataka
+PTY0095,company,Company Party 0095,Delhi
+PTY0096,individual,Individual Party 0096,Gujarat
+PTY0097,individual,Individual Party 0097,Delhi
+PTY0098,company,Company Party 0098,Tamil Nadu
+PTY0099,individual,Individual Party 0099,Karnataka
+PTY0100,individual,Individual Party 0100,Gujarat
+PTY0101,individual,Individual Party 0101,Karnataka
+PTY0102,government,Government Party 0102,Maharashtra
+PTY0103,company,Company Party 0103,Maharashtra
+PTY0104,individual,Individual Party 0104,Tamil Nadu
+PTY0105,individual,Individual Party 0105,Maharashtra
+PTY0106,individual,Individual Party 0106,Tamil Nadu
+PTY0107,company,Company Party 0107,Karnataka
+PTY0108,individual,Individual Party 0108,Gujarat
+PTY0109,company,Company Party 0109,Gujarat
+PTY0110,individual,Individual Party 0110,Karnataka
+PTY0111,company,Company Party 0111,West Bengal
+PTY0112,individual,Individual Party 0112,Tamil Nadu
+PTY0113,government,Government Party 0113,Gujarat
+PTY0114,individual,Individual Party 0114,Delhi
+PTY0115,individual,Individual Party 0115,Tamil Nadu
+PTY0116,government,Government Party 0116,Karnataka
+PTY0117,individual,Individual Party 0117,Gujarat
+PTY0118,individual,Individual Party 0118,Maharashtra
+PTY0119,company,Company Party 0119,Tamil Nadu
+PTY0120,individual,Individual Party 0120,West Bengal
+PTY0121,individual,Individual Party 0121,Tamil Nadu
+PTY0122,government,Government Party 0122,West Bengal
+PTY0123,company,Company Party 0123,Delhi
+PTY0124,individual,Individual Party 0124,Maharashtra
+PTY0125,company,Company Party 0125,Tamil Nadu
+PTY0126,company,Company Party 0126,West Bengal
+PTY0127,individual,Individual Party 0127,Karnataka
+PTY0128,individual,Individual Party 0128,Delhi
+PTY0129,individual,Individual Party 0129,Maharashtra
+PTY0130,government,Government Party 0130,Maharashtra
+PTY0131,individual,Individual Party 0131,West Bengal
+PTY0132,company,Company Party 0132,Tamil Nadu
+PTY0133,individual,Individual Party 0133,Delhi
+PTY0134,individual,Individual Party 0134,Delhi
+PTY0135,individual,Individual Party 0135,Delhi
+PTY0136,individual,Individual Party 0136,Delhi
+PTY0137,company,Company Party 0137,Maharashtra
+PTY0138,individual,Individual Party 0138,Karnataka
+PTY0139,individual,Individual Party 0139,West Bengal
+PTY0140,individual,Individual Party 0140,West Bengal
+PTY0141,company,Company Party 0141,Maharashtra
+PTY0142,individual,Individual Party 0142,Maharashtra
+PTY0143,individual,Individual Party 0143,Gujarat
+PTY0144,company,Company Party 0144,West Bengal
+PTY0145,individual,Individual Party 0145,Delhi
+PTY0146,individual,Individual Party 0146,Gujarat
+PTY0147,individual,Individual Party 0147,Maharashtra
+PTY0148,individual,Individual Party 0148,Tamil Nadu
+PTY0149,individual,Individual Party 0149,Maharashtra
+PTY0150,company,Company Party 0150,Gujarat
+PTY0151,individual,Individual Party 0151,Karnataka
+PTY0152,company,Company Party 0152,Karnataka
+PTY0153,individual,Individual Party 0153,Gujarat
+PTY0154,individual,Individual Party 0154,West Bengal
+PTY0155,company,Company Party 0155,Gujarat
+PTY0156,individual,Individual Party 0156,Karnataka
+PTY0157,company,Company Party 0157,Delhi
+PTY0158,individual,Individual Party 0158,West Bengal
+PTY0159,individual,Individual Party 0159,Maharashtra
+PTY0160,individual,Individual Party 0160,Delhi
+PTY0161,individual,Individual Party 0161,Karnataka
+PTY0162,individual,Individual Party 0162,Tamil Nadu
+PTY0163,individual,Individual Party 0163,Maharashtra
+PTY0164,individual,Individual Party 0164,West Bengal
+PTY0165,individual,Individual Party 0165,Tamil Nadu
+PTY0166,government,Government Party 0166,Delhi
+PTY0167,individual,Individual Party 0167,West Bengal
+PTY0168,individual,Individual Party 0168,Karnataka
+PTY0169,individual,Individual Party 0169,Gujarat
+PTY0170,individual,Individual Party 0170,West Bengal
+PTY0171,individual,Individual Party 0171,West Bengal
+PTY0172,individual,Individual Party 0172,Gujarat
+PTY0173,individual,Individual Party 0173,Gujarat
+PTY0174,individual,Individual Party 0174,Karnataka
+PTY0175,individual,Individual Party 0175,Delhi
+PTY0176,individual,Individual Party 0176,Maharashtra
+PTY0177,individual,Individual Party 0177,Tamil Nadu
+PTY0178,individual,Individual Party 0178,West Bengal
+PTY0179,individual,Individual Party 0179,Tamil Nadu
+PTY0180,individual,Individual Party 0180,Delhi
+PTY0181,individual,Individual Party 0181,Karnataka
+PTY0182,individual,Individual Party 0182,Delhi
+PTY0183,government,Government Party 0183,Tamil Nadu
+PTY0184,individual,Individual Party 0184,Karnataka
+PTY0185,company,Company Party 0185,Tamil Nadu
+PTY0186,government,Government Party 0186,Tamil Nadu
+PTY0187,company,Company Party 0187,Maharashtra
+PTY0188,individual,Individual Party 0188,West Bengal
+PTY0189,individual,Individual Party 0189,Tamil Nadu
+PTY0190,individual,Individual Party 0190,West Bengal
+PTY0191,company,Company Party 0191,Delhi
+PTY0192,company,Company Party 0192,Gujarat
+PTY0193,company,Company Party 0193,Delhi
+PTY0194,individual,Individual Party 0194,West Bengal
+PTY0195,individual,Individual Party 0195,Karnataka
+PTY0196,individual,Individual Party 0196,Delhi
+PTY0197,individual,Individual Party 0197,Maharashtra
+PTY0198,government,Government Party 0198,Tamil Nadu
+PTY0199,company,Company Party 0199,Gujarat
+PTY0200,individual,Individual Party 0200,Karnataka
+PTY0201,individual,Individual Party 0201,West Bengal
+PTY0202,company,Company Party 0202,Tamil Nadu
+PTY0203,individual,Individual Party 0203,Maharashtra
+PTY0204,individual,Individual Party 0204,Delhi
+PTY0205,individual,Individual Party 0205,Maharashtra
+PTY0206,company,Company Party 0206,West Bengal
+PTY0207,company,Company Party 0207,Maharashtra
+PTY0208,individual,Individual Party 0208,Gujarat
+PTY0209,individual,Individual Party 0209,Gujarat
+PTY0210,individual,Individual Party 0210,Delhi
+PTY0211,individual,Individual Party 0211,West Bengal
+PTY0212,individual,Individual Party 0212,West Bengal
+PTY0213,individual,Individual Party 0213,Delhi
+PTY0214,company,Company Party 0214,West Bengal
+PTY0215,individual,Individual Party 0215,Gujarat
+PTY0216,individual,Individual Party 0216,Maharashtra
+PTY0217,company,Company Party 0217,Maharashtra
+PTY0218,government,Government Party 0218,Maharashtra
+PTY0219,government,Government Party 0219,Tamil Nadu
+PTY0220,individual,Individual Party 0220,Gujarat
+PTY0221,company,Company Party 0221,Tamil Nadu
+PTY0222,individual,Individual Party 0222,Maharashtra
+PTY0223,company,Company Party 0223,Karnataka
+PTY0224,company,Company Party 0224,Tamil Nadu
+PTY0225,government,Government Party 0225,West Bengal
+PTY0226,individual,Individual Party 0226,Tamil Nadu
+PTY0227,individual,Individual Party 0227,Maharashtra
+PTY0228,company,Company Party 0228,Gujarat
+PTY0229,individual,Individual Party 0229,Gujarat
+PTY0230,individual,Individual Party 0230,Delhi
+PTY0231,individual,Individual Party 0231,Tamil Nadu
+PTY0232,individual,Individual Party 0232,Karnataka
+PTY0233,individual,Individual Party 0233,Delhi
+PTY0234,company,Company Party 0234,Gujarat
+PTY0235,individual,Individual Party 0235,Karnataka
+PTY0236,company,Company Party 0236,Maharashtra
+PTY0237,company,Company Party 0237,Delhi
+PTY0238,company,Company Party 0238,Tamil Nadu
+PTY0239,government,Government Party 0239,West Bengal
+PTY0240,company,Company Party 0240,Maharashtra
+PTY0241,government,Government Party 0241,Karnataka
+PTY0242,company,Company Party 0242,Delhi
+PTY0243,company,Company Party 0243,Tamil Nadu
+PTY0244,company,Company Party 0244,Maharashtra
+PTY0245,individual,Individual Party 0245,Tamil Nadu
+PTY0246,individual,Individual Party 0246,Tamil Nadu
+PTY0247,company,Company Party 0247,Maharashtra
+PTY0248,individual,Individual Party 0248,Maharashtra
+PTY0249,individual,Individual Party 0249,West Bengal
+PTY0250,individual,Individual Party 0250,Delhi
+PTY0251,individual,Individual Party 0251,Maharashtra
+PTY0252,company,Company Party 0252,Gujarat
+PTY0253,individual,Individual Party 0253,Karnataka
+PTY0254,individual,Individual Party 0254,Maharashtra
+PTY0255,company,Company Party 0255,Delhi
+PTY0256,government,Government Party 0256,Karnataka
+PTY0257,company,Company Party 0257,Gujarat
+PTY0258,individual,Individual Party 0258,Tamil Nadu
+PTY0259,individual,Individual Party 0259,Delhi
+PTY0260,individual,Individual Party 0260,Maharashtra
+PTY0261,individual,Individual Party 0261,Tamil Nadu
+PTY0262,government,Government Party 0262,Maharashtra
+PTY0263,company,Company Party 0263,Karnataka
+PTY0264,company,Company Party 0264,Maharashtra
+PTY0265,individual,Individual Party 0265,Karnataka
+PTY0266,government,Government Party 0266,Delhi
+PTY0267,company,Company Party 0267,Gujarat
+PTY0268,individual,Individual Party 0268,Gujarat
+PTY0269,individual,Individual Party 0269,Karnataka
+PTY0270,company,Company Party 0270,Karnataka
+PTY0271,company,Company Party 0271,West Bengal
+PTY0272,individual,Individual Party 0272,Gujarat
+PTY0273,individual,Individual Party 0273,West Bengal
+PTY0274,individual,Individual Party 0274,West Bengal
+PTY0275,government,Government Party 0275,Tamil Nadu
+PTY0276,individual,Individual Party 0276,Tamil Nadu
+PTY0277,individual,Individual Party 0277,Tamil Nadu
+PTY0278,individual,Individual Party 0278,West Bengal
+PTY0279,individual,Individual Party 0279,Karnataka
+PTY0280,individual,Individual Party 0280,Tamil Nadu
+PTY0281,individual,Individual Party 0281,Gujarat
+PTY0282,individual,Individual Party 0282,Gujarat
+PTY0283,individual,Individual Party 0283,Maharashtra
+PTY0284,individual,Individual Party 0284,Delhi
+PTY0285,individual,Individual Party 0285,Delhi
+PTY0286,individual,Individual Party 0286,Delhi
+PTY0287,individual,Individual Party 0287,Maharashtra
+PTY0288,individual,Individual Party 0288,Tamil Nadu
+PTY0289,company,Company Party 0289,Delhi
+PTY0290,individual,Individual Party 0290,Maharashtra
+PTY0291,company,Company Party 0291,Delhi
+PTY0292,individual,Individual Party 0292,Karnataka
+PTY0293,individual,Individual Party 0293,Maharashtra
+PTY0294,individual,Individual Party 0294,Karnataka
+PTY0295,company,Company Party 0295,Gujarat
+PTY0296,company,Company Party 0296,Maharashtra
+PTY0297,company,Company Party 0297,West Bengal
+PTY0298,individual,Individual Party 0298,Maharashtra
+PTY0299,company,Company Party 0299,Karnataka
+PTY0300,government,Government Party 0300,Maharashtra
+PTY0301,individual,Individual Party 0301,Gujarat
+PTY0302,individual,Individual Party 0302,Tamil Nadu
+PTY0303,individual,Individual Party 0303,Gujarat
+PTY0304,individual,Individual Party 0304,Maharashtra
+PTY0305,company,Company Party 0305,Gujarat
+PTY0306,government,Government Party 0306,Tamil Nadu
+PTY0307,individual,Individual Party 0307,Maharashtra
+PTY0308,individual,Individual Party 0308,Maharashtra
+PTY0309,individual,Individual Party 0309,Gujarat
+PTY0310,company,Company Party 0310,Tamil Nadu
+PTY0311,individual,Individual Party 0311,Karnataka
+PTY0312,government,Government Party 0312,Tamil Nadu
+PTY0313,company,Company Party 0313,West Bengal
+PTY0314,individual,Individual Party 0314,Gujarat
+PTY0315,company,Company Party 0315,Gujarat
+PTY0316,individual,Individual Party 0316,Karnataka
+PTY0317,individual,Individual Party 0317,Tamil Nadu
+PTY0318,company,Company Party 0318,Delhi
+PTY0319,individual,Individual Party 0319,Tamil Nadu
+PTY0320,company,Company Party 0320,Delhi
+PTY0321,individual,Individual Party 0321,Karnataka
+PTY0322,government,Government Party 0322,Maharashtra
+PTY0323,government,Government Party 0323,Karnataka
+PTY0324,individual,Individual Party 0324,Maharashtra
+PTY0325,individual,Individual Party 0325,West Bengal
+PTY0326,individual,Individual Party 0326,Karnataka
+PTY0327,company,Company Party 0327,Delhi
+PTY0328,individual,Individual Party 0328,Maharashtra
+PTY0329,individual,Individual Party 0329,Maharashtra
+PTY0330,individual,Individual Party 0330,West Bengal
+PTY0331,individual,Individual Party 0331,Delhi
+PTY0332,government,Government Party 0332,Tamil Nadu
+PTY0333,company,Company Party 0333,Gujarat
+PTY0334,company,Company Party 0334,Delhi
+PTY0335,government,Government Party 0335,Delhi
+PTY0336,individual,Individual Party 0336,Maharashtra
+PTY0337,individual,Individual Party 0337,Maharashtra
+PTY0338,individual,Individual Party 0338,Karnataka
+PTY0339,company,Company Party 0339,Delhi
+PTY0340,individual,Individual Party 0340,West Bengal
+PTY0341,individual,Individual Party 0341,Maharashtra
+PTY0342,individual,Individual Party 0342,Delhi
+PTY0343,individual,Individual Party 0343,Maharashtra
+PTY0344,individual,Individual Party 0344,Delhi
+PTY0345,individual,Individual Party 0345,West Bengal
+PTY0346,individual,Individual Party 0346,West Bengal
+PTY0347,individual,Individual Party 0347,Gujarat
+PTY0348,individual,Individual Party 0348,Maharashtra
+PTY0349,individual,Individual Party 0349,Tamil Nadu
+PTY0350,individual,Individual Party 0350,Karnataka
+PTY0351,individual,Individual Party 0351,Maharashtra
+PTY0352,company,Company Party 0352,Karnataka
+PTY0353,individual,Individual Party 0353,Karnataka
+PTY0354,individual,Individual Party 0354,Maharashtra
+PTY0355,individual,Individual Party 0355,Karnataka
+PTY0356,company,Company Party 0356,Delhi
+PTY0357,company,Company Party 0357,West Bengal
+PTY0358,company,Company Party 0358,Karnataka
+PTY0359,individual,Individual Party 0359,West Bengal
+PTY0360,company,Company Party 0360,Delhi

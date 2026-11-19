@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "fraction": 0.4203,
+      "rows_nulled": 1020
+    },
+    "type": "null_spike"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:70289803938219fecd35b9273f14075ce94e15aae8ad23de0b922a9813a0de29"
+  },
+  "incident_id": "inc_court_cases_train_013",
+  "location": {
+    "column": "payment_method",
+    "commit": null,
+    "file": "seeds/raw_fee_payments.csv",
+    "node": "seed.court_cases.raw_fee_payments",
+    "physical": "seed.court_cases.raw_fee_payments"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100039,
+  "split": "train"
+}

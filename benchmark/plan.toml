@@ -1,0 +1,23 @@
+# Benchmark plan. Each split has its own seeds; within a project, seeds and
+# models are partitioned between the splits that use it (location_share sets
+# the proportions), so no node is faulted in two splits.
+#
+# Changing this file after a split is generated invalidates that split.
+
+[splits.train]
+projects = ["jaffle_shop", "stripe", "court_cases"]
+seed_base = 100000
+incidents_per_fault = 12
+clean_runs_per_project = 10
+location_share = 2
+
+[splits.dev]
+projects = ["jaffle_shop", "stripe", "court_cases"]
+seed_base = 200000
+incidents_per_fault = 6
+clean_runs_per_project = 10
+location_share = 1
+
+# The held-out split uses a third project that appears nowhere else. It is
+# added by the owner, generated once by the owner, and frozen. See
+# docs/BENCHMARK.md.

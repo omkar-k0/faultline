@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 15
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:e619f5950e5e0ffaaad5199e5e332f7c107c1217cf19f89cceb89836246f683d"
+  },
+  "incident_id": "inc_jaffle_shop_train_010",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/raw_customers.csv",
+    "node": "seed.jaffle_shop.raw_customers",
+    "physical": "seed.jaffle_shop.raw_customers"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.jaffle_shop.unique_stg_customers_customer_id.c7614daada"
+    ],
+    "skipped_nodes": 4,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100028,
+  "split": "train"
+}

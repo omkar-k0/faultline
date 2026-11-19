@@ -1,6 +1,6 @@
-.PHONY: setup build-projects check lint typecheck test clean
+.PHONY: setup build-projects check lint typecheck test clean benchmark
 
-PROJECTS := jaffle_shop stripe
+PROJECTS := jaffle_shop stripe court_cases jira
 UV := uv
 export DBT_SEND_ANONYMOUS_USAGE_STATS := false
 
@@ -30,6 +30,10 @@ test:
 
 check: lint typecheck build-projects test
 
+benchmark:
+	@test -n "$(SPLIT)" || (echo "usage: make benchmark SPLIT=<name from benchmark/plan.toml>"; exit 2)
+	$(UV) run --frozen faultline benchmark generate --split $(SPLIT)
+
 clean:
-	rm -rf .venv .pytest_cache .mypy_cache .ruff_cache
+	rm -rf .venv .pytest_cache .mypy_cache .ruff_cache build dist
 	@for p in $(PROJECTS); do rm -rf projects/$$p/target projects/$$p/logs; done

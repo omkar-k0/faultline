@@ -1,0 +1,43 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "op": "drop"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:a6b17d62fd985ac0e9b57ccdc6ae39c021d14e6d5a4b9d5cc32caa7471d7cc5e"
+  },
+  "incident_id": "inc_court_cases_train_004",
+  "location": {
+    "column": "case_id",
+    "commit": null,
+    "file": "seeds/raw_cases.csv",
+    "node": "seed.court_cases.raw_cases",
+    "physical": "seed.court_cases.raw_cases"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.court_cases.stg_cases",
+      "model.court_cases.stg_hearings"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 34,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100012,
+  "split": "train"
+}

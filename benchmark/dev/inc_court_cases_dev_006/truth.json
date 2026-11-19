@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 811
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:4c2f20e3c965acc82c7b07738c375fca5d11deff49ae46b0364ac63dea6dddd5"
+  },
+  "incident_id": "inc_court_cases_dev_006",
+  "location": {
+    "column": "hearing_id",
+    "commit": null,
+    "file": "seeds/raw_hearings.csv",
+    "node": "seed.court_cases.raw_hearings",
+    "physical": "seed.court_cases.raw_hearings"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.court_cases.unique_stg_hearings_hearing_id.71ca5d8460"
+    ],
+    "skipped_nodes": 17,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 200018,
+  "split": "dev"
+}

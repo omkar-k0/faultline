@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "fraction": 0.6154,
+      "rows_nulled": 8
+    },
+    "type": "null_spike"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:661061669ef0462e16fe9469f473349787908bafad8ed0136e4df43b239e9f7e"
+  },
+  "incident_id": "inc_stripe_train_016",
+  "location": {
+    "column": "billing_detail_address_postal_code",
+    "commit": null,
+    "file": "seeds/payment_method_data.csv",
+    "node": "source.stripe.stripe.payment_method",
+    "physical": "seed.stripe_integration_tests.payment_method_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100047,
+  "split": "train"
+}

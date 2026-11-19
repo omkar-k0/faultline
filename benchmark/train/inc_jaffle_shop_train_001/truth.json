@@ -1,0 +1,43 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "new_name": "payment_method_raw",
+      "op": "rename"
+    },
+    "type": "schema_change"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:b3fbff3497910936f6c71124ca6049d2ec8664ac2709c05cd075533d8ce285fa"
+  },
+  "incident_id": "inc_jaffle_shop_train_001",
+  "location": {
+    "column": "payment_method",
+    "commit": null,
+    "file": "seeds/raw_payments.csv",
+    "node": "seed.jaffle_shop.raw_payments",
+    "physical": "seed.jaffle_shop.raw_payments"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [
+      "model.jaffle_shop.stg_payments"
+    ],
+    "failed_tests": [],
+    "skipped_nodes": 17,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100001,
+  "split": "train"
+}

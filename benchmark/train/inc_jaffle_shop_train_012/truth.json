@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 7
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:5d33aafa445a6b02598d9429f94a51569a2d6773f1c30c945e9e51af88de4d60"
+  },
+  "incident_id": "inc_jaffle_shop_train_012",
+  "location": {
+    "column": "id",
+    "commit": null,
+    "file": "seeds/raw_payments.csv",
+    "node": "seed.jaffle_shop.raw_payments",
+    "physical": "seed.jaffle_shop.raw_payments"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.jaffle_shop.unique_stg_payments_payment_id.3744510712"
+    ],
+    "skipped_nodes": 14,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100034,
+  "split": "train"
+}

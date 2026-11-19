@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_changed": 1,
+      "target": "usd",
+      "variant": "category_mix"
+    },
+    "type": "distribution_shift"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:50570b82aa3623f583fdb64e4a41f9d10cb0d14bf8ba1ac595a2913ce5037701"
+  },
+  "incident_id": "inc_stripe_train_020",
+  "location": {
+    "column": "currency",
+    "commit": null,
+    "file": "seeds/price_data.csv",
+    "node": "source.stripe.stripe.price",
+    "physical": "seed.stripe_integration_tests.price_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100059,
+  "split": "train"
+}

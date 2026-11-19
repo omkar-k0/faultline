@@ -1,0 +1,46 @@
+{
+  "fault": {
+    "class": "code",
+    "params": {
+      "after": "on subscription_item.plan_id = subscription_item.plan_id",
+      "before": "on subscription_item.plan_id = price_plan.price_plan_id",
+      "line": 167,
+      "operator": "join_condition_always_true"
+    },
+    "type": "broken_join"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:a7e68759bfed5520d9c85cd9307fc94c51005110aafc7cf02475575be9d53cb1"
+  },
+  "incident_id": "inc_stripe_dev_014",
+  "location": {
+    "column": null,
+    "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
+    "file": "packages/stripe/models/stripe__subscription_item_mrr_report.sql",
+    "node": "model.stripe.stripe__subscription_item_mrr_report",
+    "physical": "model.stripe.stripe__subscription_item_mrr_report"
+  },
+  "observed": {
+    "changed_relations": [
+      "model.stripe.stripe__subscription_item_mrr_report"
+    ],
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 200041,
+  "split": "dev"
+}

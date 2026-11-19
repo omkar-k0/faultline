@@ -95,6 +95,62 @@ def _cmd_impact(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_inject(args: argparse.Namespace) -> int:
+    from faultline.inject.catalog import build_catalog
+    from faultline.inject.incident import IncidentSpec, generate
+
+    project_dir = _project_dir(args.project)
+    catalog = build_catalog(project_dir)
+    nodes = {s.node for s in catalog.seeds} | {m.node for m in catalog.models}
+    fault = None if args.fault == "none" else args.fault
+    incident_id = f"inc_{catalog.project}_scratch_{args.seed}"
+    out = Path(args.out) / incident_id
+    spec = IncidentSpec(incident_id, catalog.project, "scratch", args.seed, fault)
+    doc = generate(catalog, spec, nodes, out / "run", out / "truth.json")
+    print(
+        json.dumps({k: doc[k] for k in ("incident_id", "fault", "location", "observed")}, indent=2)
+    )
+    return 0
+
+
+def _cmd_benchmark_generate(args: argparse.Namespace) -> int:
+    from faultline.inject.benchmark import generate_split, load_plan
+
+    plan = load_plan(Path(args.plan))
+    if args.split not in plan.splits:
+        print(f"faultline: split {args.split!r} is not in {args.plan}", file=sys.stderr)
+        return 2
+
+    def progress(done: int, total: int, incident_id: str) -> None:
+        print(f"[{done}/{total}] {incident_id}", flush=True)
+
+    section = generate_split(
+        plan,
+        args.split,
+        projects_dir=PROJECTS_DIR,
+        benchmark_dir=Path(args.benchmark_dir),
+        runs_dir=Path(args.runs_dir),
+        dist_dir=Path(args.dist_dir),
+        workers=args.workers,
+        progress=progress,
+    )
+    print(
+        f"{args.split}: {len(section['incidents'])} incidents, {len(section['skipped'])} skipped, "
+        f"archive {section['archive']} {section['archive_sha256']}"
+    )
+    return 0
+
+
+def _cmd_benchmark_summary(args: argparse.Namespace) -> int:
+    from faultline.inject.benchmark import summarise
+
+    rows = summarise(Path(args.benchmark_dir), args.split)
+    print(f"{'project:fault':45s} {'incidents':>9s} {'dbt_flagged':>11s}")
+    for key, row in sorted(rows.items()):
+        print(f"{key:45s} {row['incidents']:9d} {row['dbt_flagged']:11d}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="faultline",
@@ -121,6 +177,30 @@ def build_parser() -> argparse.ArgumentParser:
     imp.add_argument("--upstream", action="store_true", help="show what feeds the target")
     imp.add_argument("--json", action="store_true")
     imp.set_defaults(func=_cmd_impact)
+
+    from faultline.inject.faults import FAULT_TYPES
+
+    inj = sub.add_parser("inject", help="inject one fault into a copy of a project and run it")
+    inj.add_argument("--project", required=True)
+    inj.add_argument("--fault", required=True, choices=[*FAULT_TYPES, "none"])
+    inj.add_argument("--seed", type=int, required=True)
+    inj.add_argument("--out", default="build/incidents")
+    inj.set_defaults(func=_cmd_inject)
+
+    bench = sub.add_parser("benchmark", help="generate or summarise a benchmark split")
+    bench_sub = bench.add_subparsers(dest="benchmark_command", required=True)
+    gen = bench_sub.add_parser("generate", help="generate one split from the plan")
+    gen.add_argument("--plan", default="benchmark/plan.toml")
+    gen.add_argument("--split", required=True)
+    gen.add_argument("--benchmark-dir", default="benchmark")
+    gen.add_argument("--runs-dir", default="build/benchmark")
+    gen.add_argument("--dist-dir", default="dist")
+    gen.add_argument("--workers", type=int, default=3)
+    gen.set_defaults(func=_cmd_benchmark_generate)
+    summ = bench_sub.add_parser("summary", help="counts per project and fault type")
+    summ.add_argument("--split", required=True)
+    summ.add_argument("--benchmark-dir", default="benchmark")
+    summ.set_defaults(func=_cmd_benchmark_summary)
     return parser
 
 
@@ -133,7 +213,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     try:
         code: int = func(args)
-    except (ArtifactError, TargetError) as exc:
+    except (ArtifactError, TargetError, FileExistsError) as exc:
         print(f"faultline: {exc}", file=sys.stderr)
         return 2
     return code

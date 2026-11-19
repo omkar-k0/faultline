@@ -1,0 +1,41 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "fraction": 0.25,
+      "rows_nulled": 1
+    },
+    "type": "null_spike"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:bf267543974c22973daea5035fc7934e8615f8bf022fde1d080f2d5b3e9a4211"
+  },
+  "incident_id": "inc_stripe_train_015",
+  "location": {
+    "column": "unit_amount_decimal",
+    "commit": null,
+    "file": "seeds/price_data.csv",
+    "node": "source.stripe.stripe.price",
+    "physical": "seed.stripe_integration_tests.price_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100044,
+  "split": "train"
+}

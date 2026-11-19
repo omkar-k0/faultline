@@ -1,0 +1,44 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "rows_duplicated": 120
+    },
+    "type": "duplicate_keys"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:b30297354e7f520d61f555a0a8686ccc61bec0379893862b151eea9b9402451d"
+  },
+  "incident_id": "inc_court_cases_train_009",
+  "location": {
+    "column": "case_id",
+    "commit": null,
+    "file": "seeds/raw_cases.csv",
+    "node": "seed.court_cases.raw_cases",
+    "physical": "seed.court_cases.raw_cases"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.court_cases.unique_stg_cases_case_id.7f30147ef7",
+      "test.court_cases.unique_stg_cases_case_number.1925f866aa",
+      "test.court_cases.unique_stg_hearings_hearing_id.71ca5d8460"
+    ],
+    "skipped_nodes": 19,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "court_cases",
+  "schema_version": 1,
+  "seed": 100027,
+  "split": "train"
+}

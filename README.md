@@ -4,7 +4,7 @@ An open-source reliability assistant for dbt Core projects. It detects data inci
 
 How it decides: deterministic lineage and checks first, then statistics, then a local language model that only ranks hypotheses that already passed a query test. If nothing passes, the answer is "not confirmed". No raw rows ever go to a model.
 
-**Status: M0 scaffold. The package, the first test project (jaffle_shop on DuckDB), CI and the heldout guard are in place. Nothing detects or diagnoses incidents yet.** The milestones and rules are in [CLAUDE.md](CLAUDE.md). Benchmark numbers will appear here, each linked to a file in `eval/results/`, once they exist.
+**Status: M2 in progress. Lineage and impact work on two test projects (jaffle_shop, stripe). The fault injector has generated the train and dev benchmark splits. Nothing detects or diagnoses incidents yet.** The milestones and rules are in [CLAUDE.md](CLAUDE.md). Benchmark numbers will appear here, each linked to a file in `eval/results/`, once they exist.
 
 ## Develop
 

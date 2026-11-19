@@ -1,0 +1,47 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "fraction": 0.6195,
+      "rows_nulled": 70
+    },
+    "type": "null_spike"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:c8ae3cddd3133d75a4c3b2f2de50d10fd74ff24bc856e9375bb0bb9500aaff31"
+  },
+  "incident_id": "inc_jaffle_shop_train_015",
+  "location": {
+    "column": "amount",
+    "commit": null,
+    "file": "seeds/raw_payments.csv",
+    "node": "seed.jaffle_shop.raw_payments",
+    "physical": "seed.jaffle_shop.raw_payments"
+  },
+  "observed": {
+    "dbt_status": "error",
+    "error_nodes": [],
+    "failed_tests": [
+      "test.jaffle_shop.not_null_orders_amount.106140f9fd",
+      "test.jaffle_shop.not_null_orders_bank_transfer_amount.7743500c49",
+      "test.jaffle_shop.not_null_orders_coupon_amount.ab90c90625",
+      "test.jaffle_shop.not_null_orders_credit_card_amount.d3ca593b59",
+      "test.jaffle_shop.not_null_orders_gift_card_amount.413a0d2d7a"
+    ],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 1,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "jaffle_shop",
+  "schema_version": 1,
+  "seed": 100043,
+  "split": "train"
+}

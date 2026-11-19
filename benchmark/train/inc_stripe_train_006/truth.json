@@ -1,0 +1,42 @@
+{
+  "fault": {
+    "class": "data",
+    "params": {
+      "cutoff": "2021-03-06 20:21:06",
+      "rows_removed": 3,
+      "variant": "late"
+    },
+    "type": "late_or_missing_data"
+  },
+  "generation": {
+    "attempts": 1
+  },
+  "hashes": {
+    "inputs": "sha256:f5e38c06e34efa8733ac569c6c865f7e684ed58260182637fefee40be1808860"
+  },
+  "incident_id": "inc_stripe_train_006",
+  "location": {
+    "column": "_fivetran_synced",
+    "commit": null,
+    "file": "seeds/payment_method_data.csv",
+    "node": "source.stripe.stripe.payment_method",
+    "physical": "seed.stripe_integration_tests.payment_method_data"
+  },
+  "observed": {
+    "dbt_status": "success",
+    "error_nodes": [],
+    "failed_tests": [],
+    "skipped_nodes": 0,
+    "steps": {
+      "build": 0,
+      "deps": 0,
+      "docs generate": 0,
+      "seed": 0
+    },
+    "warned_tests": []
+  },
+  "project": "stripe",
+  "schema_version": 1,
+  "seed": 100017,
+  "split": "train"
+}
