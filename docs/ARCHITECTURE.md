@@ -1,6 +1,6 @@
 # Architecture
 
-This file grows one milestone at a time. Built so far: M0 scaffold, M1 collectors and lineage, M2 fault injector and benchmark (train and dev).
+This file grows one milestone at a time. Built so far: M0 scaffold, M1 collectors and lineage, M2 fault injector and benchmark, M3 eval harness and baselines.
 
 ## Order of work for every decision
 
@@ -68,6 +68,20 @@ for each incident spec:                                 v
 ```
 
 Details and the freeze procedure: [BENCHMARK.md](BENCHMARK.md).
+
+## Evaluation (M3)
+
+```
+release archive --loader (sha256 check, safe extract)--> Incident (run files + cleaned git history)
+                                                            |
+                                         baseline(incident) -> Prediction(detected, candidates)
+benchmark/<split>/<id>/truth.json --score.load_truth--> Truth
+                                         score_incident(Prediction, Truth) -> Outcome
+                                         aggregate(outcomes) -> metrics
+-> eval/results/<split>/<baseline>.json / .md / .run.json
+```
+
+LLM calls go through `faultline.llm.LLMClient`; the only implementation talks to a local OpenAI-compatible server. Details: [EVAL.md](EVAL.md).
 
 ## Test projects
 
