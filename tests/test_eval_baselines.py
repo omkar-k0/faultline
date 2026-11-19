@@ -206,7 +206,14 @@ def test_run_eval_writes_tables_and_is_deterministic(tmp_path: Path) -> None:
 
 @pytest.mark.parametrize(
     ("split", "method"),
-    [("dev", "dbt_tests"), ("dev", "dbt_tests_guess"), ("dev", "monitors"), ("train", "monitors")],
+    [
+        ("dev", "dbt_tests"),
+        ("dev", "dbt_tests_guess"),
+        ("dev", "monitors"),
+        ("train", "monitors"),
+        ("dev", "triage"),
+        ("train", "triage"),
+    ],
 )
 def test_committed_results_match_a_fresh_run(tmp_path: Path, split: str, method: str) -> None:
     """Committed results of every no-LLM method reproduce byte for byte."""
