@@ -10,6 +10,8 @@ M5 Incident manager + triage agent, issue #18. Built in two PRs:
 
 ## Done in M5b
 
+- Generator fix: data faults that change no file are skipped. Train benchmark-fix for `inc_stripe_train_019` (a no-op), train regenerated as `benchmark-train-2.tar.gz`; train monitors and triage re-run. **The new asset still has to be uploaded to release benchmark-v1 by the owner** (file in Downloads); until then a clean clone cannot fetch train.
+
 - `triage/llm_rank.py`: re-ranker prompt, answer parsing; the agent's RERANK state lets it only permute survivors.
 - `faultline eval --baseline triage --ablate tests|lineage`, `--baseline triage_llm`; `eval/results/<split>/ablations.md` built from the result files.
 - Gate metrics in every triage result: answered, right when answering, not confirmed, correct not confirmed, untested top-1.
@@ -24,7 +26,7 @@ M5 Incident manager + triage agent, issue #18. Built in two PRs:
 - `triage/checks.py`: one test per cause, run on recorded aggregates, lineage, compiled SQL and history; causes inferred by elimination for changes through unmeasured (text) inputs.
 - `triage/agent.py`: the state machine gather -> group -> propose -> test -> rank -> report; survivors only, "not confirmed" when none.
 - `faultline eval --baseline triage`, `faultline triage <run id>` (prints the report, stores it in `build/faultline.duckdb`).
-- Results: `eval/results/dev/triage.*` (top-1 89.6%, 43/48; wrong top-1 0/48; false alarms 0/30) and, as a one-time check, `eval/results/train/triage.*` (top-1 88.5%, 85/96; wrong top-1 3/96; false alarms 0/30). Both reproduce byte for byte (test).
+- Results: `eval/results/dev/triage.*` (top-1 89.6%, 43/48; wrong top-1 0/48; false alarms 0/30) and, as a one-time check, `eval/results/train/triage.*` (M5a: top-1 88.5%, 85/96; after the train benchmark-fix: 89.6%, 86/96, wrong top-1 3/96, false alarms 0/30). Both reproduce byte for byte (test).
 - Tests: 193 passing, including `tests/test_triage.py` (13, one property test).
 
 ## Done in M4

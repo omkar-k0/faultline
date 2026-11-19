@@ -173,3 +173,5 @@ CI never calls a model. This baseline runs on a machine with enough memory (16 G
 - **Triage was shaped by dev's misses.** Train is the check; held-out remains the honest number.
 - **Elimination leans on what the profile cannot see.** It names text inputs because they have no distribution statistics; a change hidden inside a measured column's summary would point it the wrong way.
 - **A code cause can appear more than once in a report**, with the same commit and different columns.
+- **Held-out may contain a fault that changes nothing.** Train had one (fixed, see BENCHMARK.md). Held-out was frozen before the generator fix and is not opened, so it is checked only after its final score.
+

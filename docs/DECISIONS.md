@@ -177,3 +177,18 @@ Each entry: decision, alternative, reason.
 - Alternative: let the model return causes in its own words and match them back.
 - Reason: CLAUDE.md principle 1: the LLM ranks hypotheses that survived their tests and never invents a cause; a numbered list makes that checkable.
 
+## 2026-11-19: Data faults that change no file are equivalent mutants
+- Decision: generation skips a data fault when the workspace has no changed file, and tries the next site.
+- Alternative: keep the candidate rule and accept no-op incidents, or exclude constant columns from candidates.
+- Reason: owner's choice to fix the generator; this check consumes no randomness, so every incident that was a real fault regenerates identically (dev 78/78, train 125/126).
+
+## 2026-11-19: Train regenerated in full as a new release asset
+- Decision: the fixed `inc_stripe_train_019` ships in a regenerated train archive, `benchmark-train-2.tar.gz`, beside the original in release benchmark-v1.
+- Alternative: swap the one run into the old archive, or overwrite the old asset.
+- Reason: owner's choice; stripe profiles depend on the generation date, so one new run among old ones would raise date alarms; a new name keeps older commits verifiable.
+
+## 2026-11-19: Held-out stays frozen despite the generator fix
+- Decision: held-out is not regenerated, scanned or opened; the README and EVAL say it may hold a no-op incident.
+- Alternative: let the owner scan it with a counting script.
+- Reason: owner's choice; held-out is read only by `faultline eval --split heldout`, once.
+
