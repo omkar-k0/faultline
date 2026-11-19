@@ -20,6 +20,26 @@
   "triage": "deterministic ranking, no language model"
  },
  "config_hash": "3936aebbc02f",
+ "gating": {
+  "answered": 88,
+  "correct_not_confirmed": {
+   "count": 0,
+   "n": 0,
+   "rate": null
+  },
+  "detected": 88,
+  "not_confirmed": 0,
+  "right_when_answering": {
+   "count": 85,
+   "n": 88,
+   "rate": 0.9659
+  },
+  "ungated_top1": {
+   "count": 35,
+   "n": 96,
+   "rate": 0.3646
+  }
+ },
  "incidents": [
   {
    "incident_id": "inc_court_cases_train_001",
@@ -121,7 +141,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_002",
@@ -341,7 +362,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_003",
@@ -700,7 +722,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_004",
@@ -987,7 +1010,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_005",
@@ -1500,7 +1524,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_006",
@@ -1806,7 +1831,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_007",
@@ -2576,7 +2602,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_008",
@@ -3059,7 +3086,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_009",
@@ -3531,7 +3559,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_010",
@@ -3866,7 +3895,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_011",
@@ -4052,7 +4082,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_012",
@@ -4238,7 +4269,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_013",
@@ -4340,7 +4372,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_court_cases_train_014",
@@ -4688,7 +4721,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_015",
@@ -4891,7 +4925,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_016",
@@ -4993,7 +5028,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_court_cases_train_017",
@@ -5024,7 +5060,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_018",
@@ -5126,7 +5163,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_019",
@@ -5245,7 +5283,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_020",
@@ -5276,7 +5315,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_021",
@@ -5420,7 +5460,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_022",
@@ -5588,7 +5629,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_023",
@@ -5756,7 +5798,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_024",
@@ -5924,7 +5967,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_025",
@@ -6187,7 +6231,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_026",
@@ -6450,7 +6495,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_027",
@@ -6753,7 +6799,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_028",
@@ -7235,7 +7282,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_court_cases_train_029",
@@ -7337,7 +7385,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_030",
@@ -7473,7 +7522,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_031",
@@ -7504,7 +7554,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_032",
@@ -7535,7 +7586,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_033",
@@ -7637,7 +7689,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_034",
@@ -7739,7 +7792,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_035",
@@ -7770,7 +7824,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_036",
@@ -7801,7 +7856,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_037",
@@ -7832,7 +7888,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_038",
@@ -7863,7 +7920,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_039",
@@ -7894,7 +7952,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_040",
@@ -7925,7 +7984,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_041",
@@ -7956,7 +8016,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_042",
@@ -7987,7 +8048,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_043",
@@ -8018,7 +8080,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_court_cases_train_044",
@@ -8049,7 +8112,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_001",
@@ -8278,7 +8342,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_train_002",
@@ -8430,7 +8495,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_jaffle_shop_train_003",
@@ -8659,7 +8725,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_train_004",
@@ -8811,7 +8878,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_jaffle_shop_train_005",
@@ -9258,7 +9326,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_006",
@@ -9705,7 +9774,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_007",
@@ -10135,7 +10205,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_008",
@@ -10582,7 +10653,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_009",
@@ -10794,7 +10866,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_010",
@@ -11006,7 +11079,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_011",
@@ -11244,7 +11318,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_012",
@@ -11482,7 +11557,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_013",
@@ -11878,7 +11954,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_014",
@@ -11997,7 +12074,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_jaffle_shop_train_015",
@@ -12377,7 +12455,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_016",
@@ -12496,7 +12575,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_jaffle_shop_train_017",
@@ -12527,7 +12607,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_018",
@@ -12731,7 +12812,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_train_019",
@@ -12935,7 +13017,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_train_020",
@@ -13139,7 +13222,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_jaffle_shop_train_021",
@@ -13439,7 +13523,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_022",
@@ -13707,7 +13792,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_023",
@@ -13935,7 +14021,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_024",
@@ -14235,7 +14322,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_025",
@@ -14405,7 +14493,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_026",
@@ -14575,7 +14664,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_027",
@@ -14745,7 +14835,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_028",
@@ -14915,7 +15006,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_jaffle_shop_train_029",
@@ -14946,7 +15038,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_030",
@@ -14977,7 +15070,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_031",
@@ -15008,7 +15102,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_032",
@@ -15039,7 +15134,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_033",
@@ -15070,7 +15166,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_034",
@@ -15101,7 +15198,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_035",
@@ -15132,7 +15230,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_036",
@@ -15163,7 +15262,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_037",
@@ -15194,7 +15294,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_jaffle_shop_train_038",
@@ -15225,7 +15326,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_001",
@@ -15482,7 +15584,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_002",
@@ -15723,7 +15826,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_003",
@@ -16066,7 +16170,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_004",
@@ -16307,7 +16412,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_005",
@@ -17408,7 +17514,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_006",
@@ -17969,7 +18076,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_007",
@@ -18573,7 +18681,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_008",
@@ -19225,7 +19334,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_009",
@@ -19396,7 +19506,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_stripe_train_010",
@@ -20120,7 +20231,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_011",
@@ -20387,7 +20499,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_012",
@@ -20885,7 +20998,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_013",
@@ -21056,7 +21170,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_014",
@@ -21227,7 +21342,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_015",
@@ -21421,7 +21537,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_016",
@@ -21575,7 +21692,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_stripe_train_017",
@@ -21606,7 +21724,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_018",
@@ -21777,7 +21896,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_019",
@@ -21808,7 +21928,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_020",
@@ -21839,7 +21960,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_021",
@@ -21983,7 +22105,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_022",
@@ -22127,7 +22250,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_023",
@@ -22535,7 +22659,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_024",
@@ -22679,7 +22804,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_025",
@@ -25502,7 +25628,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_026",
@@ -28325,7 +28452,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_027",
@@ -28420,7 +28548,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_028",
@@ -28828,7 +28957,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 1
   },
   {
    "incident_id": "inc_stripe_train_029",
@@ -28999,7 +29129,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_stripe_train_030",
@@ -29170,7 +29301,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_stripe_train_031",
@@ -29341,7 +29473,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_stripe_train_032",
@@ -29495,7 +29628,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 3
   },
   {
    "incident_id": "inc_stripe_train_033",
@@ -29666,7 +29800,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": 2
   },
   {
    "incident_id": "inc_stripe_train_034",
@@ -29820,7 +29955,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_035",
@@ -29851,7 +29987,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_036",
@@ -29882,7 +30019,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_037",
@@ -29913,7 +30051,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_038",
@@ -29944,7 +30083,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_039",
@@ -29975,7 +30115,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_040",
@@ -30006,7 +30147,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_041",
@@ -30037,7 +30179,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_042",
@@ -30068,7 +30211,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_043",
@@ -30099,7 +30243,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   },
   {
    "incident_id": "inc_stripe_train_044",
@@ -30130,7 +30275,8 @@
      "rank",
      "report"
     ]
-   }
+   },
+   "ungated_hit_rank": null
   }
  ],
  "metrics": {
