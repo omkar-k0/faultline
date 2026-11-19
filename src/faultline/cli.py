@@ -179,6 +179,37 @@ def _cmd_eval(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_triage(args: argparse.Namespace) -> int:
+    from faultline.eval.loader import load_incidents
+    from faultline.eval.run import harness_references
+    from faultline.eval.score import load_truth
+    from faultline.incidents.store import IncidentStore
+    from faultline.monitors.core import load_monitor_config
+    from faultline.triage.method import triage_incident
+    from faultline.triage.report import render
+
+    run_id = args.incident_id.split("#", 1)[0]
+    benchmark_dir = Path(args.benchmark_dir)
+    incidents, _ = load_incidents(args.split, benchmark_dir, download=not args.no_download)
+    match = [i for i in incidents if i.incident_id == run_id]
+    if not match:
+        print(f"no run {run_id!r} in split {args.split}", file=sys.stderr)
+        return 2
+    truths = {
+        i.incident_id: load_truth(benchmark_dir, args.split, i.incident_id) for i in incidents
+    }
+    references = harness_references(incidents, truths)[run_id]
+    result = triage_incident(match[0], references, load_monitor_config(Path(args.config)))
+    report = result.report()
+    store = IncidentStore(Path(args.store))
+    keys = store.save(report)
+    store.close()
+    print(json.dumps(report, indent=1) if args.json else render(report), end="")
+    if keys and not args.json:
+        print(f"\nStored as {', '.join(keys)} in {args.store}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="faultline",
@@ -217,6 +248,16 @@ def build_parser() -> argparse.ArgumentParser:
     ev.add_argument("--config", default="faultline.toml")
     ev.add_argument("--no-download", action="store_true", help="use dist/ only, never download")
     ev.set_defaults(func=_cmd_eval)
+
+    tri = sub.add_parser("triage", help="triage one benchmark run and store its incidents")
+    tri.add_argument("incident_id", help="benchmark run id, e.g. inc_stripe_dev_013")
+    tri.add_argument("--split", default="dev", choices=sorted(EVALUABLE_SPLITS))
+    tri.add_argument("--benchmark-dir", default="benchmark")
+    tri.add_argument("--config", default="faultline.toml")
+    tri.add_argument("--store", default="build/faultline.duckdb")
+    tri.add_argument("--json", action="store_true")
+    tri.add_argument("--no-download", action="store_true", help="use dist/ only, never download")
+    tri.set_defaults(func=_cmd_triage)
 
     inj = sub.add_parser("inject", help="inject one fault into a copy of a project and run it")
     inj.add_argument("--project", required=True)

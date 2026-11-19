@@ -1,12 +1,25 @@
 # Status
 
-Updated 2026-11-18, evening.
+Updated 2026-11-19, afternoon.
 
 ## Current milestone
 
-M4 Monitors, issue #16, draft PR #17. Built and scored on dev; checked once on train.
+M5 Incident manager + triage agent, issue #18. Built in two PRs:
+- **M5a** (branch `m5a-triage`, draft PR): incident manager, hypotheses, tests, deterministic ranking. Built and scored on dev; checked once on train.
+- **M5b** (next): text reports polished, the three ablations (no tests, no lineage, no LLM ranker), the "correct not confirmed" metric, and the LLM re-ranker run on the owner's Mac.
 
-M3 is done: merged to `main` (PRs #14, #15).
+M4 is done: merged to `main` (PR #17).
+
+## Done in M5a
+
+- `triage/evidence.py`: symptoms from monitor anomalies and failed dbt tests or models; skipped nodes kept apart; the run's own lineage, cached by its compiled SQL and columns.
+- `incidents/manager.py`: symptoms grouped into incidents by table lineage. `incidents/store.py`: incidents and reports in a DuckDB file.
+- `triage/hypotheses.py`: data causes at seeds and sources, code causes at models with the commit that changed them (a file's creating commit is never a cause).
+- `triage/checks.py`: one test per cause, run on recorded aggregates, lineage, compiled SQL and history; causes inferred by elimination for changes through unmeasured (text) inputs.
+- `triage/agent.py`: the state machine gather -> group -> propose -> test -> rank -> report; survivors only, "not confirmed" when none.
+- `faultline eval --baseline triage`, `faultline triage <run id>` (prints the report, stores it in `build/faultline.duckdb`).
+- Results: `eval/results/dev/triage.*` (top-1 89.6%, 43/48; wrong top-1 0/48; false alarms 0/30) and, as a one-time check, `eval/results/train/triage.*` (top-1 88.5%, 85/96; wrong top-1 3/96; false alarms 0/30). Both reproduce byte for byte (test).
+- Tests: 193 passing, including `tests/test_triage.py` (13, one property test).
 
 ## Done in M4
 
@@ -41,6 +54,7 @@ M3 is done: merged to `main` (PRs #14, #15).
 
 ## Not verified
 
+- "Not confirmed" never fired on dev or train, so abstention is untested by the benchmark so far.
 
 - M1 hand-check sheet: still not filled in.
 - CODEOWNERS enforcement: needs branch protection on `main`.
