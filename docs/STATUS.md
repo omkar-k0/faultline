@@ -1,16 +1,20 @@
 # Status
 
-Updated 2026-11-19, afternoon.
+Updated 2026-11-20.
 
 ## Current milestone
 
-M5 Incident manager + triage agent, issue #18. Built in two PRs:
-- **M5a**: incident manager, hypotheses, tests, deterministic ranking. Merged (PR #19).
-- **M5b** (branch `m5b-ablations`, draft PR): the three ablations, the gate metrics including "correct not confirmed", and the LLM re-ranker. Waiting on one run: `make eval-dev-triage-llm` on the owner's Mac (docs/EVAL.md).
+M5 Incident manager + triage agent (issue #18) is done: M5a merged (PR #19), M5b merged (PR #20), and the LLM re-ranker run from the owner's Mac comes in on branch `m5c-triage-llm`. Next: M6, self-trained ranker and the hosted reference line (plan first).
+
+## Done in M5c (LLM re-ranker run)
+
+- `make eval-dev-triage-llm` run on the owner's MacBook Air (Apple M4, Ollama 0.40.16, `qwen2.5:7b-instruct`, context 16384), at commit 2854460, config hash `d987e933a701`. Files: `eval/results/dev/triage_llm.*`.
+- Full variant (tests, lineage, re-ranker) top-1 87.5% (42/48), wrong top-1 1/48, false alarms 0/30. The deterministic ranking scores 89.6% (43/48), wrong top-1 0/48. From `eval/results/dev/ablations.md`.
+- 57 re-rank calls, 0 unusable answers; the model changed the top cause in 8 incidents, and that changed the score in one (`inc_court_cases_dev_004`: it put the table-level cause above the late column, which is the truth; still in top-3).
 
 ## Done in M5b
 
-- Generator fix: data faults that change no file are skipped. Train benchmark-fix for `inc_stripe_train_019` (a no-op), train regenerated as `benchmark-train-2.tar.gz`; train monitors and triage re-run. **The new asset still has to be uploaded to release benchmark-v1 by the owner** (file in Downloads); until then a clean clone cannot fetch train.
+- Generator fix: data faults that change no file are skipped. Train benchmark-fix for `inc_stripe_train_019` (a no-op), train regenerated as `benchmark-train-2.tar.gz`; train monitors and triage re-run. The new asset is on release benchmark-v1 (uploaded by the owner).
 
 - `triage/llm_rank.py`: re-ranker prompt, answer parsing; the agent's RERANK state lets it only permute survivors.
 - `faultline eval --baseline triage --ablate tests|lineage`, `--baseline triage_llm`; `eval/results/<split>/ablations.md` built from the result files.
@@ -63,7 +67,6 @@ M5 Incident manager + triage agent, issue #18. Built in two PRs:
 ## Not verified
 
 - "Not confirmed" never fired on dev or train, so "correct not confirmed" has no cases (n/a).
-- The full variant with the LLM re-ranker has not been run with a real model yet.
 
 - M1 hand-check sheet: still not filled in.
 - CODEOWNERS enforcement: needs branch protection on `main`.

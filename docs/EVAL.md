@@ -174,4 +174,5 @@ CI never calls a model. This baseline runs on a machine with enough memory (16 G
 - **Elimination leans on what the profile cannot see.** It names text inputs because they have no distribution statistics; a change hidden inside a measured column's summary would point it the wrong way.
 - **A code cause can appear more than once in a report**, with the same commit and different columns.
 - **Held-out may contain a fault that changes nothing.** Train had one (fixed, see BENCHMARK.md). Held-out was frozen before the generator fix and is not opened, so it is checked only after its final score.
+- **The local LLM re-ranker does not beat the deterministic ranking on dev.** In the full variant it moved the top cause in 8 of 57 incidents; one move cost a top-1 hit (a table-level cause put above the true column). With at most a handful of survivors per incident, the rules already order them well; the re-ranker's value here is the written summary, not accuracy.
 
