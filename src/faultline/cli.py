@@ -154,31 +154,69 @@ def _cmd_benchmark_summary(args: argparse.Namespace) -> int:
 
 
 def _cmd_eval(args: argparse.Namespace) -> int:
-    from faultline.eval.run import run_eval
-    from faultline.llm.client import OpenAICompatibleClient, load_config
+    from faultline.eval.run import LLM_METHODS, run_eval
+    from faultline.llm.client import LLMClient, OpenAICompatibleClient, load_config
+    from faultline.llm.reference import AnthropicClient, BudgetExceeded, load_reference_config
 
-    client = None
-    if args.baseline in {"raw_log_llm", "triage_llm"}:
-        client = OpenAICompatibleClient(load_config(Path(args.config)))
+    if (args.reference or args.llm_profile or args.dry_run) and args.baseline not in LLM_METHODS:
+        print(f"--reference/--llm-profile/--dry-run need --baseline {sorted(LLM_METHODS)}")
+        return 2
+    if args.reference and args.llm_profile:
+        print("use --reference or --llm-profile, not both")
+        return 2
+    if args.dry_run and not args.reference:
+        print("--dry-run applies to --reference only")
+        return 2
+    client: LLMClient | None = None
+    reference: AnthropicClient | None = None
+    variant = None
+    if args.reference:
+        reference = AnthropicClient(load_reference_config(Path(args.config)), dry_run=args.dry_run)
+        client, variant = reference, "reference"
+    elif args.baseline in LLM_METHODS:
+        client = OpenAICompatibleClient(load_config(Path(args.config), args.llm_profile))
+        variant = args.llm_profile
     command = f"faultline eval --split {args.split} --baseline {args.baseline}"
     if args.ablate:
         command += f" --ablate {args.ablate}"
-    doc = run_eval(
-        args.split,
-        args.baseline,
-        results_dir=Path(args.results_dir),
-        client=client,
-        download=not args.no_download,
-        command=command,
-        config_path=Path(args.config),
-        ablate=args.ablate,
-    )
+    if args.llm_profile:
+        command += f" --llm-profile {args.llm_profile}"
+    if args.reference:
+        command += " --reference"
+    try:
+        doc = run_eval(
+            args.split,
+            args.baseline,
+            results_dir=Path(args.results_dir),
+            client=client,
+            download=not args.no_download,
+            command=command,
+            config_path=Path(args.config),
+            ablate=args.ablate,
+            variant=variant,
+            write=not args.dry_run,
+        )
+    except BudgetExceeded as exc:
+        print(f"{exc}\nNothing was written. Calls made: {reference.calls if reference else 0}.")
+        return 3
+    if args.dry_run:
+        c = doc["cost"]
+        assert reference is not None
+        print(
+            f"Dry run, nothing written and nothing billed: {c['calls']} calls, "
+            f"{c['input_tokens']:,} input tokens (counted by the API), about "
+            f"{c['output_tokens']:,} output tokens (assumed), estimated ${c['total_usd']:.2f} "
+            f"(${c['per_incident_usd']:.4f} per incident). Cap: ${reference.config.cap_usd:.2f}."
+        )
+        return 0
     m = doc["metrics"]
     f, c = m["faulted"], m["clean"]
     print(
         f"{doc['baseline']} on {args.split}: {f['n']} faulted, {c['n']} clean, "
         f"config {doc['config_hash']} -> {args.results_dir}/{args.split}/{doc['baseline']}.md"
     )
+    if "cost" in doc:
+        print(f"Spent ${doc['cost']['total_usd']:.4f} in {doc['cost']['calls']} calls.")
     return 0
 
 
@@ -210,6 +248,23 @@ def _cmd_triage(args: argparse.Namespace) -> int:
     print(json.dumps(report, indent=1) if args.json else render(report), end="")
     if keys and not args.json:
         print(f"\nStored as {', '.join(keys)} in {args.store}")
+    return 0
+
+
+def _cmd_finetune_export(args: argparse.Namespace) -> int:
+    from faultline.llm.finetune import export
+    from faultline.monitors.core import load_monitor_config
+
+    out = Path(args.out) / args.slot
+    manifest = export(
+        args.slot, out, load_monitor_config(Path(args.config)), download=not args.no_download
+    )
+    f = manifest["files"]
+    print(
+        f"{args.slot}: {f['train']['examples']} training examples from "
+        f"{f['train']['incidents']} incidents, {f['valid']['examples']} validation examples "
+        f"from {f['valid']['incidents']} incidents -> {out}"
+    )
     return 0
 
 
@@ -252,10 +307,33 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["tests", "lineage"],
         help="with --baseline triage: switch off one step (the LLM ranker is off by default)",
     )
+    ev.add_argument(
+        "--llm-profile",
+        help="a [llm.profiles.<name>] section of faultline.toml, e.g. mlx_base or mlx_ranker",
+    )
+    ev.add_argument(
+        "--reference",
+        action="store_true",
+        help="the hosted reference model from [reference] (benchmark data only; key from env)",
+    )
+    ev.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="with --reference: count tokens and print the cost, write and bill nothing",
+    )
     ev.add_argument("--results-dir", default="eval/results")
     ev.add_argument("--config", default="faultline.toml")
     ev.add_argument("--no-download", action="store_true", help="use dist/ only, never download")
     ev.set_defaults(func=_cmd_eval)
+
+    ft = sub.add_parser("finetune", help="fine-tuning data for the LLM slots (train split only)")
+    ft_sub = ft.add_subparsers(dest="finetune_command", required=True)
+    fte = ft_sub.add_parser("export", help="write train.jsonl and valid.jsonl for mlx_lm.lora")
+    fte.add_argument("--slot", required=True, choices=["ranker", "raw_log"])
+    fte.add_argument("--out", default="build/finetune")
+    fte.add_argument("--config", default="faultline.toml")
+    fte.add_argument("--no-download", action="store_true")
+    fte.set_defaults(func=_cmd_finetune_export)
 
     tri = sub.add_parser("triage", help="triage one benchmark run and store its incidents")
     tri.add_argument("incident_id", help="benchmark run id, e.g. inc_stripe_dev_013")
