@@ -24,6 +24,11 @@ dev = [
     "mypy>=1.13",
     "hypothesis>=6.100",
 ]
+# Mac only, for the M6 fine-tuning and MLX runs; never installed in CI.
+# Install with: uv sync --group mlx
+mlx = [
+    "mlx-lm[train]==0.32.2 ; sys_platform == 'darwin'",
+]
 
 [build-system]
 requires = ["hatchling>=1.25"]

@@ -1,0 +1,26 @@
+# LoRA adapter for the raw-log baseline slot. Run on a Mac: make finetune-raw-log
+# Data comes from `faultline finetune export --slot raw_log` (train split only).
+# Prompts are long (up to about 32k characters), so fewer layers get adapters and
+# gradient checkpointing is on, to stay inside 16 GB of memory.
+model: "mlx-community/Qwen2.5-7B-Instruct-4bit"
+train: true
+data: "build/finetune/raw_log"
+adapter_path: "build/adapters/raw_log"
+fine_tune_type: lora
+mask_prompt: true
+seed: 0
+num_layers: 8
+batch_size: 1
+grad_accumulation_steps: 4
+iters: 230                 # about 2 passes over 115 examples
+learning_rate: 1.0e-5
+max_seq_length: 12288
+grad_checkpoint: true
+steps_per_report: 10
+steps_per_eval: 50
+val_batches: -1
+save_every: 50
+lora_parameters:
+  rank: 8
+  dropout: 0.0
+  scale: 20.0
