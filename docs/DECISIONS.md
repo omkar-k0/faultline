@@ -192,3 +192,28 @@ Each entry: decision, alternative, reason.
 - Alternative: let the owner scan it with a counting script.
 - Reason: owner's choice; held-out is read only by `faultline eval --split heldout`, once.
 
+## 2026-11-20: Fine-tune both LLM slots, not only the ranker
+- Decision: two LoRA adapters, one for triage re-ranking and one for the raw-log baseline, both trained on train only.
+- Alternative: ranker only, as the milestone names it.
+- Reason: owner's choice; on dev the rules already put the right cause first in every detected run, so a tuned ranker can at best tie, while the raw-log slot has real room.
+
+## 2026-11-20: Base re-run through MLX
+- Decision: "base" in M6 is the same 4-bit MLX model the adapters are trained on, served by mlx_lm.server.
+- Alternative: compare the tuned MLX model with the Ollama (GGUF) base.
+- Reason: owner's approval; base and tuned then differ only by the adapter, not by quantisation format or server.
+
+## 2026-11-20: Raw-log labels say only what the log supports
+- Decision: a raw-log training answer names the true cause only when the log shows a failed or errored node, or a commit that changed a model; otherwise "no incident".
+- Alternative: always label the true cause.
+- Reason: the model sees only the log; teaching it to name causes it cannot see would teach it to guess.
+
+## 2026-11-20: Hosted reference is Claude Opus 5.5 with a hard cap
+- Decision: Opus 5.5 in both slots, $3.00 cap checked before each call, free token-count dry run first.
+- Alternative: Sonnet 5.5, about half the cost.
+- Reason: owner's choice with a balance of about EUR 3; the cap stops the run before it can go over, and the dry run shows the cost first.
+
+## 2026-11-20: Reference rows sit apart from faultline's rows
+- Decision: `llm_slots.md` lists local models and the reference in separate tables per slot; the ablation table holds local models only.
+- Alternative: one table with a "reference" label column.
+- Reason: CLAUDE.md principle 7, never mixed into the local model's tables.
+

@@ -4,7 +4,20 @@ Updated 2026-11-20.
 
 ## Current milestone
 
-M5 Incident manager + triage agent (issue #18) is done: M5a merged (PR #19), M5b merged (PR #20), and the LLM re-ranker run from the owner's Mac comes in on branch `m5c-triage-llm`. Next: M6, self-trained ranker and the hosted reference line (plan first).
+M6 Self-trained ranker + reference line, issue #22. Two PRs:
+- **M6a** (branch `m6a-ranker-reference`, draft PR): fine-tuning data export, training configs, MLX model profiles, the hosted reference client with cost accounting and a spending cap, the `llm_slots.md` table, tests with fake models.
+- **M6b** (next, on the owner's Mac): training both adapters, base and tuned runs through MLX, the reference dry run and run. Steps in docs/EVAL.md.
+
+M5 is done: PRs #19, #20, #21.
+
+## Done in M6a
+
+- `faultline finetune export --slot ranker|raw_log` (train only): 166 ranker training examples from 77 incidents (23 validation from 11); 115 raw-log training runs (11 validation), 43 of them labelled with a cause.
+- `finetune/ranker.yaml`, `finetune/raw_log.yaml` for `mlx_lm.lora`; `mlx` dependency group (mlx-lm 0.32.2, Mac only, not installed in CI).
+- `[llm.profiles.*]` in faultline.toml and `faultline eval --llm-profile`; results named `<method>.<profile>`, with the adapter's hash.
+- `llm/reference.py`: Claude through the Messages API, key from the environment only, cost from usage, cap checked before each call, retries on overload, `--dry-run` via token counting.
+- `eval/results/dev/llm_slots.md`: both slots, local rows and the reference apart.
+- Not verified: training memory on a 16 GB Mac for the long raw-log prompts; the Opus 5.5 model string and temperature setting against the live API (the dry run will show both).
 
 ## Done in M5c (LLM re-ranker run)
 

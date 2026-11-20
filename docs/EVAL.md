@@ -141,6 +141,36 @@ The re-ranker sees each incident's symptoms and the causes that passed their tes
    One prompt per incident that has causes (about 45 on dev), each much shorter than the `raw_log_llm` prompts.
 3. Commit the files it writes, `eval/results/dev/triage_llm.{json,md,run.json}` and the updated `eval/results/dev/ablations.md`, and push to the branch.
 
+## M6: base vs tuned vs the hosted reference
+
+Two LLM slots, each compared with and without training, and against a hosted frontier model. The table is built from the result files: `eval/results/dev/llm_slots.md`.
+
+| Slot | Base | Tuned | Reference |
+|---|---|---|---|
+| triage re-ranking | `triage_llm --llm-profile mlx_base` | `--llm-profile mlx_ranker` | `triage_llm --reference` |
+| raw-log baseline | `raw_log_llm --llm-profile mlx_base` | `--llm-profile mlx_raw_log` | `raw_log_llm --reference` |
+
+**Model.** Qwen2.5-7B-Instruct (Apache 2.0), 4-bit, served by `mlx_lm.server` (mlx-lm 0.32.2, MIT). Base runs again through MLX, so base and tuned differ only by the LoRA adapter. The earlier Ollama runs stay in the table for comparison.
+
+**Training data,** from `benchmark/train/` only (`faultline finetune export`; any other split is refused). The prompts are built by the same code as in the eval.
+- *Ranker:* the surviving causes of each train incident. The answer puts the causes matching the truth first, keeps the rest in rule order, and adds a template summary. Each incident also appears shuffled twice.
+- *Raw-log:* every train run's raw-log prompt. The answer names the true cause only when the log shows something to go on (a failed or errored dbt node, or a commit that changed a model); otherwise it says "no incident".
+- About 10% of incidents, chosen by hash, validate the adapter. Configs: `finetune/ranker.yaml`, `finetune/raw_log.yaml`. Adapters are not committed. Each result records the sha256 of the adapter that was served.
+
+**Reference line** (CLAUDE.md principle 7): Claude Opus 5.5 through the Messages API, with the same prompts and inputs, on benchmark data only. The key is read from `ANTHROPIC_API_KEY` in the shell and never written anywhere (a test checks the result files). Results are named `*.reference.*` and carry token counts and cost per incident. Prices are in `faultline.toml` with their source and the date checked. They are listed apart from faultline's own rows. A hard cap (`cap_usd`, $3.00) is checked before every call with a pessimistic estimate, and the run stops, writing nothing, before it could go over. `--dry-run` counts every prompt's tokens with the free counting endpoint and prints the cost first.
+
+### Running M6 on your Mac
+
+Quit Ollama first (menu bar, or `pkill -f ollama`): training needs the memory. Then, in `faultline`:
+
+1. `git switch main && git pull && git switch -c m6b-runs`
+2. `make setup-mlx`: installs mlx-lm. The first training step also downloads the 4-bit model, about 4 GB.
+3. `make finetune-data`: writes the training files from train (a few minutes).
+4. `make finetune-ranker`, then `make finetune-raw-log`. The raw-log one has long prompts and takes longer. If it stops with an out-of-memory error, lower `num_layers` in `finetune/raw_log.yaml` to 4 and run it again.
+5. For each of base, ranker and raw-log: start the server in a second terminal (`make serve-mlx-base`, `make serve-mlx-ranker`, `make serve-mlx-raw-log`), run the matching eval in the first (`make eval-dev-mlx-base`, `make eval-dev-mlx-ranker`, `make eval-dev-mlx-raw-log`), then stop the server with Ctrl+C.
+6. The reference: in the first terminal type `export ANTHROPIC_API_KEY=` followed by your key (in the terminal only, never in a file). Run `make reference-dry-run` and check the estimate is under the cap; then `make eval-dev-reference`.
+7. `git add eval/results/dev && git commit -m "eval: M6 base, tuned and reference runs on dev" && git push -u origin m6b-runs`
+
 ## Running `raw_log_llm` on your own machine
 
 CI never calls a model. This baseline runs on a machine with enough memory (16 GB is enough for a 7B model) and comes back as a pull request.
