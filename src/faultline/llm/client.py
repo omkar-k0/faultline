@@ -33,10 +33,21 @@ class LLMConfig:
     temperature: float = 0.0
     seed: int = 0
     timeout_s: int = 600
+    profile: str | None = None  # a named [llm.profiles.<name>] section, None for [llm]
+    served_model: str | None = None  # what the server loaded, when `model` is an alias
+    adapter: str | None = None  # LoRA adapter folder the server was started with
 
 
-def load_config(path: Path = Path("faultline.toml")) -> LLMConfig:
-    raw = tomllib.loads(path.read_text()).get("llm", {})
+def load_config(path: Path = Path("faultline.toml"), profile: str | None = None) -> LLMConfig:
+    """The [llm] section, or a named profile laid over it (e.g. the MLX server with an adapter)."""
+    llm = tomllib.loads(path.read_text()).get("llm", {})
+    raw = {k: v for k, v in llm.items() if k != "profiles"}
+    if profile is not None:
+        profiles = llm.get("profiles", {})
+        if profile not in profiles:
+            known = ", ".join(sorted(profiles)) or "none"
+            raise LLMError(f"{path}: no [llm.profiles.{profile}] (known: {known})")
+        raw.update(profiles[profile])
     base_url, model = str(raw.get("base_url", "")), str(raw.get("model", ""))
     if not base_url or not model:
         raise LLMError(f"{path}: set [llm] base_url and model")
@@ -46,6 +57,9 @@ def load_config(path: Path = Path("faultline.toml")) -> LLMConfig:
         temperature=float(raw.get("temperature", 0.0)),
         seed=int(raw.get("seed", 0)),
         timeout_s=int(raw.get("timeout_s", 600)),
+        profile=profile,
+        served_model=str(raw["served_model"]) if raw.get("served_model") else None,
+        adapter=str(raw["adapter"]) if raw.get("adapter") else None,
     )
 
 
