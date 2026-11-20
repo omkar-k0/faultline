@@ -95,6 +95,13 @@ class IncidentReport:
 Reranker = Callable[[dict[str, Any], list[dict[str, Any]]], tuple[list[int], str, dict[str, Any]]]
 
 
+def rerank_inputs(report: IncidentReport) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """What a re-ranker sees for one incident. Fine-tuning data is built with this too,
+    so training prompts and eval prompts are the same."""
+    incident = {k: v for k, v in report.as_dict().items() if k != "causes"}
+    return incident, [r.as_dict(report.group) for r in report.ranked[:RERANK_LIMIT]]
+
+
 def _locations(results: Sequence[Result]) -> list[Location]:
     seen: set[Location] = set()
     out: list[Location] = []
@@ -173,8 +180,8 @@ class Triage:
     def _rerank(self, report: IncidentReport, reranker: Reranker) -> None:
         """Let the ranker reorder the survivors. Its answer can only permute them."""
         shown = report.ranked[:RERANK_LIMIT]
-        incident = {k: v for k, v in report.as_dict().items() if k != "causes"}
-        order, summary, info = reranker(incident, [r.as_dict(report.group) for r in shown])
+        incident, causes = rerank_inputs(report)
+        order, summary, info = reranker(incident, causes)
         valid = [i for i in dict.fromkeys(order) if 0 <= i < len(shown)]
         kept = valid + [i for i in range(len(shown)) if i not in valid]
         report.ranked = [shown[i] for i in kept] + report.ranked[RERANK_LIMIT:]

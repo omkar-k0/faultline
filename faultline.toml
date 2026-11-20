@@ -23,3 +23,40 @@ dist_abs_margin = 1e-9
 dist_spread_k = 1.0
 freshness_min_lag_hours = 1.0
 min_reference_runs = 3
+
+# Profiles for the M6 runs on a Mac: an MLX server (mlx_lm.server, port 8080)
+# serving Qwen2.5-7B-Instruct in 4 bit, without an adapter or with one trained
+# on benchmark/train/ only. Start the server with the matching --adapter-path;
+# see docs/EVAL.md. "default_model" means the model the server was started with.
+[llm.profiles.mlx_base]
+base_url = "http://localhost:8080/v1"
+model = "default_model"
+served_model = "mlx-community/Qwen2.5-7B-Instruct-4bit"
+
+[llm.profiles.mlx_ranker]
+base_url = "http://localhost:8080/v1"
+model = "default_model"
+served_model = "mlx-community/Qwen2.5-7B-Instruct-4bit"
+adapter = "build/adapters/ranker"
+
+[llm.profiles.mlx_raw_log]
+base_url = "http://localhost:8080/v1"
+model = "default_model"
+served_model = "mlx-community/Qwen2.5-7B-Instruct-4bit"
+adapter = "build/adapters/raw_log"
+
+# The hosted reference line (CLAUDE.md principle 7). Benchmark data only.
+# The key is read from the environment variable named here and never stored.
+[reference]
+provider = "anthropic"
+model = "claude-opus-5-5"
+api_key_env = "ANTHROPIC_API_KEY"
+input_usd_per_mtok = 4.0
+output_usd_per_mtok = 20.0
+prices_source = "https://platform.claude.com/docs/en/about-claude/pricing"
+prices_checked = "2026-11-20"
+cap_usd = 3.00
+max_tokens = 1024
+temperature = 0.0
+timeout_s = 300
+dry_run_output_tokens = 300

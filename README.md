@@ -4,7 +4,7 @@ An open-source reliability assistant for dbt Core projects. It detects data inci
 
 How it decides: deterministic lineage and checks first, then statistics, then a local language model that only ranks hypotheses that already passed a query test. If nothing passes, the answer is "not confirmed". No raw rows ever go to a model.
 
-**Status: M5 done. Lineage, the fault-injection benchmark (192 incidents, frozen held-out split), the eval harness with three baselines, faultline's monitors, and a triage agent with its ablations (including an optional local-LLM re-ranker) are built. Results on dev are in [`eval/results/dev/`](eval/results/dev/), the ablations in [`eval/results/dev/ablations.md`](eval/results/dev/ablations.md). Next: M6, a self-trained ranker and the hosted reference line.**
+**Status: M5 done, M6 in progress. Lineage, the fault-injection benchmark (192 incidents, frozen held-out split), the eval harness with three baselines, faultline's monitors, and a triage agent with its ablations (including an optional local-LLM re-ranker) are built. Results on dev are in [`eval/results/dev/`](eval/results/dev/), the ablations in [`eval/results/dev/ablations.md`](eval/results/dev/ablations.md). M6 (a fine-tuned local model and a hosted reference line) is being built; its table is [`eval/results/dev/llm_slots.md`](eval/results/dev/llm_slots.md).**
 
 ## Develop
 

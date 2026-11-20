@@ -39,6 +39,7 @@ from faultline.triage.method import ABLATIONS, TriageMethod
 # Methods that compare a run with known-good runs picked by the harness.
 REFERENCE_METHODS = frozenset({"monitors", "triage", "triage_llm"})
 TRIAGE_METHODS = frozenset({"triage", "triage_llm"})
+LLM_METHODS = frozenset({"raw_log_llm", "triage_llm"})
 
 FAULT_ORDER = (
     "schema_change",
@@ -78,8 +79,19 @@ def harness_references(
     return {iid: [by_id[r].profile for r in refs] for iid, refs in ref_ids.items()}
 
 
-def result_name(baseline: str, ablate: str | None = None) -> str:
-    return f"{baseline}.no_{ablate}" if ablate else baseline
+def result_name(baseline: str, ablate: str | None = None, variant: str | None = None) -> str:
+    name = f"{baseline}.no_{ablate}" if ablate else baseline
+    return f"{name}.{variant}" if variant else name
+
+
+def _adapter_sha256(adapter: str | None) -> str | None:
+    """Hash of a LoRA adapter's weights, so a result names exactly what was served."""
+    if not adapter:
+        return None
+    weights = Path(adapter) / "adapters.safetensors"
+    if not weights.exists():
+        return None
+    return "sha256:" + hashlib.sha256(weights.read_bytes()).hexdigest()
 
 
 def config_for(
@@ -112,6 +124,14 @@ def config_for(
                 "seed": getattr(cfg, "seed", None),
             }
         )
+        public = getattr(cfg, "public", None)
+        if callable(public):
+            config["reference_line"] = public()  # hosted model; never the key
+        for attr in ("profile", "served_model", "adapter"):
+            if getattr(cfg, attr, None):
+                config[attr] = getattr(cfg, attr)
+        if getattr(cfg, "adapter", None):
+            config["adapter_sha256"] = _adapter_sha256(cfg.adapter)  # type: ignore[union-attr]
     return config
 
 
@@ -194,10 +214,16 @@ def run_eval(
     command: str | None = None,
     config_path: Path = Path("faultline.toml"),
     ablate: str | None = None,
+    variant: str | None = None,
+    write: bool = True,
 ) -> dict[str, Any]:
+    """Score one method on one split. `variant` labels a model profile or the reference
+    line in the result's name; `write=False` scores without writing (dry runs)."""
     if ablate is not None and (baseline != "triage" or ablate not in ABLATIONS):
         raise ValueError(f"--ablate {ablate} applies to --baseline triage only ({ABLATIONS})")
-    name = result_name(baseline, ablate)
+    if variant is not None and baseline not in LLM_METHODS:
+        raise ValueError(f"a model variant applies to {sorted(LLM_METHODS)} only")
+    name = result_name(baseline, ablate, variant)
     incidents, section = load_incidents(split, benchmark_dir, dist_dir, runs_dir, download)
     raw: RawLogLLM | None = None
     monitor_method: MonitorMethod | None = None
@@ -284,6 +310,11 @@ def run_eval(
         doc["by_monitor"] = by_monitor
     if triage_method is not None:
         doc["gating"] = gating(outcomes, ungated_outcomes)
+    cost_summary = getattr(client, "cost_summary", None)
+    if callable(cost_summary):
+        doc["cost"] = cost_summary(len(incidents))
+    if not write:
+        return doc
     out_dir = results_dir / split
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / f"{name}.json").write_text(json.dumps(doc, indent=1, sort_keys=True) + "\n")
@@ -296,6 +327,8 @@ def run_eval(
     (out_dir / f"{name}.run.json").write_text(json.dumps(run_info, indent=1) + "\n")
     if triage_method is not None:
         write_ablation_table(out_dir)
+    if baseline in LLM_METHODS or baseline == "triage":
+        write_llm_slots_table(out_dir)
     return doc
 
 
@@ -348,3 +381,59 @@ def write_ablation_table(out_dir: Path) -> None:
             f"{_pct(doc['metrics']['clean']['false_alarms'])} | [{name}.md]({name}.md) |"
         )
     (out_dir / "ablations.md").write_text("\n".join(lines) + "\n")
+
+
+LOCAL_SLOT_ROWS = {
+    "ranking (triage)": (
+        ("triage", "rules only, no model"),
+        ("triage_llm", "base, Ollama"),
+        ("triage_llm.mlx_base", "base, MLX"),
+        ("triage_llm.mlx_ranker", "tuned on train, MLX"),
+    ),
+    "raw-log baseline": (
+        ("raw_log_llm", "base, Ollama"),
+        ("raw_log_llm.mlx_base", "base, MLX"),
+        ("raw_log_llm.mlx_raw_log", "tuned on train, MLX"),
+    ),
+}
+REFERENCE_SLOT_ROWS = {
+    "ranking (triage)": "triage_llm.reference",
+    "raw-log baseline": "raw_log_llm.reference",
+}
+
+
+def _slot_row(out_dir: Path, name: str, label: str) -> str | None:
+    path = out_dir / f"{name}.json"
+    if not path.exists():
+        return None
+    doc = json.loads(path.read_text())
+    f = doc["metrics"]["faulted"]
+    cost = doc.get("cost", {}).get("per_incident_usd")
+    cost_text = "local" if "cost" not in doc else f"${cost:.4f}"
+    return (
+        f"| {label} | {_pct(f['top1'])} | {_pct(f['top3'])} | {_pct(f['wrong_top1'])} | "
+        f"{_pct(f['not_confirmed'])} | {_pct(doc['metrics']['clean']['false_alarms'])} | "
+        f"{cost_text} | [{name}.md]({name}.md) |"
+    )
+
+
+def write_llm_slots_table(out_dir: Path) -> None:
+    """Base vs tuned vs reference per LLM slot, from whichever result files exist."""
+    head = (
+        "| Variant | Top-1 | Top-3 | Wrong top-1 | Not confirmed | False alarms | "
+        "Cost per incident | File |\n|---|---|---|---|---|---|---|---|"
+    )
+    lines = [
+        f"# The two LLM slots on {out_dir.name}",
+        "",
+        "Built from the result files in this folder; a row is missing until its run exists.",
+        "The hosted reference line is listed apart from faultline's own local results "
+        "(CLAUDE.md principle 7).",
+    ]
+    for slot, rows in LOCAL_SLOT_ROWS.items():
+        lines += ["", f"## {slot}", "", "faultline, local models:", "", head]
+        lines += [r for n, label in rows if (r := _slot_row(out_dir, n, label))]
+        ref = _slot_row(out_dir, REFERENCE_SLOT_ROWS[slot], "Claude, hosted (reference)")
+        lines += ["", "Reference line, hosted, not part of faultline:", "", head]
+        lines.append(ref or "| not run yet |  |  |  |  |  |  |  |")
+    (out_dir / "llm_slots.md").write_text("\n".join(lines) + "\n")
