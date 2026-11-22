@@ -57,6 +57,7 @@ prices_source = "https://platform.claude.com/docs/en/about-claude/pricing"
 prices_checked = "2026-11-20"
 cap_usd = 5.00
 max_tokens = 1024
-temperature = 0.0
+# No temperature: the API answers 400 "temperature is deprecated for this model"
+# for Opus 5.5 (2026-11-22), so the model's default sampling is used.
 timeout_s = 300
 dry_run_output_tokens = 300

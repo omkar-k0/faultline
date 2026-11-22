@@ -222,3 +222,8 @@ Each entry: decision, alternative, reason.
 - Alternative: Sonnet 5.5 in both slots, or Opus in the ranking slot only.
 - Reason: owner's choice; the free dry run counted 709,710 input tokens for the raw-log slot (about $3.00 at Opus prices), so the $3.00 cap would have stopped that run near its end with nothing written.
 
+## 2026-11-22: Reference runs without a temperature setting
+- Decision: the [reference] config sends no temperature; Opus 5.5 samples with its default.
+- Alternative: none; the API refuses the parameter for this model ("temperature is deprecated", HTTP 400, nothing billed).
+- Reason: the reference answers are therefore not guaranteed to repeat run to run, unlike the local models at temperature 0; the result file records temperature as null.
+

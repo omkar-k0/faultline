@@ -96,9 +96,15 @@ def test_reference_sends_the_key_only_in_the_header(key: str) -> None:
     url, headers, body = api.requests[0]
     assert url == "https://api.anthropic.com/v1/messages"
     assert headers["x-api-key"] == key and key not in json.dumps(body)
-    assert body["model"] == "claude-opus-5-5" and body["temperature"] == 0.0
+    assert body["model"] == "claude-opus-5-5" and "temperature" not in body
     assert key not in repr(client) and key not in json.dumps(client.config.public())
     assert key not in json.dumps(client.cost_summary(1))
+
+
+def test_temperature_is_sent_only_when_set(key: str) -> None:
+    api = FakeAPI()
+    AnthropicClient(_cfg(temperature=0.0), transport=api).complete("s", "u")
+    assert api.requests[0][2]["temperature"] == 0.0
 
 
 def test_reference_cost_is_counted_from_usage(key: str) -> None:
