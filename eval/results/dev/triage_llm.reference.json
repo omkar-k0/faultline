@@ -38,13 +38,13 @@
  },
  "config_hash": "8e928cda2dc3",
  "cost": {
-  "calls": 31,
+  "calls": 57,
   "estimate_only": false,
   "incidents": 78,
-  "input_tokens": 25315,
-  "output_tokens": 5096,
-  "per_incident_usd": 0.0026,
-  "total_usd": 0.2032
+  "input_tokens": 58290,
+  "output_tokens": 10423,
+  "per_incident_usd": 0.00566,
+  "total_usd": 0.4416
  },
  "gating": {
   "answered": 43,
@@ -150,10 +150,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"The judge_name column is missing from the raw_judges seed, so stg_judges fails to build and its relation is absent. This is the only candidate, and it explains all three symptoms through direct lineage, though the evidence points to a dropped column rather than changed values.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one and explains all three symptoms: the judge_name column is absent from seed raw_judges, so the downstream stg_judges model errors and its relation is never created. The observed column is missing outright rather than holding changed values, so the root cause is more precisely the column's removal or renaming in the seed.\"}"
       },
       "status": "confirmed",
-      "summary": "The judge_name column is missing from the raw_judges seed, so stg_judges fails to build and its relation is absent. This is the only candidate, and it explains all three symptoms through direct lineage, though the evidence points to a dropped column rather than changed values.",
+      "summary": "Candidate 1 is the only one and explains all three symptoms: the judge_name column is absent from seed raw_judges, so the downstream stg_judges model errors and its relation is never created. The observed column is missing outright rather than holding changed values, so the root cause is more precisely the column's removal or renaming in the seed.",
       "symptoms": [
        {
         "column": null,
@@ -456,10 +456,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"The symptoms point to a column rename in raw_hearings: scheduled_at_local disappeared and scheduled_at_local_new appeared. That makes stg_hearings fail and leaves every downstream relation missing. The missing scheduled_at_local is what downstream models actually reference, so candidate 1 is the more direct cause, and the new column (candidate 2) is the other side of the same change.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"The symptoms point to a rename in raw_hearings: scheduled_at_local disappeared and scheduled_at_local_new appeared, so stg_hearings errors on the missing column and every downstream relation fails to build. Candidate 1 ranks first because existing models reference the original column, while the new column (candidate 2) is better read as a side effect of the same rename than as the cause of the breakage.\"}"
       },
       "status": "confirmed",
-      "summary": "The symptoms point to a column rename in raw_hearings: scheduled_at_local disappeared and scheduled_at_local_new appeared. That makes stg_hearings fail and leaves every downstream relation missing. The missing scheduled_at_local is what downstream models actually reference, so candidate 1 is the more direct cause, and the new column (candidate 2) is the other side of the same change.",
+      "summary": "The symptoms point to a rename in raw_hearings: scheduled_at_local disappeared and scheduled_at_local_new appeared, so stg_hearings errors on the missing column and every downstream relation fails to build. Candidate 1 ranks first because existing models reference the original column, while the new column (candidate 2) is better read as a side effect of the same rename than as the cause of the breakage.",
       "symptoms": [
        {
         "column": null,
@@ -838,10 +838,10 @@
         2,
         3
        ],
-       "raw_answer": "{\"order\": [5, 1, 2, 3, 4], \"summary\": \"The raw_judges seed loaded zero rows, and that one cause explains all 10 symptoms: the empty volume downstream, the null freshness, and every column falling back to INTEGER, which is what type inference does on an empty load. Each column-level value change explains only 4 symptoms and is better read as a side effect of the empty seed.\"}"
+       "raw_answer": "{\"order\": [5, 1, 2, 3, 4], \"summary\": \"The raw_judges seed loaded 0 rows, so every column was inferred as INTEGER; that one cause accounts for all 10 schema, volume and freshness symptoms in raw_judges and stg_judges. The single-column value changes each explain only 4 symptoms and are better read as side effects of the empty seed than as independent causes.\"}"
       },
       "status": "confirmed",
-      "summary": "The raw_judges seed loaded zero rows, and that one cause explains all 10 symptoms: the empty volume downstream, the null freshness, and every column falling back to INTEGER, which is what type inference does on an empty load. Each column-level value change explains only 4 symptoms and is better read as a side effect of the empty seed.",
+      "summary": "The raw_judges seed loaded 0 rows, so every column was inferred as INTEGER; that one cause accounts for all 10 schema, volume and freshness symptoms in raw_judges and stg_judges. The single-column value changes each explain only 4 symptoms and are better read as side effects of the empty seed than as independent causes.",
       "symptoms": [
        {
         "column": "court_id",
@@ -1351,10 +1351,10 @@
         1,
         0
        ],
-       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Row loss in seed.court_cases.raw_hearings explains all 21 symptoms: the volume drops propagate from the seed through stg, int and fct, the hearing dates are truncated at 2025-12-15, cases with no hearings left produce nulls, and the adjournment and count distributions shift. A change in scheduled_at_local values explains only the freshness subset and cannot account for the volume drops or the null-rate symptoms.\"}"
+       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Missing rows in seed.court_cases.raw_hearings account for all 21 symptoms: lower volume all the way downstream, stale dates, nulls for cases that now have no hearings, and shifted adjournment distributions. The scheduled_at_local value change explains only the 16 freshness-related symptoms and is more likely a side effect of the missing recent rows.\"}"
       },
       "status": "confirmed",
-      "summary": "Row loss in seed.court_cases.raw_hearings explains all 21 symptoms: the volume drops propagate from the seed through stg, int and fct, the hearing dates are truncated at 2025-12-15, cases with no hearings left produce nulls, and the adjournment and count distributions shift. A change in scheduled_at_local values explains only the freshness subset and cannot account for the volume drops or the null-rate symptoms.",
+      "summary": "Missing rows in seed.court_cases.raw_hearings account for all 21 symptoms: lower volume all the way downstream, stale dates, nulls for cases that now have no hearings, and shifted adjournment distributions. The scheduled_at_local value change explains only the 16 freshness-related symptoms and is more likely a side effect of the missing recent rows.",
       "symptoms": [
        {
         "column": null,
@@ -1713,10 +1713,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only candidate and accounts for all 13 symptoms: raw_courts.court_id holds 12 distinct values across 13 rows, so the stg_courts unique test fails. That failure explains why the downstream models were never built and their relations are missing.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it accounts for all 13 symptoms. The duplicated court_id in seed raw_courts carries into stg_courts and fails its unique test, which likely stopped the downstream models from building, so their relations are missing.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only candidate and accounts for all 13 symptoms: raw_courts.court_id holds 12 distinct values across 13 rows, so the stg_courts unique test fails. That failure explains why the downstream models were never built and their relations are missing.",
+      "summary": "Candidate 1 is the only one, and it accounts for all 13 symptoms. The duplicated court_id in seed raw_courts carries into stg_courts and fails its unique test, which likely stopped the downstream models from building, so their relations are missing.",
       "symptoms": [
        {
         "column": null,
@@ -2116,10 +2116,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Duplicate hearing_id rows in raw_hearings fit the evidence most specifically: 811 extra rows arrived with no new distinct keys, which also breaks the uniqueness test in stg_hearings and causes the downstream models to go missing. The generic row-change candidate covers the same symptoms but is less specific.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Duplicate hearing_id rows in raw_hearings account for all symptoms: 811 extra rows with no new distinct keys, a uniqueness failure in stg_hearings, and missing downstream relations. The generic row-change candidate covers the same symptoms but is less specific, since the evidence points to duplication rather than arbitrary missing or late rows.\"}"
       },
       "status": "confirmed",
-      "summary": "Duplicate hearing_id rows in raw_hearings fit the evidence most specifically: 811 extra rows arrived with no new distinct keys, which also breaks the uniqueness test in stg_hearings and causes the downstream models to go missing. The generic row-change candidate covers the same symptoms but is less specific.",
+      "summary": "Duplicate hearing_id rows in raw_hearings account for all symptoms: 811 extra rows with no new distinct keys, a uniqueness failure in stg_hearings, and missing downstream relations. The generic row-change candidate covers the same symptoms but is less specific, since the evidence points to duplication rather than arbitrary missing or late rows.",
       "symptoms": [
        {
         "column": null,
@@ -2301,10 +2301,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Only one candidate exists: a change in seed raw_courts.court_level values. The same 0.3333 null rate appears in the seed and both downstream models, so the nulls start at the source and pass through unchanged.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one offered. Null values in the raw_courts seed's court_level column carry through stg_courts and dim_courts with the same 0.3333 null rate, which accounts for all three symptoms.\"}"
       },
       "status": "confirmed",
-      "summary": "Only one candidate exists: a change in seed raw_courts.court_level values. The same 0.3333 null rate appears in the seed and both downstream models, so the nulls start at the source and pass through unchanged.",
+      "summary": "Candidate 1 is the only one offered. Null values in the raw_courts seed's court_level column carry through stg_courts and dim_courts with the same 0.3333 null rate, which accounts for all three symptoms.",
       "symptoms": [
        {
         "column": "court_level",
@@ -2543,10 +2543,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one offered, and it accounts for all 16 symptoms. The raw seed column scheduled_at_local is itself stale and has about 40% nulls, and lineage carries that into stg_hearings, fct_hearings, int_case_hearings and fct_cases.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only candidate and accounts for all 16 symptoms. The raw seed column scheduled_at_local is itself stale and has about 40% nulls, and lineage carries that through staging into the hearing and case facts.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one offered, and it accounts for all 16 symptoms. The raw seed column scheduled_at_local is itself stale and has about 40% nulls, and lineage carries that into stg_hearings, fct_hearings, int_case_hearings and fct_cases.",
+      "summary": "Candidate 1 is the only candidate and accounts for all 16 symptoms. The raw seed column scheduled_at_local is itself stale and has about 40% nulls, and lineage carries that through staging into the hearing and case facts.",
       "symptoms": [
        {
         "column": "scheduled_at_utc",
@@ -2803,10 +2803,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"The raw_courts seed has utc_offset_minutes values about 100 times too large (median 33400 against an expected ~294-365), and this error flows into stg_courts. The inflated offsets then distort filed_at_utc and scheduled_at_utc in the staging and fact models, producing the freshness failures.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"The raw_courts seed's utc_offset_minutes now has a median of 33400, against an expected 293\u2013365, which looks like a units or scaling error. Through lineage this wrong offset feeds stg_courts and shifts the UTC timestamps in the cases and hearings models, which explains the distribution anomalies and all four freshness failures.\"}"
       },
       "status": "confirmed",
-      "summary": "The raw_courts seed has utc_offset_minutes values about 100 times too large (median 33400 against an expected ~294-365), and this error flows into stg_courts. The inflated offsets then distort filed_at_utc and scheduled_at_utc in the staging and fact models, producing the freshness failures.",
+      "summary": "The raw_courts seed's utc_offset_minutes now has a median of 33400, against an expected 293\u2013365, which looks like a units or scaling error. Through lineage this wrong offset feeds stg_courts and shifts the UTC timestamps in the cases and hearings models, which explains the distribution anomalies and all four freshness failures.",
       "symptoms": [
        {
         "column": "filed_at_utc",
@@ -2984,10 +2984,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it accounts for all five symptoms: a change in the raw_hearings.outcome values would stop hearings from being counted as adjournments, which drives adjournment counts and rates toward zero downstream. No model on the path was changed by a commit, but this cause is inferred: outcome is a text column with no distribution statistics, so the change itself was never measured directly.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and its lineage covers all five symptoms: every adjournment metric dropped toward zero, which fits a change in the outcome values of raw_hearings (e.g., the 'adjourned' label being renamed or recased). No model on the path changed, but the outcome column is text and has no distribution statistics, so this cause is inferred rather than directly measured.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one, and it accounts for all five symptoms: a change in the raw_hearings.outcome values would stop hearings from being counted as adjournments, which drives adjournment counts and rates toward zero downstream. No model on the path was changed by a commit, but this cause is inferred: outcome is a text column with no distribution statistics, so the change itself was never measured directly.",
+      "summary": "Candidate 1 is the only one, and its lineage covers all five symptoms: every adjournment metric dropped toward zero, which fits a change in the outcome values of raw_hearings (e.g., the 'adjourned' label being renamed or recased). No model on the path changed, but the outcome column is text and has no distribution statistics, so this cause is inferred rather than directly measured.",
       "symptoms": [
        {
         "column": "avg_adjournment_rate",
@@ -3189,10 +3189,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Both candidates point to commit 46ea6aa in int_case_hearings.sql. The column-level candidate ranks first because its input columns and table are normal while last_hearing_date is stale, and that staleness flows to fct_cases.last_hearing_date, which localizes the regression to that column's logic.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Commit 46ea6aa changed int_case_hearings.sql, and the last_hearing_date column there is stale even though every input column and stg_hearings are normal; the staleness then flows down to fct_cases. The column-level candidate ranks above the model-level one for the same commit because it pinpoints the off column more precisely.\"}"
       },
       "status": "confirmed",
-      "summary": "Both candidates point to commit 46ea6aa in int_case_hearings.sql. The column-level candidate ranks first because its input columns and table are normal while last_hearing_date is stale, and that staleness flows to fct_cases.last_hearing_date, which localizes the regression to that column's logic.",
+      "summary": "Commit 46ea6aa changed int_case_hearings.sql, and the last_hearing_date column there is stale even though every input column and stg_hearings are normal; the staleness then flows down to fct_cases. The column-level candidate ranks above the model-level one for the same commit because it pinpoints the off column more precisely.",
       "symptoms": [
        {
         "column": "last_hearing_date",
@@ -3370,10 +3370,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Both candidates point to commit 5b9b41f in int_case_hearings.sql, and stg_hearings is normal, so the stale last_hearing_date starts in that model and flows down to fct_cases. The column-level candidate ranks first because it pins the fault to last_hearing_date itself with all its input columns normal, while the model-level candidate is a broader version of the same cause.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Commit 5b9b41f changed int_case_hearings.sql, and its last_hearing_date column is stale even though every input column and stg_hearings are normal, so the column-level change best explains both freshness failures, including the one passed down to fct_cases. The model-level candidate covers the same commit but less precisely, so it ranks second.\"}"
       },
       "status": "confirmed",
-      "summary": "Both candidates point to commit 5b9b41f in int_case_hearings.sql, and stg_hearings is normal, so the stale last_hearing_date starts in that model and flows down to fct_cases. The column-level candidate ranks first because it pins the fault to last_hearing_date itself with all its input columns normal, while the model-level candidate is a broader version of the same cause.",
+      "summary": "Commit 5b9b41f changed int_case_hearings.sql, and its last_hearing_date column is stale even though every input column and stg_hearings are normal, so the column-level change best explains both freshness failures, including the one passed down to fct_cases. The model-level candidate covers the same commit but less precisely, so it ranks second.",
       "symptoms": [
        {
         "column": "last_hearing_date",
@@ -3551,10 +3551,10 @@
         1,
         0
        ],
-       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Commit 0053bce to stg_hearings.sql most likely introduced a fan-out join, since all inputs are normal. That would explain both the roughly 850x row explosion and the hearing_id uniqueness failure, which points to the model-level change rather than one confined to the hearing_id column.\"}"
+       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Commit 0053bce to stg_hearings.sql most likely added a join fanout at the model level: row count jumped from about 4.4k to about 3.67M and hearing_id lost uniqueness, while every input table stayed normal. The column-level reading of the same commit explains both symptoms too, but it fits the model-wide volume blowup less directly.\"}"
       },
       "status": "confirmed",
-      "summary": "Commit 0053bce to stg_hearings.sql most likely introduced a fan-out join, since all inputs are normal. That would explain both the roughly 850x row explosion and the hearing_id uniqueness failure, which points to the model-level change rather than one confined to the hearing_id column.",
+      "summary": "Commit 0053bce to stg_hearings.sql most likely added a join fanout at the model level: row count jumped from about 4.4k to about 3.67M and hearing_id lost uniqueness, while every input table stayed normal. The column-level reading of the same commit explains both symptoms too, but it fits the model-wide volume blowup less directly.",
       "symptoms": [
        {
         "column": null,
@@ -3858,10 +3858,10 @@
         1,
         0
        ],
-       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Commit d35b212 to stg_hearings.sql most likely added a fan-out join at the model level: row volume jumped about 12x (52416 vs ~4400), and the hearing_id uniqueness failure and seven missing downstream relations follow from that. Both candidates point to the same commit, but the model-level framing fits the volume explosion better than a fault confined to the hearing_id column.\"}"
+       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Commit d35b212 to stg_hearings.sql most likely changed the model's logic, probably a join fan-out: it inflated row volume about 12x (52416 vs ~4400), broke hearing_id uniqueness, and left the seven downstream relations missing, while all inputs stayed normal. The column-level framing on hearing_id fits only the uniqueness failure directly and does not explain the volume blowup as well, so it ranks second.\"}"
       },
       "status": "confirmed",
-      "summary": "Commit d35b212 to stg_hearings.sql most likely added a fan-out join at the model level: row volume jumped about 12x (52416 vs ~4400), and the hearing_id uniqueness failure and seven missing downstream relations follow from that. Both candidates point to the same commit, but the model-level framing fits the volume explosion better than a fault confined to the hearing_id column.",
+      "summary": "Commit d35b212 to stg_hearings.sql most likely changed the model's logic, probably a join fan-out: it inflated row volume about 12x (52416 vs ~4400), broke hearing_id uniqueness, and left the seven downstream relations missing, while all inputs stayed normal. The column-level framing on hearing_id fits only the uniqueness failure directly and does not explain the volume blowup as well, so it ranks second.",
       "symptoms": [
        {
         "column": null,
@@ -4035,10 +4035,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate is a +9 h shift in the seed column raw_hearings.scheduled_at_local. It accounts for all three symptoms: it is the seed symptom itself, it carries through to stg_hearings.scheduled_at_local, and it pushes fct_hearings.local_hour outside the expected 9..11 range.\"}"
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Only one candidate is available. It is well supported: the +9 h shift is observed directly in the raw_hearings seed column, and the lineage carries that shift into stg_hearings.scheduled_at_local and into fct_hearings.local_hour, which explains all three symptoms.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "The only candidate is a +9 h shift in the seed column raw_hearings.scheduled_at_local. It accounts for all three symptoms: it is the seed symptom itself, it carries through to stg_hearings.scheduled_at_local, and it pushes fct_hearings.local_hour outside the expected 9..11 range.",
+      "summary": "Only one candidate is available. It is well supported: the +9 h shift is observed directly in the raw_hearings seed column, and the lineage carries that shift into stg_hearings.scheduled_at_local and into fct_hearings.local_hour, which explains all three symptoms.",
       "symptoms": [
        {
         "column": "scheduled_at_local",
@@ -4155,10 +4155,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one and explains both symptoms. The seed column raw_judges.appointed_on is stale at 2022-06-01, and that value passes directly through lineage to stg_judges.appointed_on.\"}"
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Candidate 1 is the only candidate. The raw_judges seed's appointed_on values are stale at 2022-06-01, and that staleness flows through lineage into stg_judges, which explains both freshness symptoms.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one and explains both symptoms. The seed column raw_judges.appointed_on is stale at 2022-06-01, and that value passes directly through lineage to stg_judges.appointed_on.",
+      "summary": "Candidate 1 is the only candidate. The raw_judges seed's appointed_on values are stale at 2022-06-01, and that staleness flows through lineage into stg_judges, which explains both freshness symptoms.",
       "symptoms": [
        {
         "column": "appointed_on",
@@ -4623,10 +4623,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and its lineage from seed.jaffle_shop.raw_orders.status reaches all five symptoms: the stg_orders error and the missing stg_orders, orders and customers relations. The evidence points to the status column being missing, not just its values changing, so the column itself is the likely root cause.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and its lineage from seed.jaffle_shop.raw_orders.status covers all five symptoms: the stg_orders build error and the missing stg_orders, orders and customers relations downstream. The evidence points more to the status column being missing from the seed than to its values changing, but this is the closest available explanation.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one, and its lineage from seed.jaffle_shop.raw_orders.status reaches all five symptoms: the stg_orders error and the missing stg_orders, orders and customers relations. The evidence points to the status column being missing, not just its values changing, so the column itself is the likely root cause.",
+      "summary": "Candidate 1 is the only one, and its lineage from seed.jaffle_shop.raw_orders.status covers all five symptoms: the stg_orders build error and the missing stg_orders, orders and customers relations downstream. The evidence points more to the status column being missing from the seed than to its values changing, but this is the closest available explanation.",
       "symptoms": [
        {
         "column": null,
@@ -4785,10 +4785,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only candidate. The id column of seed.jaffle_shop.raw_orders is missing, which breaks stg_orders and leaves the downstream relations (stg_orders, orders, customers) missing, so it covers all five symptoms, though the evidence points to a dropped column more than changed values.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one and covers all five symptoms. The raw_orders.id column is missing at the seed, so stg_orders fails and stg_orders, orders and customers are never built, which matches the lineage, though the evidence points to a missing column rather than merely changed values.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only candidate. The id column of seed.jaffle_shop.raw_orders is missing, which breaks stg_orders and leaves the downstream relations (stg_orders, orders, customers) missing, so it covers all five symptoms, though the evidence points to a dropped column more than changed values.",
+      "summary": "Candidate 1 is the only one and covers all five symptoms. The raw_orders.id column is missing at the seed, so stg_orders fails and stg_orders, orders and customers are never built, which matches the lineage, though the evidence points to a missing column rather than merely changed values.",
       "symptoms": [
        {
         "column": null,
@@ -5230,10 +5230,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [3, 1, 2], \"summary\": \"seed.jaffle_shop.raw_orders loaded 0 rows, which accounts for all 15 symptoms: the empty volume downstream, the fully null customer metrics, and plausibly the columns typed as INTEGER that would otherwise be DATE or VARCHAR. Value changes in order_date or status alone cannot explain the zero row counts, so they rank lower, with order_date ahead because it explains more symptoms.\"}"
+       "raw_answer": "{\"order\": [3, 1, 2], \"summary\": \"seed.jaffle_shop.raw_orders loaded with 0 rows, which explains all 15 symptoms: empty volume downstream, all-null customer aggregates, and INTEGER types that likely come from type inference on an empty seed. The column-level changes to order_date and status explain only a subset and are more plausibly side effects of the empty load than independent causes.\"}"
       },
       "status": "confirmed",
-      "summary": "seed.jaffle_shop.raw_orders loaded 0 rows, which accounts for all 15 symptoms: the empty volume downstream, the fully null customer metrics, and plausibly the columns typed as INTEGER that would otherwise be DATE or VARCHAR. Value changes in order_date or status alone cannot explain the zero row counts, so they rank lower, with order_date ahead because it explains more symptoms.",
+      "summary": "seed.jaffle_shop.raw_orders loaded with 0 rows, which explains all 15 symptoms: empty volume downstream, all-null customer aggregates, and INTEGER types that likely come from type inference on an empty seed. The column-level changes to order_date and status explain only a subset and are more plausibly side effects of the empty load than independent causes.",
       "symptoms": [
        {
         "column": "first_order",
@@ -5755,10 +5755,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [3, 1, 2], \"summary\": \"seed.jaffle_shop.raw_orders loaded with zero rows, which explains all 15 symptoms: volume 0 downstream, all-null customer aggregates, and order_date/status turning INTEGER, consistent with type inference on an empty seed. The column-level value changes on order_date and status each explain only a subset and are more likely side effects of the empty load.\"}"
+       "raw_answer": "{\"order\": [3, 1, 2], \"summary\": \"seed.jaffle_shop.raw_orders arrived with zero rows, which accounts for all 15 symptoms: volume is zero downstream, the customers metrics are fully null, and an empty seed likely caused order_date and status to be inferred as INTEGER. The column-level changes to order_date and status explain only part of the symptoms and are probably side effects of the empty table.\"}"
       },
       "status": "confirmed",
-      "summary": "seed.jaffle_shop.raw_orders loaded with zero rows, which explains all 15 symptoms: volume 0 downstream, all-null customer aggregates, and order_date/status turning INTEGER, consistent with type inference on an empty seed. The column-level value changes on order_date and status each explain only a subset and are more likely side effects of the empty load.",
+      "summary": "seed.jaffle_shop.raw_orders arrived with zero rows, which accounts for all 15 symptoms: volume is zero downstream, the customers metrics are fully null, and an empty seed likely caused order_date and status to be inferred as INTEGER. The column-level changes to order_date and status explain only part of the symptoms and are probably side effects of the empty table.",
       "symptoms": [
        {
         "column": "first_order",
@@ -6084,10 +6084,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Candidate 1 is the more specific cause: raw_orders gained 6 rows but no new distinct id values, which matches the order_id uniqueness failure and the inflated volume that blocked customers and orders from building. Candidate 2 describes the same row change in generic terms with weaker evidence, so it ranks second.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Candidate 1 is the more specific explanation: rows in raw_orders rose to 105 while distinct ids stayed flat, which points to duplicate keys that break the stg_orders.order_id uniqueness test and the models downstream of it. Candidate 2 covers the same 5 symptoms but only as a generic row-count change, so it is less precise.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the more specific cause: raw_orders gained 6 rows but no new distinct id values, which matches the order_id uniqueness failure and the inflated volume that blocked customers and orders from building. Candidate 2 describes the same row change in generic terms with weaker evidence, so it ranks second.",
+      "summary": "Candidate 1 is the more specific explanation: rows in raw_orders rose to 105 while distinct ids stayed flat, which points to duplicate keys that break the stg_orders.order_id uniqueness test and the models downstream of it. Candidate 2 covers the same 5 symptoms but only as a generic row-count change, so it is less precise.",
       "symptoms": [
        {
         "column": null,
@@ -6333,10 +6333,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Duplicate id rows in raw_orders fit the evidence most specifically: 16 extra rows were added with no new distinct keys. That breaks uniqueness of stg_orders.order_id, inflates volume, and leaves customers/orders missing as the failure propagates downstream. A generic row change in raw_orders explains the same symptoms but does not account for the key duplication signal.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Rows in raw_orders grew from at most 100 to 115 while the number of distinct id keys stayed the same, which points to duplicate rows rather than a general row change; those duplicates break the unique test on stg_orders.order_id and leave customers and orders missing. Candidate 2 covers the same symptoms but is less specific, so it ranks second.\"}"
       },
       "status": "confirmed",
-      "summary": "Duplicate id rows in raw_orders fit the evidence most specifically: 16 extra rows were added with no new distinct keys. That breaks uniqueness of stg_orders.order_id, inflates volume, and leaves customers/orders missing as the failure propagates downstream. A generic row change in raw_orders explains the same symptoms but does not account for the key duplication signal.",
+      "summary": "Rows in raw_orders grew from at most 100 to 115 while the number of distinct id keys stayed the same, which points to duplicate rows rather than a general row change; those duplicates break the unique test on stg_orders.order_id and leave customers and orders missing. Candidate 2 covers the same symptoms but is less specific, so it ranks second.",
       "symptoms": [
        {
         "column": null,
@@ -6528,10 +6528,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one offered, and it accounts for all nine symptoms. The raw_orders.order_date seed itself shows the elevated null rate and the stale freshness, and both problems carry through its lineage into stg_orders, orders and customers.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only candidate and it accounts for all 9 symptoms: about 52% of seed.jaffle_shop.raw_orders.order_date values are null and the latest date is stale (2018-04-07). The lineage carries that same freshness and null-rate failure into stg_orders, orders and customers.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one offered, and it accounts for all nine symptoms. The raw_orders.order_date seed itself shows the elevated null rate and the stale freshness, and both problems carry through its lineage into stg_orders, orders and customers.",
+      "summary": "Candidate 1 is the only candidate and it accounts for all 9 symptoms: about 52% of seed.jaffle_shop.raw_orders.order_date values are null and the latest date is stale (2018-04-07). The lineage carries that same freshness and null-rate failure into stg_orders, orders and customers.",
       "symptoms": [
        {
         "column": "most_recent_order",
@@ -6705,10 +6705,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"The status column carries an identical null rate of 0.5253 from the raw_orders seed through stg_orders and orders, so the issue starts in the seed's values and passes downstream unchanged. Candidate 1 is the only one, and it accounts for all three symptoms through the lineage.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"The status null rate is the same 0.5253 in the raw_orders seed, stg_orders and orders, so the nulls start in the seed values and pass downstream unchanged. Candidate 1 is the only candidate, and it accounts for all three symptoms through the lineage.\"}"
       },
       "status": "confirmed",
-      "summary": "The status column carries an identical null rate of 0.5253 from the raw_orders seed through stg_orders and orders, so the issue starts in the seed's values and passes downstream unchanged. Candidate 1 is the only one, and it accounts for all three symptoms through the lineage.",
+      "summary": "The status null rate is the same 0.5253 in the raw_orders seed, stg_orders and orders, so the nulls start in the seed values and pass downstream unchanged. Candidate 1 is the only candidate, and it accounts for all three symptoms through the lineage.",
       "symptoms": [
        {
         "column": "status",
@@ -6975,10 +6975,10 @@
         0,
         1
        ],
-       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Commit fce5eb7 changed models/customers.sql, and the stale value appears only in the most_recent_order column while all its input columns and tables are normal, so the column-level change (1) fits best. The model-level framing (2) describes the same commit but is less specific.\"}"
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Commit fce5eb7 changed models/customers.sql, and every input table and column is normal, so the stale most_recent_order value comes from that edit. The column-level candidate ranks first because it pins the fault to the most_recent_order logic; the model-level candidate is the same commit described more broadly.\"}"
       },
       "status": "confirmed",
-      "summary": "Commit fce5eb7 changed models/customers.sql, and the stale value appears only in the most_recent_order column while all its input columns and tables are normal, so the column-level change (1) fits best. The model-level framing (2) describes the same commit but is less specific.",
+      "summary": "Commit fce5eb7 changed models/customers.sql, and every input table and column is normal, so the stale most_recent_order value comes from that edit. The column-level candidate ranks first because it pins the fault to the most_recent_order logic; the model-level candidate is the same commit described more broadly.",
       "symptoms": [
        {
         "column": "most_recent_order",
@@ -7148,10 +7148,10 @@
         1,
         0
        ],
-       "raw_answer": "```json\n{\"order\": [2, 1], \"summary\": \"Commit 8b68c1b changed models/customers.sql while all inputs (stg_customers, stg_orders, stg_payments) stayed normal, and the row-count drop from about 100 to 62 points to a model-level change such as a filter or join, which would also shift the customer_id median. A change scoped to the customer_id column alone explains the row loss less naturally, so it ranks second.\"}\n```"
+       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Commit 8b68c1b changed models/customers.sql while every input table stayed normal, and the drop to 62 rows is a table-level effect that likely filters customers and so also shifts the customer_id median. The model-level candidate explains both symptoms more naturally than a change scoped to the customer_id column.\"}"
       },
       "status": "confirmed",
-      "summary": "Commit 8b68c1b changed models/customers.sql while all inputs (stg_customers, stg_orders, stg_payments) stayed normal, and the row-count drop from about 100 to 62 points to a model-level change such as a filter or join, which would also shift the customer_id median. A change scoped to the customer_id column alone explains the row loss less naturally, so it ranks second.",
+      "summary": "Commit 8b68c1b changed models/customers.sql while every input table stayed normal, and the drop to 62 rows is a table-level effect that likely filters customers and so also shifts the customer_id median. The model-level candidate explains both symptoms more naturally than a change scoped to the customer_id column.",
       "symptoms": [
        {
         "column": null,
@@ -7329,10 +7329,10 @@
         1,
         0
        ],
-       "raw_answer": "{\"order\": [2, 1], \"summary\": \"Both candidates point to commit 962c5b8 in models/customers.sql, and all inputs are normal. A row count of 6200 against an expected ~100, together with duplicate customer_id, looks like a join fan-out at the model level rather than a change to a single column, so the model-level framing ranks first.\"}"
+       "raw_answer": "```json\n{\"order\": [2, 1], \"summary\": \"Commit 962c5b8 changed models/customers.sql while all upstream staging tables stayed normal, and the jump from about 100 rows to 6200 together with duplicate customer_id values points to a fan-out join in the model itself. That makes the model-level change the better fit than a change scoped to the customer_id column, which only explains the uniqueness failure directly.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "Both candidates point to commit 962c5b8 in models/customers.sql, and all inputs are normal. A row count of 6200 against an expected ~100, together with duplicate customer_id, looks like a join fan-out at the model level rather than a change to a single column, so the model-level framing ranks first.",
+      "summary": "Commit 962c5b8 changed models/customers.sql while all upstream staging tables stayed normal, and the jump from about 100 rows to 6200 together with duplicate customer_id values points to a fan-out join in the model itself. That makes the model-level change the better fit than a change scoped to the customer_id column, which only explains the uniqueness failure directly.",
       "symptoms": [
        {
         "column": null,
@@ -7833,10 +7833,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate places the cause at seed.stripe_integration_tests.charge_data.amount_refunded itself, the same location as the symptom, so it ranks first by default. Its 'values changed' framing does not quite match the observed missing column, which points to a schema change (dropped or renamed column) in the seed file.\"}"
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it sits directly on the affected seed column. Its framing as changed values fits a missing column only loosely, so the seed file's schema (a renamed or dropped amount_refunded column) is worth checking.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "The only candidate places the cause at seed.stripe_integration_tests.charge_data.amount_refunded itself, the same location as the symptom, so it ranks first by default. Its 'values changed' framing does not quite match the observed missing column, which points to a schema change (dropped or renamed column) in the seed file.",
+      "summary": "Candidate 1 is the only one, and it sits directly on the affected seed column. Its framing as changed values fits a missing column only loosely, so the seed file's schema (a renamed or dropped amount_refunded column) is worth checking.",
       "symptoms": [
        {
         "column": "amount_refunded",
@@ -7888,10 +7888,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate is that source.stripe.stripe.charge.amount_refunded changed, and the column is in fact missing at the source. That missing column plausibly carries through stg_stripe__charge_tmp into stg_stripe__charge as an all-null INTEGER placeholder (null rate 1.0, INTEGER instead of BIGINT), even though the candidate is credited with explaining just one symptom directly.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate points at the source column source.stripe.stripe.charge.amount_refunded, which is missing upstream. Its absence plausibly cascades into the missing tmp column, the null-filled INTEGER fallback in stg_stripe__charge and the 1.0 null rate, though the candidate is credited with only one of the four symptoms.\"}"
       },
       "status": "confirmed",
-      "summary": "The only candidate is that source.stripe.stripe.charge.amount_refunded changed, and the column is in fact missing at the source. That missing column plausibly carries through stg_stripe__charge_tmp into stg_stripe__charge as an all-null INTEGER placeholder (null rate 1.0, INTEGER instead of BIGINT), even though the candidate is credited with explaining just one symptom directly.",
+      "summary": "The only candidate points at the source column source.stripe.stripe.charge.amount_refunded, which is missing upstream. Its absence plausibly cascades into the missing tmp column, the null-filled INTEGER fallback in stg_stripe__charge and the 1.0 null rate, though the candidate is credited with only one of the four symptoms.",
       "symptoms": [
        {
         "column": "amount_refunded",
@@ -8017,10 +8017,10 @@
        "order": [
         0
        ],
-       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it points directly at the seed column trial_end in subscription_history_data, which is where the missing-column symptom was observed. With no upstream lineage, the most likely root cause is a change to the seed file itself, such as the column being dropped or renamed.\"}\n```"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one offered, and it sits directly on the affected column, seed.stripe_integration_tests.subscription_history_data.trial_end. A change at that column accounts for the single symptom, that the column is missing from the schema.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one, and it points directly at the seed column trial_end in subscription_history_data, which is where the missing-column symptom was observed. With no upstream lineage, the most likely root cause is a change to the seed file itself, such as the column being dropped or renamed.",
+      "summary": "Candidate 1 is the only one offered, and it sits directly on the affected column, seed.stripe_integration_tests.subscription_history_data.trial_end. A change at that column accounts for the single symptom, that the column is missing from the schema.",
       "symptoms": [
        {
         "column": "trial_end",
@@ -8072,10 +8072,10 @@
        "order": [
         0
        ],
-       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it sits on the exact column where the symptom appears, source.stripe.stripe.subscription_history.trial_end. Note that the symptom is a missing column, which looks more like an upstream schema change or drop than a change in values.\"}"
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one offered, and it points directly at source.stripe.stripe.subscription_history.trial_end, the column flagged as missing. The symptom looks more like a schema change (the column was dropped or renamed upstream) than changed values, but no other candidate explains it.\"}"
       },
       "status": "confirmed",
-      "summary": "Candidate 1 is the only one, and it sits on the exact column where the symptom appears, source.stripe.stripe.subscription_history.trial_end. Note that the symptom is a missing column, which looks more like an upstream schema change or drop than a change in values.",
+      "summary": "Candidate 1 is the only one offered, and it points directly at source.stripe.stripe.subscription_history.trial_end, the column flagged as missing. The symptom looks more like a schema change (the column was dropped or renamed upstream) than changed values, but no other candidate explains it.",
       "symptoms": [
        {
         "column": "trial_end",
@@ -8123,12 +8123,14 @@
       "proposed": 5,
       "rejected": 4,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate is a change in the values of the seed column billing_threshold_amount_gte, which directly explains the observed max of 8 falling below the expected 8.1..9.9 range. The seed is itself the source of this column, so no upstream cause competes with it.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The only candidate is a change in the values of the seed column billing_threshold_amount_gte, which directly explains the observed max of 8 falling below the expected 8.1..9.9 range. The seed is itself the source of this column, so no upstream cause competes with it.",
       "symptoms": [
        {
         "column": "billing_threshold_amount_gte",
@@ -8176,12 +8178,14 @@
       "proposed": 5,
       "rejected": 4,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one offered and directly explains the distribution anomaly: the max of billing_threshold_amount_gte at the source fell to 8, below the expected 8.1 to 9.9. It does not account for the missing trial_end column in stg_stripe__subscription_tmp, so that schema symptom likely has a separate, unlisted cause.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Candidate 1 is the only one offered and directly explains the distribution anomaly: the max of billing_threshold_amount_gte at the source fell to 8, below the expected 8.1 to 9.9. It does not account for the missing trial_end column in stg_stripe__subscription_tmp, so that schema symptom likely has a separate, unlisted cause.",
       "symptoms": [
        {
         "column": "trial_end",
@@ -8241,7 +8245,7 @@
       "node": "source.stripe.stripe.customer"
      },
      {
-      "column": "bank_account_id",
+      "column": "id",
       "commit": null,
       "node": "source.stripe.stripe.customer"
      }
@@ -8506,12 +8510,12 @@
           "passed": true
          }
         ],
-        "column": "bank_account_id",
+        "column": "id",
         "commit": null,
-        "description": "values of source.stripe.stripe.customer.bank_account_id changed",
+        "description": "values of source.stripe.stripe.customer.id changed",
         "explains": [
          {
-          "column": "bank_account_id",
+          "column": "customer_id",
           "expected": "VARCHAR",
           "node": "model.stripe.stg_stripe__customer",
           "observed": "INTEGER",
@@ -8519,7 +8523,7 @@
           "source": "schema"
          },
          {
-          "column": "bank_account_id",
+          "column": "id",
           "expected": "VARCHAR",
           "node": "model.stripe.stg_stripe__customer_tmp",
           "observed": "INTEGER",
@@ -8527,15 +8531,23 @@
           "source": "schema"
          },
          {
-          "column": "bank_account_id",
+          "column": "customer_id",
           "expected": "VARCHAR",
-          "node": "model.stripe.stripe__customer_overview",
+          "node": "model.stripe.stripe__invoice_details",
           "observed": "INTEGER",
           "severity": "inf",
           "source": "schema"
          },
          {
-          "column": "bank_account_id",
+          "column": "customer_id",
+          "expected": "VARCHAR",
+          "node": "model.stripe.stripe__invoice_line_item_details",
+          "observed": "INTEGER",
+          "severity": "inf",
+          "source": "schema"
+         },
+         {
+          "column": "id",
           "expected": "VARCHAR",
           "node": "source.stripe.stripe.customer",
           "observed": "INTEGER",
@@ -8573,26 +8585,19 @@
           "observed": "0",
           "severity": 5.5,
           "source": "volume"
-         },
-         {
-          "column": "bank_account_id",
-          "expected": "<= 0.9644",
-          "node": "model.stripe.stripe__customer_overview",
-          "observed": "1.0",
-          "severity": 1.777778,
-          "source": "null_rate"
          }
         ],
         "kind": "source_column",
         "lineage": [
-         "source.stripe.stripe.customer.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer_tmp",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer_tmp.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stripe__customer_overview",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stripe__customer_overview.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> source.stripe.stripe.customer"
+         "source.stripe.stripe.customer.id",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer.customer_id",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer_tmp",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer_tmp.id",
+         "source.stripe.stripe.customer.id -> model.stripe.stripe__customer_overview",
+         "source.stripe.stripe.customer.id -> model.stripe.stripe__invoice_details.customer_id",
+         "source.stripe.stripe.customer.id -> model.stripe.stripe__invoice_line_item_details.customer_id",
+         "source.stripe.stripe.customer.id -> source.stripe.stripe.customer"
         ],
         "mode": "observed",
         "node": "source.stripe.stripe.customer",
@@ -8603,12 +8608,19 @@
       "proposed": 105,
       "rejected": 93,
       "rerank": {
-       "completed_by_rule": 6,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        1,
+        3,
+        2,
+        4,
+        5
+       ],
+       "raw_answer": "```json\n{\"order\": [1, 2, 4, 3, 5, 6], \"summary\": \"Every candidate is a column of source.stripe.stripe.customer, which came back empty with every column typed INTEGER, so the real fault is probably a table-level replacement or emptying that no single column fully captures. Candidates are ranked by how many downstream symptoms each explains, with name widest (customer_name spreads to many marts) and id ranked above other 9-symptom columns because it is the join key feeding the customer-keyed models.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Every candidate is a column of source.stripe.stripe.customer, which came back empty with every column typed INTEGER, so the real fault is probably a table-level replacement or emptying that no single column fully captures. Candidates are ranked by how many downstream symptoms each explains, with name widest (customer_name spreads to many marts) and id ranked above other 9-symptom columns because it is the join key feeding the customer-keyed models.",
       "symptoms": [
        {
         "column": "bank_account_id",
@@ -9078,6 +9090,44 @@
           "passed": true
          }
         ],
+        "column": "id",
+        "commit": null,
+        "description": "values of seed.stripe_integration_tests.customer_data.id changed",
+        "explains": [
+         {
+          "column": "id",
+          "expected": "VARCHAR",
+          "node": "seed.stripe_integration_tests.customer_data",
+          "observed": "INTEGER",
+          "severity": "inf",
+          "source": "schema"
+         },
+         {
+          "column": null,
+          "expected": "11..13",
+          "node": "seed.stripe_integration_tests.customer_data",
+          "observed": "0",
+          "severity": 5.5,
+          "source": "volume"
+         }
+        ],
+        "kind": "source_column",
+        "lineage": [
+         "seed.stripe_integration_tests.customer_data.id",
+         "seed.stripe_integration_tests.customer_data.id -> seed.stripe_integration_tests.customer_data"
+        ],
+        "mode": "observed",
+        "node": "seed.stripe_integration_tests.customer_data",
+        "strength": 3
+       },
+       {
+        "checks": [
+         {
+          "detail": "1 symptoms",
+          "name": "the column itself is off",
+          "passed": true
+         }
+        ],
         "column": "bank_account_id",
         "commit": null,
         "description": "values of seed.stripe_integration_tests.customer_data.bank_account_id changed",
@@ -9116,50 +9166,12 @@
           "passed": true
          }
         ],
-        "column": "delinquent",
+        "column": "invoice_prefix",
         "commit": null,
-        "description": "values of seed.stripe_integration_tests.customer_data.delinquent changed",
+        "description": "values of seed.stripe_integration_tests.customer_data.invoice_prefix changed",
         "explains": [
          {
-          "column": "delinquent",
-          "expected": "BOOLEAN",
-          "node": "seed.stripe_integration_tests.customer_data",
-          "observed": "INTEGER",
-          "severity": "inf",
-          "source": "schema"
-         },
-         {
-          "column": null,
-          "expected": "11..13",
-          "node": "seed.stripe_integration_tests.customer_data",
-          "observed": "0",
-          "severity": 5.5,
-          "source": "volume"
-         }
-        ],
-        "kind": "source_column",
-        "lineage": [
-         "seed.stripe_integration_tests.customer_data.delinquent",
-         "seed.stripe_integration_tests.customer_data.delinquent -> seed.stripe_integration_tests.customer_data"
-        ],
-        "mode": "observed",
-        "node": "seed.stripe_integration_tests.customer_data",
-        "strength": 3
-       },
-       {
-        "checks": [
-         {
-          "detail": "1 symptoms",
-          "name": "the column itself is off",
-          "passed": true
-         }
-        ],
-        "column": "id",
-        "commit": null,
-        "description": "values of seed.stripe_integration_tests.customer_data.id changed",
-        "explains": [
-         {
-          "column": "id",
+          "column": "invoice_prefix",
           "expected": "VARCHAR",
           "node": "seed.stripe_integration_tests.customer_data",
           "observed": "INTEGER",
@@ -9177,8 +9189,8 @@
         ],
         "kind": "source_column",
         "lineage": [
-         "seed.stripe_integration_tests.customer_data.id",
-         "seed.stripe_integration_tests.customer_data.id -> seed.stripe_integration_tests.customer_data"
+         "seed.stripe_integration_tests.customer_data.invoice_prefix",
+         "seed.stripe_integration_tests.customer_data.invoice_prefix -> seed.stripe_integration_tests.customer_data"
         ],
         "mode": "observed",
         "node": "seed.stripe_integration_tests.customer_data",
@@ -9189,12 +9201,19 @@
       "proposed": 17,
       "rejected": 5,
       "rerank": {
-       "completed_by_rule": 6,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        2,
+        0,
+        3,
+        1,
+        4,
+        5
+       ],
+       "raw_answer": "{\"order\": [3, 1, 4, 2, 5, 6], \"summary\": \"The seed customer_data loaded 0 rows, so every column defaulted to INTEGER and the freshness columns are null; this looks like one empty or failed seed load, not separate column-value changes. All candidates explain the same two symptoms, so id ranks first as the key column, then the other VARCHAR-typed columns, then the boolean columns.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The seed customer_data loaded 0 rows, so every column defaulted to INTEGER and the freshness columns are null; this looks like one empty or failed seed load, not separate column-value changes. All candidates explain the same two symptoms, so id ranks first as the key column, then the other VARCHAR-typed columns, then the boolean columns.",
       "symptoms": [
        {
         "column": "bank_account_id",
@@ -9334,7 +9353,7 @@
       "node": "source.stripe.stripe.customer"
      },
      {
-      "column": "bank_account_id",
+      "column": "id",
       "commit": null,
       "node": "source.stripe.stripe.customer"
      }
@@ -9599,12 +9618,12 @@
           "passed": true
          }
         ],
-        "column": "bank_account_id",
+        "column": "id",
         "commit": null,
-        "description": "values of source.stripe.stripe.customer.bank_account_id changed",
+        "description": "values of source.stripe.stripe.customer.id changed",
         "explains": [
          {
-          "column": "bank_account_id",
+          "column": "customer_id",
           "expected": "VARCHAR",
           "node": "model.stripe.stg_stripe__customer",
           "observed": "INTEGER",
@@ -9612,7 +9631,7 @@
           "source": "schema"
          },
          {
-          "column": "bank_account_id",
+          "column": "id",
           "expected": "VARCHAR",
           "node": "model.stripe.stg_stripe__customer_tmp",
           "observed": "INTEGER",
@@ -9620,15 +9639,23 @@
           "source": "schema"
          },
          {
-          "column": "bank_account_id",
+          "column": "customer_id",
           "expected": "VARCHAR",
-          "node": "model.stripe.stripe__customer_overview",
+          "node": "model.stripe.stripe__invoice_details",
           "observed": "INTEGER",
           "severity": "inf",
           "source": "schema"
          },
          {
-          "column": "bank_account_id",
+          "column": "customer_id",
+          "expected": "VARCHAR",
+          "node": "model.stripe.stripe__invoice_line_item_details",
+          "observed": "INTEGER",
+          "severity": "inf",
+          "source": "schema"
+         },
+         {
+          "column": "id",
           "expected": "VARCHAR",
           "node": "source.stripe.stripe.customer",
           "observed": "INTEGER",
@@ -9666,26 +9693,19 @@
           "observed": "0",
           "severity": 5.5,
           "source": "volume"
-         },
-         {
-          "column": "bank_account_id",
-          "expected": "<= 0.9644",
-          "node": "model.stripe.stripe__customer_overview",
-          "observed": "1.0",
-          "severity": 1.777778,
-          "source": "null_rate"
          }
         ],
         "kind": "source_column",
         "lineage": [
-         "source.stripe.stripe.customer.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer_tmp",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stg_stripe__customer_tmp.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stripe__customer_overview",
-         "source.stripe.stripe.customer.bank_account_id -> model.stripe.stripe__customer_overview.bank_account_id",
-         "source.stripe.stripe.customer.bank_account_id -> source.stripe.stripe.customer"
+         "source.stripe.stripe.customer.id",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer.customer_id",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer_tmp",
+         "source.stripe.stripe.customer.id -> model.stripe.stg_stripe__customer_tmp.id",
+         "source.stripe.stripe.customer.id -> model.stripe.stripe__customer_overview",
+         "source.stripe.stripe.customer.id -> model.stripe.stripe__invoice_details.customer_id",
+         "source.stripe.stripe.customer.id -> model.stripe.stripe__invoice_line_item_details.customer_id",
+         "source.stripe.stripe.customer.id -> source.stripe.stripe.customer"
         ],
         "mode": "observed",
         "node": "source.stripe.stripe.customer",
@@ -9696,12 +9716,19 @@
       "proposed": 105,
       "rejected": 93,
       "rerank": {
-       "completed_by_rule": 6,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        1,
+        3,
+        2,
+        4,
+        5
+       ],
+       "raw_answer": "{\"order\": [1, 2, 4, 3, 5, 6], \"summary\": \"Every candidate sits on the same source table, source.stripe.stripe.customer, which arrived empty (volume 0) with every column typed INTEGER, so this looks like a whole-table load failure rather than one bad column. The ranking follows symptom coverage: name reaches the most downstream customer_name columns, and id is placed ahead of its equal-count peers because it is the join key behind the customer_overview and invoice-detail symptoms.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Every candidate sits on the same source table, source.stripe.stripe.customer, which arrived empty (volume 0) with every column typed INTEGER, so this looks like a whole-table load failure rather than one bad column. The ranking follows symptom coverage: name reaches the most downstream customer_name columns, and id is placed ahead of its equal-count peers because it is the join key behind the customer_overview and invoice-detail symptoms.",
       "symptoms": [
        {
         "column": "bank_account_id",
@@ -10171,6 +10198,44 @@
           "passed": true
          }
         ],
+        "column": "id",
+        "commit": null,
+        "description": "values of seed.stripe_integration_tests.customer_data.id changed",
+        "explains": [
+         {
+          "column": "id",
+          "expected": "VARCHAR",
+          "node": "seed.stripe_integration_tests.customer_data",
+          "observed": "INTEGER",
+          "severity": "inf",
+          "source": "schema"
+         },
+         {
+          "column": null,
+          "expected": "11..13",
+          "node": "seed.stripe_integration_tests.customer_data",
+          "observed": "0",
+          "severity": 5.5,
+          "source": "volume"
+         }
+        ],
+        "kind": "source_column",
+        "lineage": [
+         "seed.stripe_integration_tests.customer_data.id",
+         "seed.stripe_integration_tests.customer_data.id -> seed.stripe_integration_tests.customer_data"
+        ],
+        "mode": "observed",
+        "node": "seed.stripe_integration_tests.customer_data",
+        "strength": 3
+       },
+       {
+        "checks": [
+         {
+          "detail": "1 symptoms",
+          "name": "the column itself is off",
+          "passed": true
+         }
+        ],
         "column": "bank_account_id",
         "commit": null,
         "description": "values of seed.stripe_integration_tests.customer_data.bank_account_id changed",
@@ -10209,50 +10274,12 @@
           "passed": true
          }
         ],
-        "column": "delinquent",
+        "column": "invoice_prefix",
         "commit": null,
-        "description": "values of seed.stripe_integration_tests.customer_data.delinquent changed",
+        "description": "values of seed.stripe_integration_tests.customer_data.invoice_prefix changed",
         "explains": [
          {
-          "column": "delinquent",
-          "expected": "BOOLEAN",
-          "node": "seed.stripe_integration_tests.customer_data",
-          "observed": "INTEGER",
-          "severity": "inf",
-          "source": "schema"
-         },
-         {
-          "column": null,
-          "expected": "11..13",
-          "node": "seed.stripe_integration_tests.customer_data",
-          "observed": "0",
-          "severity": 5.5,
-          "source": "volume"
-         }
-        ],
-        "kind": "source_column",
-        "lineage": [
-         "seed.stripe_integration_tests.customer_data.delinquent",
-         "seed.stripe_integration_tests.customer_data.delinquent -> seed.stripe_integration_tests.customer_data"
-        ],
-        "mode": "observed",
-        "node": "seed.stripe_integration_tests.customer_data",
-        "strength": 3
-       },
-       {
-        "checks": [
-         {
-          "detail": "1 symptoms",
-          "name": "the column itself is off",
-          "passed": true
-         }
-        ],
-        "column": "id",
-        "commit": null,
-        "description": "values of seed.stripe_integration_tests.customer_data.id changed",
-        "explains": [
-         {
-          "column": "id",
+          "column": "invoice_prefix",
           "expected": "VARCHAR",
           "node": "seed.stripe_integration_tests.customer_data",
           "observed": "INTEGER",
@@ -10270,8 +10297,8 @@
         ],
         "kind": "source_column",
         "lineage": [
-         "seed.stripe_integration_tests.customer_data.id",
-         "seed.stripe_integration_tests.customer_data.id -> seed.stripe_integration_tests.customer_data"
+         "seed.stripe_integration_tests.customer_data.invoice_prefix",
+         "seed.stripe_integration_tests.customer_data.invoice_prefix -> seed.stripe_integration_tests.customer_data"
         ],
         "mode": "observed",
         "node": "seed.stripe_integration_tests.customer_data",
@@ -10282,12 +10309,19 @@
       "proposed": 17,
       "rejected": 5,
       "rerank": {
-       "completed_by_rule": 6,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        2,
+        0,
+        3,
+        1,
+        4,
+        5
+       ],
+       "raw_answer": "```json\n{\"order\": [3, 1, 4, 2, 5, 6], \"summary\": \"All candidates are structurally equivalent: each explains its own column's type change plus the shared zero-row volume symptom. The pattern of every column being inferred as INTEGER with 0 rows suggests the seed loaded empty, so the primary key `id` is ranked first as the most plausible single-column signal, followed by the other VARCHAR and then BOOLEAN columns.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "All candidates are structurally equivalent: each explains its own column's type change plus the shared zero-row volume symptom. The pattern of every column being inferred as INTEGER with 0 rows suggests the seed loaded empty, so the primary key `id` is ranked first as the most plausible single-column signal, followed by the other VARCHAR and then BOOLEAN columns.",
       "symptoms": [
        {
         "column": "bank_account_id",
@@ -10585,12 +10619,16 @@
       "proposed": 7,
       "rejected": 4,
       "rerank": {
-       "completed_by_rule": 3,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        1,
+        2
+       ],
+       "raw_answer": "```json\n{\"order\": [1, 2, 3], \"summary\": \"Candidate 1, the duplicated coupon.id at the source, is the most likely root cause: a duplicated row would also shift the other columns' null rates and medians, including the unexplained max_redemptions and percent_off shifts. The duration_in_months and amount_off changes each explain only their own column's symptoms and may be side effects of the duplication.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Candidate 1, the duplicated coupon.id at the source, is the most likely root cause: a duplicated row would also shift the other columns' null rates and medians, including the unexplained max_redemptions and percent_off shifts. The duration_in_months and amount_off changes each explain only their own column's symptoms and may be side effects of the duplication.",
       "symptoms": [
        {
         "column": "amount_off",
@@ -10776,12 +10814,16 @@
       "proposed": 5,
       "rejected": 2,
       "rerank": {
-       "completed_by_rule": 3,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        1,
+        2
+       ],
+       "raw_answer": "```json\n{\"order\": [1, 2, 3], \"summary\": \"Each candidate explains only its own symptom, but the duplicate id (10 distinct across 11 rows) suggests an extra or duplicated row in the coupon seed, which could also nudge the amount_off null rate and the duration_in_months median. The id change therefore ranks first, then the large median shift, then the marginal null-rate exceedance.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Each candidate explains only its own symptom, but the duplicate id (10 distinct across 11 rows) suggests an extra or duplicated row in the coupon seed, which could also nudge the amount_off null rate and the duration_in_months median. The id change therefore ranks first, then the large median shift, then the marginal null-rate exceedance.",
       "symptoms": [
        {
         "column": "amount_off",
@@ -10980,80 +11022,6 @@
        {
         "checks": [
          {
-          "detail": "1 symptoms",
-          "name": "the column itself is off",
-          "passed": true
-         }
-        ],
-        "column": "balance_transaction_id",
-        "commit": null,
-        "description": "values of source.stripe.stripe.fee.balance_transaction_id changed",
-        "explains": [
-         {
-          "column": null,
-          "expected": "12..14",
-          "node": "model.stripe.stg_stripe__fee",
-          "observed": "15",
-          "severity": 0.5,
-          "source": "volume"
-         },
-         {
-          "column": null,
-          "expected": "12..14",
-          "node": "model.stripe.stg_stripe__fee_tmp",
-          "observed": "15",
-          "severity": 0.5,
-          "source": "volume"
-         },
-         {
-          "column": null,
-          "expected": "12..14",
-          "node": "source.stripe.stripe.fee",
-          "observed": "15",
-          "severity": 0.5,
-          "source": "volume"
-         },
-         {
-          "column": "balance_transaction_id",
-          "expected": "unique",
-          "node": "model.stripe.stg_stripe__fee",
-          "observed": "13 distinct / 15 rows",
-          "severity": 2.0,
-          "source": "duplicates"
-         },
-         {
-          "column": "balance_transaction_id",
-          "expected": "unique",
-          "node": "model.stripe.stg_stripe__fee_tmp",
-          "observed": "13 distinct / 15 rows",
-          "severity": 2.0,
-          "source": "duplicates"
-         },
-         {
-          "column": "balance_transaction_id",
-          "expected": "unique",
-          "node": "source.stripe.stripe.fee",
-          "observed": "13 distinct / 15 rows",
-          "severity": 2.0,
-          "source": "duplicates"
-         }
-        ],
-        "kind": "source_column",
-        "lineage": [
-         "source.stripe.stripe.fee.balance_transaction_id",
-         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee",
-         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee.balance_transaction_id",
-         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee_tmp",
-         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee_tmp.balance_transaction_id",
-         "source.stripe.stripe.fee.balance_transaction_id -> source.stripe.stripe.fee"
-        ],
-        "mode": "observed",
-        "node": "source.stripe.stripe.fee",
-        "strength": 3
-       },
-       {
-        "checks": [
-         {
           "detail": "1 table-level symptoms",
           "name": "the table itself is off",
           "passed": true
@@ -11151,18 +11119,97 @@
         "mode": "observed",
         "node": "source.stripe.stripe.fee",
         "strength": 2
+       },
+       {
+        "checks": [
+         {
+          "detail": "1 symptoms",
+          "name": "the column itself is off",
+          "passed": true
+         }
+        ],
+        "column": "balance_transaction_id",
+        "commit": null,
+        "description": "values of source.stripe.stripe.fee.balance_transaction_id changed",
+        "explains": [
+         {
+          "column": null,
+          "expected": "12..14",
+          "node": "model.stripe.stg_stripe__fee",
+          "observed": "15",
+          "severity": 0.5,
+          "source": "volume"
+         },
+         {
+          "column": null,
+          "expected": "12..14",
+          "node": "model.stripe.stg_stripe__fee_tmp",
+          "observed": "15",
+          "severity": 0.5,
+          "source": "volume"
+         },
+         {
+          "column": null,
+          "expected": "12..14",
+          "node": "source.stripe.stripe.fee",
+          "observed": "15",
+          "severity": 0.5,
+          "source": "volume"
+         },
+         {
+          "column": "balance_transaction_id",
+          "expected": "unique",
+          "node": "model.stripe.stg_stripe__fee",
+          "observed": "13 distinct / 15 rows",
+          "severity": 2.0,
+          "source": "duplicates"
+         },
+         {
+          "column": "balance_transaction_id",
+          "expected": "unique",
+          "node": "model.stripe.stg_stripe__fee_tmp",
+          "observed": "13 distinct / 15 rows",
+          "severity": 2.0,
+          "source": "duplicates"
+         },
+         {
+          "column": "balance_transaction_id",
+          "expected": "unique",
+          "node": "source.stripe.stripe.fee",
+          "observed": "13 distinct / 15 rows",
+          "severity": 2.0,
+          "source": "duplicates"
+         }
+        ],
+        "kind": "source_column",
+        "lineage": [
+         "source.stripe.stripe.fee.balance_transaction_id",
+         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee",
+         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee.balance_transaction_id",
+         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee_tmp",
+         "source.stripe.stripe.fee.balance_transaction_id -> model.stripe.stg_stripe__fee_tmp.balance_transaction_id",
+         "source.stripe.stripe.fee.balance_transaction_id -> source.stripe.stripe.fee"
+        ],
+        "mode": "observed",
+        "node": "source.stripe.stripe.fee",
+        "strength": 3
        }
       ],
       "incident": 1,
       "proposed": 5,
       "rejected": 1,
       "rerank": {
-       "completed_by_rule": 4,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        2,
+        1,
+        3
+       ],
+       "raw_answer": "{\"order\": [1, 3, 2, 4], \"summary\": \"Duplicate rows in source.stripe.stripe.fee explain all nine symptoms: +2 rows with no new distinct balance_transaction_id keys raise the volume, shift the amount mean and break uniqueness, and this propagates through stg_stripe__fee_tmp to stg_stripe__fee. A generic row change also covers everything but is less specific, while value changes to balance_transaction_id or amount each explain only six symptoms.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Duplicate rows in source.stripe.stripe.fee explain all nine symptoms: +2 rows with no new distinct balance_transaction_id keys raise the volume, shift the amount mean and break uniqueness, and this propagates through stg_stripe__fee_tmp to stg_stripe__fee. A generic row change also covers everything but is less specific, while value changes to balance_transaction_id or amount each explain only six symptoms.",
       "symptoms": [
        {
         "column": null,
@@ -11305,44 +11352,6 @@
        {
         "checks": [
          {
-          "detail": "1 symptoms",
-          "name": "the column itself is off",
-          "passed": true
-         }
-        ],
-        "column": "balance_transaction_id",
-        "commit": null,
-        "description": "values of seed.stripe_integration_tests.fee_data.balance_transaction_id changed",
-        "explains": [
-         {
-          "column": null,
-          "expected": "12..14",
-          "node": "seed.stripe_integration_tests.fee_data",
-          "observed": "15",
-          "severity": 0.5,
-          "source": "volume"
-         },
-         {
-          "column": "balance_transaction_id",
-          "expected": "unique",
-          "node": "seed.stripe_integration_tests.fee_data",
-          "observed": "13 distinct / 15 rows",
-          "severity": 2.0,
-          "source": "duplicates"
-         }
-        ],
-        "kind": "source_column",
-        "lineage": [
-         "seed.stripe_integration_tests.fee_data.balance_transaction_id",
-         "seed.stripe_integration_tests.fee_data.balance_transaction_id -> seed.stripe_integration_tests.fee_data"
-        ],
-        "mode": "observed",
-        "node": "seed.stripe_integration_tests.fee_data",
-        "strength": 3
-       },
-       {
-        "checks": [
-         {
           "detail": "1 table-level symptoms",
           "name": "the table itself is off",
           "passed": true
@@ -11386,18 +11395,61 @@
         "mode": "observed",
         "node": "seed.stripe_integration_tests.fee_data",
         "strength": 2
+       },
+       {
+        "checks": [
+         {
+          "detail": "1 symptoms",
+          "name": "the column itself is off",
+          "passed": true
+         }
+        ],
+        "column": "balance_transaction_id",
+        "commit": null,
+        "description": "values of seed.stripe_integration_tests.fee_data.balance_transaction_id changed",
+        "explains": [
+         {
+          "column": null,
+          "expected": "12..14",
+          "node": "seed.stripe_integration_tests.fee_data",
+          "observed": "15",
+          "severity": 0.5,
+          "source": "volume"
+         },
+         {
+          "column": "balance_transaction_id",
+          "expected": "unique",
+          "node": "seed.stripe_integration_tests.fee_data",
+          "observed": "13 distinct / 15 rows",
+          "severity": 2.0,
+          "source": "duplicates"
+         }
+        ],
+        "kind": "source_column",
+        "lineage": [
+         "seed.stripe_integration_tests.fee_data.balance_transaction_id",
+         "seed.stripe_integration_tests.fee_data.balance_transaction_id -> seed.stripe_integration_tests.fee_data"
+        ],
+        "mode": "observed",
+        "node": "seed.stripe_integration_tests.fee_data",
+        "strength": 3
        }
       ],
       "incident": 2,
       "proposed": 5,
       "rejected": 1,
       "rerank": {
-       "completed_by_rule": 4,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        2,
+        1,
+        3
+       ],
+       "raw_answer": "{\"order\": [1, 3, 2, 4], \"summary\": \"Two duplicated balance_transaction_id rows (+2 rows, +0 distinct keys on a key that is unique in every reference run) explain the excess volume, the duplicate key and the shifted amount mean together. A generic row change also covers all three symptoms but is less specific, and the column-value candidates each explain only two.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Two duplicated balance_transaction_id rows (+2 rows, +0 distinct keys on a key that is unique in every reference run) explain the excess volume, the duplicate key and the shifted amount mean together. A generic row change also covers all three symptoms but is less specific, and the column-value candidates each explain only two.",
       "symptoms": [
        {
         "column": null,
@@ -11524,12 +11576,14 @@
       "proposed": 3,
       "rejected": 2,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"Candidate 1 is the only one listed: the null rate in source.stripe.stripe.coupon.duration jumped to about 70%. That increase flows directly into stg_stripe__coupon_tmp and stg_stripe__coupon, which explains all three symptoms.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Candidate 1 is the only one listed: the null rate in source.stripe.stripe.coupon.duration jumped to about 70%. That increase flows directly into stg_stripe__coupon_tmp and stg_stripe__coupon, which explains all three symptoms.",
       "symptoms": [
        {
         "column": "duration",
@@ -11593,12 +11647,14 @@
       "proposed": 3,
       "rejected": 2,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it accounts directly for the observed symptom: the null rate of coupon_data.duration rose to 0.7 against an expected maximum of 0.02. The lineage points straight at the seed column, so the cause is a change in that seed's values rather than anything upstream.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Candidate 1 is the only one, and it accounts directly for the observed symptom: the null rate of coupon_data.duration rose to 0.7 against an expected maximum of 0.02. The lineage points straight at the seed column, so the cause is a change in that seed's values rather than anything upstream.",
       "symptoms": [
        {
         "column": "duration",
@@ -11709,12 +11765,14 @@
       "proposed": 12,
       "rejected": 11,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"The only candidate is a change in the values of source.stripe.stripe.charge.amount_refunded, and it accounts for all three symptoms. The same 0.375 null rate appears at the source and propagates unchanged through stg_stripe__charge_tmp and stg_stripe__charge.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The only candidate is a change in the values of source.stripe.stripe.charge.amount_refunded, and it accounts for all three symptoms. The same 0.375 null rate appears at the source and propagates unchanged through stg_stripe__charge_tmp and stg_stripe__charge.",
       "symptoms": [
        {
         "column": "amount_refunded",
@@ -11778,12 +11836,14 @@
       "proposed": 12,
       "rejected": 11,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"The only candidate is a change in the values of seed.stripe_integration_tests.charge_data.amount_refunded, which accounts directly for the observed null rate of 0.375 against a threshold of 0.02. It sits on the column where the symptom was measured and needs no upstream lineage to explain it.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The only candidate is a change in the values of seed.stripe_integration_tests.charge_data.amount_refunded, which accounts directly for the observed null rate of 0.375 against a threshold of 0.02. It sits on the column where the symptom was measured and needs no upstream lineage to explain it.",
       "symptoms": [
        {
         "column": "amount_refunded",
@@ -11894,12 +11954,14 @@
       "proposed": 8,
       "rejected": 7,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"The mean of the source column source.stripe.stripe.payout.amount fell by about 100x, and the same shift appears unchanged in both downstream staging models. This makes the changed source values the root cause of all three symptoms.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The mean of the source column source.stripe.stripe.payout.amount fell by about 100x, and the same shift appears unchanged in both downstream staging models. This makes the changed source values the root cause of all three symptoms.",
       "symptoms": [
        {
         "column": "amount",
@@ -11963,12 +12025,14 @@
       "proposed": 8,
       "rejected": 7,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate is a direct value change in seed.stripe_integration_tests.payout_data.amount, which fully explains the distribution anomaly at that same column. The observed mean is roughly 100x below the expected range, which suggests a units shift such as cents versus dollars in the seed data.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The only candidate is a direct value change in seed.stripe_integration_tests.payout_data.amount, which fully explains the distribution anomaly at that same column. The observed mean is roughly 100x below the expected range, which suggests a units shift such as cents versus dollars in the seed data.",
       "symptoms": [
        {
         "column": "amount",
@@ -12079,12 +12143,14 @@
       "proposed": 4,
       "rejected": 3,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"The mean of source.stripe.stripe.fee.amount (69426.7) is well above the expected 23220.4..29283.3 range. The identical shift in stg_stripe__fee_tmp and stg_stripe__fee follows from lineage, so the upstream source value change is the only and most likely root cause.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The mean of source.stripe.stripe.fee.amount (69426.7) is well above the expected 23220.4..29283.3 range. The identical shift in stg_stripe__fee_tmp and stg_stripe__fee follows from lineage, so the upstream source value change is the only and most likely root cause.",
       "symptoms": [
        {
         "column": "amount",
@@ -12148,12 +12214,14 @@
       "proposed": 4,
       "rejected": 3,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate is a change in the values of seed.stripe_integration_tests.fee_data.amount, which directly explains the observed mean of 69426.7 sitting well above the expected range of 23220.4\u201329283.3. The symptom and the cause are on the same seed column, with no upstream lineage involved.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The only candidate is a change in the values of seed.stripe_integration_tests.fee_data.amount, which directly explains the observed mean of 69426.7 sitting well above the expected range of 23220.4\u201329283.3. The symptom and the cause are on the same seed column, with no upstream lineage involved.",
       "symptoms": [
        {
         "column": "amount",
@@ -12205,7 +12273,7 @@
       "node": "model.stripe.int_stripe__account_rolling_totals"
      },
      {
-      "column": "rolling_total_daily_adjustments_amount",
+      "column": "rolling_total_daily_failed_charge_amount",
       "commit": "dbb8263063fc6878bac31253c8d414af5bcbe716",
       "node": "model.stripe.int_stripe__account_rolling_totals"
      }
@@ -13585,7 +13653,7 @@
           "passed": true
          },
          {
-          "detail": "1 symptoms",
+          "detail": "2 symptoms",
           "name": "the column itself is off",
           "passed": true
          },
@@ -13600,9 +13668,9 @@
           "passed": true
          }
         ],
-        "column": "rolling_total_daily_adjustments_amount",
+        "column": "rolling_total_daily_failed_charge_amount",
         "commit": "dbb8263063fc6878bac31253c8d414af5bcbe716",
-        "description": "code change in model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount (commit dbb8263)",
+        "description": "code change in model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount (commit dbb8263)",
         "explains": [
          {
           "column": "rolling_daily_end_balance_amount",
@@ -14207,51 +14275,51 @@
         ],
         "kind": "code_change",
         "lineage": [
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_daily_end_balance_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_daily_net_activity_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_adjustments_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_adjustments_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_failed_charge_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_failed_charge_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_gross_payout_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_gross_transaction_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_net_transactions_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_other_transactions_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_payout_fee_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_payouts_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_refunds_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_sales_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_sales_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_daily_end_balance_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_daily_net_activity_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_gross_payout_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_gross_transaction_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_net_transactions_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_other_transactions_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_payout_fee_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_payouts_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_refunds_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_sales_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_sales_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_daily_end_balance_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_daily_net_activity_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_adjustments_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_adjustments_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_failed_charge_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_failed_charge_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_gross_payout_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_gross_transaction_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_net_transactions_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_other_transactions_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_payout_fee_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_payouts_count",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_refunds_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_sales_amount",
-         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_sales_count"
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_daily_end_balance_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_daily_net_activity_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_adjustments_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_adjustments_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_failed_charge_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_failed_charge_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_gross_payout_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_gross_transaction_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_net_transactions_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_other_transactions_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_payout_fee_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_payouts_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_refunds_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_sales_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_partitions.rolling_total_daily_sales_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_daily_end_balance_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_daily_net_activity_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_adjustments_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_gross_payout_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_gross_transaction_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_net_transactions_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_other_transactions_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_payout_fee_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_payouts_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_refunds_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_sales_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_sales_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_daily_end_balance_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_daily_net_activity_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_adjustments_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_adjustments_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_failed_charge_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_failed_charge_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_gross_payout_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_gross_transaction_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_net_transactions_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_other_transactions_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_payout_fee_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_payouts_count",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_refunds_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_sales_amount",
+         "model.stripe.int_stripe__account_rolling_totals.rolling_total_daily_failed_charge_amount -> model.stripe.stripe__daily_overview.rolling_total_daily_sales_count"
         ],
         "mode": "observed",
         "node": "model.stripe.int_stripe__account_rolling_totals",
@@ -14262,12 +14330,19 @@
       "proposed": 103,
       "rejected": 87,
       "rerank": {
-       "completed_by_rule": 6,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        1,
+        4,
+        5,
+        2,
+        3
+       ],
+       "raw_answer": "{\"order\": [1, 2, 5, 6, 3, 4], \"summary\": \"Every candidate points to the same commit dbb8263 in int_stripe__account_rolling_totals.sql, and each explains all 75 DOUBLE-type symptoms downstream while its inputs are normal, so the change most likely cast all the rolling columns to DOUBLE. Candidates whose own column shows two direct symptoms rank slightly above those showing one, but they are nearly interchangeable.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Every candidate points to the same commit dbb8263 in int_stripe__account_rolling_totals.sql, and each explains all 75 DOUBLE-type symptoms downstream while its inputs are normal, so the change most likely cast all the rolling columns to DOUBLE. Candidates whose own column shows two direct symptoms rank slightly above those showing one, but they are nearly interchangeable.",
       "symptoms": [
        {
         "column": "rolling_daily_end_balance_amount",
@@ -15114,12 +15189,15 @@
       "proposed": 83,
       "rejected": 81,
       "rerank": {
-       "completed_by_rule": 2,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        1
+       ],
+       "raw_answer": "{\"order\": [1, 2], \"summary\": \"Commit 48204bd changed int_stripe__account_daily. Candidate 1 pins the change to the total_daily_other_transactions_amount column, whose type switched from HUGEINT to DOUBLE while all of its inputs stayed normal, and that change flows down to every affected downstream column; candidate 2 names the same commit but only at the model level, so it is less specific.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Commit 48204bd changed int_stripe__account_daily. Candidate 1 pins the change to the total_daily_other_transactions_amount column, whose type switched from HUGEINT to DOUBLE while all of its inputs stayed normal, and that change flows down to every affected downstream column; candidate 2 names the same commit but only at the model level, so it is less specific.",
       "symptoms": [
        {
         "column": "total_daily_other_transactions_amount",
@@ -15214,7 +15292,7 @@
       "node": "model.stripe.stripe__subscription_item_mrr_report"
      },
      {
-      "column": "prior_month_contract_mrr",
+      "column": null,
       "commit": "fa0a2679264e788a371f931b01e45ec4f053bfa1",
       "node": "model.stripe.stripe__subscription_item_mrr_report"
      },
@@ -15319,13 +15397,8 @@
           "passed": true
          },
          {
-          "detail": "1 symptoms",
-          "name": "the column itself is off",
-          "passed": true
-         },
-         {
-          "detail": "all normal",
-          "name": "every input column is normal",
+          "detail": "5 at the model, 0 below",
+          "name": "the model or a model below it is off",
           "passed": true
          },
          {
@@ -15334,9 +15407,9 @@
           "passed": true
          }
         ],
-        "column": "prior_month_contract_mrr",
+        "column": null,
         "commit": "fa0a2679264e788a371f931b01e45ec4f053bfa1",
-        "description": "code change in model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr (commit fa0a267)",
+        "description": "code change in model.stripe.stripe__subscription_item_mrr_report (commit fa0a267)",
         "explains": [
          {
           "column": null,
@@ -15381,11 +15454,11 @@
         ],
         "kind": "code_change",
         "lineage": [
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report.item_month_number",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report.subscription_month",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report.subscription_year"
+         "model.stripe.stripe__subscription_item_mrr_report",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.item_month_number",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.subscription_month",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.subscription_year"
         ],
         "mode": "observed",
         "node": "model.stripe.stripe__subscription_item_mrr_report",
@@ -15476,12 +15549,18 @@
       "proposed": 40,
       "rejected": 35,
       "rerank": {
-       "completed_by_rule": 5,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0,
+        4,
+        2,
+        3,
+        1
+       ],
+       "raw_answer": "{\"order\": [1, 5, 3, 4, 2], \"summary\": \"Commit fa0a267 looks like it limited the report to rows with item_month_number <= 4, which matches the max of 4, the drop to 4 rows, the stale month and year, and a 0.25 null rate (one first-month null out of four rows). A broader model-level change such as a new WHERE clause is the next best fit, ahead of edits to the date or prior-MRR columns, which would not naturally cut the row count.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Commit fa0a267 looks like it limited the report to rows with item_month_number <= 4, which matches the max of 4, the drop to 4 rows, the stale month and year, and a 0.25 null rate (one first-month null out of four rows). A broader model-level change such as a new WHERE clause is the next best fit, ahead of edits to the date or prior-MRR columns, which would not naturally cut the row count.",
       "symptoms": [
        {
         "column": null,
@@ -15555,17 +15634,17 @@
    "prediction": {
     "candidates": [
      {
+      "column": null,
+      "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
+      "node": "model.stripe.stripe__subscription_item_mrr_report"
+     },
+     {
       "column": "item_month_number",
       "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
       "node": "model.stripe.stripe__subscription_item_mrr_report"
      },
      {
       "column": "month_contract_mrr",
-      "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
-      "node": "model.stripe.stripe__subscription_item_mrr_report"
-     },
-     {
-      "column": "prior_month_contract_mrr",
       "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
       "node": "model.stripe.stripe__subscription_item_mrr_report"
      }
@@ -15577,6 +15656,72 @@
     "incidents": [
      {
       "causes": [
+       {
+        "checks": [
+         {
+          "detail": "packages/stripe/models/stripe__subscription_item_mrr_report.sql",
+          "name": "commit changed the model's file",
+          "passed": true
+         },
+         {
+          "detail": "4 at the model, 0 below",
+          "name": "the model or a model below it is off",
+          "passed": true
+         },
+         {
+          "detail": "model.stripe.int_stripe__subscription_discount, model.stripe.stg_stripe__invoice_line_item, model.stripe.stg_stripe__price_plan, model.stripe.stg_stripe__subscription, model.stripe.stg_stripe__subscription_item",
+          "name": "every input table is normal",
+          "passed": true
+         }
+        ],
+        "column": null,
+        "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
+        "description": "code change in model.stripe.stripe__subscription_item_mrr_report (commit a8beb6f)",
+        "explains": [
+         {
+          "column": null,
+          "expected": "80..82",
+          "node": "model.stripe.stripe__subscription_item_mrr_report",
+          "observed": "648",
+          "severity": 283.0,
+          "source": "volume"
+         },
+         {
+          "column": "item_month_number",
+          "expected": "2.7..3.3",
+          "node": "model.stripe.stripe__subscription_item_mrr_report",
+          "observed": "median=6",
+          "severity": 4.5,
+          "source": "distribution"
+         },
+         {
+          "column": "month_contract_mrr",
+          "expected": "-1e-09..1e-09",
+          "node": "model.stripe.stripe__subscription_item_mrr_report",
+          "observed": "max=9156",
+          "severity": 4577999999999.499,
+          "source": "distribution"
+         },
+         {
+          "column": "prior_month_contract_mrr",
+          "expected": "-1e-09..1e-09",
+          "node": "model.stripe.stripe__subscription_item_mrr_report",
+          "observed": "max=9156",
+          "severity": 4577999999999.499,
+          "source": "distribution"
+         }
+        ],
+        "kind": "code_change",
+        "lineage": [
+         "model.stripe.stripe__subscription_item_mrr_report",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.item_month_number",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.month_contract_mrr",
+         "model.stripe.stripe__subscription_item_mrr_report -> model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr"
+        ],
+        "mode": "observed",
+        "node": "model.stripe.stripe__subscription_item_mrr_report",
+        "strength": 3
+       },
        {
         "checks": [
          {
@@ -15718,89 +15863,23 @@
         "mode": "observed",
         "node": "model.stripe.stripe__subscription_item_mrr_report",
         "strength": 3
-       },
-       {
-        "checks": [
-         {
-          "detail": "packages/stripe/models/stripe__subscription_item_mrr_report.sql",
-          "name": "commit changed the model's file",
-          "passed": true
-         },
-         {
-          "detail": "1 symptoms",
-          "name": "the column itself is off",
-          "passed": true
-         },
-         {
-          "detail": "all normal",
-          "name": "every input column is normal",
-          "passed": true
-         },
-         {
-          "detail": "model.stripe.int_stripe__subscription_discount, model.stripe.stg_stripe__invoice_line_item, model.stripe.stg_stripe__price_plan, model.stripe.stg_stripe__subscription, model.stripe.stg_stripe__subscription_item",
-          "name": "every input table is normal",
-          "passed": true
-         }
-        ],
-        "column": "prior_month_contract_mrr",
-        "commit": "a8beb6f4e621e14538120e5edeab61636ed42032",
-        "description": "code change in model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr (commit a8beb6f)",
-        "explains": [
-         {
-          "column": null,
-          "expected": "80..82",
-          "node": "model.stripe.stripe__subscription_item_mrr_report",
-          "observed": "648",
-          "severity": 283.0,
-          "source": "volume"
-         },
-         {
-          "column": "item_month_number",
-          "expected": "2.7..3.3",
-          "node": "model.stripe.stripe__subscription_item_mrr_report",
-          "observed": "median=6",
-          "severity": 4.5,
-          "source": "distribution"
-         },
-         {
-          "column": "month_contract_mrr",
-          "expected": "-1e-09..1e-09",
-          "node": "model.stripe.stripe__subscription_item_mrr_report",
-          "observed": "max=9156",
-          "severity": 4577999999999.499,
-          "source": "distribution"
-         },
-         {
-          "column": "prior_month_contract_mrr",
-          "expected": "-1e-09..1e-09",
-          "node": "model.stripe.stripe__subscription_item_mrr_report",
-          "observed": "max=9156",
-          "severity": 4577999999999.499,
-          "source": "distribution"
-         }
-        ],
-        "kind": "code_change",
-        "lineage": [
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report.item_month_number",
-         "model.stripe.stripe__subscription_item_mrr_report.prior_month_contract_mrr -> model.stripe.stripe__subscription_item_mrr_report.month_contract_mrr"
-        ],
-        "mode": "observed",
-        "node": "model.stripe.stripe__subscription_item_mrr_report",
-        "strength": 3
        }
       ],
       "incident": 1,
       "proposed": 39,
       "rejected": 35,
       "rerank": {
-       "completed_by_rule": 4,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        3,
+        0,
+        1,
+        2
+       ],
+       "raw_answer": "{\"order\": [4, 1, 2, 3], \"summary\": \"The 8x row increase, together with shifts in item_month_number and both contract-MRR columns, points to a model-level change in commit a8beb6f, such as a fan-out or month-spine join, since all inputs are normal. Among the column candidates, item_month_number is the most plausible because it drives row generation and feeds both MRR columns.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The 8x row increase, together with shifts in item_month_number and both contract-MRR columns, points to a model-level change in commit a8beb6f, such as a fan-out or month-spine join, since all inputs are normal. Among the column candidates, item_month_number is the most plausible because it drives row generation and feeds both MRR columns.",
       "symptoms": [
        {
         "column": null,
@@ -15926,12 +16005,14 @@
       "proposed": 7,
       "rejected": 6,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"The +1 h shift appears first in the source column source.stripe.stripe.customer._fivetran_synced. It then flows unchanged through lineage into stg_stripe__customer_tmp._fivetran_synced, so the source change accounts for both symptoms.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The +1 h shift appears first in the source column source.stripe.stripe.customer._fivetran_synced. It then flows unchanged through lineage into stg_stripe__customer_tmp._fivetran_synced, so the source change accounts for both symptoms.",
       "symptoms": [
        {
         "column": "_fivetran_synced",
@@ -15987,12 +16068,14 @@
       "proposed": 7,
       "rejected": 6,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it directly explains the observed +1 h shift in the seed column _fivetran_synced, which itself shows the change. Because the shift appears at the source seed rather than downstream, the column's values changed at origin.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Candidate 1 is the only one, and it directly explains the observed +1 h shift in the seed column _fivetran_synced, which itself shows the change. Because the shift appears at the source seed rather than downstream, the column's values changed at origin.",
       "symptoms": [
        {
         "column": "_fivetran_synced",
@@ -16103,12 +16186,14 @@
       "proposed": 3,
       "rejected": 2,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "{\"order\": [1], \"summary\": \"The only candidate is stale values in source.stripe.stripe.coupon.created. That column feeds both stg_stripe__coupon.created_at and stg_stripe__coupon_tmp.created, so it accounts for all three freshness failures.\"}"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "The only candidate is stale values in source.stripe.stripe.coupon.created. That column feeds both stg_stripe__coupon.created_at and stg_stripe__coupon_tmp.created, so it accounts for all three freshness failures.",
       "symptoms": [
        {
         "column": "created_at",
@@ -16172,12 +16257,14 @@
       "proposed": 3,
       "rejected": 2,
       "rerank": {
-       "completed_by_rule": 1,
-       "error": "reference API answered 400: You have reached your specified API usage limits. You will regain access on 2026-12-01 at 00:00 UTC.",
-       "order": []
+       "completed_by_rule": 0,
+       "order": [
+        0
+       ],
+       "raw_answer": "```json\n{\"order\": [1], \"summary\": \"Candidate 1 is the only one, and it directly explains the freshness failure. The created column in the seed coupon_data has a latest value of 2024-08-01T07:00:00, two hours behind the expected 09:00:00, so the seed data itself is stale or was changed.\"}\n```"
       },
       "status": "confirmed",
-      "summary": "",
+      "summary": "Candidate 1 is the only one, and it directly explains the freshness failure. The created column in the seed coupon_data has a latest value of 2024-08-01T07:00:00, two hours behind the expected 09:00:00, so the seed data itself is stale or was changed.",
       "symptoms": [
        {
         "column": "created",
