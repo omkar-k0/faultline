@@ -28,6 +28,7 @@ faultline, local models:
 |---|---|---|---|---|---|---|---|
 | base, Ollama | 2.1% (1/48) | 2.1% (1/48) | 14.6% (7/48) | 0.0% (0/48) | 0.0% (0/30) | local | [raw_log_llm.md](raw_log_llm.md) |
 | base, MLX | 2.1% (1/48) | 2.1% (1/48) | 12.5% (6/48) | 0.0% (0/48) | 0.0% (0/30) | local | [raw_log_llm.mlx_base.md](raw_log_llm.mlx_base.md) |
+| tuned on train, MLX | 4.2% (2/48) | 4.2% (2/48) | 18.8% (9/48) | 0.0% (0/48) | 0.0% (0/30) | local | [raw_log_llm.mlx_raw_log.md](raw_log_llm.mlx_raw_log.md) |
 
 Reference line, hosted, not part of faultline:
 

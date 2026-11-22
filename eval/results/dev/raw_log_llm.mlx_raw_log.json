@@ -1,0 +1,2040 @@
+{
+ "archive_sha256": "sha256:4b03de862025322908c3b3036bc9b8d7617139e3a01eb3dd6403ecea504ed5a4",
+ "baseline": "raw_log_llm.mlx_raw_log",
+ "command": "faultline eval --split dev --baseline raw_log_llm --llm-profile mlx_raw_log",
+ "config": {
+  "adapter": "build/adapters/raw_log",
+  "adapter_sha256": "sha256:7c088fb743358c49c41d9451d2e33564faec741f7c69d5b5d144de64b365b9a6",
+  "baseline": "raw_log_llm",
+  "faultline_version": "0.0.1",
+  "model": "default_model",
+  "profile": "mlx_raw_log",
+  "prompt_sha256": "sha256:50962e4105d6a99e66f63bbb59b7df72068cee02a057fa4d03de06a167e67492",
+  "seed": 0,
+  "served_model": "mlx-community/Qwen2.5-7B-Instruct-4bit",
+  "temperature": 0.0
+ },
+ "config_hash": "33a7d003c05e",
+ "incidents": [
+  {
+   "incident_id": "inc_court_cases_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_001",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "judge_name",
+      "commit": null,
+      "node": "seed.court_cases.raw_judges"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.court_cases.raw_judges\", \"column\": \"judge_name\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_court_cases_dev_002",
+    "node_hit_rank": 1,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "scheduled_at_local",
+      "commit": null,
+      "node": "seed.court_cases.raw_hearings"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.court_cases.raw_hearings\", \"column\": \"scheduled_at_local\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_003",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_004",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_005",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "case_id",
+      "commit": null,
+      "node": "seed.court_cases.raw_cases"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.court_cases.raw_cases\", \"column\": \"case_id\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_006",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "filed_at_local",
+      "commit": null,
+      "node": "seed.court_cases.raw_filings"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.court_cases.raw_filings\", \"column\": \"filed_at_local\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_007",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_008",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_009",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_010",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_011",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_012",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_013",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_014",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "hearing_id",
+      "commit": "d35b21249c16012ccc937ba2ff46205d9f485c33",
+      "node": "seed.court_cases.raw_hearings"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.court_cases.raw_hearings\", \"column\": \"hearing_id\", \"commit\": \"d35b21249c16012ccc937ba2ff46205d9f485c33\"}]}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_015",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_016",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_017",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_018",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_019",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_020",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_021",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_022",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_023",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_024",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_025",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_court_cases_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_court_cases_dev_026",
+    "node_hit_rank": null,
+    "project": "court_cases",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_001",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "status",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_payments"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.jaffle_shop.raw_payments\", \"column\": \"status\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_002",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": "23b374c043f0c39ad6dfe5c54406b68b54e7af2d",
+      "node": "seed.jaffle_shop.raw_payments"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.jaffle_shop.raw_payments\", \"column\": \"id\", \"commit\": \"23b374c043f0c39ad6dfe5c54406b68b54e7af2d\"}]}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_003",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_004",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_005",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_payments"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.jaffle_shop.raw_payments\", \"column\": \"id\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_006",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jaffle_shop.raw_payments"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.jaffle_shop.raw_payments\", \"column\": \"id\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_007",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_008",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_009",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_010",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "status",
+      "commit": null,
+      "node": "model.jaffle_shop.orders"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"model.jaffle_shop.orders\", \"column\": \"status\", \"commit\": null}]}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_011",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_012",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_013",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_014",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": "962c5b8d83a70c8319acef5248a8edd47c364c0e",
+      "node": "seed.jaffle_shop.raw_customers"
+     }
+    ],
+    "detected": true
+   },
+   "raw_answer": "{\"incident\": true, \"not_confirmed\": false, \"root_causes\": [{\"node\": \"seed.jaffle_shop.raw_customers\", \"column\": \"id\", \"commit\": \"962c5b8d83a70c8319acef5248a8edd47c364c0e\"}]}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_015",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_016",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_017",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_018",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_019",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_020",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_021",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_022",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_023",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_024",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_025",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_jaffle_shop_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jaffle_shop_dev_026",
+    "node_hit_rank": null,
+    "project": "jaffle_shop",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_001",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_001",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_002",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_002",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_003",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_004",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_005",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_005",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_006",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_006",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_007",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_008",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_009",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_009",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_010",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_011",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_012",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_013",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_013",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_014",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_014",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_015",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_015",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_016",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_017",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_018",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_018",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_019",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_020",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_021",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_022",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_023",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_024",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_025",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  },
+  {
+   "incident_id": "inc_stripe_dev_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_stripe_dev_026",
+    "node_hit_rank": null,
+    "project": "stripe",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   },
+   "raw_answer": "{\"incident\": false, \"not_confirmed\": false, \"root_causes\": []}"
+  }
+ ],
+ "metrics": {
+  "by_fault_type": {
+   "broken_join": {
+    "detected": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    }
+   },
+   "distribution_shift": {
+    "detected": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    }
+   },
+   "duplicate_keys": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    }
+   },
+   "late_or_missing_data": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "model_logic_bug": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "null_spike": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "schema_change": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "diagnostic_node_top3": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "top3": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "wrong_top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    }
+   },
+   "timezone_error": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   }
+  },
+  "by_project": {
+   "court_cases": {
+    "detected": {
+     "count": 5,
+     "n": 16,
+     "rate": 0.3125
+    },
+    "diagnostic_node_top1": {
+     "count": 2,
+     "n": 16,
+     "rate": 0.125
+    },
+    "diagnostic_node_top3": {
+     "count": 2,
+     "n": 16,
+     "rate": 0.125
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 2,
+     "n": 16,
+     "rate": 0.125
+    },
+    "top3": {
+     "count": 2,
+     "n": 16,
+     "rate": 0.125
+    },
+    "wrong_top1": {
+     "count": 3,
+     "n": 16,
+     "rate": 0.1875
+    }
+   },
+   "jaffle_shop": {
+    "detected": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 6,
+     "n": 16,
+     "rate": 0.375
+    }
+   },
+   "stripe": {
+    "detected": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "n": 16,
+    "not_confirmed": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 16,
+     "rate": 0.0
+    }
+   }
+  },
+  "clean": {
+   "false_alarms": {
+    "count": 0,
+    "n": 30,
+    "rate": 0.0
+   },
+   "n": 30
+  },
+  "faulted": {
+   "detected": {
+    "count": 11,
+    "n": 48,
+    "rate": 0.2292
+   },
+   "diagnostic_node_top1": {
+    "count": 2,
+    "n": 48,
+    "rate": 0.0417
+   },
+   "diagnostic_node_top3": {
+    "count": 2,
+    "n": 48,
+    "rate": 0.0417
+   },
+   "n": 48,
+   "not_confirmed": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "top1": {
+    "count": 2,
+    "n": 48,
+    "rate": 0.0417
+   },
+   "top3": {
+    "count": 2,
+    "n": 48,
+    "rate": 0.0417
+   },
+   "wrong_top1": {
+    "count": 9,
+    "n": 48,
+    "rate": 0.1875
+   }
+  }
+ },
+ "plan_sha256": "sha256:cb61ddf816eaab7e85a986f74ec4397a32e7e9962d8c7b9ebe2aab72aaecd95f",
+ "split": "dev"
+}
