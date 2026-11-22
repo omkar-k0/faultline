@@ -1,10 +1,19 @@
 # Status
 
-Updated 2026-11-22.
+Updated 2026-11-23.
 
 ## Current milestone
 
-M6 Self-trained ranker + reference line (issue #22): M6a merged (PR #23); M6b, the runs from the owner's Mac, is on branch `m6b-runs`. Next: M7, fix drafter + test generator (plan first).
+M7 Fix drafter + test generator, issue #25, branch `m7-fixes-testgen` (draft PR). M6 is done (PRs #23, #24). Next: M8, MCP server, reports, held-out scored once, release (plan first).
+
+## Done in M7
+
+- `inject/rebuild.py`: exact rebuilds of train and dev runs, checked against the recorded input hash; held-out refused.
+- `fixes/`: drafter (revert a model commit, dedupe a duplicated source key, map a renamed seed column; no code fix for data faults), draft PR writer (`gh pr create --draft`, never merges), scoring.
+- `testgen/`: checks learned from train clean runs, one warn-level singular test per relation, mutation scoring with the failed checks named.
+- Dev results: fixes 16/48 fixed, 16/16 when proposed, 0/30 on clean runs (`eval/results/dev/fixes.md`); generated tests catch 38/48 vs 7/48 for the projects' own tests, 1/30 clean runs with a false alarm (`eval/results/dev/testgen.md`).
+- `make eval-dev-fixes`, `make eval-dev-testgen` (about 160 dbt builds; not in `make check`). Tests: 236 passing.
+- Not verified: a live draft PR on a real repo (waits for M8 and the owner's OK).
 
 ## Done in M6b
 

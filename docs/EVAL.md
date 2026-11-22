@@ -141,6 +141,49 @@ The re-ranker sees each incident's symptoms and the causes that passed their tes
    One prompt per incident that has causes (about 45 on dev), each much shorter than the `raw_log_llm` prompts.
 3. Commit the files it writes, `eval/results/dev/triage_llm.{json,md,run.json}` and the updated `eval/results/dev/ablations.md`, and push to the branch.
 
+## M7: the fix drafter and the test generator
+
+Both are scored on **exact rebuilds** of the runs (`src/faultline/inject/rebuild.py`). A run's workspace is rebuilt from its seed and fault site and checked against the input hash recorded at generation. The archives hold no databases, and a fix or a test only counts if it actually runs. Held-out runs are never rebuilt. Neither method sees the truth; the harness uses it only to rebuild the scene.
+
+### The fix drafter: `eval/results/dev/fixes.md`
+
+For each dev run, deterministic triage names its top cause and `faultline fix` drafts one fix:
+
+| Cause | Fix |
+|---|---|
+| code change in a model | put the model's file back as it was before the commit |
+| duplicate rows on a source key | the models that read the source keep one copy of each identical row |
+| source column renamed | those models read the new column under the old name (seeds only) |
+| anything else | **no fix**: the draft says the fix belongs at the source |
+
+**A fix succeeds** when `dbt build` passes and every model equals the same run built without its fault. The rate counts every faulted run, so causes without a fix count against it.
+
+**Drafts:** `faultline fix draft <run>` writes the patch and the PR text. `--open-pr --repo <dir>` opens a **draft** PR with `gh` and stops; nothing in faultline merges.
+
+**Result:** 16 of 48 dev faults fixed. Every fix that was proposed worked (16/16), and no fix was proposed on any of the 30 clean runs.
+- Code faults: 11 of 12 (the twelfth was never detected).
+- Duplicate keys: 4 of 6.
+- One renamed column.
+- Nothing for the data faults, as intended.
+
+### The test generator: `eval/results/dev/testgen.md`
+
+**What it learns:** from the 30 clean train runs only (no dev run, no faulted run), rebuilt the same day. Every fact that held in all of them becomes a check:
+- row-count range
+- never null, or a ceiling on the null share
+- key uniqueness
+- numeric range, widened by half the seen span, and an average near the seen averages
+- time range on seeds and sources
+- distinct-count range on short text columns
+
+Each relation gets one dbt singular test with severity `warn`, which returns the names of its failed checks.
+
+**Mutation score:** each faulted dev run is a mutant. It's killed when a generated test fails on the rebuilt run under real `dbt test`. On clean runs, any failure is a false alarm.
+
+**Result:** 38 of 48 dev faults caught, against 7 for the projects' own tests, with 1 false alarm in 30 clean runs.
+
+**How it was tuned:** the first version used a range margin of 10% of the span and raised false alarms on 11 of 30 clean dev runs, all from numeric ranges on small resampled tables. The margin was widened to half the span and an average check added. That gave 38 caught and 1 false alarm, a range on a postal code. Dev is the tuning split, so this is allowed; there was no second check on another split.
+
 ## M6: base vs tuned vs the hosted reference
 
 Two LLM slots, each compared with and without training, and against a hosted frontier model. The table is built from the result files: `eval/results/dev/llm_slots.md`.
@@ -207,4 +250,9 @@ CI never calls a model. This baseline runs on a machine with enough memory (16 G
 - **The local LLM re-ranker does not beat the deterministic ranking on dev.** In the full variant it moved the top cause in 8 of 57 incidents; one move cost a top-1 hit (a table-level cause put above the true column). With at most a handful of survivors per incident, the rules already order them well; the re-ranker's value here is the written summary, not accuracy.
 - **Fine-tuning the raw-log model made it more confident, not more precise.** Trained on 115 train runs, it flags more incidents (11 vs 7 of 48) and gets 2 right instead of 1, but its confident wrong answers rose from 6 to 9: mostly the right column in the wrong table, and on both broken joins the right commit put on a source table. The tuned ranker ties the rules (43/48) and fixes the one swap the base model made; on dev it cannot do better.
 - **The hosted model is the strongest reader of a raw log, and still far behind triage.** Claude Opus 5.5 gets 15 of 48 from the log alone with no confident wrong answer, at about $0.04 per incident; faultline's tests and lineage get 43 of 48 with no model at all. In the ranking slot it ties the local base model (42/48).
+- **Triage is scored on where, not on what.** On 2 duplicate-key runs, one or two repeated rows stay inside the row-count margin, so triage confirms "values of the key changed" at the right location. That's a top-1 hit, but the fix drafter correctly declines to dedupe something it was not told is duplicated.
+- **Most data faults have no code fix, by design.** The fix rate (16/48) is low for that reason. Hiding a null spike in a model would raise it.
+- **Generated tests miss most model logic bugs (1/6) and half the time shifts (3/6).** A logic bug that keeps values in range, or a time shift of a few hours inside the seen spread, breaks no fact the clean runs show.
+- **One generated check misfires on a postal code.** Numeric codes are treated as quantities.
+- **The generator was tuned on dev,** once, after its first false alarms; no other split checked the tuned version.
 
