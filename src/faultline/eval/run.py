@@ -142,12 +142,22 @@ def _pct(metric: dict[str, Any]) -> str:
 
 def to_markdown(doc: dict[str, Any]) -> str:
     m = doc["metrics"]
+    warning = (
+        [
+            f"**Incomplete: {doc['incomplete']['failed_llm_calls']} model calls failed. "
+            "These numbers do not measure the model.**",
+            "",
+        ]
+        if "incomplete" in doc
+        else []
+    )
     lines = [
         f"# {doc['baseline']} on {doc['split']}",
         "",
         f"Config hash `{doc['config_hash']}` · archive `{doc['archive_sha256'][:19]}…` · "
         f"command `{doc['command']}`",
         "",
+        *warning,
         "| Fault type | n | Detected | Top-1 | Top-3 | Wrong top-1 | Not confirmed |",
         "|---|---|---|---|---|---|---|",
     ]
@@ -310,6 +320,11 @@ def run_eval(
         doc["by_monitor"] = by_monitor
     if triage_method is not None:
         doc["gating"] = gating(outcomes, ungated_outcomes)
+        failed = rerank_failures(rows)
+        if failed:
+            # The re-ranker keeps the rule order when a call fails. That is right in use,
+            # but such a run does not measure the model, so it is marked incomplete.
+            doc["incomplete"] = {"failed_llm_calls": failed, "reason": "re-rank calls failed"}
     cost_summary = getattr(client, "cost_summary", None)
     if callable(cost_summary):
         doc["cost"] = cost_summary(len(incidents))
@@ -330,6 +345,15 @@ def run_eval(
     if baseline in LLM_METHODS or baseline == "triage":
         write_llm_slots_table(out_dir)
     return doc
+
+
+def rerank_failures(rows: Sequence[dict[str, Any]]) -> int:
+    return sum(
+        1
+        for row in rows
+        for inc in (row.get("report") or {}).get("incidents", [])
+        if "error" in (inc.get("rerank") or {})
+    )
 
 
 def gating(outcomes: Sequence[Outcome], ungated: Sequence[Outcome]) -> dict[str, Any]:
@@ -410,6 +434,12 @@ def _slot_row(out_dir: Path, name: str, label: str) -> str | None:
     f = doc["metrics"]["faulted"]
     cost = doc.get("cost", {}).get("per_incident_usd")
     cost_text = "local" if "cost" not in doc else f"${cost:.4f}"
+    if "incomplete" in doc:
+        failed = doc["incomplete"]["failed_llm_calls"]
+        return (
+            f"| {label} | incomplete: {failed} model calls failed; not a result |  |  |  |  | "
+            f"{cost_text} | [{name}.md]({name}.md) |"
+        )
     return (
         f"| {label} | {_pct(f['top1'])} | {_pct(f['top3'])} | {_pct(f['wrong_top1'])} | "
         f"{_pct(f['not_confirmed'])} | {_pct(doc['metrics']['clean']['false_alarms'])} | "

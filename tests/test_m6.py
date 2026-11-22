@@ -96,9 +96,15 @@ def test_reference_sends_the_key_only_in_the_header(key: str) -> None:
     url, headers, body = api.requests[0]
     assert url == "https://api.anthropic.com/v1/messages"
     assert headers["x-api-key"] == key and key not in json.dumps(body)
-    assert body["model"] == "claude-opus-5-5" and body["temperature"] == 0.0
+    assert body["model"] == "claude-opus-5-5" and "temperature" not in body
     assert key not in repr(client) and key not in json.dumps(client.config.public())
     assert key not in json.dumps(client.cost_summary(1))
+
+
+def test_temperature_is_sent_only_when_set(key: str) -> None:
+    api = FakeAPI()
+    AnthropicClient(_cfg(temperature=0.0), transport=api).complete("s", "u")
+    assert api.requests[0][2]["temperature"] == 0.0
 
 
 def test_reference_cost_is_counted_from_usage(key: str) -> None:
@@ -222,3 +228,23 @@ def test_validation_share_is_stable() -> None:
     ids = [f"inc_x_train_{i:03d}" for i in range(400)]
     share = sum(map(is_valid, ids)) / len(ids)
     assert 0.05 < share < 0.15 and is_valid(ids[0]) == is_valid(ids[0])
+
+
+def test_failed_rerank_calls_mark_the_run_incomplete(key: str, tmp_path: Path) -> None:
+    api = FakeAPI(statuses=[200] * 5 + [400] * 500)
+    client = AnthropicClient(_cfg(), transport=api, sleep=lambda _s: None)
+    doc = run_eval(
+        "dev",
+        "triage_llm",
+        benchmark_dir=ROOT / "benchmark",
+        dist_dir=ROOT / "dist",
+        runs_dir=ROOT / "build/eval",
+        results_dir=tmp_path,
+        client=client,
+        variant="reference",
+    )
+    assert doc["incomplete"]["failed_llm_calls"] > 0
+    md = (tmp_path / "dev" / "triage_llm.reference.md").read_text()
+    assert "Incomplete:" in md
+    slots = (tmp_path / "dev" / "llm_slots.md").read_text()
+    assert "incomplete:" in slots and "not a result" in slots
