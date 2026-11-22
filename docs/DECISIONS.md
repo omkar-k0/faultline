@@ -217,3 +217,8 @@ Each entry: decision, alternative, reason.
 - Alternative: one table with a "reference" label column.
 - Reason: CLAUDE.md principle 7, never mixed into the local model's tables.
 
+## 2026-11-22: Reference cap raised to $5.00 after the dry run
+- Decision: the per-run spending cap is $5.00, with Opus 5.5 kept in both slots after the owner added credit.
+- Alternative: Sonnet 5.5 in both slots, or Opus in the ranking slot only.
+- Reason: owner's choice; the free dry run counted 709,710 input tokens for the raw-log slot (about $3.00 at Opus prices), so the $3.00 cap would have stopped that run near its end with nothing written.
+
