@@ -217,6 +217,12 @@ def _cmd_eval(args: argparse.Namespace) -> int:
     )
     if "cost" in doc:
         print(f"Spent ${doc['cost']['total_usd']:.4f} in {doc['cost']['calls']} calls.")
+    if "incomplete" in doc:
+        print(
+            f"INCOMPLETE: {doc['incomplete']['failed_llm_calls']} model calls failed; "
+            "the result is written but marked as not a result. Fix the cause and run again."
+        )
+        return 4
     return 0
 
 

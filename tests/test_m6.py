@@ -228,3 +228,23 @@ def test_validation_share_is_stable() -> None:
     ids = [f"inc_x_train_{i:03d}" for i in range(400)]
     share = sum(map(is_valid, ids)) / len(ids)
     assert 0.05 < share < 0.15 and is_valid(ids[0]) == is_valid(ids[0])
+
+
+def test_failed_rerank_calls_mark_the_run_incomplete(key: str, tmp_path: Path) -> None:
+    api = FakeAPI(statuses=[200] * 5 + [400] * 500)
+    client = AnthropicClient(_cfg(), transport=api, sleep=lambda _s: None)
+    doc = run_eval(
+        "dev",
+        "triage_llm",
+        benchmark_dir=ROOT / "benchmark",
+        dist_dir=ROOT / "dist",
+        runs_dir=ROOT / "build/eval",
+        results_dir=tmp_path,
+        client=client,
+        variant="reference",
+    )
+    assert doc["incomplete"]["failed_llm_calls"] > 0
+    md = (tmp_path / "dev" / "triage_llm.reference.md").read_text()
+    assert "Incomplete:" in md
+    slots = (tmp_path / "dev" / "llm_slots.md").read_text()
+    assert "incomplete:" in slots and "not a result" in slots
