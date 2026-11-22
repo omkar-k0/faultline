@@ -1,14 +1,19 @@
 # Status
 
-Updated 2026-11-20.
+Updated 2026-11-22.
 
 ## Current milestone
 
-M6 Self-trained ranker + reference line, issue #22. Two PRs:
-- **M6a** (branch `m6a-ranker-reference`, draft PR): fine-tuning data export, training configs, MLX model profiles, the hosted reference client with cost accounting and a spending cap, the `llm_slots.md` table, tests with fake models.
-- **M6b** (next, on the owner's Mac): training both adapters, base and tuned runs through MLX, the reference dry run and run. Steps in docs/EVAL.md.
+M6 Self-trained ranker + reference line (issue #22): M6a merged (PR #23); M6b, the runs from the owner's Mac, is on branch `m6b-runs`. Next: M7, fix drafter + test generator (plan first).
 
-M5 is done: PRs #19, #20, #21.
+## Done in M6b
+
+- Both LoRA adapters trained on the owner's MacBook Air (M4, 16 GB), mlx-lm 0.32.2, from `benchmark/train/` only: ranker 330 steps (validation loss 2.039 to 0.003), raw-log 230 steps (0.650 to 0.059). Adapters are not committed; each result records the adapter's sha256.
+- Dev results, from `eval/results/dev/llm_slots.md`:
+  - Ranking slot: rules 89.6% top-1 (43/48), 0 wrong; base MLX 87.5% (42/48), 1 wrong; tuned 89.6% (43/48), 0 wrong; Claude Opus 5.5 87.5% (42/48), 1 wrong, $0.0057 per incident.
+  - Raw-log slot: base MLX 2.1% (1/48), 6 wrong; tuned 4.2% (2/48), 9 wrong; Claude Opus 5.5 31.2% (15/48), 0 wrong, 9 not confirmed, $0.0408 per incident.
+- Reference spend on dev: $3.18 (raw-log, 78 calls) + $0.44 (ranking, 57 calls). A first ranking run hit the account's usage limit on 26 calls; the harness now marks such a run incomplete, and it was run again in full.
+- Not verified: the reference answers repeat run to run (Opus 5.5 takes no temperature).
 
 ## Done in M6a
 
