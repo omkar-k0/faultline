@@ -18,7 +18,7 @@ Reference line, hosted, not part of faultline:
 
 | Variant | Top-1 | Top-3 | Wrong top-1 | Not confirmed | False alarms | Cost per incident | File |
 |---|---|---|---|---|---|---|---|
-| not run yet |  |  |  |  |  |  |  |
+| Claude, hosted (reference) | 87.5% (42/48) | 89.6% (43/48) | 2.1% (1/48) | 0.0% (0/48) | 0.0% (0/30) | $0.0026 | [triage_llm.reference.md](triage_llm.reference.md) |
 
 ## raw-log baseline
 
@@ -34,4 +34,4 @@ Reference line, hosted, not part of faultline:
 
 | Variant | Top-1 | Top-3 | Wrong top-1 | Not confirmed | False alarms | Cost per incident | File |
 |---|---|---|---|---|---|---|---|
-| not run yet |  |  |  |  |  |  |  |
+| Claude, hosted (reference) | 31.2% (15/48) | 31.2% (15/48) | 0.0% (0/48) | 18.8% (9/48) | 0.0% (0/30) | $0.0408 | [raw_log_llm.reference.md](raw_log_llm.reference.md) |
