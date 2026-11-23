@@ -11,12 +11,12 @@ import json
 from pathlib import Path
 from typing import Any
 
-from faultline.eval.splits import FINAL_SPLIT
+from faultline.eval.splits import FINAL_LABEL, FINAL_SPLIT, final_note
 
 START = "<!-- results:start (written by `faultline readme`; do not edit by hand) -->"
 END = "<!-- results:end -->"
 SPLITS = ("dev", FINAL_SPLIT)
-SPLIT_LABEL = {"dev": "dev", FINAL_SPLIT: "held-out (jira, scored once)"}
+SPLIT_LABEL = {"dev": "dev", FINAL_SPLIT: FINAL_LABEL}
 
 DIAGNOSIS = (
     ("dbt_tests", "dbt's own tests (alert only)"),
@@ -180,11 +180,7 @@ def render_tables(results: Path = Path("eval/results")) -> str:
         "",
         *m7_table(results),
         "",
-        (
-            f"Held-out was scored once, at commit `{commit}`."
-            if commit
-            else "Held-out has not been scored yet."
-        ),
+        final_note(commit),
         "",
         END,
     ]

@@ -32,3 +32,13 @@ def check_final_scoring(split: str, results_dir: Path, name: str) -> None:
             f"{name} was already scored on {FINAL_SPLIT} "
             f"({results_dir / split / name}.json); it is scored once"
         )
+
+
+FINAL_LABEL = "held-out (jira, scored once)"  # how the README names the split
+
+
+def final_note(commit: str | None) -> str:
+    """The README line that records when the split was scored."""
+    if commit:
+        return f"Held-out was scored once, at commit `{commit}`."
+    return "Held-out has not been scored yet."
