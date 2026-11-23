@@ -257,3 +257,33 @@ Each entry: decision, alternative, reason.
 - Alternative: one test per check at the default severity error.
 - Reason: an error-level test skips everything downstream and would change what the project's own tests see in the same run; one test per relation keeps stripe at about 80 tests instead of thousands.
 
+## 2026-11-23: MCP server on the official SDK 2.x
+- Decision: `mcp` 2.3 (MIT), `MCPServer` over stdio, five tools, each annotated read-only.
+- Alternative: pin `mcp<2` for the older FastMCP API.
+- Reason: owner's approval of the official SDK; 2.x is current, and the read-only annotation tells clients nothing here changes anything.
+
+## 2026-11-23: The final split is scored only through `faultline eval`, once per method
+- Decision: `eval/splits.py` names the split and is the only src/ file the guard allows to; the loader admits it only when `run_eval` asks; an existing complete result refuses a second scoring; a result marked incomplete may be scored again.
+- Alternative: a manual promise not to re-run.
+- Reason: CLAUDE.md, "heldout scored once"; the rule is enforced in code, and a run cut short by an API limit does not lock in a non-result.
+
+## 2026-11-23: Fixes and generated tests are not scored on the final split
+- Decision: M7 results stay dev-only.
+- Alternative: rebuild the final split's runs and learn tests from its clean runs.
+- Reason: owner's approval; the final split is only scored, never rebuilt, and jira has no clean train runs to learn tests from.
+
+## 2026-11-23: Post-mortems judge learned checks on the recorded profile
+- Decision: "tests that would have caught it" lists learned checks that fail on the run's profile.
+- Alternative: rebuild the run and execute the check SQL.
+- Reason: instant, no date drift; time-range checks need the database and are left out of post-mortems.
+
+## 2026-11-23: `make repro` re-scores model results instead of re-running them
+- Decision: deterministic results are re-run byte for byte; model results are re-scored from their stored predictions against the truth, and their config hashes checked; M7 results are re-summarised.
+- Alternative: re-run everything, which needs the local models, an API key and about 160 dbt builds.
+- Reason: a stranger can check every number with one command; full re-runs stay available as separate targets.
+
+## 2026-11-23: README tables are generated
+- Decision: `faultline readme` writes the results block from eval/results/, every number a link; `repro` fails if the README differs.
+- Alternative: tables written by hand.
+- Reason: CLAUDE.md, never type a metric by hand.
+

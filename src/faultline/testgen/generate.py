@@ -42,6 +42,38 @@ UNIQUE_FLOOR = 0.99  # distinct/rows in every reference, approximate counts
 class Check:
     name: str
     condition: str  # SQL, true when the check fails; __REL__ stands for the relation
+    kind: str = ""
+    column: str | None = None
+    lo: float | str | None = None
+    hi: float | str | None = None
+
+    def fails_on(self, entry: dict[str, Any]) -> bool | None:
+        """The same check judged on a recorded profile; None when the profile cannot tell."""
+        if entry.get("missing") or "rows" not in entry:
+            return True
+        rows = int(entry["rows"])
+        if self.kind == "rows":
+            return not (float(self.lo or 0) <= rows <= float(self.hi or 0))
+        stats = (entry.get("columns") or {}).get(self.column or "")
+        if stats is None:
+            return True  # the column is gone
+        if self.kind == "not_null":
+            return bool(stats.get("non_null", rows) < rows)
+        if self.kind == "null_share":
+            return bool(rows and 1 - stats.get("non_null", rows) / rows > float(self.hi))  # type: ignore[arg-type]
+        if self.kind == "unique":
+            return bool(stats.get("distinct", rows) < 0.98 * stats.get("non_null", rows))
+        if self.kind in {"range", "time_range"}:
+            lo, hi = stats.get("min"), stats.get("max")
+            if lo is None or hi is None:
+                return None
+            if self.kind == "range":
+                return bool(float(lo) < float(self.lo) or float(hi) > float(self.hi))  # type: ignore[arg-type]
+            return None  # time margins need the database
+        if self.kind == "mean":
+            mean = stats.get("mean")
+            return None if mean is None else not (float(self.lo) <= float(mean) <= float(self.hi))  # type: ignore[arg-type]
+        return None
 
 
 def _q(name: str) -> str:
@@ -72,7 +104,14 @@ def _column_checks(
     out: list[Check] = []
     shares = [1 - s["non_null"] / r if r else 0.0 for s, r in zip(stats, rows, strict=True)]
     if all(s["non_null"] == r for s, r in zip(stats, rows, strict=True)) and min(rows) > 0:
-        out.append(Check(f"not_null:{col}", f"exists (select 1 from __REL__ where {c} is null)"))
+        out.append(
+            Check(
+                f"not_null:{col}",
+                f"exists (select 1 from __REL__ where {c} is null)",
+                "not_null",
+                col,
+            )
+        )
     elif max(shares) + NULL_MARGIN < 1:
         hi = max(shares) + NULL_MARGIN
         out.append(
@@ -80,6 +119,10 @@ def _column_checks(
                 f"null_share:{col}",
                 f"(select avg(case when {c} is null then 1.0 else 0.0 end) from __REL__) "
                 f"> {_num(hi)}",
+                "null_share",
+                col,
+                None,
+                hi,
             )
         )
     if is_key(col) and all(
@@ -90,6 +133,8 @@ def _column_checks(
                 f"unique:{col}",
                 f"exists (select {c} from __REL__ where {c} is not null group by {c} "
                 "having count(*) > 1)",
+                "unique",
+                col,
             )
         )
     if all(s.get("mean") is not None for s in stats):
@@ -105,6 +150,10 @@ def _column_checks(
                     f"range:{col}",
                     f"exists (select 1 from __REL__ where {c} < {_num(lo - pad)} "
                     f"or {c} > {_num(hi + pad)})",
+                    "range",
+                    col,
+                    lo - pad,
+                    hi + pad,
                 )
             )
             out.append(
@@ -112,6 +161,10 @@ def _column_checks(
                     f"mean:{col}",
                     f"(select avg({c}) from __REL__) not between {_num(m_lo - m_pad)} "
                     f"and {_num(m_hi + m_pad)}",
+                    "mean",
+                    col,
+                    m_lo - m_pad,
+                    m_hi + m_pad,
                 )
             )
     elif node_kind in {"seed", "source"} and all(
@@ -124,6 +177,10 @@ def _column_checks(
                 f"exists (select 1 from __REL__ where cast({c} as timestamp) < "
                 f"timestamp '{lo}' - interval 1 hour or cast({c} as timestamp) > "
                 f"timestamp '{hi}' + interval 1 hour)",
+                "time_range",
+                col,
+                lo,
+                hi,
             )
         )
     elif (
@@ -139,6 +196,10 @@ def _column_checks(
                     f"distinct:{col}",
                     f"(select count(distinct {c}) from __REL__) "
                     f"not between {max(low, 0)} and {high}",
+                    "distinct",
+                    col,
+                    max(low, 0),
+                    high,
                 )
             )
     return out
@@ -162,6 +223,10 @@ def learn(project: Project, references: Sequence[Profile]) -> dict[str, list[Che
                 "rows",
                 f"(select count(*) from __REL__) not between {max(min(rows) - pad, 0)} "
                 f"and {max(rows) + pad}",
+                "rows",
+                None,
+                max(min(rows) - pad, 0),
+                max(rows) + pad,
             )
         ]
         cols = sorted(set.intersection(*(set(e.get("columns", {})) for e in entries)))

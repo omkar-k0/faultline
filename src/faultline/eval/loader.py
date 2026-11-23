@@ -22,9 +22,11 @@ from functools import cached_property
 from pathlib import Path
 from typing import Any
 
+from faultline.eval.splits import FINAL_SPLIT
+
 RELEASE_URL = "https://github.com/omkar-k0/faultline/releases/download/benchmark-v1/{name}"
 # Splits this milestone may evaluate. The frozen split is scored once, at the end.
-EVALUABLE_SPLITS = frozenset({"train", "dev"})
+EVALUABLE_SPLITS = frozenset({"train", "dev"})  # the final split: see eval/splits.py
 _COMMIT_LINE = re.compile(r"^([0-9a-f]{40}) (.*)$")
 _MODEL_SQL = re.compile(r"(^|/)models/.+\.sql$")
 
@@ -113,8 +115,9 @@ def _sha256(path: Path) -> str:
     return "sha256:" + digest.hexdigest()
 
 
-def split_section(benchmark_dir: Path, split: str) -> dict[str, Any]:
-    if split not in EVALUABLE_SPLITS:
+def split_section(benchmark_dir: Path, split: str, allow_final: bool = False) -> dict[str, Any]:
+    allowed = EVALUABLE_SPLITS | ({FINAL_SPLIT} if allow_final else set())
+    if split not in allowed:
         raise BenchmarkError(f"split {split!r} cannot be evaluated in this milestone")
     manifest = json.loads((benchmark_dir / "manifest.json").read_text())
     try:
@@ -164,9 +167,11 @@ def load_incidents(
     dist_dir: Path = Path("dist"),
     runs_dir: Path = Path("build/eval"),
     download: bool = True,
+    allow_final: bool = False,
 ) -> tuple[list[Incident], dict[str, Any]]:
-    """Incidents of a split in manifest order, plus the manifest section."""
-    section = split_section(benchmark_dir, split)
+    """Incidents of a split in manifest order, plus the manifest section.
+    `allow_final` is set by `run_eval` only (see eval/splits.py)."""
+    section = split_section(benchmark_dir, split, allow_final)
     archive = ensure_archive(section, dist_dir, download)
     extract(archive, runs_dir, section["archive_sha256"])
     incidents = []

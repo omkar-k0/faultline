@@ -61,3 +61,11 @@ max_tokens = 1024
 # for Opus 5.5 (2026-11-22), so the model's default sampling is used.
 timeout_s = 300
 dry_run_output_tokens = 300
+
+# `faultline mcp`: read-only tools for an assistant. The dbt project to read
+# lineage from (built with `make setup`) and the incident store `faultline triage`
+# writes.
+[mcp]
+project_dir = "projects/jaffle_shop"
+store = "build/faultline.duckdb"
+results_dir = "eval/results"
