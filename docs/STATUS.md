@@ -4,7 +4,16 @@ Updated 2026-11-23.
 
 ## Current milestone
 
-M7 Fix drafter + test generator, issue #25, branch `m7-fixes-testgen` (draft PR). M6 is done (PRs #23, #24). Next: M8, MCP server, reports, held-out scored once, release (plan first).
+M8 MCP server, reports, release, issue #27, branch `m8-release` (draft PR). M7 is done (PR #26).
+
+## Done in M8 so far
+
+- `faultline mcp`: read-only MCP server (official SDK 2.3): list_incidents, get_report, get_lineage, impact_of, get_results; path guard on results.
+- `faultline postmortem <run>`: summary, symptoms, impact through lineage, root cause with checks, drafted fix, learned checks that fail on the run, follow-ups.
+- Final split: `eval/splits.py` (scored only through `faultline eval`, once per method; incomplete results may be re-scored); `scripts/final_scoring.sh` / `make final-scoring` runs it all on the Mac, starting and stopping the MLX server, with a dry run and a typed "yes" before the reference spends.
+- Triage smoke test on the vendored jira project (no final-split data).
+- `faultline readme` (generated tables, every number a link) and `faultline repro` / `make repro`: 27 checks, 0 failed.
+- Next: one live draft PR on a demo repo; the final scoring on the Mac; release v1.0.0 with the adapters.
 
 ## Done in M7
 

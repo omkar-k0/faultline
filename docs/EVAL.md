@@ -141,6 +141,15 @@ The re-ranker sees each incident's symptoms and the causes that passed their tes
    One prompt per incident that has causes (about 45 on dev), each much shorter than the `raw_log_llm` prompts.
 3. Commit the files it writes, `eval/results/dev/triage_llm.{json,md,run.json}` and the updated `eval/results/dev/ablations.md`, and push to the branch.
 
+## M8: the final scoring, once
+
+Run on the Mac with the adapters and the API key, from a committed state: `make final-scoring` (`scripts/final_scoring.sh`). In order:
+1. The deterministic methods and the two ablations.
+2. The base and both tuned models through MLX. The script starts and stops the server.
+3. The Claude reference in both slots, after a free dry run and a typed "yes".
+
+Each method is scored once: `faultline eval` refuses to overwrite a complete result on this split, and the script skips methods already scored. Only a result marked incomplete, with failed model calls, may run again. The commit is recorded in each `.run.json` and printed in the README. Fixes and generated tests are not scored here (see DECISIONS).
+
 ## M7: the fix drafter and the test generator
 
 Both are scored on **exact rebuilds** of the runs (`src/faultline/inject/rebuild.py`). A run's workspace is rebuilt from its seed and fault site and checked against the input hash recorded at generation. The archives hold no databases, and a fix or a test only counts if it actually runs. Held-out runs are never rebuilt. Neither method sees the truth; the harness uses it only to rebuild the scene.
