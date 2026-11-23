@@ -1,0 +1,1094 @@
+{
+ "archive_sha256": "sha256:4b03de862025322908c3b3036bc9b8d7617139e3a01eb3dd6403ecea504ed5a4",
+ "command": "faultline fix eval --split dev",
+ "incidents": [
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_judges.judge_name changed",
+   "diff": "",
+   "fault_type": "schema_change",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_001",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the column was dropped at the source; restore it there",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "values of seed.court_cases.raw_hearings.scheduled_at_local changed",
+   "diff": "--- a/models/staging/stg_hearings.sql\n+++ b/models/staging/stg_hearings.sql\n@@ -1,5 +1,6 @@\n+-- faultline fix: raw_hearings.scheduled_at_local was renamed to scheduled_at_local_new; read it under the old name\n with hearings as (\n-    select * from {{ ref('raw_hearings') }}\n+    select * from (select *, \"scheduled_at_local_new\" as \"scheduled_at_local\" from {{ ref('raw_hearings') }})\n ),\n \n cases as (\n",
+   "fault_type": "schema_change",
+   "fixed": true,
+   "incident_id": "inc_court_cases_dev_002",
+   "pattern": "map_renamed_column",
+   "proposed": true,
+   "reason": "map scheduled_at_local_new back to scheduled_at_local where the seed is read, until the source is fixed",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_judges.appointed_on changed",
+   "diff": "",
+   "fault_type": "late_or_missing_data",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_003",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_hearings.scheduled_at_local changed",
+   "diff": "",
+   "fault_type": "late_or_missing_data",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_004",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_courts.court_id changed",
+   "diff": "",
+   "fault_type": "duplicate_keys",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_005",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "duplicate rows in seed.court_cases.raw_hearings (key hearing_id)",
+   "diff": "--- a/models/staging/stg_hearings.sql\n+++ b/models/staging/stg_hearings.sql\n@@ -1,3 +1,6 @@\n+-- faultline fix: seed.court_cases.raw_hearings repeats rows on key hearing_id; keep one copy of each\n+with faultline_input as (\n+\n with hearings as (\n     select * from {{ ref('raw_hearings') }}\n ),\n@@ -23,3 +26,6 @@\n from hearings\n left join cases on hearings.case_id = cases.case_id\n left join courts on cases.court_id = courts.court_id\n+\n+)\n+select distinct * from faultline_input\n",
+   "fault_type": "duplicate_keys",
+   "fixed": true,
+   "incident_id": "inc_court_cases_dev_006",
+   "pattern": "dedupe_rows",
+   "proposed": true,
+   "reason": "keep one copy of each identical row in the 1 model(s) reading seed.court_cases.raw_hearings; the source itself should stop sending duplicates",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_courts.court_level changed",
+   "diff": "",
+   "fault_type": "null_spike",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_007",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_hearings.scheduled_at_local changed",
+   "diff": "",
+   "fault_type": "null_spike",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_008",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_courts.utc_offset_minutes changed",
+   "diff": "",
+   "fault_type": "distribution_shift",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_009",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_hearings.outcome changed",
+   "diff": "",
+   "fault_type": "distribution_shift",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_010",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.court_cases.int_case_hearings.last_hearing_date (commit 46ea6aa)",
+   "diff": "--- a/models/intermediate/int_case_hearings.sql\n+++ b/models/intermediate/int_case_hearings.sql\n@@ -3,7 +3,7 @@\n     count(*) as hearing_count,\n     count(*) filter (where is_adjourned) as adjournment_count,\n     min(hearing_date) as first_hearing_date,\n-    min(hearing_date) as last_hearing_date,\n+    max(hearing_date) as last_hearing_date,\n     sum(duration_minutes) as total_hearing_minutes\n from {{ ref('stg_hearings') }}\n group by case_id\n",
+   "fault_type": "model_logic_bug",
+   "fixed": true,
+   "incident_id": "inc_court_cases_dev_011",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit 46ea6aa made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.court_cases.int_case_hearings.last_hearing_date (commit 5b9b41f)",
+   "diff": "--- a/models/intermediate/int_case_hearings.sql\n+++ b/models/intermediate/int_case_hearings.sql\n@@ -3,7 +3,7 @@\n     count(*) as hearing_count,\n     count(*) filter (where is_adjourned) as adjournment_count,\n     min(hearing_date) as first_hearing_date,\n-    min(hearing_date) as last_hearing_date,\n+    max(hearing_date) as last_hearing_date,\n     sum(duration_minutes) as total_hearing_minutes\n from {{ ref('stg_hearings') }}\n group by case_id\n",
+   "fault_type": "model_logic_bug",
+   "fixed": true,
+   "incident_id": "inc_court_cases_dev_012",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit 5b9b41f made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.court_cases.stg_hearings.hearing_id (commit 0053bce)",
+   "diff": "--- a/models/staging/stg_hearings.sql\n+++ b/models/staging/stg_hearings.sql\n@@ -21,5 +21,5 @@\n     hearings.duration_minutes,\n     hearings.outcome = 'adjourned' as is_adjourned\n from hearings\n-left join cases on hearings.case_id = hearings.case_id\n+left join cases on hearings.case_id = cases.case_id\n left join courts on cases.court_id = courts.court_id\n",
+   "fault_type": "broken_join",
+   "fixed": true,
+   "incident_id": "inc_court_cases_dev_013",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit 0053bce made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.court_cases.stg_hearings.hearing_id (commit d35b212)",
+   "diff": "--- a/models/staging/stg_hearings.sql\n+++ b/models/staging/stg_hearings.sql\n@@ -22,4 +22,4 @@\n     hearings.outcome = 'adjourned' as is_adjourned\n from hearings\n left join cases on hearings.case_id = cases.case_id\n-left join courts on cases.court_id = cases.court_id\n+left join courts on cases.court_id = courts.court_id\n",
+   "fault_type": "broken_join",
+   "fixed": true,
+   "incident_id": "inc_court_cases_dev_014",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit d35b212 made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_hearings.scheduled_at_local changed",
+   "diff": "",
+   "fault_type": "timezone_error",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_015",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.court_cases.raw_judges.appointed_on changed",
+   "diff": "",
+   "fault_type": "timezone_error",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_016",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_017",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_018",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_019",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_020",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_021",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_022",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_023",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_024",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_025",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_court_cases_dev_026",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.jaffle_shop.raw_orders.status changed",
+   "diff": "",
+   "fault_type": "schema_change",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_001",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the column was dropped at the source; restore it there",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.jaffle_shop.raw_orders.id changed",
+   "diff": "",
+   "fault_type": "schema_change",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_002",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the column was dropped at the source; restore it there",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.jaffle_shop.raw_orders.order_date changed",
+   "diff": "",
+   "fault_type": "late_or_missing_data",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_003",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.jaffle_shop.raw_orders.order_date changed",
+   "diff": "",
+   "fault_type": "late_or_missing_data",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_004",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "duplicate rows in seed.jaffle_shop.raw_orders (key id)",
+   "diff": "--- a/models/staging/stg_orders.sql\n+++ b/models/staging/stg_orders.sql\n@@ -1,3 +1,6 @@\n+-- faultline fix: seed.jaffle_shop.raw_orders repeats rows on key id; keep one copy of each\n+with faultline_input as (\n+\n with source as (\n \n     {#-\n@@ -21,3 +24,6 @@\n )\n \n select * from renamed\n+\n+)\n+select distinct * from faultline_input\n",
+   "fault_type": "duplicate_keys",
+   "fixed": true,
+   "incident_id": "inc_jaffle_shop_dev_005",
+   "pattern": "dedupe_rows",
+   "proposed": true,
+   "reason": "keep one copy of each identical row in the 1 model(s) reading seed.jaffle_shop.raw_orders; the source itself should stop sending duplicates",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "duplicate rows in seed.jaffle_shop.raw_orders (key id)",
+   "diff": "--- a/models/staging/stg_orders.sql\n+++ b/models/staging/stg_orders.sql\n@@ -1,3 +1,6 @@\n+-- faultline fix: seed.jaffle_shop.raw_orders repeats rows on key id; keep one copy of each\n+with faultline_input as (\n+\n with source as (\n \n     {#-\n@@ -21,3 +24,6 @@\n )\n \n select * from renamed\n+\n+)\n+select distinct * from faultline_input\n",
+   "fault_type": "duplicate_keys",
+   "fixed": true,
+   "incident_id": "inc_jaffle_shop_dev_006",
+   "pattern": "dedupe_rows",
+   "proposed": true,
+   "reason": "keep one copy of each identical row in the 1 model(s) reading seed.jaffle_shop.raw_orders; the source itself should stop sending duplicates",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.jaffle_shop.raw_orders.order_date changed",
+   "diff": "",
+   "fault_type": "null_spike",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_007",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.jaffle_shop.raw_orders.status changed",
+   "diff": "",
+   "fault_type": "null_spike",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_008",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "distribution_shift",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_009",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "distribution_shift",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_010",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "model_logic_bug",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_011",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.jaffle_shop.customers.most_recent_order (commit fce5eb7)",
+   "diff": "--- a/models/customers.sql\n+++ b/models/customers.sql\n@@ -22,7 +22,7 @@\n         customer_id,\n \n         min(order_date) as first_order,\n-        min(order_date) as most_recent_order,\n+        max(order_date) as most_recent_order,\n         count(order_id) as number_of_orders\n     from orders\n \n",
+   "fault_type": "model_logic_bug",
+   "fixed": true,
+   "incident_id": "inc_jaffle_shop_dev_012",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit fce5eb7 made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.jaffle_shop.customers.customer_id (commit 8b68c1b)",
+   "diff": "--- a/models/customers.sql\n+++ b/models/customers.sql\n@@ -58,7 +58,7 @@\n \n     from customers\n \n-    inner join customer_orders\n+    left join customer_orders\n         on customers.customer_id = customer_orders.customer_id\n \n     left join customer_payments\n",
+   "fault_type": "broken_join",
+   "fixed": true,
+   "incident_id": "inc_jaffle_shop_dev_013",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit 8b68c1b made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.jaffle_shop.customers.customer_id (commit 962c5b8)",
+   "diff": "--- a/models/customers.sql\n+++ b/models/customers.sql\n@@ -62,7 +62,7 @@\n         on customers.customer_id = customer_orders.customer_id\n \n     left join customer_payments\n-        on  customers.customer_id = customers.customer_id\n+        on  customers.customer_id = customer_payments.customer_id\n \n )\n \n",
+   "fault_type": "broken_join",
+   "fixed": true,
+   "incident_id": "inc_jaffle_shop_dev_014",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit 962c5b8 made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "timezone_error",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_015",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "timezone_error",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_016",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_017",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_018",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_019",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_020",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_021",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_022",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_023",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_024",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_025",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_jaffle_shop_dev_026",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.stripe_integration_tests.charge_data.amount_refunded changed",
+   "diff": "",
+   "fault_type": "schema_change",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_001",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the column was dropped at the source; restore it there",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of seed.stripe_integration_tests.subscription_history_data.trial_end changed",
+   "diff": "",
+   "fault_type": "schema_change",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_002",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the column was dropped at the source; restore it there",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.customer.name changed",
+   "diff": "",
+   "fault_type": "late_or_missing_data",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_003",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.customer.name changed",
+   "diff": "",
+   "fault_type": "late_or_missing_data",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_004",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.coupon.id changed",
+   "diff": "",
+   "fault_type": "duplicate_keys",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_005",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "duplicate rows in source.stripe.stripe.fee (key balance_transaction_id)",
+   "diff": "--- a/packages/stripe/models/staging/tmp/stg_stripe__fee_tmp.sql\n+++ b/packages/stripe/models/staging/tmp/stg_stripe__fee_tmp.sql\n@@ -1,3 +1,6 @@\n+-- faultline fix: source.stripe.stripe.fee repeats rows on key balance_transaction_id; keep one copy of each\n+with faultline_input as (\n+\n {% if var('stripe_union_schemas', []) | length > 0 or var('stripe_union_databases', []) | length > 0 %}\n \n {{\n@@ -24,4 +27,7 @@\n     )\n }}\n \n-{% endif %}+{% endif %}\n+\n+)\n+select distinct * from faultline_input\n",
+   "fault_type": "duplicate_keys",
+   "fixed": true,
+   "incident_id": "inc_stripe_dev_006",
+   "pattern": "dedupe_rows",
+   "proposed": true,
+   "reason": "keep one copy of each identical row in the 1 model(s) reading source.stripe.stripe.fee; the source itself should stop sending duplicates",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.coupon.duration changed",
+   "diff": "",
+   "fault_type": "null_spike",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_007",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.charge.amount_refunded changed",
+   "diff": "",
+   "fault_type": "null_spike",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_008",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.payout.amount changed",
+   "diff": "",
+   "fault_type": "distribution_shift",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_009",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.fee.amount changed",
+   "diff": "",
+   "fault_type": "distribution_shift",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_010",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.stripe.int_stripe__account_rolling_totals.rolling_daily_end_balance_amount (commit dbb8263)",
+   "diff": "--- a/packages/stripe/models/intermediate/int_stripe__account_rolling_totals.sql\n+++ b/packages/stripe/models/intermediate/int_stripe__account_rolling_totals.sql\n@@ -17,7 +17,7 @@\n         *\n \n         {% for t in total_fields %}\n-        , avg({{ t }}) over (partition by account_id{{ fivetran_utils.partition_by_source_relation(package_name='stripe') }} order by date_day rows unbounded preceding) as rolling_{{ t }}\n+        , sum({{ t }}) over (partition by account_id{{ fivetran_utils.partition_by_source_relation(package_name='stripe') }} order by date_day rows unbounded preceding) as rolling_{{ t }}\n         {% endfor %}\n \n     from account_daily_balances_by_type\n",
+   "fault_type": "model_logic_bug",
+   "fixed": true,
+   "incident_id": "inc_stripe_dev_011",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit dbb8263 made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.stripe.int_stripe__account_daily.total_daily_other_transactions_amount (commit 48204bd)",
+   "diff": "--- a/packages/stripe/models/intermediate/int_stripe__account_daily.sql\n+++ b/packages/stripe/models/intermediate/int_stripe__account_daily.sql\n@@ -33,7 +33,7 @@\n         sum(case when balance_transaction.balance_transaction_type = 'adjustment' \n             then balance_transaction.balance_transaction_amount\n             else 0 end) as total_daily_adjustments_amount,\n-        avg(case when balance_transaction.balance_transaction_type not in ('charge', 'payment', 'payment_refund', 'refund', 'adjustment', 'payout') and balance_transaction.balance_transaction_type not like '%transfer%' \n+        sum(case when balance_transaction.balance_transaction_type not in ('charge', 'payment', 'payment_refund', 'refund', 'adjustment', 'payout') and balance_transaction.balance_transaction_type not like '%transfer%' \n             then balance_transaction.balance_transaction_amount\n             else 0 end) as total_daily_other_transactions_amount,\n         sum(case when balance_transaction.balance_transaction_type <> 'payout' and balance_transaction.balance_transaction_type not like '%transfer%' \n",
+   "fault_type": "model_logic_bug",
+   "fixed": true,
+   "incident_id": "inc_stripe_dev_012",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit 48204bd made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.stripe.stripe__subscription_item_mrr_report.item_month_number (commit fa0a267)",
+   "diff": "--- a/packages/stripe/models/stripe__subscription_item_mrr_report.sql\n+++ b/packages/stripe/models/stripe__subscription_item_mrr_report.sql\n@@ -160,7 +160,7 @@\n         price_plan.currency,\n         price_plan.unit_amount\n     from subscription_item\n-    inner join subscription_deduped as subscription\n+    left join subscription_deduped as subscription\n         on subscription_item.subscription_id = subscription.subscription_id\n         and subscription_item.source_relation = subscription.source_relation\n     left join price_plan\n",
+   "fault_type": "broken_join",
+   "fixed": true,
+   "incident_id": "inc_stripe_dev_013",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit fa0a267 made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": true,
+   "cause": "code change in model.stripe.stripe__subscription_item_mrr_report.item_month_number (commit a8beb6f)",
+   "diff": "--- a/packages/stripe/models/stripe__subscription_item_mrr_report.sql\n+++ b/packages/stripe/models/stripe__subscription_item_mrr_report.sql\n@@ -164,7 +164,7 @@\n         on subscription_item.subscription_id = subscription.subscription_id\n         and subscription_item.source_relation = subscription.source_relation\n     left join price_plan\n-        on subscription_item.plan_id = subscription_item.plan_id\n+        on subscription_item.plan_id = price_plan.price_plan_id\n         and subscription_item.source_relation = price_plan.source_relation\n \n ),\n",
+   "fault_type": "broken_join",
+   "fixed": true,
+   "incident_id": "inc_stripe_dev_014",
+   "pattern": "revert_commit",
+   "proposed": true,
+   "reason": "revert the change commit a8beb6f made to this model",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.customer._fivetran_synced changed",
+   "diff": "",
+   "fault_type": "timezone_error",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_015",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": "values of source.stripe.stripe.coupon.created changed",
+   "diff": "",
+   "fault_type": "timezone_error",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_016",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "the data changed at the source; a model change would hide it, so the fix is at the source, and a test can catch it next time",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_017",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_018",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_019",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_020",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_021",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_022",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_023",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_024",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_025",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  },
+  {
+   "build_ok": null,
+   "cause": null,
+   "diff": "",
+   "fault_type": "clean",
+   "fixed": false,
+   "incident_id": "inc_stripe_dev_026",
+   "pattern": "none",
+   "proposed": false,
+   "reason": "no confirmed cause",
+   "still_off": []
+  }
+ ],
+ "metrics": {
+  "by_fault_type": {
+   "broken_join": {
+    "fixed": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "proposed": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    }
+   },
+   "distribution_shift": {
+    "fixed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "proposed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "duplicate_keys": {
+    "fixed": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "n": 6,
+    "proposed": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    }
+   },
+   "late_or_missing_data": {
+    "fixed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "proposed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "model_logic_bug": {
+    "fixed": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    },
+    "n": 6,
+    "proposed": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    }
+   },
+   "null_spike": {
+    "fixed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "proposed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "schema_change": {
+    "fixed": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "n": 6,
+    "proposed": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    }
+   },
+   "timezone_error": {
+    "fixed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "proposed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   }
+  },
+  "by_pattern": {
+   "dedupe_rows": {
+    "count": 4,
+    "n": 4,
+    "rate": 1.0
+   },
+   "map_renamed_column": {
+    "count": 1,
+    "n": 1,
+    "rate": 1.0
+   },
+   "revert_commit": {
+    "count": 11,
+    "n": 11,
+    "rate": 1.0
+   }
+  },
+  "clean": {
+   "false_fixes": {
+    "count": 0,
+    "n": 30,
+    "rate": 0.0
+   },
+   "n": 30
+  },
+  "faulted": {
+   "fixed": {
+    "count": 16,
+    "n": 48,
+    "rate": 0.3333
+   },
+   "fixed_when_proposed": {
+    "count": 16,
+    "n": 16,
+    "rate": 1.0
+   },
+   "n": 48,
+   "proposed": {
+    "count": 16,
+    "n": 48,
+    "rate": 0.3333
+   }
+  }
+ },
+ "split": "dev"
+}

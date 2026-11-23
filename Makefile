@@ -1,4 +1,4 @@
-.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm eval-dev-triage-llm setup-mlx finetune-data finetune-ranker finetune-raw-log serve-mlx-base serve-mlx-ranker serve-mlx-raw-log eval-dev-mlx-base eval-dev-mlx-ranker eval-dev-mlx-raw-log reference-dry-run eval-dev-reference
+.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm eval-dev-triage-llm setup-mlx finetune-data finetune-ranker finetune-raw-log serve-mlx-base serve-mlx-ranker serve-mlx-raw-log eval-dev-mlx-base eval-dev-mlx-ranker eval-dev-mlx-raw-log reference-dry-run eval-dev-reference eval-dev-fixes eval-dev-testgen
 
 PROJECTS := jaffle_shop stripe court_cases jira
 UV := uv
@@ -58,6 +58,13 @@ eval-dev-triage-llm:
 clean:
 	rm -rf .venv .pytest_cache .mypy_cache .ruff_cache build dist
 	@for p in $(PROJECTS); do rm -rf projects/$$p/target projects/$$p/logs; done
+
+# M7: rebuilds every dev run (about 160 dbt builds in all); not part of `make check`.
+eval-dev-fixes:
+	$(UV) run --frozen faultline fix eval --split dev
+
+eval-dev-testgen:
+	$(UV) run --frozen faultline testgen eval --split dev
 
 # ---------------------------------------------------------------- M6, on a Mac
 # Apple silicon only; none of this runs in CI. Steps in docs/EVAL.md.

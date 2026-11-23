@@ -274,6 +274,78 @@ def _cmd_finetune_export(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_fix_eval(args: argparse.Namespace) -> int:
+    from faultline.fixes.evaluate import evaluate
+
+    doc = evaluate(args.split, workers=args.workers, download=not args.no_download)
+    f = doc["metrics"]["faulted"]
+    print(
+        f"fixes on {args.split}: proposed {f['proposed']['count']}/{f['n']}, "
+        f"fixed {f['fixed']['count']}/{f['n']} -> eval/results/{args.split}/fixes.md"
+    )
+    return 0
+
+
+def _cmd_testgen_eval(args: argparse.Namespace) -> int:
+    from faultline.testgen.evaluate import evaluate
+
+    doc = evaluate(args.split, workers=args.workers)
+    f = doc["metrics"]["faulted"]
+    c = doc["metrics"]["clean"]
+    print(
+        f"generated tests on {args.split}: caught {f['generated']['count']}/{f['n']} faulted "
+        f"(own tests {f['own']['count']}), false alarms on {c['false_alarm_runs']['count']}/"
+        f"{c['n']} clean -> eval/results/{args.split}/testgen.md"
+    )
+    return 0
+
+
+def _cmd_fix_draft(args: argparse.Namespace) -> int:
+    import tempfile
+
+    from faultline.collectors.dbt_artifacts import load_project
+    from faultline.eval.loader import load_incidents
+    from faultline.eval.run import harness_references
+    from faultline.eval.score import load_truth
+    from faultline.fixes.draft import draft
+    from faultline.fixes.evaluate import _top_cause
+    from faultline.fixes.pr import open_draft_pr, write_draft
+    from faultline.inject.rebuild import load_truth_doc, rebuild
+    from faultline.monitors.core import load_monitor_config
+    from faultline.triage.method import triage_incident
+
+    bdir = Path("benchmark")
+    incidents, _ = load_incidents(args.split, bdir, download=not args.no_download)
+    match = [i for i in incidents if i.incident_id == args.run_id]
+    if not match:
+        print(f"no run {args.run_id!r} in split {args.split}", file=sys.stderr)
+        return 2
+    truths = {i.incident_id: load_truth(bdir, args.split, i.incident_id) for i in incidents}
+    refs = harness_references(incidents, truths)[args.run_id]
+    report = triage_incident(match[0], refs, load_monitor_config(Path(args.config))).report()
+    top = _top_cause(report)
+    if top is None:
+        print("Root cause not confirmed: no fix drafted.")
+        return 0
+    cause, incident = top
+    project = load_project(match[0].run_dir.parent, target=match[0].run_dir.name)
+    with tempfile.TemporaryDirectory() as tmp:
+        built = rebuild(load_truth_doc(bdir, args.split, args.run_id), Path(tmp) / "ws")
+        fix = draft(built.workspace, project, cause, incident)
+        print(f"Cause: {fix.cause}\nFix: {fix.pattern}: {fix.reason}")
+        if not fix.proposed:
+            return 0
+        if args.open_pr:
+            if not args.repo:
+                print("--open-pr needs --repo: your own dbt repo with a GitHub remote")
+                return 2
+            print(open_draft_pr(Path(args.repo), args.run_id, fix))
+            return 0
+        for path in write_draft(built.workspace, args.run_id, fix, Path(args.out)):
+            print(f"wrote {path}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="faultline",
@@ -331,6 +403,30 @@ def build_parser() -> argparse.ArgumentParser:
     ev.add_argument("--config", default="faultline.toml")
     ev.add_argument("--no-download", action="store_true", help="use dist/ only, never download")
     ev.set_defaults(func=_cmd_eval)
+
+    fx = sub.add_parser("fix", help="draft fixes for confirmed causes (never merges)")
+    fx_sub = fx.add_subparsers(dest="fix_command", required=True)
+    fxe = fx_sub.add_parser("eval", help="fix success rate: rebuild, patch, build, compare")
+    fxe.add_argument("--split", default="dev", choices=sorted(EVALUABLE_SPLITS))
+    fxe.add_argument("--workers", type=int, default=2)
+    fxe.add_argument("--no-download", action="store_true")
+    fxe.set_defaults(func=_cmd_fix_eval)
+    fxd = fx_sub.add_parser("draft", help="draft the fix for one benchmark run")
+    fxd.add_argument("run_id")
+    fxd.add_argument("--split", default="dev", choices=sorted(EVALUABLE_SPLITS))
+    fxd.add_argument("--out", default="build/fixes")
+    fxd.add_argument("--config", default="faultline.toml")
+    fxd.add_argument("--open-pr", action="store_true", help="branch, push and open a DRAFT PR")
+    fxd.add_argument("--repo", help="with --open-pr: the dbt repo to open it in")
+    fxd.add_argument("--no-download", action="store_true")
+    fxd.set_defaults(func=_cmd_fix_draft)
+
+    tg = sub.add_parser("testgen", help="tests learned from clean runs, and their mutation score")
+    tg_sub = tg.add_subparsers(dest="testgen_command", required=True)
+    tge = tg_sub.add_parser("eval", help="learn from train clean runs, score on dev")
+    tge.add_argument("--split", default="dev", choices=["dev"])
+    tge.add_argument("--workers", type=int, default=2)
+    tge.set_defaults(func=_cmd_testgen_eval)
 
     ft = sub.add_parser("finetune", help="fine-tuning data for the LLM slots (train split only)")
     ft_sub = ft.add_subparsers(dest="finetune_command", required=True)

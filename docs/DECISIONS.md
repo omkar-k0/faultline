@@ -227,3 +227,33 @@ Each entry: decision, alternative, reason.
 - Alternative: none; the API refuses the parameter for this model ("temperature is deprecated", HTTP 400, nothing billed).
 - Reason: the reference answers are therefore not guaranteed to repeat run to run, unlike the local models at temperature 0; the result file records temperature as null.
 
+## 2026-11-22: Fixes are scored on exact rebuilds of the runs
+- Decision: each run's workspace is rebuilt from its seed and fault site, checked against the input hash recorded at generation; the fix is applied there and dbt run.
+- Alternative: score fixes on the archived profiles only, or store every run's files.
+- Reason: owner's approval; a fix is only shown to work by building it. The rebuild is harness code that reads ground truth to set the scene; the drafter never sees the truth. Held-out runs are never rebuilt.
+
+## 2026-11-22: A fix succeeds only if every model equals the same run without its fault
+- Decision: success = dbt build passes and every model's profile matches the same seed built clean.
+- Alternative: "symptoms gone" or "values back inside the normal range".
+- Reason: owner's approval of "back to normal"; the same-seed clean run is the exact normal, so nothing partial passes.
+
+## 2026-11-22: Data faults get no code fix
+- Decision: null spikes, distribution shifts, late or missing rows, time shifts, dropped and retyped columns get no patch; the draft points to the source and counts as "no fix".
+- Alternative: coalesce, filter or cast in the staging model.
+- Reason: owner's approval; such a patch hides the incident instead of fixing it.
+
+## 2026-11-22: Duplicate rows are fixed with select distinct in the first models reading the source
+- Decision: the reading models wrap their SQL and keep one copy of each identical row.
+- Alternative: rewrite the source reference inside each model (not possible for stripe, whose sources are read through package macros).
+- Reason: works the same for seeds and package sources; whether it is exact is shown by the fix test, not assumed.
+
+## 2026-11-22: Generated tests are learned from train clean runs, rebuilt the same day
+- Decision: the test generator learns from the 30 train clean runs, rebuilt in the same session as the dev runs it is scored on.
+- Alternative: learn from the archived train profiles.
+- Reason: stripe models build a calendar up to the day they run, so archived profiles from another day would make every stripe run look wrong. No dev run is used to learn.
+
+## 2026-11-22: Generated tests run with severity warn
+- Decision: one singular test per relation, severity warn, returning its failed checks.
+- Alternative: one test per check at the default severity error.
+- Reason: an error-level test skips everything downstream and would change what the project's own tests see in the same run; one test per relation keeps stripe at about 80 tests instead of thousands.
+
