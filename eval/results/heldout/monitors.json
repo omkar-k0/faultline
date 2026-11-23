@@ -1,0 +1,6208 @@
+{
+ "archive_sha256": "sha256:8fe3c87c2658e821574fbb53078391028878b96c4ec3bc8625a6a0ffa408f7e7",
+ "baseline": "monitors",
+ "by_monitor": {
+  "distribution": {
+   "broken_join": 3,
+   "clean": 1,
+   "distribution_shift": 1,
+   "duplicate_keys": 3,
+   "late_or_missing_data": 2,
+   "timezone_error": 2
+  },
+  "duplicates": {
+   "broken_join": 3,
+   "duplicate_keys": 5,
+   "schema_change": 1,
+   "timezone_error": 1
+  },
+  "freshness": {
+   "broken_join": 1,
+   "late_or_missing_data": 4,
+   "null_spike": 1,
+   "schema_change": 3,
+   "timezone_error": 5
+  },
+  "null_rate": {
+   "broken_join": 2,
+   "distribution_shift": 1,
+   "duplicate_keys": 4,
+   "late_or_missing_data": 3,
+   "null_spike": 6,
+   "schema_change": 4
+  },
+  "schema": {
+   "broken_join": 2,
+   "duplicate_keys": 2,
+   "late_or_missing_data": 4,
+   "model_logic_bug": 3,
+   "schema_change": 6
+  },
+  "time_shift": {
+   "timezone_error": 1
+  },
+  "volume": {
+   "broken_join": 4,
+   "duplicate_keys": 3,
+   "late_or_missing_data": 6,
+   "null_spike": 1
+  }
+ },
+ "command": "faultline eval --split heldout --baseline monitors",
+ "config": {
+  "baseline": "monitors",
+  "faultline_version": "0.0.1",
+  "monitors": {
+   "dist_abs_margin": 1e-09,
+   "dist_mad_k": 6.0,
+   "dist_rel_margin": 0.1,
+   "dist_spread_k": 1.0,
+   "freshness_min_lag_hours": 1.0,
+   "min_reference_runs": 3,
+   "null_abs_margin": 0.02,
+   "volume_abs_margin": 1,
+   "volume_rel_margin": 0.01
+  },
+  "reference": "other clean runs of the same project in the split, all but one"
+ },
+ "config_hash": "93f805f53942",
+ "incidents": [
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__field_option_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.field_option",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.jira.jira.field_option",
+     "observed": "missing",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_001",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_001",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.field_option"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.field_option"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__field_option_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__issue_field_history_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.issue_field_history",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.jira.jira.issue_field_history",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-19T12:20:53.503000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue_field_history",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_field_history",
+     "observed": 1.0,
+     "severity": 49.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_002",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_002",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue_field_history"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.issue_field_history"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_field_history_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "start_date",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date_raw",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date_raw",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date_raw",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": ">= 2020-05-01T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__version",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__version",
+     "observed": 1.0,
+     "severity": 15.666666666666663
+    }
+   ],
+   "incident_id": "inc_jira_heldout_003",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_003",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "start_date",
+      "commit": null,
+      "node": "seed.jira_integration_tests.version"
+     },
+     {
+      "column": "start_date_raw",
+      "commit": null,
+      "node": "seed.jira_integration_tests.version"
+     },
+     {
+      "column": "start_date",
+      "commit": null,
+      "node": "source.jira.jira.version"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__field_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced_value",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__field_tmp",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.field",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced_value",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.field",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.jira.jira.field",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced_value",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "source.jira.jira.field",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:41.553000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__field",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__field",
+     "observed": 1.0,
+     "severity": 49.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_004",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_004",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.field"
+     },
+     {
+      "column": "_fivetran_synced_value",
+      "commit": null,
+      "node": "seed.jira_integration_tests.field"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.field"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "issue_id",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__issue_link_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_id_v2",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__issue_link_tmp",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_id",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.issue_link",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_id_v2",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.issue_link",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_id",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.jira.jira.issue_link",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_id_v2",
+     "expected": "column absent",
+     "monitor": "schema",
+     "node": "source.jira.jira.issue_link",
+     "observed": "new",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_id",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_link",
+     "observed": 1.0,
+     "severity": 49.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_005",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_005",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "issue_id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue_link"
+     },
+     {
+      "column": "issue_id_v2",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue_link"
+     },
+     {
+      "column": "issue_id",
+      "commit": null,
+      "node": "source.jira.jira.issue_link"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "last_viewed",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "last_viewed",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "last_viewed",
+     "expected": "column present",
+     "monitor": "schema",
+     "node": "source.jira.jira.issue",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_006",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_006",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "last_viewed",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     },
+     {
+      "column": "last_viewed",
+      "commit": null,
+      "node": "source.jira.jira.issue"
+     },
+     {
+      "column": "last_viewed",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "description",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_archived",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_overdue",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_released",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "version_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "archived",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "description",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "overdue",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "release_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "released",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "archived",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "description",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "overdue",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "release_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "released",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "archived",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "description",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "overdue",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "release_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "released",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": "DATE",
+     "monitor": "schema",
+     "node": "source.jira.jira.version",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__version",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "seed.jira_integration_tests.version",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "source.jira.jira.version",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": "release_date",
+     "expected": ">= 2020-11-17T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__version",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "start_date",
+     "expected": ">= 2020-05-01T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__version",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-06-17T14:20:59.271000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-06-17T14:20:59.271000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.version",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-06-17T14:20:59.271000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.version",
+     "observed": null,
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_007",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_007",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.version"
+     },
+     {
+      "column": "archived",
+      "commit": null,
+      "node": "seed.jira_integration_tests.version"
+     },
+     {
+      "column": "description",
+      "commit": null,
+      "node": "seed.jira_integration_tests.version"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "last_viewed",
+     "expected": "TIMESTAMP",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "last_viewed",
+     "expected": "TIMESTAMP",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "last_viewed",
+     "expected": "TIMESTAMP",
+     "monitor": "schema",
+     "node": "source.jira.jira.issue",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "2637..2691",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_issue_field_history",
+     "observed": 2450,
+     "severity": 3.5165165165165355
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__issue",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "source.jira.jira.issue",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_changed_at",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_changed_at",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_changed_at",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_changed_at",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "resolved",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_category_changed",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "resolved",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_category_changed",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "resolved",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "source.jira.jira.issue",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "status_category_changed",
+     "expected": ">= 2020-11-28T19:11:46",
+     "monitor": "freshness",
+     "node": "source.jira.jira.issue",
+     "observed": "2020-04-01T08:34:02",
+     "severity": 5794.6288888888885
+    },
+    {
+     "column": "updated",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "source.jira.jira.issue",
+     "observed": "2020-05-29T11:33:53",
+     "severity": 4399.631111111111
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_changed_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "revised_parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_changed_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "team",
+     "expected": "<= 0.9967",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__daily_issue_field_history",
+     "observed": 1.0,
+     "severity": 0.16366366366366014
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_changed_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "team",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 1.0,
+     "severity": 24.0
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_changed_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "last_viewed",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_category_changed",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "updated",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "last_viewed",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_category_changed",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "updated",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "last_viewed",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue",
+     "observed": 1.0,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "resolved",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "status_category_changed",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "updated",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue",
+     "observed": 0.5,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "min=1",
+     "severity": 499999999.5
+    },
+    {
+     "column": "priority_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status_id",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    },
+    {
+     "column": "priority_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status_id",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "min=1",
+     "severity": 499999999.5
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "min=5.022e+06",
+     "severity": 2510997499999999.5
+    },
+    {
+     "column": "priority_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status_id",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    },
+    {
+     "column": "priority_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status_id",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    },
+    {
+     "column": "priority",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    },
+    {
+     "column": "priority",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    },
+    {
+     "column": "priority",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "source.jira.jira.issue",
+     "observed": "max=3",
+     "severity": 1.5
+    },
+    {
+     "column": "status",
+     "expected": "4435.38..5573.38",
+     "monitor": "distribution",
+     "node": "source.jira.jira.issue",
+     "observed": "mean=3",
+     "severity": 3.8948813708260106
+    }
+   ],
+   "incident_id": "inc_jira_heldout_008",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_008",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "last_viewed",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     },
+     {
+      "column": "last_viewed",
+      "commit": null,
+      "node": "source.jira.jira.issue"
+     },
+     {
+      "column": "status_category_changed",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__daily_issue_field_history",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__project_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__user_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": "is_shared_team",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_visible_team",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "team_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "team_title",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_shared",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_visible",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "title",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_shared",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_visible",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "title",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "id",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.jira.jira.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_shared",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.jira.jira.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "is_visible",
+     "expected": "BOOLEAN",
+     "monitor": "schema",
+     "node": "source.jira.jira.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.jira.jira.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "title",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.jira.jira.team",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "4..6",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__team",
+     "observed": 0,
+     "severity": 2.0
+    },
+    {
+     "column": null,
+     "expected": "4..6",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": 0,
+     "severity": 2.0
+    },
+    {
+     "column": null,
+     "expected": "4..6",
+     "monitor": "volume",
+     "node": "seed.jira_integration_tests.team",
+     "observed": 0,
+     "severity": 2.0
+    },
+    {
+     "column": null,
+     "expected": "4..6",
+     "monitor": "volume",
+     "node": "source.jira.jira.team",
+     "observed": 0,
+     "severity": 2.0
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:41.553000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__team",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:41.553000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__team_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:41.553000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.team",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:41.553000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.team",
+     "observed": null,
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_009",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_009",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.team"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.team"
+     },
+     {
+      "column": "is_shared",
+      "commit": null,
+      "node": "seed.jira_integration_tests.team"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "37..39",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 23,
+     "severity": 7.0
+    },
+    {
+     "column": "issues_committed",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": 0.5,
+     "severity": 7.33333333333333
+    },
+    {
+     "column": "board_id",
+     "expected": "4.26316..5.21053",
+     "monitor": "distribution",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "mean=3.26087",
+     "severity": 1.0579704790660103
+    },
+    {
+     "column": "days_left_in_sprint",
+     "expected": "5.4..6.6",
+     "monitor": "distribution",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "median=5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "board_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "median=2.5",
+     "severity": 2.0
+    },
+    {
+     "column": "board_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__sprint",
+     "observed": "median=2.5",
+     "severity": 2.0
+    },
+    {
+     "column": "sprint_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__sprint",
+     "observed": "median=2.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "board_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__sprint_tmp",
+     "observed": "median=2.5",
+     "severity": 2.0
+    },
+    {
+     "column": "id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__sprint_tmp",
+     "observed": "median=2.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "board_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "seed.jira_integration_tests.sprint",
+     "observed": "median=2.5",
+     "severity": 2.0
+    },
+    {
+     "column": "id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "seed.jira_integration_tests.sprint",
+     "observed": "median=2.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "board_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "source.jira.jira.sprint",
+     "observed": "median=2.5",
+     "severity": 2.0
+    },
+    {
+     "column": "id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "source.jira.jira.sprint",
+     "observed": "median=2.5",
+     "severity": 0.3333333333333338
+    }
+   ],
+   "incident_id": "inc_jira_heldout_010",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_010",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "board_id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.sprint"
+     },
+     {
+      "column": "board_id",
+      "commit": null,
+      "node": "source.jira.jira.sprint"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.sprint"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "current_status_category",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "current_status_category",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "previous_status_category_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status_category_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status_category_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "status_category_name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__status_category",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "model.jira.stg_jira__status_category_tmp",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "seed.jira_integration_tests.status_category",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": "name",
+     "expected": "VARCHAR",
+     "monitor": "schema",
+     "node": "source.jira.jira.status_category",
+     "observed": "INTEGER",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__status_category",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__status_category_tmp",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "seed.jira_integration_tests.status_category",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": null,
+     "expected": "2..4",
+     "monitor": "volume",
+     "node": "source.jira.jira.status_category",
+     "observed": 0,
+     "severity": 1.0
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:40.411000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__status_category_tmp",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:40.411000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.status_category",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T22:20:40.411000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.status_category",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "current_status_category",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 1.0,
+     "severity": 24.0
+    },
+    {
+     "column": "current_status_category",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 1.0,
+     "severity": 24.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_011",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_011",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.status_category"
+     },
+     {
+      "column": "name",
+      "commit": null,
+      "node": "seed.jira_integration_tests.status_category"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.status_category"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__component",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__component_tmp",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "seed.jira_integration_tests.component",
+     "observed": 2,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "source.jira.jira.component",
+     "observed": 2,
+     "severity": 0.5
+    }
+   ],
+   "incident_id": "inc_jira_heldout_012",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_012",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.jira_integration_tests.component"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "source.jira.jira.component"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jira.stg_jira__component_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "component_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__component",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__component_tmp",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.jira_integration_tests.component",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.jira.jira.component",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_013",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_013",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.component"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "source.jira.jira.component"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "model.jira.stg_jira__component_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "current_sprint_id",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_sprint_name",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_status",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_status_category",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "issue_description",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_completed_at",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_ended_at",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "sprint_started_at",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_sprint_id",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_sprint_name",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_status",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "current_status_category",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "issue_description",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_completed_at",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_ended_at",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "sprint_name",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_started_at",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=51.2",
+     "severity": 2.499999999999999
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "priority_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=3.4",
+     "severity": 0.1666666666666669
+    },
+    {
+     "column": "status_id",
+     "expected": "4267.45..5548.05",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=9988",
+     "severity": 3.4670857410588773
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=51.2",
+     "severity": 2.499999999999999
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "2.95974e+06..3.61746e+06",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=1.5552e+06",
+     "severity": 2.1354661827724435
+    },
+    {
+     "column": "priority_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=3.4",
+     "severity": 0.1666666666666669
+    },
+    {
+     "column": "status_id",
+     "expected": "4267.45..5548.05",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=9988",
+     "severity": 3.4670857410588773
+    },
+    {
+     "column": "priority_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__priority",
+     "observed": "median=3.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__priority_tmp",
+     "observed": "median=3.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "seed.jira_integration_tests.priority",
+     "observed": "median=3.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "source.jira.jira.priority",
+     "observed": "median=3.5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "priority_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__priority",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__priority_tmp",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.jira_integration_tests.priority",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.jira.jira.priority",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_014",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_014",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.priority"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "source.jira.jira.priority"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "model.jira.stg_jira__priority_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "37..39",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 76,
+     "severity": 18.5
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_completed_at",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "sprint_completed_at",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8,
+     "severity": 1.5000000000000013
+    },
+    {
+     "column": "team",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6,
+     "severity": 3.999999999999998
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=25.6",
+     "severity": 0.4999999999999997
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=1",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "status_id",
+     "expected": "4214.47..5601.03",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=3",
+     "severity": 3.037365717493664
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=25.6",
+     "severity": 0.4999999999999997
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=1",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "2.95974e+06..3.61746e+06",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=5.022e+06",
+     "severity": 2.1354661827724435
+    },
+    {
+     "column": "status_id",
+     "expected": "4214.47..5601.03",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=3",
+     "severity": 3.037365717493664
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 5 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__project_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "user_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__user_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "user_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__user",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__user_tmp",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.jira_integration_tests.user",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.jira.jira.user",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_015",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_015",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.user"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "source.jira.jira.user"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "model.jira.stg_jira__user_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "components",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__project_enhanced",
+     "observed": 0.75,
+     "severity": 3.166666666666662
+    },
+    {
+     "column": "project_category_id",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__project_enhanced",
+     "observed": 0.75,
+     "severity": 3.166666666666662
+    },
+    {
+     "column": "project_category_id",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__project",
+     "observed": 0.75,
+     "severity": 3.166666666666662
+    },
+    {
+     "column": "project_category_id",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__project_tmp",
+     "observed": 0.75,
+     "severity": 3.166666666666662
+    },
+    {
+     "column": "project_category_id",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.project",
+     "observed": 0.75,
+     "severity": 3.166666666666662
+    },
+    {
+     "column": "project_category_id",
+     "expected": "<= 0.6867",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.project",
+     "observed": 0.75,
+     "severity": 3.166666666666662
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__project_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__project",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__project_tmp",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.jira_integration_tests.project",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.jira.jira.project",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_016",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 3,
+    "incident_id": "inc_jira_heldout_016",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "project_category_id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.project"
+     },
+     {
+      "column": "project_category_id",
+      "commit": null,
+      "node": "source.jira.jira.project"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.project"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "130..132",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__comment",
+     "observed": 141,
+     "severity": 3.3167938931297645
+    },
+    {
+     "column": null,
+     "expected": "130..132",
+     "monitor": "volume",
+     "node": "model.jira.stg_jira__comment_tmp",
+     "observed": 141,
+     "severity": 3.3167938931297645
+    },
+    {
+     "column": null,
+     "expected": "130..132",
+     "monitor": "volume",
+     "node": "seed.jira_integration_tests.comment",
+     "observed": 141,
+     "severity": 3.3167938931297645
+    },
+    {
+     "column": null,
+     "expected": "130..132",
+     "monitor": "volume",
+     "node": "source.jira.jira.comment",
+     "observed": 141,
+     "severity": 3.3167938931297645
+    }
+   ],
+   "incident_id": "inc_jira_heldout_017",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_017",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "seed.jira_integration_tests.comment"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "source.jira.jira.comment"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jira.stg_jira__comment_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 6,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "37..39",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 76,
+     "severity": 18.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 6,
+     "severity": 0.5
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "sprint_completed_at",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "sprint_completed_at",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=21.3333",
+     "severity": 1.1666667187499997
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=1.16667",
+     "severity": 0.33333499999999894
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=21.3333",
+     "severity": 1.1666667187499997
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=1.16667",
+     "severity": 0.33333499999999894
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "4.41422e+07..5.39515e+07",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=3.37941e+07",
+     "severity": 1.0549176155130187
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "priority_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__priority",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__priority_tmp",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "seed.jira_integration_tests.priority",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "source.jira.jira.priority",
+     "observed": "5 distinct / 6 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_018",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_018",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "id",
+      "commit": null,
+      "node": "seed.jira_integration_tests.priority"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "source.jira.jira.priority"
+     },
+     {
+      "column": "id",
+      "commit": null,
+      "node": "model.jira.stg_jira__priority_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T12:21:00.979000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__field_option_tmp",
+     "observed": "2020-11-19T12:20:53.110000",
+     "severity": 96.00218583333333
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T12:21:00.979000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.field_option",
+     "observed": "2020-11-19T12:20:53.110000",
+     "severity": 96.00218583333333
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-23T12:21:00.979000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.field_option",
+     "observed": "2020-11-19T12:20:53.110000",
+     "severity": 96.00218583333333
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__field_option_tmp",
+     "observed": 0.6,
+     "severity": 28.999999999999996
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.field_option",
+     "observed": 0.6,
+     "severity": 28.999999999999996
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.field_option",
+     "observed": 0.6,
+     "severity": 28.999999999999996
+    }
+   ],
+   "incident_id": "inc_jira_heldout_019",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_019",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.field_option"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.field_option"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__field_option_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "issue_name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.5,
+     "severity": 24.0
+    },
+    {
+     "column": "issue_name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": 0.5,
+     "severity": 24.0
+    },
+    {
+     "column": "issue_name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.5,
+     "severity": 24.0
+    },
+    {
+     "column": "issue_name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue",
+     "observed": 0.5,
+     "severity": 24.0
+    },
+    {
+     "column": "summary",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": 0.5,
+     "severity": 24.0
+    },
+    {
+     "column": "summary",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": 0.5,
+     "severity": 24.0
+    },
+    {
+     "column": "summary",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue",
+     "observed": 0.5,
+     "severity": 24.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_020",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_020",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "summary",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     },
+     {
+      "column": "summary",
+      "commit": null,
+      "node": "source.jira.jira.issue"
+     },
+     {
+      "column": "summary",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "field_option_name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__field_option",
+     "observed": 0.4,
+     "severity": 19.0
+    },
+    {
+     "column": "name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__field_option_tmp",
+     "observed": 0.4,
+     "severity": 19.0
+    },
+    {
+     "column": "name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.field_option",
+     "observed": 0.4,
+     "severity": 19.0
+    },
+    {
+     "column": "name",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.field_option",
+     "observed": 0.4,
+     "severity": 19.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_021",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_021",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "name",
+      "commit": null,
+      "node": "seed.jira_integration_tests.field_option"
+     },
+     {
+      "column": "name",
+      "commit": null,
+      "node": "source.jira.jira.field_option"
+     },
+     {
+      "column": "name",
+      "commit": null,
+      "node": "model.jira.stg_jira__field_option_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__status",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__status_tmp",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.status",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.status",
+     "observed": 0.3333,
+     "severity": 15.666666666666668
+    }
+   ],
+   "incident_id": "inc_jira_heldout_022",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_022",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.status"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.status"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__status_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "2637..2691",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_issue_field_history",
+     "observed": 2633,
+     "severity": 0.08183183183183461
+    },
+    {
+     "column": "valid_starting_at_week",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__field_history_scd",
+     "observed": 0.25,
+     "severity": 11.5
+    },
+    {
+     "column": "valid_starting_on",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__field_history_scd",
+     "observed": 0.25,
+     "severity": 11.5
+    },
+    {
+     "column": "valid_starting_at_week",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__pivot_daily_field_history",
+     "observed": 0.25,
+     "severity": 11.5
+    },
+    {
+     "column": "valid_starting_on",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__pivot_daily_field_history",
+     "observed": 0.25,
+     "severity": 11.5
+    },
+    {
+     "column": "team",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.75,
+     "severity": 11.499999999999998
+    },
+    {
+     "column": "minutes_in_status",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": 0.2,
+     "severity": 8.999999999999998
+    },
+    {
+     "column": "transition_at",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": 0.2,
+     "severity": 8.999999999999998
+    },
+    {
+     "column": "updated_at_week",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": 0.2,
+     "severity": 8.999999999999998
+    },
+    {
+     "column": "valid_from",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": 0.2,
+     "severity": 8.999999999999998
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_field_history",
+     "observed": 0.3,
+     "severity": 14.000000000000002
+    },
+    {
+     "column": "time",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__issue_field_history_tmp",
+     "observed": 0.3,
+     "severity": 14.000000000000002
+    },
+    {
+     "column": "time",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.issue_field_history",
+     "observed": 0.3,
+     "severity": 14.000000000000002
+    },
+    {
+     "column": "time",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.issue_field_history",
+     "observed": 0.3,
+     "severity": 14.000000000000002
+    }
+   ],
+   "incident_id": "inc_jira_heldout_023",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_023",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "time",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue_field_history"
+     },
+     {
+      "column": "time",
+      "commit": null,
+      "node": "source.jira.jira.issue_field_history"
+     },
+     {
+      "column": "time",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_field_history_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__status",
+     "observed": 0.6667,
+     "severity": 32.333333333333336
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.stg_jira__status_tmp",
+     "observed": 0.6667,
+     "severity": 32.333333333333336
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "seed.jira_integration_tests.status",
+     "observed": 0.6667,
+     "severity": 32.333333333333336
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "source.jira.jira.status",
+     "observed": 0.6667,
+     "severity": 32.333333333333336
+    }
+   ],
+   "incident_id": "inc_jira_heldout_024",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_024",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.status"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.status"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__status_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_025",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_026",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_027",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_027",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_028",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_028",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_029",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_029",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "current_status",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 1.0,
+     "severity": 24.0
+    },
+    {
+     "column": "current_status_category",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 1.0,
+     "severity": 24.0
+    },
+    {
+     "column": "current_status",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 1.0,
+     "severity": 24.0
+    },
+    {
+     "column": "current_status_category",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 1.0,
+     "severity": 24.0
+    },
+    {
+     "column": "status_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "status_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "status_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "status_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "status",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "status",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    },
+    {
+     "column": "status",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "source.jira.jira.issue",
+     "observed": "min=0",
+     "severity": 4.500000000000003
+    }
+   ],
+   "incident_id": "inc_jira_heldout_030",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_030",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "status",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     },
+     {
+      "column": "status",
+      "commit": null,
+      "node": "source.jira.jira.issue"
+     },
+     {
+      "column": "status",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_031",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_031",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "remaining_estimate_seconds",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_032",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_032",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "remaining_estimate_seconds",
+      "commit": null,
+      "node": "model.jira.jira__sprint_enhanced"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_033",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_033",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_034",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_034",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "time_spent_seconds",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_035",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_035",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "time_spent_seconds",
+      "commit": null,
+      "node": "model.jira.jira__sprint_enhanced"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "remaining_estimate_seconds",
+     "expected": "HUGEINT",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "DOUBLE",
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_036",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_036",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "remaining_estimate_seconds",
+      "commit": null,
+      "node": "model.jira.jira__sprint_enhanced"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_037",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_037",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_038",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_038",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "2637..2691",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_issue_field_history",
+     "observed": 9696,
+     "severity": 131.4819819819826
+    },
+    {
+     "column": null,
+     "expected": "37..39",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 46,
+     "severity": 3.5
+    },
+    {
+     "column": "issue_resolved_at",
+     "expected": "<= 0.0200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 0.1739,
+     "severity": 7.695652173913044
+    },
+    {
+     "column": "issues_committed",
+     "expected": "<= 0.3533",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": 0.5,
+     "severity": 7.33333333333333
+    },
+    {
+     "column": "board_id",
+     "expected": "4.26316..5.21053",
+     "monitor": "distribution",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "mean=3.91304",
+     "severity": 0.36956563043479174
+    },
+    {
+     "column": "days_left_in_sprint",
+     "expected": "5.4..6.6",
+     "monitor": "distribution",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "median=5",
+     "severity": 0.3333333333333338
+    },
+    {
+     "column": "board_id",
+     "expected": "4.5..5.5",
+     "monitor": "distribution",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "median=2.5",
+     "severity": 2.0
+    },
+    {
+     "column": "open_sprint_issues",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "max=1",
+     "severity": 499999999.5
+    },
+    {
+     "column": "resolved_sprint_issues",
+     "expected": "0.9..1.1",
+     "monitor": "distribution",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "min=0",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "board_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "sprint_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_039",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_039",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jira.jira__daily_issue_field_history"
+     },
+     {
+      "column": "issue_resolved_at",
+      "commit": null,
+      "node": "model.jira.jira__daily_sprint_issue_history"
+     },
+     {
+      "column": null,
+      "commit": null,
+      "node": "model.jira.jira__daily_sprint_issue_history"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "4..6",
+     "monitor": "volume",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": 0,
+     "severity": 2.0
+    },
+    {
+     "column": null,
+     "expected": "4..6",
+     "monitor": "volume",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": 0,
+     "severity": 2.0
+    },
+    {
+     "column": "transition_at",
+     "expected": ">= 2020-11-10T19:19:48.472000",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "transition_until",
+     "expected": ">= 2026-11-19T08:42:23.189204+01:00",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_status_transitions",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "updated_at_week",
+     "expected": ">= 2020-11-09T00:00:00",
+     "monitor": "freshness",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "valid_from",
+     "expected": ">= 2020-11-10T19:19:48.472000",
+     "monitor": "freshness",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": null,
+     "severity": "inf"
+    },
+    {
+     "column": "valid_until",
+     "expected": ">= 2026-11-19T08:42:23.081817+01:00",
+     "monitor": "freshness",
+     "node": "model.jira.jira__timestamp_issue_field_history",
+     "observed": null,
+     "severity": "inf"
+    }
+   ],
+   "incident_id": "inc_jira_heldout_040",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_040",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "updated_at_week",
+      "commit": null,
+      "node": "model.jira.jira__timestamp_issue_field_history"
+     },
+     {
+      "column": "valid_from",
+      "commit": null,
+      "node": "model.jira.jira__timestamp_issue_field_history"
+     },
+     {
+      "column": "valid_until",
+      "commit": null,
+      "node": "model.jira.jira__timestamp_issue_field_history"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 6,
+     "severity": 0.5
+    },
+    {
+     "column": null,
+     "expected": "37..39",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 76,
+     "severity": 18.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 6,
+     "severity": 0.5
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "resolved_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "status_changed_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "conversation",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "parent_issue_id",
+     "expected": "<= 0.7700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.8333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "resolved_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "status_changed_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "team",
+     "expected": "<= 0.5200",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.6667,
+     "severity": 7.333333333333336
+    },
+    {
+     "column": "updated_at",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "work_ratio",
+     "expected": "<= 0.2700",
+     "monitor": "null_rate",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 0.3333,
+     "severity": 3.1666666666666674
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=21.3333",
+     "severity": 1.1666667187499997
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=1",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "priority_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "mean=2.66667",
+     "severity": 0.0555550000000005
+    },
+    {
+     "column": "status_id",
+     "expected": "4107.73..5707.77",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=3",
+     "severity": 2.5653752560546894
+    },
+    {
+     "column": "count_comments",
+     "expected": "28.8..35.2",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=21.3333",
+     "severity": 1.1666667187499997
+    },
+    {
+     "column": "count_sprint_changes",
+     "expected": "0.45..0.55",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=1",
+     "severity": 4.499999999999998
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "2.95974e+06..3.61746e+06",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=5.022e+06",
+     "severity": 2.1354661827724435
+    },
+    {
+     "column": "priority_id",
+     "expected": "2.7..3.3",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "mean=2.66667",
+     "severity": 0.0555550000000005
+    },
+    {
+     "column": "status_id",
+     "expected": "4107.73..5707.77",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=3",
+     "severity": 2.5653752560546894
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 6 rows",
+     "severity": 2.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_041",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_041",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "count_sprint_changes",
+      "commit": null,
+      "node": "model.jira.int_jira__issue_join"
+     },
+     {
+      "column": "conversation",
+      "commit": null,
+      "node": "model.jira.int_jira__issue_join"
+     },
+     {
+      "column": "parent_issue_id",
+      "commit": null,
+      "node": "model.jira.int_jira__issue_join"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": null,
+     "expected": "relation present",
+     "monitor": "schema",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "missing",
+     "severity": "inf"
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": 12,
+     "severity": 3.5
+    },
+    {
+     "column": null,
+     "expected": "37..39",
+     "monitor": "volume",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": 114,
+     "severity": 37.5
+    },
+    {
+     "column": null,
+     "expected": "3..5",
+     "monitor": "volume",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": 12,
+     "severity": 3.5
+    },
+    {
+     "column": "count_comments",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "median=2",
+     "severity": 999999999.4999999
+    },
+    {
+     "column": "count_comments",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "median=2",
+     "severity": 999999999.4999999
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 12 rows",
+     "severity": 8.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 12 rows",
+     "severity": 8.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "4 distinct / 12 rows",
+     "severity": 8.0
+    },
+    {
+     "column": "issue_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 12 rows",
+     "severity": 8.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 12 rows",
+     "severity": 8.0
+    },
+    {
+     "column": "project_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "4 distinct / 12 rows",
+     "severity": 8.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_042",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_042",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": true
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "count_comments",
+      "commit": null,
+      "node": "model.jira.int_jira__issue_join"
+     },
+     {
+      "column": "issue_id",
+      "commit": null,
+      "node": "model.jira.int_jira__issue_join"
+     },
+     {
+      "column": "issue_type_id",
+      "commit": null,
+      "node": "model.jira.int_jira__issue_join"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "resolved_at",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "resolved_at",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_resolved_at",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "resolved_at",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "resolved_at",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "resolved",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "resolved",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "resolved",
+     "expected": "no shift",
+     "monitor": "time_shift",
+     "node": "source.jira.jira.issue",
+     "observed": "-1 h",
+     "severity": 1.0
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "min=-3600",
+     "severity": 1799999999999.5
+    }
+   ],
+   "incident_id": "inc_jira_heldout_043",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_043",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "resolved",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     },
+     {
+      "column": "resolved",
+      "commit": null,
+      "node": "source.jira.jira.issue"
+     },
+     {
+      "column": "resolved",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__sprint",
+     "observed": "2020-11-22T10:20:59",
+     "severity": 2.0001425
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__sprint_tmp",
+     "observed": "2020-11-22T10:20:59",
+     "severity": 2.0001425
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.sprint",
+     "observed": "2020-11-22T10:20:59",
+     "severity": 2.0001425
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.sprint",
+     "observed": "2020-11-22T10:20:59",
+     "severity": 2.0001425
+    }
+   ],
+   "incident_id": "inc_jira_heldout_044",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_044",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.sprint"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.sprint"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__sprint_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "issue_resolved_at",
+     "expected": ">= 2020-05-29T11:33:53",
+     "monitor": "freshness",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "2020-05-29T03:33:53",
+     "severity": 8.0
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "resolved_at",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "resolved",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__issue_tmp",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "resolved",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.issue",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "resolved",
+     "expected": ">= 2020-11-28T19:11:45",
+     "monitor": "freshness",
+     "node": "source.jira.jira.issue",
+     "observed": "2020-11-28T11:11:45",
+     "severity": 8.0
+    },
+    {
+     "column": "open_duration_seconds",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "min=-28800",
+     "severity": 14399999999999.498
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.int_jira__issue_type_parents",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    },
+    {
+     "column": "issue_type_id",
+     "expected": "unique",
+     "monitor": "duplicates",
+     "node": "model.jira.stg_jira__issue",
+     "observed": "3 distinct / 4 rows",
+     "severity": 1.0
+    }
+   ],
+   "incident_id": "inc_jira_heldout_045",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_045",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "resolved",
+      "commit": null,
+      "node": "seed.jira_integration_tests.issue"
+     },
+     {
+      "column": "resolved",
+      "commit": null,
+      "node": "source.jira.jira.issue"
+     },
+     {
+      "column": "resolved",
+      "commit": null,
+      "node": "model.jira.stg_jira__issue_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__sprint",
+     "observed": "2020-11-22T05:20:59",
+     "severity": 7.0001425
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__sprint_tmp",
+     "observed": "2020-11-22T05:20:59",
+     "severity": 7.0001425
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.sprint",
+     "observed": "2020-11-22T05:20:59",
+     "severity": 7.0001425
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2020-11-22T12:20:59.513000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.sprint",
+     "observed": "2020-11-22T05:20:59",
+     "severity": 7.0001425
+    }
+   ],
+   "incident_id": "inc_jira_heldout_046",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_046",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.sprint"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.sprint"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__sprint_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "sprint_started_at",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "model.jira.int_jira__issue_join",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "sprint_started_at",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "model.jira.jira__daily_sprint_issue_history",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "sprint_started_at",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "model.jira.jira__issue_enhanced",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "sprint_started_at",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "model.jira.jira__sprint_enhanced",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "started_at",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__sprint",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "start_date",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__sprint_tmp",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "start_date",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.sprint",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    },
+    {
+     "column": "start_date",
+     "expected": ">= 2020-11-12T21:55:42.220000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.sprint",
+     "observed": "2020-11-12T15:55:42",
+     "severity": 6.000061111111111
+    }
+   ],
+   "incident_id": "inc_jira_heldout_047",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_047",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "start_date",
+      "commit": null,
+      "node": "seed.jira_integration_tests.sprint"
+     },
+     {
+      "column": "start_date",
+      "commit": null,
+      "node": "source.jira.jira.sprint"
+     },
+     {
+      "column": "start_date",
+      "commit": null,
+      "node": "model.jira.stg_jira__sprint_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-06-17T14:20:59.271000",
+     "monitor": "freshness",
+     "node": "model.jira.stg_jira__version_tmp",
+     "observed": "2021-06-17T13:20:59",
+     "severity": 1.000075277777778
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-06-17T14:20:59.271000",
+     "monitor": "freshness",
+     "node": "seed.jira_integration_tests.version",
+     "observed": "2021-06-17T13:20:59",
+     "severity": 1.000075277777778
+    },
+    {
+     "column": "_fivetran_synced",
+     "expected": ">= 2021-06-17T14:20:59.271000",
+     "monitor": "freshness",
+     "node": "source.jira.jira.version",
+     "observed": "2021-06-17T13:20:59",
+     "severity": 1.000075277777778
+    }
+   ],
+   "incident_id": "inc_jira_heldout_048",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": 1,
+    "incident_id": "inc_jira_heldout_048",
+    "node_hit_rank": 1,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "seed.jira_integration_tests.version"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "source.jira.jira.version"
+     },
+     {
+      "column": "_fivetran_synced",
+      "commit": null,
+      "node": "model.jira.stg_jira__version_tmp"
+     }
+    ],
+    "detected": true
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_049",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_049",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_050",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_050",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_051",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_051",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_052",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_052",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_053",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_053",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_054",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_054",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_055",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_055",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_056",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_056",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [],
+   "incident_id": "inc_jira_heldout_057",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_057",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "anomalies": [
+    {
+     "column": "count_open_issues",
+     "expected": "-1e-09..1e-09",
+     "monitor": "distribution",
+     "node": "model.jira.jira__project_enhanced",
+     "observed": "max=1",
+     "severity": 499999999.5
+    }
+   ],
+   "incident_id": "inc_jira_heldout_058",
+   "outcome": {
+    "abstained": false,
+    "detected": true,
+    "false_alarm": true,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_058",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [
+     {
+      "column": "count_open_issues",
+      "commit": null,
+      "node": "model.jira.jira__project_enhanced"
+     }
+    ],
+    "detected": true
+   }
+  }
+ ],
+ "metrics": {
+  "by_fault_type": {
+   "broken_join": {
+    "detected": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "diagnostic_node_top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "diagnostic_node_top3": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    }
+   },
+   "distribution_shift": {
+    "detected": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "diagnostic_node_top1": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "diagnostic_node_top3": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "top3": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "duplicate_keys": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 4,
+     "n": 6,
+     "rate": 0.6667
+    },
+    "top3": {
+     "count": 5,
+     "n": 6,
+     "rate": 0.8333
+    },
+    "wrong_top1": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    }
+   },
+   "late_or_missing_data": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "top3": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "wrong_top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    }
+   },
+   "model_logic_bug": {
+    "detected": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "diagnostic_node_top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "diagnostic_node_top3": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 3,
+     "n": 6,
+     "rate": 0.5
+    }
+   },
+   "null_spike": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "schema_change": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "timezone_error": {
+    "detected": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "diagnostic_node_top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "top3": {
+     "count": 6,
+     "n": 6,
+     "rate": 1.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   }
+  },
+  "by_project": {
+   "jira": {
+    "detected": {
+     "count": 38,
+     "n": 48,
+     "rate": 0.7917
+    },
+    "diagnostic_node_top1": {
+     "count": 36,
+     "n": 48,
+     "rate": 0.75
+    },
+    "diagnostic_node_top3": {
+     "count": 36,
+     "n": 48,
+     "rate": 0.75
+    },
+    "n": 48,
+    "not_confirmed": {
+     "count": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 26,
+     "n": 48,
+     "rate": 0.5417
+    },
+    "top3": {
+     "count": 27,
+     "n": 48,
+     "rate": 0.5625
+    },
+    "wrong_top1": {
+     "count": 12,
+     "n": 48,
+     "rate": 0.25
+    }
+   }
+  },
+  "clean": {
+   "false_alarms": {
+    "count": 1,
+    "n": 10,
+    "rate": 0.1
+   },
+   "n": 10
+  },
+  "faulted": {
+   "detected": {
+    "count": 38,
+    "n": 48,
+    "rate": 0.7917
+   },
+   "diagnostic_node_top1": {
+    "count": 36,
+    "n": 48,
+    "rate": 0.75
+   },
+   "diagnostic_node_top3": {
+    "count": 36,
+    "n": 48,
+    "rate": 0.75
+   },
+   "n": 48,
+   "not_confirmed": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "top1": {
+    "count": 26,
+    "n": 48,
+    "rate": 0.5417
+   },
+   "top3": {
+    "count": 27,
+    "n": 48,
+    "rate": 0.5625
+   },
+   "wrong_top1": {
+    "count": 12,
+    "n": 48,
+    "rate": 0.25
+   }
+  }
+ },
+ "plan_sha256": "sha256:673730eabec62170c3b394acd891fe80d8d2bc52aafde032b7dfd47e6474e60d",
+ "split": "heldout"
+}

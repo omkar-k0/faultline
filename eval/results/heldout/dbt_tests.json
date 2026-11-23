@@ -1,0 +1,1452 @@
+{
+ "archive_sha256": "sha256:8fe3c87c2658e821574fbb53078391028878b96c4ec3bc8625a6a0ffa408f7e7",
+ "baseline": "dbt_tests",
+ "command": "faultline eval --split heldout --baseline dbt_tests",
+ "config": {
+  "baseline": "dbt_tests",
+  "faultline_version": "0.0.1"
+ },
+ "config_hash": "aeee888f69bb",
+ "incidents": [
+  {
+   "incident_id": "inc_jira_heldout_001",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_001",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_002",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_002",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_003",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_003",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_004",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_004",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_005",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_005",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_006",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "schema_change",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_006",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_007",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_007",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_008",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_008",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_009",
+   "outcome": {
+    "abstained": true,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_009",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_010",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_010",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_011",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_011",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_012",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "late_or_missing_data",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_012",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_013",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_013",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_014",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_014",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_015",
+   "outcome": {
+    "abstained": true,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_015",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_016",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_016",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_017",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_017",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_018",
+   "outcome": {
+    "abstained": true,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "duplicate_keys",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_018",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_019",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_019",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_020",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_020",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_021",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_021",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_022",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_022",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_023",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_023",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_024",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "null_spike",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_024",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_025",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_025",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_026",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_026",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_027",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_027",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_028",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_028",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_029",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_029",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_030",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "distribution_shift",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_030",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_031",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_031",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_032",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_032",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_033",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_033",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_034",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_034",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_035",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_035",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_036",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "model_logic_bug",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_036",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_037",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_037",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_038",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_038",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_039",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_039",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_040",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_040",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_041",
+   "outcome": {
+    "abstained": true,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_041",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_042",
+   "outcome": {
+    "abstained": true,
+    "detected": true,
+    "false_alarm": false,
+    "fault_type": "broken_join",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_042",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": true
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_043",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_043",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_044",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_044",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_045",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_045",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_046",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_046",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_047",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_047",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_048",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "timezone_error",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_048",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_049",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_049",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_050",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_050",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_051",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_051",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_052",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_052",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_053",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_053",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_054",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_054",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_055",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_055",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_056",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_056",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_057",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_057",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  },
+  {
+   "incident_id": "inc_jira_heldout_058",
+   "outcome": {
+    "abstained": false,
+    "detected": false,
+    "false_alarm": false,
+    "fault_type": "clean",
+    "hit_rank": null,
+    "incident_id": "inc_jira_heldout_058",
+    "node_hit_rank": null,
+    "project": "jira",
+    "wrong_top1": false
+   },
+   "prediction": {
+    "candidates": [],
+    "detected": false
+   }
+  }
+ ],
+ "metrics": {
+  "by_fault_type": {
+   "broken_join": {
+    "detected": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "distribution_shift": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "duplicate_keys": {
+    "detected": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 2,
+     "n": 6,
+     "rate": 0.3333
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "late_or_missing_data": {
+    "detected": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 1,
+     "n": 6,
+     "rate": 0.1667
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "model_logic_bug": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "null_spike": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "schema_change": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   },
+   "timezone_error": {
+    "detected": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "n": 6,
+    "not_confirmed": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 6,
+     "rate": 0.0
+    }
+   }
+  },
+  "by_project": {
+   "jira": {
+    "detected": {
+     "count": 5,
+     "n": 48,
+     "rate": 0.1042
+    },
+    "diagnostic_node_top1": {
+     "count": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "diagnostic_node_top3": {
+     "count": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "n": 48,
+    "not_confirmed": {
+     "count": 5,
+     "n": 48,
+     "rate": 0.1042
+    },
+    "top1": {
+     "count": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "top3": {
+     "count": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "wrong_top1": {
+     "count": 0,
+     "n": 48,
+     "rate": 0.0
+    }
+   }
+  },
+  "clean": {
+   "false_alarms": {
+    "count": 0,
+    "n": 10,
+    "rate": 0.0
+   },
+   "n": 10
+  },
+  "faulted": {
+   "detected": {
+    "count": 5,
+    "n": 48,
+    "rate": 0.1042
+   },
+   "diagnostic_node_top1": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "diagnostic_node_top3": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "n": 48,
+   "not_confirmed": {
+    "count": 5,
+    "n": 48,
+    "rate": 0.1042
+   },
+   "top1": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "top3": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   },
+   "wrong_top1": {
+    "count": 0,
+    "n": 48,
+    "rate": 0.0
+   }
+  }
+ },
+ "plan_sha256": "sha256:673730eabec62170c3b394acd891fe80d8d2bc52aafde032b7dfd47e6474e60d",
+ "split": "heldout"
+}
