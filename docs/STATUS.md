@@ -4,7 +4,7 @@ Updated 2026-11-23.
 
 ## Current milestone
 
-M8 MCP server, reports, release, issue #27, branch `m8-release` (draft PR). M7 is done (PR #26).
+M8 MCP server, reports, release, issue #27. Code merged in PR #28; script fix in PR #29; final scoring on branch `m8-final`.
 
 ## Done in M8 so far
 
@@ -13,7 +13,11 @@ M8 MCP server, reports, release, issue #27, branch `m8-release` (draft PR). M7 i
 - Final split: `eval/splits.py` (scored only through `faultline eval`, once per method; incomplete results may be re-scored); `scripts/final_scoring.sh` / `make final-scoring` runs it all on the Mac, starting and stopping the MLX server, with a dry run and a typed "yes" before the reference spends.
 - Triage smoke test on the vendored jira project (no final-split data).
 - `faultline readme` (generated tables, every number a link) and `faultline repro` / `make repro`: 27 checks, 0 failed.
-- Next: one live draft PR on a demo repo; the final scoring on the Mac; release v1.0.0 with the adapters.
+- Final scoring done on the owner's Mac, 23 Nov 2026: deterministic at `d115597`, models and reference at `edb4a0c` (only the script differs). No result incomplete. Reference spend $3.48. Files: `eval/results/heldout/`.
+- Held-out, from those files: triage top-1 72.9% (35/48), wrong 3/48, false alarms 1/10 (dev: 89.6%, 0, 0/30). Ranking slot: base 34/48, tuned 36/48, Claude 35/48. Raw-log slot: base 0/48, tuned 1/48 (18 wrong), Claude 4/48 (10 not confirmed).
+- README tables regenerated from the files; weaknesses updated with the held-out gap.
+- Next: one live draft PR on the demo repo `omkar-k0/faultline-demo`; release v1.0.0 with the adapters.
+- Not verified: the live draft PR (waits for the demo repo).
 
 ## Done in M7
 

@@ -150,6 +150,12 @@ Run on the Mac with the adapters and the API key, from a committed state: `make 
 
 Each method is scored once: `faultline eval` refuses to overwrite a complete result on this split, and the script skips methods already scored. Only a result marked incomplete, with failed model calls, may run again. The commit is recorded in each `.run.json` and printed in the README. Fixes and generated tests are not scored here (see DECISIONS).
 
+### What happened on 23 Nov 2026
+
+- The six deterministic results were written at commit `d115597`. The script then stopped: macOS bash 3.2 treats an empty array as unset, so the base-model server never started. No model was called.
+- PR #29 changed only `scripts/final_scoring.sh`. The model and reference results were written at commit `edb4a0c`; `src/`, `benchmark/` and `faultline.toml` are identical at both commits.
+- Every method was scored once; no result is marked incomplete. Reference spend: $2.99 (raw log, 58 calls) and $0.49 (ranking, 69 calls).
+
 ## M7: the fix drafter and the test generator
 
 Both are scored on **exact rebuilds** of the runs (`src/faultline/inject/rebuild.py`). A run's workspace is rebuilt from its seed and fault site and checked against the input hash recorded at generation. The archives hold no databases, and a fix or a test only counts if it actually runs. Held-out runs are never rebuilt. Neither method sees the truth; the harness uses it only to rebuild the scene.
