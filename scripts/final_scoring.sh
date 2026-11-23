@@ -37,16 +37,18 @@ score triage.no_lineage --baseline triage --ablate lineage
 
 # 2. Local models through MLX.
 serve() {  # adapter path or "" for the base model
+  # ${extra[@]+...}: macOS bash 3.2 treats an empty array as unset under set -u.
   local extra=()
   [[ -n "$1" ]] && extra=(--adapter-path "$1")
-  uv run --frozen --group mlx mlx_lm.server --model $MODEL "${extra[@]}" --port 8080 \
+  uv run --frozen --group mlx mlx_lm.server --model $MODEL ${extra[@]+"${extra[@]}"} --port 8080 \
     > build/mlx_server.log 2>&1 &
   SERVER=$!
   for _ in $(seq 1 120); do
     curl -s localhost:8080/v1/models >/dev/null 2>&1 && return
     sleep 5
   done
-  echo "MLX server did not start; see build/mlx_server.log" >&2; kill $SERVER; exit 1
+  echo "MLX server did not start; see build/mlx_server.log" >&2
+  kill "$SERVER" 2>/dev/null || true; exit 1
 }
 stop() { kill "$SERVER" 2>/dev/null || true; wait "$SERVER" 2>/dev/null || true; }
 mkdir -p build
