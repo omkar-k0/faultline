@@ -30,6 +30,7 @@ from faultline.eval.score import (
     load_truth,
     score_incident,
 )
+from faultline.eval.splits import check_final_scoring
 from faultline.llm.client import LLMClient
 from faultline.monitors.core import MONITORS, MonitorConfig, Profile, load_monitor_config
 from faultline.monitors.method import MonitorMethod, pick_references
@@ -226,6 +227,7 @@ def run_eval(
     ablate: str | None = None,
     variant: str | None = None,
     write: bool = True,
+    allow_final: bool = False,
 ) -> dict[str, Any]:
     """Score one method on one split. `variant` labels a model profile or the reference
     line in the result's name; `write=False` scores without writing (dry runs)."""
@@ -234,7 +236,11 @@ def run_eval(
     if variant is not None and baseline not in LLM_METHODS:
         raise ValueError(f"a model variant applies to {sorted(LLM_METHODS)} only")
     name = result_name(baseline, ablate, variant)
-    incidents, section = load_incidents(split, benchmark_dir, dist_dir, runs_dir, download)
+    if write:
+        check_final_scoring(split, results_dir, name)
+    incidents, section = load_incidents(
+        split, benchmark_dir, dist_dir, runs_dir, download, allow_final
+    )
     raw: RawLogLLM | None = None
     monitor_method: MonitorMethod | None = None
     triage_method: TriageMethod | None = None
