@@ -12,6 +12,7 @@ dependencies = [
     "duckdb>=1.4",
     "sqlglot>=27",
     "networkx>=3.4",
+    "mcp>=2.3,<3",
 ]
 
 [project.scripts]
