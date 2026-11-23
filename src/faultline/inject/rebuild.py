@@ -8,7 +8,7 @@ input hash recorded when the run was generated; a mismatch stops everything.
 
 This is harness code: it reads ground truth to rebuild the scene, the way the
 generator built it. Methods under test (the fix drafter, the test generator)
-never see the truth. Train and dev only; held-out runs are never rebuilt.
+never see the truth. Only train and dev runs are ever rebuilt.
 """
 
 from __future__ import annotations
