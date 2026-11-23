@@ -1,4 +1,4 @@
-.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm eval-dev-triage-llm setup-mlx finetune-data finetune-ranker finetune-raw-log serve-mlx-base serve-mlx-ranker serve-mlx-raw-log eval-dev-mlx-base eval-dev-mlx-ranker eval-dev-mlx-raw-log reference-dry-run eval-dev-reference eval-dev-fixes eval-dev-testgen
+.PHONY: setup build-projects check lint typecheck test clean benchmark fetch-benchmark eval-dev eval-dev-llm eval-dev-triage-llm setup-mlx finetune-data finetune-ranker finetune-raw-log serve-mlx-base serve-mlx-ranker serve-mlx-raw-log eval-dev-mlx-base eval-dev-mlx-ranker eval-dev-mlx-raw-log reference-dry-run eval-dev-reference eval-dev-fixes eval-dev-testgen final-scoring repro
 
 PROJECTS := jaffle_shop stripe court_cases jira
 UV := uv
@@ -65,6 +65,14 @@ eval-dev-fixes:
 
 eval-dev-testgen:
 	$(UV) run --frozen faultline testgen eval --split dev
+
+# From a clean clone: set up, fetch the benchmark, then check every number.
+repro: setup fetch-benchmark
+	$(UV) run --frozen faultline repro
+
+# The one final scoring (M8). On a Mac with the adapters; see docs/EVAL.md.
+final-scoring:
+	./scripts/final_scoring.sh
 
 # ---------------------------------------------------------------- M6, on a Mac
 # Apple silicon only; none of this runs in CI. Steps in docs/EVAL.md.

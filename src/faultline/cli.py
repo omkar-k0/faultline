@@ -155,6 +155,7 @@ def _cmd_benchmark_summary(args: argparse.Namespace) -> int:
 
 def _cmd_eval(args: argparse.Namespace) -> int:
     from faultline.eval.run import LLM_METHODS, run_eval
+    from faultline.eval.splits import FINAL_SPLIT, ScoredAlready
     from faultline.llm.client import LLMClient, OpenAICompatibleClient, load_config
     from faultline.llm.reference import AnthropicClient, BudgetExceeded, load_reference_config
 
@@ -195,7 +196,11 @@ def _cmd_eval(args: argparse.Namespace) -> int:
             ablate=args.ablate,
             variant=variant,
             write=not args.dry_run,
+            allow_final=args.split == FINAL_SPLIT,
         )
+    except ScoredAlready as exc:
+        print(exc)
+        return 5
     except BudgetExceeded as exc:
         print(f"{exc}\nNothing was written. Calls made: {reference.calls if reference else 0}.")
         return 3
@@ -346,6 +351,89 @@ def _cmd_fix_draft(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_postmortem(args: argparse.Namespace) -> int:
+    import tempfile
+
+    from faultline.collectors.dbt_artifacts import load_project
+    from faultline.eval.loader import load_incidents
+    from faultline.eval.run import harness_references
+    from faultline.eval.score import load_truth
+    from faultline.fixes.draft import draft
+    from faultline.fixes.evaluate import _top_cause
+    from faultline.inject.rebuild import load_truth_doc, rebuild
+    from faultline.lineage.column import build_column_lineage
+    from faultline.monitors.core import load_monitor_config
+    from faultline.testgen.generate import learn
+    from faultline.triage.method import triage_incident
+    from faultline.triage.postmortem import PostmortemInputs, render
+
+    bdir = Path("benchmark")
+    incidents, _ = load_incidents(args.split, bdir, download=not args.no_download)
+    match = [i for i in incidents if i.incident_id == args.run_id]
+    if not match:
+        print(f"no run {args.run_id!r} in split {args.split}", file=sys.stderr)
+        return 2
+    run = match[0]
+    truths = {i.incident_id: load_truth(bdir, args.split, i.incident_id) for i in incidents}
+    refs = harness_references(incidents, truths)[run.incident_id]
+    report = triage_incident(run, refs, load_monitor_config(Path(args.config))).report()
+    project = load_project(run.run_dir.parent, target=run.run_dir.name)
+    lineage = build_column_lineage(project)
+    fix, diff = None, ""
+    top = _top_cause(report)
+    if top is not None:
+        with tempfile.TemporaryDirectory() as tmp:
+            built = rebuild(load_truth_doc(bdir, args.split, run.incident_id), Path(tmp) / "ws")
+            fix = draft(built.workspace, project, top[0], top[1])
+            diff = fix.diff(built.workspace) if fix.proposed else ""
+    caught = []
+    for node, checks in learn(project, refs).items():
+        for check in checks:
+            if check.fails_on(run.profile.get(node) or {"missing": True}):
+                caught.append(f"{node}: {check.name}")
+    text = render(
+        PostmortemInputs(run.incident_id, report, project, lineage, fix, diff, caught, True)
+    )
+    out = Path(args.out) / f"{run.incident_id}.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(text)
+    print(f"wrote {out}")
+    return 0
+
+
+def _cmd_readme(args: argparse.Namespace) -> int:
+    from faultline.eval.readme import render_tables, replace_block
+
+    path = Path("README.md")
+    text = path.read_text()
+    new = replace_block(text, render_tables(Path("eval/results")))
+    if args.check:
+        print("README tables match eval/results." if new == text else "README tables are stale.")
+        return 0 if new == text else 1
+    path.write_text(new)
+    print("README tables written from eval/results.")
+    return 0
+
+
+def _cmd_repro(args: argparse.Namespace) -> int:
+    from faultline.eval.repro import repro
+
+    report = repro()
+    for line in report.ok:
+        print(f"ok    {line}")
+    for line in report.failed:
+        print(f"FAIL  {line}")
+    print(f"{len(report.ok)} ok, {len(report.failed)} failed")
+    return 1 if report.failed else 0
+
+
+def _cmd_mcp(args: argparse.Namespace) -> int:
+    from faultline.mcp.server import main
+
+    main(Path(args.config))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="faultline",
@@ -375,10 +463,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     from faultline.eval.baselines import BASELINES
     from faultline.eval.loader import EVALUABLE_SPLITS
+    from faultline.eval.splits import FINAL_SPLIT
     from faultline.inject.faults import FAULT_TYPES
 
     ev = sub.add_parser("eval", help="score a baseline on a benchmark split")
-    ev.add_argument("--split", required=True, choices=sorted(EVALUABLE_SPLITS))
+    ev.add_argument("--split", required=True, choices=sorted(EVALUABLE_SPLITS | {FINAL_SPLIT}))
     ev.add_argument("--baseline", required=True, choices=list(BASELINES))
     ev.add_argument(
         "--ablate",
@@ -403,6 +492,25 @@ def build_parser() -> argparse.ArgumentParser:
     ev.add_argument("--config", default="faultline.toml")
     ev.add_argument("--no-download", action="store_true", help="use dist/ only, never download")
     ev.set_defaults(func=_cmd_eval)
+
+    pm = sub.add_parser("postmortem", help="write a post-mortem for one benchmark run")
+    pm.add_argument("run_id")
+    pm.add_argument("--split", default="dev", choices=sorted(EVALUABLE_SPLITS))
+    pm.add_argument("--out", default="build/postmortems")
+    pm.add_argument("--config", default="faultline.toml")
+    pm.add_argument("--no-download", action="store_true")
+    pm.set_defaults(func=_cmd_postmortem)
+
+    rd = sub.add_parser("readme", help="write the README result tables from eval/results")
+    rd.add_argument("--check", action="store_true", help="only check they are current")
+    rd.set_defaults(func=_cmd_readme)
+
+    rp = sub.add_parser("repro", help="check every number in eval/results and the README")
+    rp.set_defaults(func=_cmd_repro)
+
+    mc = sub.add_parser("mcp", help="serve read-only tools over MCP (stdio)")
+    mc.add_argument("--config", default="faultline.toml")
+    mc.set_defaults(func=_cmd_mcp)
 
     fx = sub.add_parser("fix", help="draft fixes for confirmed causes (never merges)")
     fx_sub = fx.add_subparsers(dest="fix_command", required=True)
