@@ -39,6 +39,12 @@ FINAL_LABEL = "held-out (jira, scored once)"  # how the README names the split
 
 def final_note(commit: str | None) -> str:
     """The README line that records when the split was scored."""
+    if commit and ", " in commit:
+        listed = " and ".join(f"`{c}`" for c in commit.split(", "))
+        return (
+            f"Held-out was scored once per method, at commits {listed}; "
+            "each result's `.run.json` names its commit (see docs/EVAL.md)."
+        )
     if commit:
         return f"Held-out was scored once, at commit `{commit}`."
     return "Held-out has not been scored yet."
